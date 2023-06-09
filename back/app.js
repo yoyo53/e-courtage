@@ -9,7 +9,7 @@ var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
   
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,6 +28,7 @@ app.listen(PORT, (error) =>{
 const Firebase = require('./firebase.connection');
 const bucket = Firebase.bucket;
 /* END firebase initialization */
+bucket.getFiles().then(([files]) => files.forEach(file => console.log(file.name)))
 
 async function uploadFile(filepath, filename) {
 	await bucket.upload(filepath, {
@@ -67,12 +68,6 @@ downloadFile("test.js", "/");
 /* Use all routers */
 app.use('/auth', authRouter);
 
-/* BEGIN firebase initialization */
-
-const storage = require('./firebase.connection').storage;
-storage.getFiles().then(([files]) => files.forEach(file => console.log(file.name)))
-/* END firebase initialization */
-
 /* BEGIN db initialization */
 const Sequelize = require('./db.connection');
 const connection = Sequelize.connection;
@@ -89,10 +84,10 @@ catch(error){
 
 /* Synchronize database */
 
-const Banque = require("./models/banque.model.js")(connection, Sequelize.library);
-const Client = require("./models/client.model.js")(connection, Sequelize.library);
-const Demande = require("./models/demande.model.js")(connection, Sequelize.library);
-const Document = require("./models/document.model.js")(connection, Sequelize.library);
+const Banque = require("./models/Banque.model.js")(connection, Sequelize.library);
+const Client = require("./models/Client.model.js")(connection, Sequelize.library);
+const Demande = require("./models/Demande.model.js")(connection, Sequelize.library);
+const Document = require("./models/Document.model.js")(connection, Sequelize.library);
 const Accepter = require("./models/accepter.model.js")(connection, Sequelize.library);
 const Session = require("./models/session.model.js")(connection, Sequelize.library);
 
