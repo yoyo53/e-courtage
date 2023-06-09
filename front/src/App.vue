@@ -8,7 +8,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #f1f1f1;
+  background: linear-gradient(to bottom left, #7ceb8c, #2e5032);
+  height: 100vh;
+  overflow-y: hidden;
 }
 
 nav {
