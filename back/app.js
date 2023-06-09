@@ -1,5 +1,6 @@
 
 const express = require('express');
+require('dotenv').config();
 
 
 const app = express();
@@ -14,20 +15,43 @@ app.listen(PORT, (error) =>{
 );
 
 /* BEGIN firebase initialization */
+const Firebase = require('./firebase.connection');
+const bucket = Firebase.bucket;
+/* END firebase initialization */
 
-const firebaseConfig = require("./firebase_credentials.json");
-const { credential } = require('firebase-admin');
-const { initializeApp } = require('firebase-admin/app');
-const { getStorage } = require("firebase-admin/storage");
+async function uploadFile(filepath, filename) {
+	await bucket.upload(filepath, {
+		gzip: true,
+		destination: filename,
+		metadata: {
+			cacheControl: 'public, max-age=3600'
+		}
+	});
+	console.log(`${filename} uploaded to bucket.`);
+}
 
-const firebaseApp = initializeApp({
-    credential: credential.cert(firebaseConfig),
-    storageBucket: 'gs://e-courtage.appspot.com'
-});
-const storage = getStorage(firebaseApp).bucket();
-storage.getFiles().then(([files]) => files.forEach(file => console.log(file.name)))
+async function generateSignedUrl(filename) {
+	const options = {
+		version: 'v2',
+		action: 'read',
+		expires: Date.now() + 3600
+	};
+
+	const [url] = await bucket.file(filename).getSignedUrl(options);
+	console.log(url);
+};
+
+async function downloadFile(srcFilename, destFilename) {
+    await bucket.file(srcFilename).download({
+        destination: destFilename,
+      });
+    console.log(`gs://${bucket.name}/${srcFilename} downloaded to ${destFilename}.`);
+}
 
 
+generateSignedUrl("documents/test");
+generateSignedUrl("test.js");
+downloadFile("test.js", "/");
 
 
 
