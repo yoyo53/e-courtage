@@ -17,6 +17,9 @@ module.exports = (sequelize, Sequelize) => {
         Raison : {
             type: Sequelize.STRING
         },
+        Id_Client : {
+            type: Sequelize.INTEGER
+        }
     }, {timestamps: false});
     return Demande;
 };

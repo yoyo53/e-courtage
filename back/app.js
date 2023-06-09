@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 /* Initialize all routers */
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
+var demandeRouter = require('./routes/demande');
 
 const app = express();
 const PORT = 3000;
@@ -32,6 +33,7 @@ const bucket = Firebase.bucket;
 
 /* Use all routers */
 app.use('/auth', authRouter);
+app.use('/demande', demandeRouter);
 
 /* BEGIN db initialization */
 const Sequelize = require('./db.connection');
