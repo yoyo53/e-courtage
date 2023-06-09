@@ -1,7 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
     const Client = sequelize.define("Client", {
         Id_Client: {
-            type: Sequelize.BINGINT,
+            type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },

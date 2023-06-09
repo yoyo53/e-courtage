@@ -1,9 +1,9 @@
 module.exports = {
-    HOST: "",
-    USER: "",
-    PASSWORD: "",
-    DB: "",
-    dialect: "",
+    HOST: "e-courtage-db.fly.dev",
+    USER: "postgres",
+    PASSWORD: "ZqNGswyY0cnZ02W",
+    DB: "e-courtage-db",
+    dialect: "postgres",
     pool: {
         max: 5,
         min: 0,
