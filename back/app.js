@@ -45,25 +45,26 @@ const Banque = require("./models/banque.model")(connection, Sequelize.library);
 const Client = require("./models/client.model.js")(connection, Sequelize.library);
 const Demande = require("./models/demande.model.js")(connection, Sequelize.library);
 const Document = require("./models/document.model.js")(connection, Sequelize.library);
-
+const Accepter = require("./models/accepter.model.js")(connection, Sequelize.library);
 
 /* Add db relations */
-/*
-Demande.hasMany(Document, {as: "Documents", foreignKey: "Id_Demande"});
-Demande.hasMany(Banque, {as: "Banques", foreignKey: "Id_Banque"});
+Demande.sync({force: true}, {alter: true});
+Client.sync({force: true}, {alter: true});
+Document.sync({force: true}, {alter: true});
+Banque.sync({force: true}, {alter: true});
+
+Demande.belongsToMany(Document, {as: "Document", through: "Contient", foreignKey: "Id_Demande", timestamps: false});
+Demande.belongsToMany(Banque, {as:"Banque", through: Accepter, foreignKey: "Id_Demande"});
 Demande.belongsTo(Client, {as: "Owner", foreignKey: "Id_Client"});
-Demande.sync({force: false}, {alter: true});
 
 Client.hasMany(Demande, {as: "Demande", foreignKey: "Id_Client"});
-Client.sync({force: false}, {alter: true});
 
-Document.hasMany(Demande, {as: "Demand", foreignKey: "Id_Document"});
-Document.sync({force: false}, {alter: true});
+Document.belongsToMany(Demande, {as:"Demandes", through: "Contient", foreignKey: "Id_Document", timestamps: false});
 
-Banque.hasMany(Demande, {as: "Demandes", foreignKey: "Id_Banque"});
-Banque.sync({force: false}, {alter: true});
-*/
+Banque.belongsToMany(Demande, {as:"Accepted", through: Accepter, foreignKey: "Id_Banque"});
 
+connection.sync()
+/* END db relations */
 
 
 module.exports = app;
