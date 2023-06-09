@@ -71,7 +71,33 @@ exports.registerClient = async(req, res) => {
 }   
 
 exports.loginBanque = async(req, res) => {
-    console.log("Login Banque");
+    let banque = await Banque.findOne({where: {Num_Siren: req.body.Num_Siren}});
+
+    if(banque && banque.Id_Banque && 
+        banque.Password == Crypto.createHash('sha256').update(req.body.Password).digest('hex')){
+        
+        // Find if user already has a session
+        let session = await Session.findOne({where: {Id_Banque: banque.Id_Banque}});
+
+        // If user has a session, check if it is still valid
+        let isTokenExpired = session ? (new Date(session.validUntil) - new Date() <= 0) : true;
+        var token = "";
+
+        // If user has a session and it is still valid
+        if(session && !isTokenExpired){
+            // If session is valid, token is the same
+            token = session.token;
+        } else {
+            // If session is not valid, delete it and create a new one
+            sessions.deleteExpiredToken();
+            let newSession = await sessions.createSession(banque.Id_Banque);
+            token = newSession.token;
+        }
+        res.status(200).send({token: token});
+    }
+    else{
+        res.status(403).send({message: "Wrong credentials"});
+    }
 }
 
 
