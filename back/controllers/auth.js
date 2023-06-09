@@ -2,8 +2,11 @@ const Sequelize = require("../db.connection");
 var nodemailer = require('nodemailer');
 const Crypto = require("crypto");
 
+const sessions = require("../controllers/session.js");
+
 const Client = require("../models/client.model.js")(Sequelize.connection, Sequelize.library);
 const Banque = require("../models/banque.model.js")(Sequelize.connection, Sequelize.library);
+const Session = require("../models/session.model.js")(Sequelize.connection, Sequelize.library);
 
 // TODO
 exports.loginClient = async(req, res) => {
@@ -12,10 +15,25 @@ exports.loginClient = async(req, res) => {
 
     if(client && client.Id_Client && 
         client.Password == Crypto.createHash('sha256').update(req.body.Password).digest('hex')){
-        res.send(client);
+        
+        // Find if user already has a session
+        let session = await Session.findOne({where: {Id_Client: client.Id_Client}});
+
+        // If user has a session, check if it is still valid
+        let isTokenExpired = session ? (new Date(session.validUntil) - new Date() <= 0) : true;
+        var token = "";
+        if(session && !isTokenExpired){
+            // If session is valid, return session
+            token = session.token;
+        } else {
+            // If session is not valid, create a new one
+            let newSession = await sessions.createSession(client.Id_Client);
+            token = newSession.token;
+        }
+        res.status(200).send({token: token});
     }
     else{
-        res.status(401).send({message: "Wrong credentials"});
+        res.status(403).send({message: "Wrong credentials"});
     }
 }
 
