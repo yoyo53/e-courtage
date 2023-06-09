@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 /* Initialize all routers */
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
+var demandeRouter = require('./routes/demande');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -30,43 +31,10 @@ const bucket = Firebase.bucket;
 /* END firebase initialization */
 bucket.getFiles().then(([files]) => files.forEach(file => console.log(file.name)))
 
-async function uploadFile(filepath, filename) {
-	await bucket.upload(filepath, {
-		gzip: true,
-		destination: filename,
-		metadata: {
-			cacheControl: 'public, max-age=3600'
-		}
-	});
-	console.log(`${filename} uploaded to bucket.`);
-}
-
-async function generateSignedUrl(filename) {
-	const options = {
-		version: 'v2',
-		action: 'read',
-		expires: Date.now() + 3600
-	};
-
-	const [url] = await bucket.file(filename).getSignedUrl(options);
-	console.log(url);
-};
-
-async function downloadFile(srcFilename, destFilename) {
-    await bucket.file(srcFilename).download({
-        destination: destFilename,
-      });
-    console.log(`gs://${bucket.name}/${srcFilename} downloaded to ${destFilename}.`);
-}
-
-generateSignedUrl("documents/test");
-generateSignedUrl("test.js");
-downloadFile("test.js", "/");
-
-
 
 /* Use all routers */
 app.use('/auth', authRouter);
+app.use('/demande', demandeRouter);
 
 /* BEGIN db initialization */
 const Sequelize = require('./db.connection');
