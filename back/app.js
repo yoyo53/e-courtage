@@ -14,13 +14,19 @@ app.listen(PORT, (error) =>{
 );
 
 /* BEGIN firebase initialization */
-/*
-const firebaseConfig = require("./firebase.connection");
-const { initializeApp } = require("firebase/app");
-const { getAnalytics } = require("firebase/analytics");
-const firebaseApp = initializeApp(firebaseConfig.connectionFirebase);
-const analytics = getAnalytics(firebaseApp);
-*/
+
+const firebaseConfig = require("./firebase_credentials.json");
+const { credential } = require('firebase-admin');
+const { initializeApp } = require('firebase-admin/app');
+const { getStorage } = require("firebase-admin/storage");
+
+const firebaseApp = initializeApp({
+    credential: credential.cert(firebaseConfig),
+    storageBucket: 'gs://e-courtage.appspot.com'
+});
+const storage = getStorage(firebaseApp).bucket();
+storage.getFiles().then(([files]) => files.forEach(file => console.log(file.name)))
+
 
 
 
@@ -41,7 +47,7 @@ catch(error){
 
 /* Synchronize database */
 
-const Banque = require("./models/banque.model")(connection, Sequelize.library);
+const Banque = require("./models/banque.model.js")(connection, Sequelize.library);
 const Client = require("./models/client.model.js")(connection, Sequelize.library);
 const Demande = require("./models/demande.model.js")(connection, Sequelize.library);
 const Document = require("./models/document.model.js")(connection, Sequelize.library);
