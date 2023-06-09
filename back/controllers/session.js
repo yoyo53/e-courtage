@@ -26,3 +26,15 @@ exports.createSession = async (id) => {
         });
     return result;
 }
+
+exports.deleteExpiredToken = async () => {
+    var currentDate = moment().format();
+    var condition = {where: {validUntil: {[Op.lte]: currentDate}}}
+    await Session.findAll(condition)
+    .then(data => {
+        for(var i=0; i<data.length; i++){
+            this.delete(data[i].id)
+        }
+    })
+}
+
