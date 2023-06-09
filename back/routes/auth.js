@@ -2,9 +2,20 @@ var express = require('express');
 var auth = require('../controllers/auth');
 var router = express.Router();
 
-/*  Verification of the user's credentials */
-router.post('/login', auth.login);
+router.post('/something', function(req, res,) {	
+    res.send('POST request received');
+});
+/*  Vérification des credentials clients */
+router.post('/loginClient', auth.loginClient);
+
+/*  Vérification des credentials banque */
+router.post('/loginBanque', auth.loginBanque);
 
 
-/*  Registration of a new user */
-router.post('/register', auth.register);
+/*  Enregistrement d'un nouveau client */
+router.post('/registerClient', auth.registerClient);
+
+/*  Enregistrement d'un nouvelle banque */
+//router.post('/registerbanque', auth.registerBanque);
+
+module.exports = router;
