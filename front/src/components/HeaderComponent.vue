@@ -17,5 +17,6 @@ export default {
 #header {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 50px;
 }
 </style>
