@@ -12,7 +12,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #f1f1f1;
-  background: linear-gradient(to bottom left, #7ceb8c, #2e5032);
+  background: linear-gradient(to bottom left, #7ceb8c, #2c3b2e);
   height: 100vh;
   overflow-y: hidden;
 }
