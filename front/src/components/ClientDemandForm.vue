@@ -130,6 +130,11 @@ export default {
         width: 50vw;
         height: 70vh;
         border-radius: 10px;
+        overflow-y: scroll;
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
     }
 
     #form{
