@@ -3,6 +3,7 @@
         <h3>{{demand.subject}}</h3>
         <div class="demandRow"><span>{{ demand.amount }}</span> <span>{{ demand.duration }}</span></div>
         <div class="demandRow"><span>{{ demand.purpose }}</span></div>
+        <button id="detailButton" @click="()=>handleDisplayDetail()"> Plus </button>
     </div>
 </template>
 
@@ -13,6 +14,11 @@ export default {
         demand: {
             type: Object,
             required: true
+        }
+    },
+    methods: {
+        handleDisplayDetail() {
+            alert("WIP")
         }
     }
 }
@@ -38,6 +44,12 @@ export default {
         justify-content: space-between;
         align-items: center;
         width: 100%;
+    }
+
+    #detailButton{
+        color: blue;
+        margin-top: 10px;
+        border: none;
     }
 
 </style>

@@ -3,6 +3,7 @@
         <!--<h1>This is a demand form filling pop up</h1>-->
         <button id="openButton" @click="()=>handleDisplay()">NOUVELLE DEMANDE</button>
         <div id="modal-form" ref="modalForm" v-if="displayForm">
+            <button id="closeButton" @click="()=>handleDisplay()">X</button>
             <h2>New Demand</h2>
             <form id="form">
                 <div class="mb-3">
@@ -104,6 +105,16 @@ export default {
         text-align: center;
         font-size: 2vw;
         border-radius: 10px;
+    }
+
+    #closeButton{
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: #D9D9D9;
+        border-radius: 10px;
+        border: none;
+        font-size: 2vw;
     }
 
     #modal-form{

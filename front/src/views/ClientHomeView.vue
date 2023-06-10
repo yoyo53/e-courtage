@@ -135,6 +135,11 @@ export default {
         list-style: none;
         padding: 10px;
         border-radius: 10px;
+        overflow-y: scroll;
+    }
+
+    ::-webkit-scrollbar {
+        display:none;
     }
 
     /* Left Part Stuff */
