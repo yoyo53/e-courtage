@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--<h1>This is a demand form filling pop up</h1>-->
-        <button @click="()=>handleDisplay()">NEW DEMAND</button>
+        <button id="openButton" @click="()=>handleDisplay()">NOUVELLE DEMANDE</button>
         <div id="modal-form" ref="modalForm" v-if="displayForm">
             <h2>New Demand</h2>
             <form id="form">
@@ -49,6 +49,19 @@ export default {
         handleSubmit(ev) {
             ev.preventDefault();
             console.log(this.files);
+
+
+            this.$parent.userDemands.push({
+                subject: this.subject,
+                amount: this.amount,
+                duration: this.duration,
+                purpose: this.purpose,
+                files: this.files
+            });
+
+            console.log(this.$parent.userDemands);
+
+
             //Send data to the server with XMLHttpRequest
             let formData = new FormData();
             formData.append('subject', this.subject);
@@ -62,6 +75,15 @@ export default {
             xhr.onload = () => {
                 console.log(xhr.response);
             }
+
+            //Reset the form
+            this.subject = '';
+            this.amount = '';
+            this.duration = '';
+            this.purpose = '';
+            this.files = [];
+
+            this.displayForm = false;
         },
         handleDisplay() {
             this.displayForm = !this.displayForm;
@@ -74,6 +96,15 @@ export default {
 </script>
 
 <style>
+
+    #openButton{
+        height: 100%;
+        width: 50%;
+        background-color: #D9D9D9;
+        text-align: center;
+        font-size: 2vw;
+        border-radius: 10px;
+    }
 
     #modal-form{
         color: black;
@@ -94,7 +125,5 @@ export default {
         margin-top: 50px;
         text-align: left;
     }
-
-
 
 </style>
