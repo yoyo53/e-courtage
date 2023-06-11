@@ -13,6 +13,7 @@
                         <li class="profile-item"><span>Numéro de téléphone :</span> <input type="tel" v-model="userData.phone"></li>
                         <li class="profile-item"><span>Adresse mail :</span> <input type="email" v-model="userData.email"></li>
                         <li class="profile-item"><span>Profession :</span> <input type="text" v-model="userData.occupation"></li>
+                        <li class="profile-item"><client-file-list/></li>
                     </ul>
                 </div>
                 <div id="notifications-view-area">
@@ -43,6 +44,7 @@ import ClientDemandForm from '@/components/ClientDemandForm.vue';
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import ClientNotificationListElement from '../components/ClientNotificationListElement.vue';
 import ClientDemandsListElement from '../components/ClientDemandsListElement.vue';
+import ClientFileList from '../components/ClientFileList.vue';
 
 export default {
     name: 'ClientHomeView',
@@ -50,7 +52,8 @@ export default {
     HeaderComponent,
     ClientDemandForm,
     ClientNotificationListElement,
-        ClientDemandsListElement
+        ClientDemandsListElement,
+        ClientFileList
 },
     data() {
         return {
@@ -170,6 +173,17 @@ export default {
         justify-content: space-between;
         align-items: center;
         width: 100%;
+    }
+
+    input {
+        border: 0px solid black;
+    }
+
+    #files-button{
+        color: blue;
+        margin-top: 10px;
+        border: none;
+        background-color: transparent;
     }
 
     #notifications-view-area {
