@@ -1,7 +1,8 @@
 <template>
     <div>
         <h1>This is a login page</h1>
-        <button @click="()=>handleLogin()">Login</button>
+        <button @click="()=>handleLoginC()">Login (Client)</button>
+        <button @click="()=>handleLoginB()">Login (Banque)</button>
     </div>
 </template>
 
@@ -13,9 +14,13 @@ export default {
         }
     },
     methods: {
-        handleLogin(){
+        handleLoginC(){
             localStorage.setItem('token', '123456789');
             this.$router.push('/client');
+        },
+        handleLoginB(){
+            localStorage.setItem('token', '123456789');
+            this.$router.push('/bank');
         }
     }
 }
