@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--<h1>This is a demand form filling pop up</h1>-->
-        <button id="openButton" @click="()=>handleDisplay()">NOUVEAU FICHIER</button>
+        <button type="none" id="openButton" @click="()=>handleDisplay()">NOUVEAU FICHIER</button>
         <div id="modal-form" ref="modalForm" v-if="displayForm">
             <button id="closeButton" @click="()=>handleDisplay()">X</button>
             <h2>New Demand</h2>
