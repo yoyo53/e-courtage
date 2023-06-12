@@ -23,8 +23,11 @@
                     <input type="text" class="form-control" id="demandPurpose" v-model="purpose">
                 </div>
                 <div class="mb-3">
-                    <label for="formFileMultiple" class="form-label">Vos fichiers</label>
-                    <input class="form-control" type="file" id="formFileMultiple" multiple v-on:change="(ev)=>onFilesChange(ev)">
+                    <label for="formFileMultiple" class="form-label">Vos Fichiers</label>
+                    <ul>
+                        <ClientFileListCheckableElement v-for="file in files" :key="file.name" :file="file"/>
+                    </ul>
+                    <client-new-file-form />
                 </div>
                 <button type="submit" class="btn btn-primary" @click="(ev)=>handleSubmit(ev)">Envoyer</button>
             </form>
@@ -33,25 +36,26 @@
 </template>
 
 <script>
+import ClientFileListCheckableElement from './ClientFileListCheckableElement.vue';
+import ClientNewFileForm from './ClientNewFileForm.vue';
+
 
 export default {
-    name: 'ClientDemandForm',
+    name: "ClientDemandForm",
     data() {
         return {
-            subject: '',
-            amount: '',
-            duration: '',
-            purpose: '',
+            subject: "",
+            amount: "",
+            duration: "",
+            purpose: "",
             displayForm: false,
+            selectedFiles: [],
             files: []
-        }
+        };
     },
     methods: {
         handleSubmit(ev) {
             ev.preventDefault();
-            console.log(this.files);
-
-
             this.$parent.userDemands.push({
                 subject: this.subject,
                 amount: this.amount,
@@ -59,31 +63,26 @@ export default {
                 purpose: this.purpose,
                 files: this.files
             });
-
             console.log(this.$parent.userDemands);
-
-
             //Send data to the server with XMLHttpRequest
             let formData = new FormData();
-            formData.append('subject', this.subject);
-            formData.append('amount', this.amount);
-            formData.append('duration', this.duration);
-            formData.append('purpose', this.purpose);
-            formData.append('files', this.files);
+            formData.append("subject", this.subject);
+            formData.append("amount", this.amount);
+            formData.append("duration", this.duration);
+            formData.append("purpose", this.purpose);
+            formData.append("files", this.files);
             let xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://localhost:3000/api/demand');
+            xhr.open("POST", "http://localhost:3000/api/demand");
             xhr.send(formData);
             xhr.onload = () => {
                 console.log(xhr.response);
-            }
-
+            };
             //Reset the form
-            this.subject = '';
-            this.amount = '';
-            this.duration = '';
-            this.purpose = '';
+            this.subject = "";
+            this.amount = "";
+            this.duration = "";
+            this.purpose = "";
             this.files = [];
-
             this.displayForm = false;
         },
         handleDisplay() {
@@ -92,6 +91,23 @@ export default {
         onFilesChange(ev) {
             this.files = ev.target.files;
         }
+    },
+    components: { ClientFileListCheckableElement, ClientNewFileForm },
+    mounted() {
+        this.files = [
+            {
+                name: "file1",
+                id: "1"
+            },
+            {
+                name: "file2",
+                id: "2"
+            },
+            {
+                name: "file3",
+                id: "3"
+            }
+        ];
     }
 }
 </script>
