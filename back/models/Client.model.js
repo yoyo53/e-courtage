@@ -17,6 +17,9 @@ module.exports = (sequelize, Sequelize) => {
         Password: {
             type: Sequelize.STRING
         },
+        Date_Naissance: {
+            type: Sequelize.DATE
+        },
         Tel: {
             type: Sequelize.STRING
         },
@@ -25,7 +28,11 @@ module.exports = (sequelize, Sequelize) => {
         },
         Revenue: {
             type: Sequelize.INTEGER
-        }
+        },
+        Account_Activated: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
+        },
     }, {timestamps: false});
     return Client;
 };

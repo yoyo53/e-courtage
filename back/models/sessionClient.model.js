@@ -1,5 +1,10 @@
 module.exports = (sequelize, Sequelize) => {
-    const Session = sequelize.define("session", {
+    const SessionClient = sequelize.define("SessionClient", {
+        Id_SessionClient: {
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
         token: {
             type: Sequelize.STRING
         },
@@ -10,5 +15,5 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER
         }
     }, { timestamps: false });
-    return Session;
+    return SessionClient;
 };

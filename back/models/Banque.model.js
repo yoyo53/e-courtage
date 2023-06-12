@@ -5,15 +5,22 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
+        Email : {
+            type: Sequelize.STRING
+        },
+        Password : {
+            type: Sequelize.STRING
+        },
         Nom_Banque : {
             type: Sequelize.STRING
         },
         Num_Siren: {
             type: Sequelize.INTEGER
         },
-        Password : {
-            type: Sequelize.STRING
-        }
+        Account_Activated: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
+        },
     }, {timestamps: false});
     return Banque;
 };

@@ -8,10 +8,7 @@ module.exports = (sequelize, Sequelize) => {
         Nom_Document : {
             type: Sequelize.STRING
         },
-        Type : {
-            type: Sequelize.STRING
-        },
-        Path : {
+        Id_Client : {
             type: Sequelize.STRING
         }
     }, {timestamps: false});
