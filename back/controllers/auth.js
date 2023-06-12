@@ -5,7 +5,7 @@ const sessions = require("../controllers/session.js");
 
 const Client = require("../models/Client.model.js")(Sequelize.connection, Sequelize.library);
 const Banque = require("../models/Banque.model.js")(Sequelize.connection, Sequelize.library);
-const Session = require("../models/session.model.js")(Sequelize.connection, Sequelize.library);
+const SessionClient = require("../models/sessionClient.model.js")(Sequelize.connection, Sequelize.library);
 
 exports.loginClient = async(req, res) => {
     // Check if user exists in database
@@ -15,7 +15,7 @@ exports.loginClient = async(req, res) => {
         client.Password == Crypto.createHash('sha256').update(req.body.Password).digest('hex')){
         
         // Find if user already has a session
-        let session = await Session.findOne({where: {Id_Client: client.Id_Client}});
+        let session = await SessionClient.findOne({where: {Id_Client: client.Id_Client}});
 
         // If user has a session, check if it is still valid
         let isTokenExpired = session ? (new Date(session.validUntil) - new Date() <= 0) : true;
@@ -28,7 +28,7 @@ exports.loginClient = async(req, res) => {
         } else {
             // If session is not valid, delete it and create a new one
             sessions.deleteExpiredToken();
-            let newSession = await sessions.createSession(client.Id_Client);
+            let newSession = await sessions.createSession(client.Id_Client, "client");
             token = newSession.token;
         }
         res.status(200).send({token: token});
@@ -39,7 +39,7 @@ exports.loginClient = async(req, res) => {
 }
 
 exports.registerClient = async(req, res) => {
-    sendConfirmationMail(req, res);
+    // sendConfirmationMail(req, res);
     // Create new Client
     let client = {
         Nom: req.body.Nom,

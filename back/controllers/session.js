@@ -7,7 +7,7 @@ const SessionClient = require("../models/sessionClient.model")(Sequelize.connect
 const SessionBanque = require("../models/sessionBanque.model")(Sequelize.connection, Sequelize.library);
 
 // Create a new Session
-exports.createSessionClient = async (id, userType) => {
+exports.createSession = async (id, userType) => {
 
     let validity = moment().add(1, 'days').format()
     if (userType == "banque") {
@@ -96,7 +96,13 @@ exports.findByToken = async (token, userType) => {
 exports.deleteExpiredToken = async () => {
     var currentDate = moment().format();
     var condition = {where: {validUntil: {[Op.lte]: currentDate}}}
-    await Session.findAll(condition)
+    await SessionClient.findAll(condition)
+    .then(data => {
+        for(var i=0; i<data.length; i++){
+            this.delete(data[i].id)
+        }
+    })
+    await SessionBanque.findAll(condition)
     .then(data => {
         for(var i=0; i<data.length; i++){
             this.delete(data[i].id)
