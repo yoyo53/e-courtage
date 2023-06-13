@@ -74,6 +74,18 @@ export default {
                 occupation: "Software Engineer",
             }
             console.log(this.userData);
+            /*
+            fetch('/api/userdataaddress/',{
+                headers: {
+                'Content-Type': 'application/json',
+                'authorization': sessionStorage.getItem("token")
+                }})
+            .then((response)=>{return(response.json())})
+            .then((parsed) => {
+                console.log(parsed);
+                this.userData = parsed;
+            });
+            */
         },
         fetchUserNotifications() {
             // TODO
@@ -91,12 +103,52 @@ export default {
                     "bank": "Crédit Agricole"
                 }
             ]
+
+            /*
+            fetch('/api/usernotificationsaddress/',{
+                headers: {
+                'Content-Type': 'application/json',
+                'authorization': sessionStorage.getItem("token")
+                }})
+            .then((response)=>{return(response.json())})
+            .then((parsed) => {
+                console.log(parsed);
+                this.userNotifications = parsed;
+            });
+            */
         },
         fetchUserDemands() {
-            // TODO
+            /*
+            fetch('/api/userdemandsaddress/',{
+                headers: {
+                'Content-Type': 'application/json',
+                'authorization': sessionStorage.getItem("token")
+                }})
+            .then((response)=>{return(response.json())})
+            .then((parsed) => {
+                console.log(parsed);
+                this.userDemands = parsed;
+            });
+            */
         },
         sendUserData() {
-            // TODO
+            /*
+            fetch( '/api/userdataaddress', {
+                method: 'PATCH',
+                headers: {
+                'Content-Type': 'application/json',
+                'authorization': sessionStorage.getItem("token")
+                },
+                body: JSON.stringify({
+                    "name": this.userData.name,
+                    "firstname": this.userData.firstname,
+                    "birthdate": this.userData.birthdate,
+                    "phone": this.userData.phone,
+                    "email": this.userData.email,
+                    "occupation": this.userData.occupation
+                })
+            })
+            */
         }
     },
     mounted() {

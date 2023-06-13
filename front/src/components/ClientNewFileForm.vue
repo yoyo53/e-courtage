@@ -40,6 +40,27 @@ export default {
                 return;
             }
             ev.preventDefault();
+
+            /*
+            fetch( '/api/userfilesaddress', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                'authorization': sessionStorage.getItem("token")
+                },
+                body: JSON.stringify({
+                    "name": this.name,
+                    "file": this.file,
+                })
+            })
+            .then( response => response.json() )
+            .then( json => {
+                console.log(json);
+                this.$parent.files.push({name: this.name, file: this.file, id: this.$parent.files.length + 1});
+                this.displayForm = false;
+            })
+            */
+
             this.$parent.files.push({name: this.name, file: this.file, id: this.$parent.files.length + 1});
             this.displayForm = false;
         },

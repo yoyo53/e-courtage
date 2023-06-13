@@ -69,6 +69,20 @@ export default {
         },
         handleReplace(name) {
             console.log(name);
+        },
+        fetchUserFiles() {
+            /*
+            fetch('/api/userfilesaddress/',{
+                headers: {
+                'Content-Type': 'application/json',
+                'authorization': sessionStorage.getItem("token")
+                }})
+            .then((response)=>{return(response.json())})
+            .then((parsed) => {
+                console.log(parsed);
+                this.userFiles = parsed;
+            });
+            */
         }
 
     },
@@ -87,6 +101,7 @@ export default {
                 file: null
             }
         ]
+        this.fetchUserFiles();
     }
 }
 </script>
