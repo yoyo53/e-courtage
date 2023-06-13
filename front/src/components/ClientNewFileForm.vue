@@ -61,7 +61,7 @@ export default {
             })
             */
 
-            this.$parent.files.push({name: this.name, file: this.file, id: this.$parent.files.length + 1});
+            this.$parent.userFiles.push({name: this.name, file: this.file, id: this.$parent.userFiles.length + 1});
             this.displayForm = false;
         },
         handleDisplay() {

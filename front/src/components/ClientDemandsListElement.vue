@@ -3,12 +3,14 @@
         <h3>{{demand.subject}}</h3>
         <div class="demandRow"><span> Acquisition : {{ demand.acquisitionAmount}} €</span> <span> Apport : {{ demand.apport }} €</span></div>
         <div class="demandRow"><span>{{ demand.comments }}</span></div>
-        <button id="detailButton" @click="()=>handleDisplayDetail()"> Plus </button>
+        <client-demand-detail :propDemand="demand"/>
     </div>
 </template>
 
 <script>
+import ClientDemandDetail from './ClientDemandDetail.vue'
 export default {
+  components: { ClientDemandDetail },
     name: 'ClientDemandsListElement',
     props: {
         demand: {
