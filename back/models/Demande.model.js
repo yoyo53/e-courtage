@@ -1,23 +1,23 @@
 module.exports = (sequelize, Sequelize) => {
-    const Demande = sequelize.define("Demande", {
-        Id_Demande : {
+    const Demande = sequelize.define("demande", {
+        id_demande : {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        Sujet : {
+        sujet : {
             type: Sequelize.STRING
         },
-        Montant : {
+        montant : {
             type: Sequelize.INTEGER
         },
-        Duree : {
+        duree : {
             type: Sequelize.INTEGER
         },
-        Raison : {
+        raison : {
             type: Sequelize.STRING
         },
-        Id_Client : {
+        id_client : {
             type: Sequelize.INTEGER
         }
     }, {timestamps: false});

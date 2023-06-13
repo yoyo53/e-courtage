@@ -69,18 +69,18 @@ SessionClient.sync({ force: false, alter: true });
 SessionBanque.sync({ force: false, alter: true });
 
 
-Demande.belongsToMany(Document, {as: "Document", through: "Contient", foreignKey: "Id_Demande", timestamps: false});
-Demande.belongsToMany(Banque, {as:"Banque", through: Accepter, foreignKey: "Id_Demande"});
-Demande.belongsTo(Client, {as: "Owner", foreignKey: "Id_Client"});
+Demande.belongsToMany(Document, {as: "document", through: "contient", foreignKey: "id_demande", timestamps: false});
+Demande.belongsToMany(Banque, {as:"banque", through: Accepter, foreignKey: "id_demande"});
+Demande.belongsTo(Client, {as: "owner", foreignKey: "id_client"});
 
-Client.hasMany(Demande, {as: "Demande", foreignKey: "Id_Client"});
+Client.hasMany(Demande, {as: "demande", foreignKey: "id_client"});
 
-Document.belongsToMany(Demande, {as:"Demandes", through: "Contient", foreignKey: "Id_Document", timestamps: false});
+Document.belongsToMany(Demande, {as:"demandes", through: "contient", foreignKey: "id_document", timestamps: false});
 
-Banque.belongsToMany(Demande, {as:"Accepted", through: Accepter, foreignKey: "Id_Banque"});
+Banque.belongsToMany(Demande, {as:"accepted", through: Accepter, foreignKey: "id_banque"});
 
-SessionClient.belongsTo(Client, {as: "user", foreignKey: "Id_Client"});
-SessionBanque.belongsTo(Banque, {as: "user", foreignKey: "Id_Banque"});
+SessionClient.belongsTo(Client, {as: "user", foreignKey: "id_client"});
+SessionBanque.belongsTo(Banque, {as: "user", foreignKey: "id_banque"});
 
 connection.sync()
 /* END db relations */

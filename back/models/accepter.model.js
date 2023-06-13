@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Accepter = sequelize.define("Accepter", {
+    const Accepter = sequelize.define("accepter", {
         statut: {
             type: Sequelize.INTEGER,
             defaultValue: 0
