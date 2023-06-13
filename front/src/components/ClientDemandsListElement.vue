@@ -1,8 +1,8 @@
 <template>
     <div id="demandListElement">
         <h3>{{demand.subject}}</h3>
-        <div class="demandRow"><span>{{ demand.amount }}</span> <span>{{ demand.duration }}</span></div>
-        <div class="demandRow"><span>{{ demand.purpose }}</span></div>
+        <div class="demandRow"><span> Acquisition : {{ demand.acquisitionAmount}} €</span> <span> Apport : {{ demand.apport }} €</span></div>
+        <div class="demandRow"><span>{{ demand.comments }}</span></div>
         <button id="detailButton" @click="()=>handleDisplayDetail()"> Plus </button>
     </div>
 </template>

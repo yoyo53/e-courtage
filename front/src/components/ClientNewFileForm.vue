@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--<h1>This is a demand form filling pop up</h1>-->
-        <button type="none" id="openButton" @click="()=>handleDisplay()">NOUVEAU FICHIER</button>
+        <button type="none" id="openNFButton" @click="()=>handleDisplay()">NOUVEAU FICHIER</button>
         <div id="modal-form" ref="modalForm" v-if="displayForm">
             <button id="closeButton" @click="()=>handleDisplay()">X</button>
             <h2>New Demand</h2>
@@ -74,12 +74,12 @@ export default {
 
 <style>
 
-    #openButton{
-        height: 100%;
-        width: 50%;
+    #openNFButton{
+        height: 50%;
+        width: 25%;
         background-color: #D9D9D9;
         text-align: center;
-        font-size: 2vw;
+        font-size: 1vw;
         border-radius: 10px;
         margin-top: 10px;
         margin-bottom: 10px;

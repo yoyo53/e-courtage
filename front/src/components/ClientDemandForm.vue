@@ -4,16 +4,16 @@
         <button id="openButton" @click="()=>handleDisplay()">NOUVELLE DEMANDE</button>
         <div id="modal-form" ref="modalForm" v-if="displayForm">
             <button id="closeButton" @click="()=>handleDisplay()">X</button>
-            <h2>New Demand</h2>
+            <h2>Nouvelle demande</h2>
             <form id="form">
                 <div class="mb-3">
                     <label for="formSubject" class="form-label">Sujet</label>
-                    <input type="text" class="form-control" id="formSubject" v-model="newDemand.subject" required>
+                    <input type="text" class="form-control" id="formSubject" v-model="newDemand.subject" placeholder="Trouvez un titre pour votre demande" required>
                 </div>
                 <div class="mb-3">
-                    <label for="formAmount" class="form-label">Nature du projet ?</label>
-                    <select class="form-select" aria-label="Default select example" v-model="newDemand.nature" required>
-                        <option selected>Choisissez la nature de votre projet</option>
+                    <label for="formNature" class="form-label">Nature du projet ?</label>
+                    <select class="form-select" aria-label="Default select example" id="formNature" v-model="newDemand.nature" required>
+                        <option value="">Choisissez la nature de votre projet</option>
                         <option value="1">Achat</option>
                         <option value="2">Construction</option>
                         <option value="3">Travaux</option>
@@ -21,9 +21,9 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="formDuration" class="form-label">Type de bien ?</label>
-                    <select class="form-select" aria-label="Default select example" v-model="newDemand.type" required>
-                        <option selected>Choisissez le type du bien</option>
+                    <label for="formType" class="form-label">Type de bien ?</label>
+                    <select class="form-select" aria-label="Default select example" id="formType" v-model="newDemand.type" required>
+                        <option value="">Choisissez le type du bien</option>
                         <option value="1">Maison</option>
                         <option value="2">Appartement</option>
                         <option value="3">Terrain</option>
@@ -31,9 +31,9 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="formPurpose" class="form-label">Age du bien ?</label>
-                    <select class="form-select" aria-label="Default select example" v-model="newDemand.age" required>
-                        <option selected>Choisissez l'âge du bien</option>
+                    <label for="formAge" class="form-label">Age du bien ?</label>
+                    <select class="form-select" aria-label="Default select example" id="formAge" v-model="newDemand.age" required>
+                        <option value="">Choisissez l'âge du bien</option>
                         <option value="1">Ancien</option>
                         <option value="2">Neuf</option>
                         <option value="3">Vente sur plan</option>
@@ -41,8 +41,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="formPurpose" class="form-label">Usage du bien ?</label>
-                    <select class="form-select" aria-label="Default select example" v-model="newDemand.usage" required>
-                        <option selected>Choisissez l'usage du bien</option>
+                    <select class="form-select" aria-label="Default select example" id="formPurpose" v-model="newDemand.usage" required>
+                        <option value="">Choisissez l'usage du bien</option>
                         <option value="1">Residence principale</option>
                         <option value="2">Residence secondaire</option>
                         <option value="3">Utilisation professionnelle</option>
@@ -50,9 +50,9 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="formPurpose" class="form-label">Ou en êtes vous dans votre recherche ?</label>
-                    <select class="form-select" aria-label="Default select example" v-model="newDemand.researchStatus" required>
-                        <option selected>Renseigner où vous en êtes dans votre recherche</option>
+                    <label for="formResearchStatus" class="form-label">Ou en êtes vous dans votre recherche ?</label>
+                    <select class="form-select" aria-label="Default select example" id="formResearchStatus" v-model="newDemand.researchStatus" required>
+                        <option value="">Renseigner où vous en êtes dans votre recherche</option>
                         <option value="1">En recherche</option>
                         <option value="2">Vous vous préparez à faire une offre</option>
                         <option value="3">Vous avez déjà fait une offre</option>
@@ -61,28 +61,37 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="formPurpose" class="form-label">Où se situe le bien ?</label>
-                    <input type="text" class="form-control" id="formPurpose" v-model="newDemand.location" required>
+                    <label for="formCountry" class="form-label">Dans quel pays se situe le bien ?</label>
+                    <input type="text" class="form-control" id="formCountry" v-model="newDemand.country" placeholder="Renseignez le pays où se situe le bien" required>
                 </div>
                 <div class="mb-3">
-                    <label for="formPurpose" class="form-label">Montant de l'acquisition ?</label>
-                    <input type="text" class="form-control" id="formPurpose" v-model="newDemand.acquisitionAmount" required>
+                    <label for="formCity" class="form-label">Dans quelle ville se situe le bien ?</label>
+                    <input type="text" class="form-control" id="formCity" v-model="newDemand.city" placeholder="Renseignez la ville où se situe le bien" required>
                 </div>
                 <div class="mb-3">
-                    <label for="formPurpose" class="form-label">Frais de notaire (opt.) ?</label>
-                    <input type="text" class="form-control" id="formPurpose" v-model="newDemand.notaireAmount">
+                    <label for="formAcquisitionAmount" class="form-label">Montant de l'acquisition ?</label>
+                    <input type="text" class="form-control" id="formAcquisitionAmount" v-model="newDemand.acquisitionAmount" placeholder="Renseignez la valeur du bien" required>
                 </div>
                 <div class="mb-3">
-                    <label for="formPurpose" class="form-label">Acquisition en solo ?</label>
-                    <input type="text" class="form-control" id="formPurpose" v-model="newDemand.solo" required>
+                    <label for="formNotaireAmount" class="form-label">Frais de notaire (opt.) ?</label>
+                    <input type="text" class="form-control" id="formNotaireAmount" v-model="newDemand.notaireAmount" placeholder="Renseignez les frais de notaires, si il y a">
                 </div>
                 <div class="mb-3">
-                    <label for="formPurpose" class="form-label">Votre apport personnel ?</label>
-                    <input type="text" class="form-control" id="formPurpose" v-model="newDemand.apport" required>
+                    <label for="formAloneGroup" class="form-label">Comment empruntez-vous ?</label>
+                    <select class="form-select" aria-label="Default select example" id="formAloneGroup" v-model="newDemand.aloneGroup" required>
+                        <option value="">Vous empruntez ...</option>
+                        <option value="1">Seul</option>
+                        <option value="2">Avec un co-emprunteur</option>
+                        <option value="3">Autre</option>
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="formPurpose" class="form-label">Commentaires sur le projet ?</label>
-                    <input type="text" class="form-control" id="formPurpose" v-model="newDemand.comments">
+                    <label for="formApport" class="form-label">Votre apport personnel ?</label>
+                    <input type="text" class="form-control" id="formApport" v-model="newDemand.apport" placeholder="Renseignez votre apport dans l'acquisition" required>
+                </div>
+                <div class="mb-3">
+                    <label for="formComment" class="form-label">Commentaires sur le projet ?</label>
+                    <input type="text" class="form-control" id="formComment" v-model="newDemand.comments" placeholder="Vous pouvez ajouter tout détail que vous pensez significant">
                 </div>
 
                 <div class="mb-3">
@@ -114,10 +123,11 @@ export default {
                 age: "",
                 usage: "",
                 researchStatus: "",
-                location: "",
+                country: "",
+                city: "",
                 acquisitionAmount: "",
                 notaireAmount: "",
-                solo: false,
+                aloneGroup: "",
                 apport: "",
                 comments: "",
             },
@@ -128,12 +138,25 @@ export default {
     },
     methods: {
         handleSubmit(ev) {
+
+            if(this.newDemand.subject=="" || this.newDemand.nature=="" || this.newDemand.type=="" || this.newDemand.age=="" || this.newDemand.usage=="" || this.newDemand.researchStatus=="" || this.newDemand.country=="" || this.newDemand.city=="" || this.newDemand.acquisitionAmount=="" || this.newDemand.aloneGroup=="" || this.newDemand.apport=="")
+                return;
+
             ev.preventDefault();
             this.$parent.userDemands.push({
-                subject: this.subject,
-                amount: this.amount,
-                duration: this.duration,
-                purpose: this.purpose,
+                subject: this.newDemand.subject,
+                nature: this.newDemand.nature,
+                type: this.newDemand.type,
+                age: this.newDemand.age,
+                usage: this.newDemand.usage,
+                researchStatus: this.newDemand.researchStatus,
+                country: this.newDemand.country,
+                city: this.newDemand.city,
+                acquisitionAmount: this.newDemand.acquisitionAmount,
+                notaireAmount: this.newDemand.notaireAmount,
+                aloneGroup: this.newDemand.aloneGroup,
+                apport: this.newDemand.apport,
+                comments: this.newDemand.comments,
                 files: this.files
             });
             console.log(this.$parent.userDemands);
