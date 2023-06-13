@@ -6,16 +6,20 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true
         },
         email : {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false
         },
         password : {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false
         },
         nom_banque : {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false
         },
         siren: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            allowNull: false
         },
         account_status: {
             type: Sequelize.BOOLEAN,
