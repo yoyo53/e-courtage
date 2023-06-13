@@ -3,7 +3,7 @@
         <button @click="()=>handleDisplay()">Vos fichiers</button>
         <div id="modal-list" v-if="display">
             <button id="closeButton" @click="()=>handleDisplay()">X</button>
-            <div v-if="!newForm">
+            <div>
                 <h2 style="margin-bottom: 30px;">Vos fichiers</h2>
                 <ul class="list-group">
                     <li class="fileRow list-group-item" v-for="file in userFiles" :key="file.name">
@@ -15,52 +15,26 @@
                         </div>
                     </li>
                 </ul>
-                <button class="btn btn-primary" @click="()=>openForm()">Ajouter un fichier</button>
             </div>
-            <div v-else>
-                <h2 style="margin-bottom: 30px;">Ajouter un fichier</h2>
-                <form>
-                    <div class="mb-3">
-                        <label for="demandSubject" class="form-label">Nom</label>
-                        <input type="text" class="form-control" id="demandSubject" v-model="newFile.name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="demandAmount" class="form-label">Utilité</label>
-                        <input type="text" class="form-control" id="demandAmount" v-model="newFile.use" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="formFileMultiple" class="form-label">Votre Fichier</label>
-                        <input class="form-control" type="file" id="formFileMultiple" v-on:change="(ev)=>onFilesChange(ev)" required>
-                    </div>
-                    <button type="submit" class="btn btn-success" @click="(ev)=>handleSubmit(ev)">Envoyer</button>
-                    <button class="btn btn-warning" @click="()=>openForm()">Annuler</button>
-                </form>
-            </div>
+            <client-new-file-form/>
         </div>
     </div>
 </template>
 
 <script>
+import ClientNewFileForm from './ClientNewFileForm.vue';
 export default {
+  components: { ClientNewFileForm },
     name: 'ClientFileList',
     data() {
         return {
             userFiles: [],
             display: false,
-            newForm: false,
-            newFile: {
-                name: '',
-                use: '',
-                file: null
-            }
         }
     },
     methods: {
         handleDisplay() {
             this.display = !this.display;
-        },
-        openForm() {
-            this.newForm = !this.newForm;
         },
         handleDelete(name) {
             console.log(name);

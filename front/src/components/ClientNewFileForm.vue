@@ -60,6 +60,8 @@ export default {
         text-align: center;
         font-size: 2vw;
         border-radius: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     #closeButton{
