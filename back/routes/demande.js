@@ -6,7 +6,10 @@ var router = express.Router();
 router.post('/createDemande', demande.createDemande);
 
 /*  Récupération des demandes d'un client */
-//router.get('/getDemandes/:id', demande.getDemandes);
+router.get('/getAllDemandes', demande.getAllDemandes);
+
+/*  Récupération d'une demande d'un client */
+//router.get('/getDemande/:id_demande', demande.getDemande);
 
 module.exports = router;
 
