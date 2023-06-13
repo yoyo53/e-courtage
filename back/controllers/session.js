@@ -13,7 +13,7 @@ exports.createSession = async (id, userType) => {
     if (userType == "banque") {
         const obj = {
             token: uuidv4(),
-            validUntil: validity,
+            valid_until: validity,
             id_banque: id
         };
         // Save new Session
@@ -29,7 +29,7 @@ exports.createSession = async (id, userType) => {
     } else{
         const obj = {
             token: uuidv4(),
-            validUntil: validity,
+            valid_until: validity,
             id_client: id
         };
         // Save new Session
@@ -51,7 +51,7 @@ exports.verifyToken = async (token, userType) => {
     if(token){
         let session = await this.findByToken(token, userType)
         if(session){
-            let isTokenExpired = (new Date(session.validUntil) - new Date()) <= 0
+            let isTokenExpired = (new Date(session.valid_until) - new Date()) <= 0
             if(!isTokenExpired){
                 console.log("token is valid")
                 return true
@@ -95,7 +95,7 @@ exports.findByToken = async (token, userType) => {
 
 exports.deleteExpiredToken = async () => {
     var currentDate = moment().format();
-    var condition = {where: {validUntil: {[Op.lte]: currentDate}}}
+    var condition = {where: {valid_until: {[Op.lte]: currentDate}}}
     await SessionClient.findAll(condition)
     .then(data => {
         for(var i=0; i<data.length; i++){

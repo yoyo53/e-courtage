@@ -12,7 +12,7 @@ router.get('/getAllDemandes', demande.getAllDemandes);
 router.get('/getSingleDemande/:id_demande', demande.getSingleDemande);
 
 /* Modification d'une demande */
-router.put('/updateDemande/:id_demande', demande.updateDemande);
+router.patch('/updateDemande/:id_demande', demande.updateDemande);
 
 /* Suppression d'une demande */
 router.delete('/deleteDemande/:id_demande', demande.deleteDemande);
