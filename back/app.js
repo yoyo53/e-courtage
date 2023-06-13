@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 /* Initialize all routers */
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
-var demandeRouter = require('./routes/demande');
+var demande_clientRouter = require('./routes/demande_client');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -34,7 +34,7 @@ bucket.getFiles().then(([files]) => files.forEach(file => console.log(file.name)
 
 /* Use all routers */
 app.use('/auth', authRouter);
-app.use('/demande', demandeRouter);
+app.use('/demande_client', demandeRouter);
 
 /* BEGIN db initialization */
 const Sequelize = require('./db.connection');
