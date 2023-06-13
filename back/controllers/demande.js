@@ -18,9 +18,18 @@ exports.createDemande = async (req, res) => {
         // Create new Demande
         let demande = {
             sujet: req.body.sujet,
-            montant: req.body.montant,
-            duree: req.body.duree,
-            raison: req.body.raison,
+            nature: req.body.nature,
+            type: req.body.type,
+            age: req.body.age,
+            usage: req.body.usage,
+            status_recherche: req.body.status_recherche,
+            pays: req.body.pays,
+            ville: req.body.ville,
+            montant_bien: req.body.montant_bien,
+            montant_travaux: req.body.montant_travaux,
+            frais_notaire: req.body.frais_notaire ? req.body.frais_notaire : null,
+            apport_personnel: req.body.apport_personnel,
+            commentaire: req.body.commentaire ? req.body.commentaire : null,
             id_client: client.id_client
         }
         // Save new Demande
@@ -97,11 +106,9 @@ exports.updateDemande = async (req, res) => {
         }
 
         // Update demande
-        demande.sujet = req.body.sujet;
-        demande.montant = req.body.montant;
-        demande.duree = req.body.duree;
-        demande.raison = req.body.raison;
-
+        for(let key in req.body){
+            demande[key] = req.body[key];
+        }
         // Save demande
         await demande.save();
 
