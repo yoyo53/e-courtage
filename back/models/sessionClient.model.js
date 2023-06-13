@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
-    const SessionClient = sequelize.define("SessionClient", {
-        Id_SessionClient: {
+    const SessionClient = sequelize.define("sessionclient", {
+        id_sessionclient: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -11,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
         validUntil: {
             type: Sequelize.DATE
         },
-        Id_Client: {
+        id_client: {
             type: Sequelize.INTEGER
         }
     }, { timestamps: false });

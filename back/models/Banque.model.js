@@ -1,23 +1,23 @@
 module.exports = (sequelize, Sequelize) => {
-    const Banque = sequelize.define("Banque", {
-        Id_Banque: {
+    const Banque = sequelize.define("banque", {
+        id_banque: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        Email : {
+        email : {
             type: Sequelize.STRING
         },
-        Password : {
+        password : {
             type: Sequelize.STRING
         },
-        Nom_Banque : {
+        nom_banque : {
             type: Sequelize.STRING
         },
-        Num_Siren: {
+        siren: {
             type: Sequelize.INTEGER
         },
-        Account_Activated: {
+        account_status: {
             type: Sequelize.BOOLEAN,
             defaultValue: false
         },

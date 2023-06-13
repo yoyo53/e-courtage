@@ -1,14 +1,14 @@
 module.exports = (sequelize, Sequelize) => {
-    const Document = sequelize.define("Document", {
-        Id_Document : {
+    const Document = sequelize.define("document", {
+        id_document : {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        Nom_Document : {
+        nom_document : {
             type: Sequelize.STRING
         },
-        Id_Client : {
+        id_client : {
             type: Sequelize.STRING
         }
     }, {timestamps: false});
