@@ -9,7 +9,13 @@ router.post('/createDemande', demande.createDemande);
 router.get('/getAllDemandes', demande.getAllDemandes);
 
 /*  Récupération d'une demande d'un client */
-//router.get('/getDemande/:id_demande', demande.getDemande);
+router.get('/getSingleDemande/:id_demande', demande.getSingleDemande);
+
+/* Modification d'une demande */
+router.put('/updateDemande/:id_demande', demande.updateDemande);
+
+/* Suppression d'une demande */
+router.delete('/deleteDemande/:id_demande', demande.deleteDemande);
 
 module.exports = router;
 
