@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
         token: {
             type: Sequelize.STRING
         },
-        validUntil: {
+        valid_until: {
             type: Sequelize.DATE
         },
         id_client: {

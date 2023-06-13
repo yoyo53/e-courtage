@@ -6,7 +6,8 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true
         },
         nom_document : {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false
         },
         id_client : {
             type: Sequelize.STRING

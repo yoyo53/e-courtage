@@ -3,9 +3,9 @@ const Crypto = require("crypto");
 
 const sessions = require("../controllers/session.js");
 
-const Client = require("../models/Client.model.js")(Sequelize.connection, Sequelize.library);
-const Banque = require("../models/Banque.model.js")(Sequelize.connection, Sequelize.library);
-const SessionClient = require("../models/sessionClient.model.js")(Sequelize.connection, Sequelize.library);
+const Client = require("../models/client.model.js")(Sequelize.connection, Sequelize.library);
+const Banque = require("../models/banque.model.js")(Sequelize.connection, Sequelize.library);
+const Session = require("../models/session.model.js")(Sequelize.connection, Sequelize.library);
 
 exports.loginClient = async(req, res) => {
     // Check if user exists in database
@@ -15,7 +15,7 @@ exports.loginClient = async(req, res) => {
         client.Password == Crypto.createHash('sha256').update(req.body.Password).digest('hex')){
         
         // Find if user already has a session
-        let session = await SessionClient.findOne({where: {Id_Client: client.Id_Client}});
+        let session = await Session.findOne({where: {Id_Client: client.Id_Client}});
 
         // If user has a session, check if it is still valid
         let isTokenExpired = session ? (new Date(session.validUntil) - new Date() <= 0) : true;
@@ -28,7 +28,7 @@ exports.loginClient = async(req, res) => {
         } else {
             // If session is not valid, delete it and create a new one
             sessions.deleteExpiredToken();
-            let newSession = await sessions.createSession(client.Id_Client, "client");
+            let newSession = await sessions.createSession(client.Id_Client);
             token = newSession.token;
         }
         res.status(200).send({token: token});
@@ -39,7 +39,7 @@ exports.loginClient = async(req, res) => {
 }
 
 exports.registerClient = async(req, res) => {
-    // sendConfirmationMail(req, res);
+    sendConfirmationMail(req, res);
     // Create new Client
     let client = {
         Nom: req.body.Nom,
@@ -76,14 +76,14 @@ exports.loginBanque = async(req, res) => {
     if(banque && banque.Id_Banque && 
         banque.Password == Crypto.createHash('sha256').update(req.body.Password).digest('hex')){
         
-        // Find if user already has a session
+        // Find if banque already has a session
         let session = await Session.findOne({where: {Id_Banque: banque.Id_Banque}});
 
-        // If user has a session, check if it is still valid
+        // If banque has a session, check if it is still valid
         let isTokenExpired = session ? (new Date(session.validUntil) - new Date() <= 0) : true;
         var token = "";
 
-        // If user has a session and it is still valid
+        // If banque has a session and it is still valid
         if(session && !isTokenExpired){
             // If session is valid, token is the same
             token = session.token;
@@ -99,6 +99,38 @@ exports.loginBanque = async(req, res) => {
         res.status(403).send({message: "Wrong credentials"});
     }
 }
+
+
+exports.registerBanque = async(req, res) => {
+    sendConfirmationMail(req, res);
+    // Create new Banque
+    let banque = {
+        id_banque: req.body.id_banque,
+        email: req.body.email,
+        password: Crypto.createHash('sha256').update(req.body.Password).digest('hex'),
+        nom_banque: req.body.nom_banque,
+        siren: req.body.siren,
+        account_status: req.body.account_status,
+    }
+    // Verify if banque account already exists
+    let verifyBanque = await Banque.findOne({where: {Num_Siren: req.body.Num_Siren}});
+    
+    if(verifyBanque != null){
+        res.status(401).send({message: "Account banque already exists"});
+        return;
+    }
+    // Save new Banque
+    Banque.create(banque)
+        .then(data => {
+            // Send a confirmation email to the banque
+            //sendConfirmationMail(req, res);
+            res.send(data);
+        })
+        .catch(error => {
+            res.status(500).send({message: error.message || "Error while creating Banque"});
+        }
+    );
+}   
 
 
 

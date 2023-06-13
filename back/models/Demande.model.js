@@ -6,16 +6,51 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true
         },
         sujet : {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false
         },
-        montant : {
+        nature : {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        type : {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        age : {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        usage : {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        status_recherche : {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        pays : {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        ville : {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        montant_bien : {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        },
+        montant_travaux : {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        },
+        frais_notaire : {
             type: Sequelize.INTEGER
         },
-        duree : {
-            type: Sequelize.INTEGER
-        },
-        raison : {
-            type: Sequelize.STRING
+        apport_personnel : {
+            type: Sequelize.INTEGER,
+            allowNull: false
         },
         id_client : {
             type: Sequelize.INTEGER
