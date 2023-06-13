@@ -7,21 +7,84 @@
             <h2>New Demand</h2>
             <form id="form">
                 <div class="mb-3">
-                    <label for="demandSubject" class="form-label">Sujet</label>
-                    <input type="text" class="form-control" id="demandSubject" v-model="subject">
+                    <label for="formSubject" class="form-label">Sujet</label>
+                    <input type="text" class="form-control" id="formSubject" v-model="newDemand.subject" required>
                 </div>
                 <div class="mb-3">
-                    <label for="demandAmount" class="form-label">Amount</label>
-                    <input type="text" class="form-control" id="demandAmount" v-model="amount">
+                    <label for="formAmount" class="form-label">Nature du projet ?</label>
+                    <select class="form-select" aria-label="Default select example" v-model="newDemand.nature" required>
+                        <option selected>Choisissez la nature de votre projet</option>
+                        <option value="1">Achat</option>
+                        <option value="2">Construction</option>
+                        <option value="3">Travaux</option>
+                        <option value="4">Autre</option>
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="demandDuration" class="form-label">Durée</label>
-                    <input type="text" class="form-control" id="demandDuration" v-model="duration">
+                    <label for="formDuration" class="form-label">Type de bien ?</label>
+                    <select class="form-select" aria-label="Default select example" v-model="newDemand.type" required>
+                        <option selected>Choisissez le type du bien</option>
+                        <option value="1">Maison</option>
+                        <option value="2">Appartement</option>
+                        <option value="3">Terrain</option>
+                        <option value="4">Autre</option>
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="demandPurpose" class="form-label">Raison</label>
-                    <input type="text" class="form-control" id="demandPurpose" v-model="purpose">
+                    <label for="formPurpose" class="form-label">Age du bien ?</label>
+                    <select class="form-select" aria-label="Default select example" v-model="newDemand.age" required>
+                        <option selected>Choisissez l'âge du bien</option>
+                        <option value="1">Ancien</option>
+                        <option value="2">Neuf</option>
+                        <option value="3">Vente sur plan</option>
+                    </select>
                 </div>
+                <div class="mb-3">
+                    <label for="formPurpose" class="form-label">Usage du bien ?</label>
+                    <select class="form-select" aria-label="Default select example" v-model="newDemand.usage" required>
+                        <option selected>Choisissez l'usage du bien</option>
+                        <option value="1">Residence principale</option>
+                        <option value="2">Residence secondaire</option>
+                        <option value="3">Utilisation professionnelle</option>
+                        <option value="4">Autre</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="formPurpose" class="form-label">Ou en êtes vous dans votre recherche ?</label>
+                    <select class="form-select" aria-label="Default select example" v-model="newDemand.researchStatus" required>
+                        <option selected>Renseigner où vous en êtes dans votre recherche</option>
+                        <option value="1">En recherche</option>
+                        <option value="2">Vous vous préparez à faire une offre</option>
+                        <option value="3">Vous avez déjà fait une offre</option>
+                        <option value="4">Vous avez déjà signé un compromis</option>
+                        <option value="5">Autre</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="formPurpose" class="form-label">Où se situe le bien ?</label>
+                    <input type="text" class="form-control" id="formPurpose" v-model="newDemand.location" required>
+                </div>
+                <div class="mb-3">
+                    <label for="formPurpose" class="form-label">Montant de l'acquisition ?</label>
+                    <input type="text" class="form-control" id="formPurpose" v-model="newDemand.acquisitionAmount" required>
+                </div>
+                <div class="mb-3">
+                    <label for="formPurpose" class="form-label">Frais de notaire (opt.) ?</label>
+                    <input type="text" class="form-control" id="formPurpose" v-model="newDemand.notaireAmount">
+                </div>
+                <div class="mb-3">
+                    <label for="formPurpose" class="form-label">Acquisition en solo ?</label>
+                    <input type="text" class="form-control" id="formPurpose" v-model="newDemand.solo" required>
+                </div>
+                <div class="mb-3">
+                    <label for="formPurpose" class="form-label">Votre apport personnel ?</label>
+                    <input type="text" class="form-control" id="formPurpose" v-model="newDemand.apport" required>
+                </div>
+                <div class="mb-3">
+                    <label for="formPurpose" class="form-label">Commentaires sur le projet ?</label>
+                    <input type="text" class="form-control" id="formPurpose" v-model="newDemand.comments">
+                </div>
+
                 <div class="mb-3">
                     <label for="formFileMultiple" class="form-label">Vos Fichiers</label>
                     <ul>
@@ -44,10 +107,20 @@ export default {
     name: "ClientDemandForm",
     data() {
         return {
-            subject: "",
-            amount: "",
-            duration: "",
-            purpose: "",
+            newDemand: {
+                subject: "",
+                nature: "",
+                type: "",
+                age: "",
+                usage: "",
+                researchStatus: "",
+                location: "",
+                acquisitionAmount: "",
+                notaireAmount: "",
+                solo: false,
+                apport: "",
+                comments: "",
+            },
             displayForm: false,
             selectedFiles: [],
             files: []
