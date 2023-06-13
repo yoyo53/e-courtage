@@ -9,17 +9,17 @@ function sendConfirmationMail(email, name){
         service: "gmail",
         secure:true,
         auth: {
-            user: "wordpanic@gmail.com",
-            pass: "diykfziehqyeibio"
+            user: "eecourtage@gmail.com",
+            pass: "eecourtage.2000"
         }
     });
     // Message object
     let message = {
-    from: 'wordpanic@gmail.com',
-    to: "thomas.song@efrei.net",
+    from: 'eecourtage@gmail.com',
+    to: "angele.blais@efrei.net",
     subject: 'Confirmation of Account creation',
     text: 'Hi ' + req.body.Username +",",
-    html:'Hi '+ req.body.Username + ',' + '<br><p>Thanks again for creating an account on WordPanic.</p> <p>Follow this link to begin your WordPanic adventure! :</p> <p>http://lefthanging-frontend.s3-website.us-east-2.amazonaws.com/</p>'
+    html:'Hi '+ req.body.Username + ',' + '<br><p>Thanks again for creating an account on ecourtage.</p> <p>Follow this link to begin your ecourtage adventure! :</p> <p>http://lefthanging-frontend.s3-website.us-east-2.amazonaws.com/</p>'
     };
 
     // send mail with defined transport object
