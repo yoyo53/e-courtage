@@ -14,7 +14,7 @@ exports.createSession = async (id, userType) => {
         const obj = {
             token: uuidv4(),
             validUntil: validity,
-            Id_Banque: id
+            id_banque: id
         };
         // Save new Session
         // Save in the database
@@ -30,7 +30,7 @@ exports.createSession = async (id, userType) => {
         const obj = {
             token: uuidv4(),
             validUntil: validity,
-            Id_Client: id
+            id_client: id
         };
         // Save new Session
         // Save in the database
