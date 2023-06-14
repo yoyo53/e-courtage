@@ -1,2 +1,2 @@
 "use strict";(self["webpackChunkfront"]=self["webpackChunkfront"]||[]).push([[482],{8482:function(n,r,e){e.r(r),e.d(r,{default:function(){return l}});var t=e(3396);const u=(0,t._)("h1",null,"This is a register page",-1),s=[u];function i(n,r,e,u,i,a){return(0,t.wg)(),(0,t.iD)("div",null,s)}var a={},c=e(89);const f=(0,c.Z)(a,[["render",i]]);var l=f}}]);
-//# sourceMappingURL=482.4ece9b22.js.map
+//# sourceMappingURL=482.59400d62.js.map
