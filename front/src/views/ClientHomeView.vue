@@ -13,7 +13,7 @@
                         <li class="profile-item"><span>Numéro de téléphone :</span> <input type="tel" v-model="userData.phone"></li>
                         <li class="profile-item"><span>Adresse mail :</span> <input type="email" v-model="userData.email"></li>
                         <li class="profile-item"><span>Profession :</span> <input type="text" v-model="userData.occupation"></li>
-                        <li class="profile-item"><client-file-list/></li>
+                        <li class="profile-item"><client-file-list/><router-link class="btn btn-primary" to="/client/profile">Votre profil</router-link></li>
                     </ul>
                 </div>
                 <div id="notifications-view-area">
