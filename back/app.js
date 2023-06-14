@@ -34,7 +34,7 @@ bucket.getFiles().then(([files]) => files.forEach(file => console.log(file.name)
 
 /* Use all routers */
 app.use('/auth', authRouter);
-app.use('/demande_client', demandeRouter);
+app.use('/demande_client', demande_clientRouter);
 
 /* BEGIN db initialization */
 const Sequelize = require('./db.connection');
