@@ -9,11 +9,14 @@ var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var demande_clientRouter = require('./routes/demande_client');
 
+var cors = require('cors')
+
 const app = express();
 const PORT = process.env.PORT || 3000;
   
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors())
 
 
 
