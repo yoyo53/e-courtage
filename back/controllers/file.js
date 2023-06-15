@@ -1,38 +1,39 @@
-const Firebase = require('./firebase.connection');
-const bucket = Firebase.bucket;
+const bucket = require('./firebase.connection');
+const JSZip = require('jszip');
 
 
-async function uploadFile(filepath, filename) {
-	await bucket.upload(filepath, {
-		gzip: true,
-		destination: filename,
-		metadata: {
-			cacheControl: 'public, max-age=3600'
-		}
-	});
-	console.log(`${filename} uploaded to bucket.`);
-}
-
-async function generateSignedUrl(filename) {
+async function generateSignedUrl(request, response) {
 	const options = {
 		version: 'v2',
 		action: 'read',
 		expires: Date.now() + 3600
 	};
-
 	const [url] = await bucket.file(filename).getSignedUrl(options);
-	console.log(url);
+	response.status(200).send(`URL du fichier: ${url}`);
 };
 
-async function downloadFile(srcFilename, destFilename) {
-    await bucket.file(srcFilename).download({
-        destination: destFilename,
-      });
-    console.log(`gs://${bucket.name}/${srcFilename} downloaded to ${destFilename}.`);
+async function uploadFile(request, response) {
+    await bucket.file(request.file.originalname).save(request.file.buffer, { contentType: request.file.mimetype }, (error) => {
+        if (error) { throw error }
+        response.status(200).send(`${request.file.originalname} uploaded to bucket.`);
+    })
+}
+
+async function getFile(request, response) {
+    bucket.file(request.params.filepath).createReadStream().pipe(response);
+}
+
+async function getFiles(request, response) {
+	const zip = new JSZip();
+	for (filepath of JSON.parse(request.params.filepaths)) {
+		zip.file(filepath, bucket.file(filepath).createReadStream(), { binary : true });
+	}
+	zip.generateNodeStream().pipe(response);
 }
 
 module.exports = {
-    uploadFile: uploadFile,
-    generateSignedUrl: generateSignedUrl,
-    downloadFile: downloadFile
+    generateSignedUrl,
+    uploadFile,
+	getFile,
+	getFiles
 }

@@ -3,14 +3,13 @@ const { credential } = require("firebase-admin");
 const { initializeApp } = require("firebase-admin/app");
 const { getStorage } = require("firebase-admin/storage");
 
-const firebaseApp = initializeApp({
+const app = initializeApp({
     credential: credential.cert(firebaseConfig),
     storageBucket: 'gs://e-courtage.appspot.com'
 });
-const bucket = getStorage(firebaseApp).bucket();
+const bucket = getStorage(app).bucket();
 
 module.exports = {
-    app: firebaseApp,
-    bucket: bucket
+    bucket
 }
 
