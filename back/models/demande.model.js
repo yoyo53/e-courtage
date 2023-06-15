@@ -42,8 +42,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         montant_travaux : {
-            type: Sequelize.INTEGER,
-            allowNull: false
+            type: Sequelize.INTEGER
         },
         frais_notaire : {
             type: Sequelize.INTEGER
@@ -51,6 +50,9 @@ module.exports = (sequelize, Sequelize) => {
         apport_personnel : {
             type: Sequelize.INTEGER,
             allowNull: false
+        },
+        accompagnement:{
+            type: Sequelize.STRING
         },
         id_client : {
             type: Sequelize.INTEGER

@@ -1,8 +1,8 @@
 const Sequelize = require("../db.connection");
 const Demande = require("../models/demande.model.js")(Sequelize.connection, Sequelize.library);
+const Contient = require("../models/contient.model.js")(Sequelize.connection, Sequelize.library);
 const sessions = require("./session.js");
 
-//TODO
 exports.createDemande = async (req, res) => {
     // Get Client Id from token
     var token = req.get("Authorization");
@@ -26,15 +26,28 @@ exports.createDemande = async (req, res) => {
             pays: req.body.pays,
             ville: req.body.ville,
             montant_bien: req.body.montant_bien,
-            montant_travaux: req.body.montant_travaux,
+            montant_travaux: req.body.montant_travaux ? req.body.montant_travaux : null,
             frais_notaire: req.body.frais_notaire ? req.body.frais_notaire : null,
             apport_personnel: req.body.apport_personnel,
-            commentaire: req.body.commentaire ? req.body.commentaire : null,
+            commentaire: req.body.commentaire ? req.body.commentaire : null,    
+            accompagnement: req.body.accompagnement,
             id_client: client.id_client
         }
         // Save new Demande
         let newDemande = await Demande.create(demande);
-        // TODO Link all files to demande
+
+        // Link all documents to demande
+        for (let id_file of req.body.files) {
+            // Create new contient
+            let contient = {
+                id_demande: newDemande.id_demande,
+                id_document: id_file
+            }
+            // Save new contient
+            await Contient.create(contient);
+
+        }
+
 
         res.status(200).send({ message: "Demande created successfully" });
     }
