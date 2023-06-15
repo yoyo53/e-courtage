@@ -79,10 +79,45 @@ exports.getAllDemandes = async (req, res) => {
         let client = await sessions.findByToken(token, "client");
         // Get all demandes
         let demandes = await Demande.findAll({ where: { id_client: client.id_client } });
-
-        res.status(200).send(demandes);
+        let demandes_list = [];
+        for (let demande of demandes) {
+            let demandes_obj = {
+                id_demande: demande.id_demande,
+                list_files: []
+            }
+            let contients = await Contient.findAll({ where: { id_demande: demande.id_demande } });
+            for (let contient of contients) {
+                let document = await Document.findOne({ where: { id_document: contient.id_document } });
+                demandes_obj.list_files.push(document.nom_document);
+            }
+            demandes_list.push(demandes_obj);
+        }
+        res.status(200).send(demandes_list);
     }
 };
+
+exports.getAllDemandesAccepted = async (req, res) => {
+    // Get Client Id from token
+    var token = req.get("Authorization");
+
+    // Verify if user is logged in
+    let session = await sessions.verifyToken(token, "client");
+
+    if (!session) {
+        res.status(401).send({ message: "Unauthorized" });
+        return;
+    } else {
+        let client = await sessions.findByToken(token, "client");
+        // Get all demandes accepted
+        let accepted = await Accepter.findAll({ where: { id_client: client.id_client, status: 2 } });
+        let demandes = [];
+        for (let accept of accepted) {
+            let demande = await Demande.findOne({ where: { id_demande: accept.id_demande } });
+            demandes.push(demande);
+        }
+        res.status(200).send(demandes);
+    }
+}
 
 exports.getSingleDemande = async (req, res) => {
     // Get Client Id from token
@@ -190,6 +225,8 @@ exports.deleteDemande = async (req, res) => {
 
         res.status(200).send({message: "Demande deleted successfully"});
     }
+
+    
 
 }
 
