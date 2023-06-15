@@ -6,8 +6,7 @@ const sessions = require("./session.js");
 const file = require("./file.js");
 const e = require("express");
 
-exports.addDocument = async (req, res) => {
-
+exports.addDocument = async (req, res) => {	
 
 	// Get Client Id from token
 	var token = req.get("Authorization");
@@ -26,14 +25,17 @@ exports.addDocument = async (req, res) => {
 		
 		let document = await Document.create({
 			id_client: client.id_client,
-			nom_document: "test"
+			nom_document: req.body.nom_document,
 		});
 		
+		
+		const nameFile = req.file.originalname;
+		const extension = nameFile.split('.').pop();
+		const newName = document.id_document + '.' + extension;
 
-		// File 
-		//let file = req.file;
 		// Upload file
-		await file.uploadFile(req, res);
+		await file.uploadFile(req, newName ,res);
+		res.status(200).send({ message: "Document added successfully" });	
 	}	
 }
 

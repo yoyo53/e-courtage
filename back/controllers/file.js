@@ -1,4 +1,4 @@
-const bucket = require('./firebase.connection');
+const {bucket} = require('../firebase.connection');
 const JSZip = require('jszip');
 
 
