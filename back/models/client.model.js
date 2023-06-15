@@ -75,6 +75,9 @@ module.exports = (sequelize, Sequelize) => {
         loyer_actuel:{
             type: Sequelize.INTEGER
         },
+        accompagnement:{
+            type: Sequelize.STRING
+        },
         account_status: {
             type: Sequelize.BOOLEAN,
             defaultValue: false

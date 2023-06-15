@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         id_client : {
-            type: Sequelize.STRING
+            type: Sequelize.INTEGER
         }
     }, {timestamps: false});
     return Document;

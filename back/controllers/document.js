@@ -35,7 +35,6 @@ exports.addDocument = async (req, res) => {
 
 		// Upload file
 		await file.uploadFile(req, newName ,res);
-		res.status(200).send({ message: "Document added successfully" });	
 	}	
 }
 
@@ -140,11 +139,18 @@ exports.updateDocument = async (req, res) => {
 				id_client: client.id_client
 			}
 		});
+		
+		// Verify if extension is the same
+		const nameFile = req.file.originalname;
+		const extension = nameFile.split('.').pop();
+		const newName = document.id_document + '.' + extension;
 
+		if (extension != req.file.originalname.split('.').pop()) {
+			// Delete file
+			//await file.deleteFile(document.id_document);
+		}
 		// Upload file
-		//await file.uploadFile(req.file.path, document.id_document);
-
-		res.status(200).send({ message: "Document updated successfully" });
+		await file.uploadFile(req, newName ,res);
 	}
 }
 

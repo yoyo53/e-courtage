@@ -16,7 +16,7 @@ router.get('/getAllDocuments', document.getAllDocuments);
 router.get('/getSingleDocument/:id_document', document.getSingleDocument);
 
 /* Modification d'un document */
-router.patch('/updateDocument/:id_document', document.updateDocument);
+router.patch('/updateDocument/:id_document',multer().single("file"), document.updateDocument);
 
 /* Supression de tous les documents d'un client */
 router.delete('/deleteAllDocuments', document.deleteAllDocuments);
