@@ -8,12 +8,12 @@
         <form id="loginForm">
             <div class="mb-3">
                 <label for="formEmail" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="formEmail" placeholder="name@example.com">
+                <input type="email" class="form-control" id="formEmail" placeholder="name@example.com" v-model="email">
             </div>
 
             <div class="mb-3">
                 <label for="formPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="formPassword" placeholder="********">
+                <input type="password" class="form-control" id="formPassword" placeholder="********" v-model="password">
             </div>
 
             <div class="mb-3">
@@ -44,9 +44,15 @@ export default {
                 body: JSON.stringify(obj)
             })
             .then((res) => {return(res.json())})
-            .then((json) => {sessionStorage.setItem("token",json.token)})
-            .then(()=>{this.$router.push('/client')})
-            .catch((err) => {console.log(err)});
+            .then((data) => {
+                console.log(data);
+                if(data.token != null) {
+                    localStorage.setItem('token', data.token);
+                    this.$router.push('/client');
+                } else {
+                    alert('Login failed');
+                }
+            })
                 
         },
         handleLoginB(){
