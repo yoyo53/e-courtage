@@ -109,6 +109,7 @@
                     <client-new-file-form />
                 </div>
                 <button type="submit" class="btn btn-primary" @click="(ev)=>handleSubmit(ev)">Envoyer</button>
+                <button type="button" class="btn btn-danger" @click="(ev)=>handleDelete(ev)">Supprimer</button>
             </form>
         </div>
     </div>
@@ -145,38 +146,57 @@ export default {
                 return;
 
             ev.preventDefault();
-            /*
-            this.$parent.userDemands.push({
-                subject: this.newDemand.subject,
-                nature: this.newDemand.nature,
-                type: this.newDemand.type,
-                age: this.newDemand.age,
-                usage: this.newDemand.usage,
-                researchStatus: this.newDemand.researchStatus,
-                country: this.newDemand.country,
-                city: this.newDemand.city,
-                acquisitionAmount: this.newDemand.acquisitionAmount,
-                notaireAmount: this.newDemand.notaireAmount,
-                aloneGroup: this.newDemand.aloneGroup,
-                apport: this.newDemand.apport,
-                comments: this.newDemand.comments,
-                files: this.files
+            
+            fetch("http://localhost:3000/demande_client/updateDemande/"+this.newDemand.id_demande, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem("token")
+                },
+                body: JSON.stringify(this.newDemand)
+            })
+            .then((response)=>{
+                if(response.ok){
+                    return response.json();
+                }
+                else{
+                    throw new Error("Erreur lors de la mise à jour de la demande");
+                }
+            })
+            .then(res => {
+                console.log(res);
+                this.displayDetail = false;
+            })
+            .catch(err => {
+                console.log(err);
+                alert(err.message)
             });
-            */
-            console.log(this.$parent.userDemands);
-            //Send data to the server with XMLHttpRequest
-            let formData = new FormData();
-            formData.append("subject", this.subject);
-            formData.append("amount", this.amount);
-            formData.append("duration", this.duration);
-            formData.append("purpose", this.purpose);
-            formData.append("files", this.files);
-            let xhr = new XMLHttpRequest();
-            xhr.open("PUT", "http://localhost:3000/api/demand");
-            xhr.send(formData);
-            xhr.onload = () => {
-                console.log(xhr.response);
-            };
+        },
+        handleDelete() {
+            fetch("http://localhost:3000/demande_client/deleteDemande/"+this.newDemand.id_demande, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem("token")
+                }
+            })
+            .then((response)=>{
+                if(response.ok){
+                    return response.json();
+                }
+                else{
+                    throw new Error("Erreur lors de la suppression de la demande");
+                }
+            })
+            .then(res => {
+                console.log(res);
+                this.$parent.$parent.userDemands = this.$parent.$parent.userDemands.filter(demand => demand.id_demande != this.newDemand.id_demande);
+                this.displayDetail = false;
+            })
+            .catch(err => {
+                console.log(err);
+                alert(err.message)
+            });
         },
         handleDisplay() {
             this.displayDetail = !this.displayDetail;
