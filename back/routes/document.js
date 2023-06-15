@@ -1,9 +1,10 @@
 var express = require('express');
 var document = require('../controllers/document');
 var router = express.Router();
+var multer = require('multer');
 
 /*  Création d'un nouveau document */
-router.post('/addDocument', document.addDocument);
+router.post('/addDocument', multer().single("file"), document.addDocument);
 
 /* Suppression d'un document */
 router.delete('/deleteDocument/:id_document', document.deleteDocument);

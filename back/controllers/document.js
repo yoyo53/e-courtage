@@ -1,5 +1,5 @@
 
-
+const multer = require("multer");
 const Sequelize = require("../db.connection");
 const Document = require("../models/document.model.js")(Sequelize.connection, Sequelize.library);
 const sessions = require("./session.js");
@@ -7,6 +7,8 @@ const file = require("./file.js");
 const e = require("express");
 
 exports.addDocument = async (req, res) => {
+
+
 	// Get Client Id from token
 	var token = req.get("Authorization");
 
@@ -21,14 +23,17 @@ exports.addDocument = async (req, res) => {
 		let client = await sessions.findByToken(token, "client");
 
 		// Create document
+		
 		let document = await Document.create({
 			id_client: client.id_client,
-			nom_document: req.body.nom_document
+			nom_document: "test"
 		});
-		// Upload file
-		//await file.uploadFile(req.file.path, document.id_document);
+		
 
-		res.status(200).send({ message: "Document created successfully" });
+		// File 
+		//let file = req.file;
+		// Upload file
+		await file.uploadFile(req, res);
 	}	
 }
 
