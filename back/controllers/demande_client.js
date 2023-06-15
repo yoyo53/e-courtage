@@ -1,6 +1,8 @@
 const Sequelize = require("../db.connection");
 const Demande = require("../models/demande.model.js")(Sequelize.connection, Sequelize.library);
 const Contient = require("../models/contient.model.js")(Sequelize.connection, Sequelize.library);
+const Accepter = require("../models/accepter.model.js")(Sequelize.connection, Sequelize.library);
+const Banque = require("../models/banque.model.js")(Sequelize.connection, Sequelize.library);
 const sessions = require("./session.js");
 
 exports.createDemande = async (req, res) => {
@@ -45,10 +47,20 @@ exports.createDemande = async (req, res) => {
             }
             // Save new contient
             await Contient.create(contient);
-
         }
 
-
+        // Make a find all banques
+        let banques = await Banque.findAll();
+        for (let banque of banques) {
+            // Create new accepter
+            let accepter = {
+                id_demande: newDemande.id_demande,
+                id_banque: banque.id_banque,
+                status: 0 // 0 = En attente, 1 = Pinned by banque, 2 = Accepté, -1 = Refusé
+            }
+            // Save new accepter
+            await Accepter.create(accepter);
+        }
         res.status(200).send({ message: "Demande created successfully" });
     }
 };

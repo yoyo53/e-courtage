@@ -24,4 +24,4 @@ router.delete('/deleteAllDocuments', document.deleteAllDocuments);
 /* Téléchargement d'un document */
 router.get('/downloadDocument/:id_document', document.downloadDocument);
 
-module.exports = router;
+module.exports = router;    

@@ -16,3 +16,4 @@ router.patch('/updateDemande/:id_demande', demande_banque.updateDemande);
 
 
 
+module.exports = router;

@@ -5,11 +5,11 @@ const bodyParser = require('body-parser');
 
 
 /* Initialize all routers */
-var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var demande_clientRouter = require('./routes/demande_client');
 var demande_banqueRouter = require('./routes/demande_banque');
 var documentRouter = require('./routes/document');
+var banqueRouter = require('./routes/banque');
 
 var cors = require('cors')
 
@@ -39,8 +39,11 @@ bucket.getFiles().then(([files]) => files.forEach(file => console.log(file.name)
 
 /* Use all routers */
 app.use('/auth', authRouter);
-app.use('/demande_client', demande_clientRouter);
 app.use('/document', documentRouter);
+app.use('/demande_client', demande_clientRouter);
+app.use('/demande_banque', demande_banqueRouter);
+app.use('/banque', banqueRouter);
+
 
 /* BEGIN db initialization */
 const Sequelize = require('./db.connection');
