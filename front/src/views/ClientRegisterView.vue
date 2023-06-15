@@ -112,7 +112,7 @@ export default {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                if(data.idClient != null) {
+                if(data.id_client != null) {
                     localStorage.setItem('token', data.token);
                     this.$router.push('/login');
                 } else {

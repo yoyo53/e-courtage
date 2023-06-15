@@ -8,7 +8,7 @@
             <form id="form">
                 <div class="mb-3">
                     <label for="formSubject" class="form-label">Sujet</label>
-                    <input type="text" class="form-control" id="formSubject" v-model="newDemand.subject" placeholder="Trouvez un titre pour votre demande" required>
+                    <input type="text" class="form-control" id="formSubject" v-model="newDemand.sujet" placeholder="Trouvez un titre pour votre demande" required>
                 </div>
                 <div class="mb-3">
                     <label for="formNature" class="form-label">Nature du projet ?</label>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="formResearchStatus" class="form-label">Ou en êtes vous dans votre recherche ?</label>
-                    <select class="form-select" aria-label="Default select example" id="formResearchStatus" v-model="newDemand.researchStatus" required>
+                    <select class="form-select" aria-label="Default select example" id="formResearchStatus" v-model="newDemand.status_recherche" required>
                         <option value="">Renseigner où vous en êtes dans votre recherche</option>
                         <option value="En recherche">En recherche</option>
                         <option value="Vous vous préparez à faire une offre">Vous vous préparez à faire une offre</option>
@@ -65,23 +65,27 @@
                 </div>
                 <div class="mb-3">
                     <label for="formCountry" class="form-label">Dans quel pays se situe le bien ?</label>
-                    <input type="text" class="form-control" id="formCountry" v-model="newDemand.country" placeholder="Renseignez le pays où se situe le bien" required>
+                    <input type="text" class="form-control" id="formCountry" v-model="newDemand.pays" placeholder="Renseignez le pays où se situe le bien" required>
                 </div>
                 <div class="mb-3">
-                    <label for="formCity" class="form-label">Dans quelle ville se situe le bien ? (optionnel)</label>
-                    <input type="text" class="form-control" id="formCity" v-model="newDemand.city" placeholder="Renseignez la ville où se situe le bien">
+                    <label for="formCity" class="form-label">Dans quelle ville se situe le bien ?</label>
+                    <input type="text" class="form-control" id="formCity" v-model="newDemand.ville" placeholder="Renseignez la ville où se situe le bien" required>
                 </div>
                 <div class="mb-3">
-                    <label for="formAcquisitionAmount" class="form-label">Montant éstimé de l'acquisition ?</label>
-                    <input type="text" class="form-control" id="formAcquisitionAmount" v-model="newDemand.acquisitionAmount" placeholder="Renseignez la valeur estimée du bien" required>
+                    <label for="formAcquisitionAmount" class="form-label">Montant estimé de l'acquisition ?</label>
+                    <input type="text" class="form-control" id="formAcquisitionAmount" v-model="newDemand.montant_bien" placeholder="Renseignez la valeur estimée du bien" required>
+                </div>
+                <div class="mb-3">
+                    <label for="formTravauxAmount" class="form-label">Montant estimé des travaux ?</label>
+                    <input type="text" class="form-control" id="formTravauxAmount" v-model="newDemand.montant_travaux" placeholder="Renseignez la valeur estimée des travaux" required>
                 </div>
                 <div class="mb-3">
                     <label for="formNotaireAmount" class="form-label">Frais de notaire ? (optionnel)</label>
-                    <input type="text" class="form-control" id="formNotaireAmount" v-model="newDemand.notaireAmount" placeholder="Renseignez les frais de notaires, si il y a">
+                    <input type="text" class="form-control" id="formNotaireAmount" v-model="newDemand.frais_notaire" placeholder="Renseignez les frais de notaires, si il y a">
                 </div>
                 <div class="mb-3">
                     <label for="formAloneGroup" class="form-label">Comment empruntez-vous ?</label>
-                    <select class="form-select" aria-label="Default select example" id="formAloneGroup" v-model="newDemand.aloneGroup" required>
+                    <select class="form-select" aria-label="Default select example" id="formAloneGroup" v-model="newDemand.accompagnement" required>
                         <option value="">Vous empruntez seul ? En groupe ? </option>
                         <option value="1">Seul</option>
                         <option value="2">Avec un co-emprunteur</option>
@@ -90,11 +94,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="formApport" class="form-label">Votre apport personnel ?</label>
-                    <input type="text" class="form-control" id="formApport" v-model="newDemand.apport" placeholder="Renseignez votre apport dans l'acquisition" required>
+                    <input type="text" class="form-control" id="formApport" v-model="newDemand.apport_personnel" placeholder="Renseignez votre apport dans l'acquisition" required>
                 </div>
                 <div class="mb-3">
                     <label for="formComment" class="form-label">Commentaires sur le projet ? (optionnel)</label>
-                    <input type="text" class="form-control" id="formComment" v-model="newDemand.comments" placeholder="Vous pouvez ajouter tout détail que vous pensez significant">
+                    <input type="text" class="form-control" id="formComment" v-model="newDemand.commentaire" placeholder="Vous pouvez ajouter tout détail que vous pensez significant">
                 </div>
 
                 <div class="mb-3">
@@ -120,20 +124,21 @@ export default {
     data() {
         return {
             newDemand: {
-                subject: "",
+                sujet: "",
                 nature: "",
                 type: "",
                 age: "",
                 usage: "",
-                researchStatus: "",
-                country: "",
-                city: "",
-                acquisitionAmount: "",
-                notaireAmount: "",
-                aloneGroup: "",
-                apport: "",
-                comments: "",
-                selectedFiles: []
+                status_recherche: "",
+                pays: "",
+                ville: "",
+                montant_bien: "",
+                montant_travaux: "",
+                frais_notaire: "",
+                accompagnement: "",
+                apport_personnel: "",
+                commentaire: "",
+                files: []
             },
             displayForm: false,
             userFiles: []
@@ -142,57 +147,59 @@ export default {
     methods: {
         handleSubmit(ev) {
 
-            if(this.newDemand.subject=="" || this.newDemand.nature=="" || this.newDemand.type=="" || this.newDemand.age=="" || this.newDemand.usage=="" || this.newDemand.researchStatus=="" || this.newDemand.country=="" ||  this.newDemand.acquisitionAmount=="" || this.newDemand.aloneGroup=="" || this.newDemand.apport=="")
+            if(this.newDemand.sujet == "" || this.newDemand.nature == "" || this.newDemand.type == "" || this.newDemand.age == "" || this.newDemand.usage == "" || this.newDemand.status_recherche == "" || this.newDemand.pays == "" || this.newDemand.montant_bien == "" || this.newDemand.aloneGroup == "" || this.newDemand.apport_personnel == "") {
+                alert("Veuillez remplir tous les champs obligatoires");
                 return;
+            }
 
             ev.preventDefault();
-            this.$parent.userDemands.push({
-                subject: this.newDemand.subject,
-                nature: this.newDemand.nature,
-                type: this.newDemand.type,
-                age: this.newDemand.age,
-                usage: this.newDemand.usage,
-                researchStatus: this.newDemand.researchStatus,
-                country: this.newDemand.country,
-                city: this.newDemand.city,
-                acquisitionAmount: this.newDemand.acquisitionAmount,
-                notaireAmount: this.newDemand.notaireAmount,
-                aloneGroup: this.newDemand.aloneGroup,
-                apport: this.newDemand.apport,
-                comments: this.newDemand.comments,
-                files: this.files,
-                selectedFiles: this.newDemand.selectedFiles
+            
+            console.log(localStorage.getItem("token"));
+
+            fetch("http://localhost:3000/demande_client/createDemande", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem("token")
+                },
+                body: JSON.stringify(this.newDemand)
+            })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Something went wrong");
+                }
+            })
+            .then((response) => {
+                console.log(response);
+                this.$parent.userDemands.push(this.newDemand);
+                console.log(this.$parent.userDemands);
+                //reset form
+                this.newDemand = {
+                    sujet: "",
+                    nature: "",
+                    type: "",
+                    age: "",
+                    usage: "",
+                    status_recherche: "",
+                    pays: "",
+                    ville: "",
+                    montant_bien: "",
+                    montant_travaux: "",
+                    frais_notaire: "",
+                    accompagnement: "",
+                    apport_personnel: "",
+                    commentaire: "",
+                    files: []
+                };
+
+                this.displayForm = false;
+            })
+            .catch((error) => {
+                console.log(error);
+                alert("Une erreur est survenue, veuillez réessayer plus tard");
             });
-            console.log(this.$parent.userDemands);
-            //Send data to the server with XMLHttpRequest
-            let formData = new FormData();
-            formData.append("subject", this.subject);
-            formData.append("amount", this.amount);
-            formData.append("duration", this.duration);
-            formData.append("purpose", this.purpose);
-            formData.append("files", this.files);
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://localhost:3000/api/demand");
-            xhr.send(formData);
-            xhr.onload = () => {
-                console.log(xhr.response);
-            };
-            //Reset the form
-            this.newDemand.subject = "";
-            this.newDemand.nature = "";
-            this.newDemand.type = "";
-            this.newDemand.age = "";
-            this.newDemand.usage = "";
-            this.newDemand.researchStatus = "";
-            this.newDemand.country = "";
-            this.newDemand.city = "";
-            this.newDemand.acquisitionAmount = "";
-            this.newDemand.notaireAmount = "";
-            this.newDemand.aloneGroup = "";
-            this.newDemand.apport = "";
-            this.newDemand.comments = "";
-            this.selectedFiles = [];
-            this.displayForm = false;
         },
         handleDisplay() {
             this.displayForm = !this.displayForm;

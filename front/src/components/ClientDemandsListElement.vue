@@ -1,8 +1,8 @@
 <template>
     <div id="demandListElement">
-        <h3>{{demand.subject}}</h3>
-        <div class="demandRow"><span> Acquisition : {{ demand.acquisitionAmount}} €</span> <span> Apport : {{ demand.apport }} €</span></div>
-        <div class="demandRow"><span>{{ demand.comments }}</span></div>
+        <h3>{{demand.sujet}}</h3>
+        <div class="demandRow"><span> Acquisition : {{ demand.montant_bien}} €</span> <span> Apport : {{ demand.apport_personnel }} €</span></div>
+        <div class="demandRow"><span>{{ demand.commentaire }}</span></div>
         <client-demand-detail :propDemand="demand"/>
     </div>
 </template>

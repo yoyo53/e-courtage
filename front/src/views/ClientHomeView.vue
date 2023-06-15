@@ -118,18 +118,18 @@ export default {
             */
         },
         fetchUserDemands() {
-            /*
-            fetch('/api/userdemandsaddress/',{
+            
+            fetch('http://localhost:3000/demande_client/getAllDemandes',{
                 headers: {
                 'Content-Type': 'application/json',
-                'authorization': sessionStorage.getItem("token")
+                'Authorization': localStorage.getItem("token")
                 }})
             .then((response)=>{return(response.json())})
             .then((parsed) => {
                 console.log(parsed);
                 this.userDemands = parsed;
             });
-            */
+            
         },
         sendUserData() {
             /*
