@@ -1,5 +1,5 @@
 const Sequelize = require("../db.connection");
-const Demande = require("../models/Demande.model.js")(Sequelize.connection, Sequelize.library);
+const Demande = require("../models/demande.model.js")(Sequelize.connection, Sequelize.library);
 const Banque = require("../models/banque.model.js")(Sequelize.connection, Sequelize.library);
 const Accepter = require("../models/accepter.model.js")(Sequelize.connection, Sequelize.library);
 const sessions = require("./session.js");

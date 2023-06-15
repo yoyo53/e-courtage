@@ -1,7 +1,7 @@
 
 
 const Sequelize = require("../db.connection");
-const Document = require("../models/Document.model.js")(Sequelize.connection, Sequelize.library);
+const Document = require("../models/document.model.js")(Sequelize.connection, Sequelize.library);
 const sessions = require("./session.js");
 const file = require("./file.js");
 const e = require("express");
