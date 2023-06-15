@@ -3,7 +3,7 @@
         <h1>This is a login page</h1>
         <button @click="()=>handleLoginB()">Login (Banque)</button>
 
-        <router-link class="btn btn-primary" to="/register">Déjà client ?</router-link>
+        <router-link class="btn btn-primary" to="/register">Pas encore de compte ?</router-link>
 
         <form id="loginForm">
             <div class="mb-3">
@@ -17,7 +17,7 @@
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary" @click="handleLoginC">Login</button>
+                <button type="submit" class="btn btn-primary" @click="()=>handleLoginC()">Login</button>
             </div>
 
         </form>
