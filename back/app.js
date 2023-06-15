@@ -57,7 +57,7 @@ catch(error){
 
 const Banque = require("./models/banque.model.js")(connection, Sequelize.library);
 const Client = require("./models/client.model.js")(connection, Sequelize.library);
-const Demande = require("./models/dDemande.model.js")(connection, Sequelize.library);
+const Demande = require("./models/demande.model.js")(connection, Sequelize.library);
 const Document = require("./models/document.model.js")(connection, Sequelize.library);
 const Accepter = require("./models/accepter.model.js")(connection, Sequelize.library);
 const SessionClient = require("./models/sessionClient.model.js")(connection, Sequelize.library);
