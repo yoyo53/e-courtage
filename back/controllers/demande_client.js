@@ -125,6 +125,22 @@ exports.updateDemande = async (req, res) => {
         // Save demande
         await demande.save();
 
+        if (req.body.files) {
+            // Delete all contient
+            await Contient.destroy({ where: { id_demande: demande.id_demande } });
+
+            // Link all documents to demande
+            for (let id_file of req.body.files) {
+                // Create new contient
+                let contient = {
+                    id_demande: demande.id_demande,
+                    id_document: id_file
+                }
+                // Save new contient
+                await Contient.create(contient);
+            }
+        }
+
         res.status(200).send({message: "Demande updated successfully"});
     }
 }
