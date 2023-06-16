@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
     "origin": "*",
     "methods": "GET,PATCH,POST,DELETE,OPTIONS",
-    "allowedHeaders": "Content-Type,Authorization"
+    "allowedHeaders": "X-Requested-With,Content-Type,Authorization",
 }))
 
 app.listen(PORT, (error) =>{
