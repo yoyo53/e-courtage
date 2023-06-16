@@ -18,13 +18,13 @@ const PORT = process.env.PORT || 3000;
   
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH');
-    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept, Authorization");
-    next();
-});
-
+app.use(cors({
+    "origin": "*",
+    "methods": "GET,PATCH,POST,DELETE",
+    "credentials": true,
+    "allowedHeaders": "Content-Type,Authorization"
+  }
+  ))
 
 app.listen(PORT, (error) =>{
     if(!error)
