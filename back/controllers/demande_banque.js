@@ -38,6 +38,7 @@ exports.getSingleDemande = async(req, res) => {
         let accepter = await Accepter.findOne({ where: { id_banque: banque.id_banque, id_demande: req.params.id_demande } });
         let demande = await Demande.findOne({ where: { id_demande: accepter.id_demande } });
         res.status(200).send(demande);
+        
     }
 }
 

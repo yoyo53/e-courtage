@@ -1,4 +1,3 @@
-const { listenerCount } = require("nodemailer/lib/xoauth2");
 const Sequelize = require("../db.connection");
 const Demande = require("../models/demande.model.js")(Sequelize.connection, Sequelize.library);
 const Document = require("../models/document.model.js")(Sequelize.connection, Sequelize.library);
@@ -6,7 +5,6 @@ const Contient = require("../models/contient.model.js")(Sequelize.connection, Se
 const Accepter = require("../models/accepter.model.js")(Sequelize.connection, Sequelize.library);
 const Banque = require("../models/banque.model.js")(Sequelize.connection, Sequelize.library);
 const sessions = require("./session.js");
-const { list } = require("postcss");
 
 exports.createDemande = async (req, res) => {
     // Get Client Id from token

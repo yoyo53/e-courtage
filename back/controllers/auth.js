@@ -9,16 +9,16 @@ const Session = require("../models/sessionClient.model.js")(Sequelize.connection
 
 exports.loginClient = async(req, res) => {
     // Check if user exists in database
-    let client = await Client.findOne({where: {Email: req.body.Email}});
+    let client = await Client.findOne({where: {email: req.body.email}});
 
-    if(client && client.Id_Client && 
-        client.Password == Crypto.createHash('sha256').update(req.body.Password).digest('hex')){
+    if(client && client.id_client && 
+        client.password == Crypto.createHash('sha256').update(req.body.password).digest('hex')){
         
         // Find if user already has a session
-        let session = await Session.findOne({where: {Id_Client: client.Id_Client}});
+        let session = await Session.findOne({where: {id_client: client.id_client}});
 
         // If user has a session, check if it is still valid
-        let isTokenExpired = session ? (new Date(session.validUntil) - new Date() <= 0) : true;
+        let isTokenExpired = session ? (new Date(session.valid_until) - new Date() <= 0) : true;
         var token = "";
 
         // If user has a session and it is still valid
@@ -28,7 +28,7 @@ exports.loginClient = async(req, res) => {
         } else {
             // If session is not valid, delete it and create a new one
             sessions.deleteExpiredToken();
-            let newSession = await sessions.createSession(client.Id_Client);
+            let newSession = await sessions.createSession(client.id_client, "client");
             token = newSession.token;
         }
         res.status(200).send({token: token});
@@ -39,19 +39,22 @@ exports.loginClient = async(req, res) => {
 }
 
 exports.registerClient = async(req, res) => {
-    sendConfirmationMail(req, res);
+    //sendConfirmationMail(req, res);
     // Create new Client
     let client = {
-        Nom: req.body.Nom,
-        Prenom: req.body.Prenom,
-        Email: req.body.Email,
-        Password : Crypto.createHash('sha256').update(req.body.Password).digest('hex'),
-        Tel: req.body.Tel,
-        Emploi: req.body.Emploi,
-        Revenue: req.body.Revenue
+        nom: req.body.nom,
+        prenom: req.body.prenom,
+        email: req.body.email,
+        password : Crypto.createHash('sha256').update(req.body.password).digest('hex'),
+        tel: req.body.tel,
+        genre : req.body.genre,
+        date_birth: req.body.date_birth,
+        pays: req.body.pays,
+        ville: req.body.ville,
+        adresse : req.body.adresse
     }
     // Verify if user already exists
-    let verifyClient = await Client.findOne({where: {Email: client.Email}});
+    let verifyClient = await Client.findOne({where: {email: client.email}});
     
     if(verifyClient != null){
         res.status(401).send({message: "Account already exists"});
@@ -130,8 +133,4 @@ exports.registerBanque = async(req, res) => {
             res.status(500).send({message: error.message || "Error while creating Banque"});
         }
     );
-}   
-
-
-
-
+}

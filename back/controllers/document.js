@@ -1,10 +1,7 @@
-
-const multer = require("multer");
 const Sequelize = require("../db.connection");
 const Document = require("../models/document.model.js")(Sequelize.connection, Sequelize.library);
 const sessions = require("./session.js");
 const file = require("./file.js");
-const e = require("express");
 
 exports.addDocument = async (req, res) => {	
 
