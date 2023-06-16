@@ -18,7 +18,7 @@ router.patch('/updateDemande/:id_demande', demande_client.updateDemande);
 router.delete('/deleteDemande/:id_demande', demande_client.deleteDemande);
 
 /*  Récupération des demandes acceptées d'un client */
-router.get('/getAcceptedDemandes', demande_client.getAcceptedDemandes);
+router.get('/getAllDemandesAccepted', demande_client.getAllDemandesAccepted);
 
 module.exports = router;
 
