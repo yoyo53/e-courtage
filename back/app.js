@@ -20,11 +20,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
     "origin": "*",
-    "methods": "GET,PATCH,POST,DELETE",
-    "credentials": true,
-    "allowedHeaders": "Content-Type,Authorization"
-  }
-  ))
+    "methods": "GET,PATCH,POST,DELETE,OPTIONS",
+    "allowedHeaders": "X-Requested-With,Content-Type,Authorization",
+}))
 
 app.listen(PORT, (error) =>{
     if(!error)

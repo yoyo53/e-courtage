@@ -119,7 +119,7 @@ export default {
         },
         fetchUserDemands() {
             
-            fetch('http://localhost:3000/demande_client/getAllDemandes',{
+            fetch('https://e-courtage-back.fly.dev/demande_client/getAllDemandes',{
                 headers: {
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem("token")
