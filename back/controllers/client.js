@@ -15,8 +15,9 @@ exports.getAllClients = async (req, res) => {
 		return;
 	} else {
 		// Get Client Id
+		const sessions = require("./session.js");
 		let client = await sessions.findByToken(token, "client");
-		let clients = await Clients.findAll({
+		let clients = await Client.findAll({
 			where: {
 				id_client: client.id_client
 			}
@@ -28,6 +29,7 @@ exports.getAllClients = async (req, res) => {
 exports.patch = async (req, res) => {
 	// Get Client Id from token
 	var token = req.get("Authorization");
+	const sessions = require("./session.js");
 
 	// Verify if user is logged in
 	let session = await sessions.verifyToken(token, "client");
@@ -36,26 +38,30 @@ exports.patch = async (req, res) => {
 		res.status(401).send({ message: "Unauthorized" });
 		return;
 	} else {
-		let client = await Clients.find((client) => client.id === session.clientId);
+        status_immo:{
+			let client = await Client.findOne({ where: { id_client: client.id_client, nom: client.nom, prenom: client.prenom, email: client.email, password: client.password,  genre: client. genre, date_birth: client.date_birth, tel: client. tel, pays: client.pays, ville: client.ville,  adresse: client.adresse, status_immo: client.status_immo} });
+		// let client = await Client.find((client) => client.id === session.clientId);
         for(var key in req.body){
             client[key] = req.body[key];
         };
-		res.status(200).send(clients);
+		res.status(200).send(client);
 	}
 }
 
 exports.deleteAllClients = async (req, res) => {
 	var token = req.get("Authorization");
+	const sessions = require("./session.js");
 
 	// Verify if user is logged in
 	let session = await sessions.verifyToken(token, "client");
+	let client = await sessions.findByToken(token, "client");
 
 	if (!session) {
 		res.status(401).send({ message: "Unauthorized" });
 		return;
 	} else {
 		// Delete all clients
-		await Clients.destroy({
+		await Client.destroy({
 			where: {
 				id_client: client.id_client
 			}
@@ -63,4 +69,4 @@ exports.deleteAllClients = async (req, res) => {
 		res.status(200).send({ message: "All clients are deleted" });
 	}
 }
-
+}
