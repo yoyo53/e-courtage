@@ -16,6 +16,6 @@ router.post('/loginBanque', auth.loginBanque);
 router.post('/registerClient', auth.registerClient);
 
 /*  Enregistrement d'un nouvelle banque */
-//router.post('/registerbanque', auth.registerBanque);
+router.post('/registerBanque', auth.registerBanque);
 
 module.exports = router;

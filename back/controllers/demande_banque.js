@@ -4,6 +4,7 @@ const Banque = require("../models/banque.model.js")(Sequelize.connection, Sequel
 const Accepter = require("../models/accepter.model.js")(Sequelize.connection, Sequelize.library);
 const sessions = require("./session.js");
 const file = require("./file.js");
+const { Op } = require("sequelize");
 
 exports.getAllDemandes = async(req, res) => {
     // Check if token is valid
@@ -15,11 +16,17 @@ exports.getAllDemandes = async(req, res) => {
         res.status(401).send({ message: "Unauthorized" });
         return;
     }else{
-        var banque = await sessions.findByToken(token, "banque");
-        // Get all demandes
-        let accepters = await Accepter.findAll({ where: { id_banque: banque.id_banque, status : {[Op.not] : -1} }});
-        let demandes = await Demande.findAll({ where: { id_demande: accepters.id_demande } });
-        res.status(200).send(demandes);
+        try{
+            var banque = await sessions.findByToken(token, "banque");
+            // Get all demandes
+            let accepters = await Accepter.findAll({ where: { id_banque: banque.id_banque, statut : {[Op.not] : -1} }});
+            let demandes = await Demande.findAll({ where: { id_demande: accepters.id_demande } });
+            res.status(200).send(demandes);
+        }
+        catch(err){
+            res.status(500).send({ message: err.message });
+        }
+        
     }
 }
 
