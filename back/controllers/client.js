@@ -3,7 +3,7 @@ const { Op } = require("sequelize");
 const Sequelize = require("../db.connection");
 const Client = require("../models/client.model.js")(Sequelize.connection, Sequelize.library);
 
-exports.getAllClients = async (req, res) => {
+exports.getClients = async (req, res) => {
 	// Get Client Id from token
 	var token = req.get("Authorization");
 
@@ -48,7 +48,7 @@ exports.patch = async (req, res) => {
 	}
 }
 
-exports.deleteAllClients = async (req, res) => {
+exports.deleteClients = async (req, res) => {
 	var token = req.get("Authorization");
 	const sessions = require("./session.js");
 
