@@ -1,3 +1,4 @@
+const { listenerCount } = require("nodemailer/lib/xoauth2");
 const Sequelize = require("../db.connection");
 const Demande = require("../models/demande.model.js")(Sequelize.connection, Sequelize.library);
 const Document = require("../models/document.model.js")(Sequelize.connection, Sequelize.library);
@@ -5,6 +6,7 @@ const Contient = require("../models/contient.model.js")(Sequelize.connection, Se
 const Accepter = require("../models/accepter.model.js")(Sequelize.connection, Sequelize.library);
 const Banque = require("../models/banque.model.js")(Sequelize.connection, Sequelize.library);
 const sessions = require("./session.js");
+const { list } = require("postcss");
 
 exports.createDemande = async (req, res) => {
     // Get Client Id from token
@@ -62,7 +64,7 @@ exports.createDemande = async (req, res) => {
             // Save new accepter
             await Accepter.create(accepter);
         }
-        res.status(200).send({ message: "Demande created successfully" });
+        res.status(200).send({ id_demande: newDemande.id_demande, message: "Demande created successfully" });
     }
 };
 
@@ -80,20 +82,17 @@ exports.getAllDemandes = async (req, res) => {
         let client = await sessions.findByToken(token, "client");
         // Get all demandes
         let demandes = await Demande.findAll({ where: { id_client: client.id_client } });
-        let demandes_list = [];
         for (let demande of demandes) {
-            let demandes_obj = {
-                id_demande: demande.id_demande,
-                list_files: []
-            }
+            let list_files = [];
             let contients = await Contient.findAll({ where: { id_demande: demande.id_demande } });
-            for (let contient of contients) {
-                let document = await Document.findOne({ where: { id_document: contient.id_document } });
-                demandes_obj.list_files.push(document.nom_document);
+            for(let contient of contients){
+                list_files.push(contient.id_document);
             }
-            demandes_list.push(demandes_obj);
+            // Add new attribute to demande
+            demande.dataValues.files = list_files;
+            
         }
-        res.status(200).send(demandes_list);
+        res.status(200).send(demandes);
     }
 };
 
@@ -189,7 +188,7 @@ exports.updateDemande = async (req, res) => {
             }
         }
 
-        res.status(200).send({message: "Demande updated successfully"});
+        res.status(200).send({id_demande: demande.id_demande, message: "Demande updated successfully"});
     }
 }
 
