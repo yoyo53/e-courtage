@@ -183,7 +183,8 @@ exports.updateDocument = async (req, res) => {
 				//await file.deleteFile(document.id_document);
 			}
 			// Upload file
-			file.uploadFile(req, newName ,res);
+			file.uploadFile(req, newName);
+			res.status(200).send({ message: "Document updated successfully" });
 		}
 	} catch(err){
 		res.status(500).send({ message: "Error has occured" });
