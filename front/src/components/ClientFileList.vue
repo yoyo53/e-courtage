@@ -38,7 +38,7 @@ export default {
         },
         handleDownload(id,nom) {
             console.log(id);
-            fetch("http://localhost:3000/document/downloadDocument/" + id, {
+            fetch("https://e-courtage-back.fly.dev/document/downloadDocument/" + id, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export default {
                 console.log(input);
                 formData.append("file", input.files[0]);
                 let xhr = new XMLHttpRequest();
-                xhr.open("PATCH", "http://localhost:3000/document/updateDocument/" + id, true);
+                xhr.open("PATCH", "https://e-courtage-back.fly.dev/document/updateDocument/" + id, true);
                 xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
                 xhr.send(formData);
                 xhr.onload = function() {
@@ -89,7 +89,7 @@ export default {
         },
         handleDelete(id) {
             console.log(id);
-            fetch("http://localhost:3000/document/deleteDocument/" + id, {
+            fetch("https://e-courtage-back.fly.dev/document/deleteDocument/" + id, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -109,7 +109,7 @@ export default {
             })
         },
         fetchUserFiles() {
-            fetch("http://localhost:3000/document/getAllDocuments", {
+            fetch("https://e-courtage-back.fly.dev/document/getAllDocuments", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
