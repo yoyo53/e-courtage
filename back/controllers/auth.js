@@ -5,7 +5,7 @@ const sessions = require("../controllers/session.js");
 
 const Client = require("../models/client.model.js")(Sequelize.connection, Sequelize.library);
 const Banque = require("../models/banque.model.js")(Sequelize.connection, Sequelize.library);
-const Session = require("../models/session.model.js")(Sequelize.connection, Sequelize.library);
+const Session = require("../models/sessionClient.model.js")(Sequelize.connection, Sequelize.library);
 
 exports.loginClient = async(req, res) => {
     // Check if user exists in database
