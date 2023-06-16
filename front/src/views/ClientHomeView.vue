@@ -13,7 +13,7 @@
                         <li class="profile-item"><span>Numéro de téléphone :</span> <input type="tel" v-model="userData.phone"></li>
                         <li class="profile-item"><span>Adresse mail :</span> <input type="email" v-model="userData.email"></li>
                         <li class="profile-item"><span>Profession :</span> <input type="text" v-model="userData.occupation"></li>
-                        <li class="profile-item"><client-file-list/><router-link class="btn btn-primary" to="/client/profile">Votre profil</router-link></li>
+                        <li class="profile-item profile-buttons"><client-file-list/><router-link class="btn btn-primary" to="/client/profile">Votre profil</router-link></li>
                     </ul>
                 </div>
                 <div id="notifications-view-area">
@@ -105,10 +105,10 @@ export default {
             ]
 
             /*
-            fetch('/api/usernotificationsaddress/',{
+            fetch('http://localhost:3000/demande_client/getAllDemandesAccepted', {
                 headers: {
                 'Content-Type': 'application/json',
-                'authorization': sessionStorage.getItem("token")
+                'Authorization': localStorage.getItem("token")
                 }})
             .then((response)=>{return(response.json())})
             .then((parsed) => {
@@ -119,7 +119,7 @@ export default {
         },
         fetchUserDemands() {
             
-            fetch('http://localhost:3000/demande_client/getAllDemandes',{
+            fetch('https://e-courtage-back.fly.dev/demande_client/getAllDemandes',{
                 headers: {
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem("token")
@@ -191,6 +191,7 @@ export default {
         padding: 10px;
         border-radius: 10px;
         overflow-y: scroll;
+        scrollbar-width: none;
     }
 
     ::-webkit-scrollbar {
@@ -225,6 +226,10 @@ export default {
         justify-content: space-between;
         align-items: center;
         width: 100%;
+    }
+
+    .profile-buttons{
+        margin-top: 10px;
     }
 
     input {

@@ -1,17 +1,17 @@
 <template>
     <div>
-        <button @click="()=>handleDisplay()">Vos fichiers</button>
+        <button class="btn btn-primary" @click="()=>handleDisplay()">Vos fichiers</button>
         <div id="modal-list" v-if="display">
             <button id="closeButton" @click="()=>handleDisplay()">X</button>
             <div>
                 <h2 style="margin-bottom: 30px;">Vos fichiers</h2>
                 <ul class="list-group">
                     <li class="fileRow list-group-item" v-for="file in userFiles" :key="file.name">
-                        <div>{{file.name}} - {{file.use}} - {{file.size}}</div>
-                        <div>
-                            <button class="btn btn-success fileRowButton" @click="()=>handleDownload(file.name)">Télécharger</button>
-                            <button class="btn btn-light fileRowButton" @click="()=>handleReplace(file.name)">Remplacer</button>
-                            <button class="btn btn-danger fileRowButton" @click="()=>handleDelete(file.name)">Supprimer</button>
+                        <div class="fileRow-text">{{file.id_document}} - {{ file.nom_document }}</div>
+                        <div class="fileRow-buttons">
+                            <button class="btn btn-success fileRowButton" @click="()=>handleDownload(file.id_document, file.nom_document)">Télécharger</button>
+                            <button class="btn btn-light fileRowButton" @click="()=>handleUpdate(file.id_document)">Remplacer</button>
+                            <button class="btn btn-danger fileRowButton" @click="()=>handleDelete(file.id_document)">Supprimer</button>
                         </div>
                     </li>
                 </ul>
@@ -36,71 +36,105 @@ export default {
         handleDisplay() {
             this.display = !this.display;
         },
-        handleDelete(name) {
-            console.log(name);
-            if(confirm('Voulez-vous vraiment supprimer ce fichier ?')){
-                this.userFiles = this.userFiles.filter(file => file.name !== name);
-                console.log(this.userFiles);
+        handleDownload(id,nom) {
+            console.log(id);
+            fetch("https://e-courtage-back.fly.dev/document/downloadDocument/" + id, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem("token")
+                }
+            })
+            .then((response) => {
+                if (response.ok) {
+                    return response.blob();
+                } else {
+                    throw new Error("Something went wrong");
+                }
+            })
+            .then((response) => {
+                console.log(response);
+                const url = window.URL.createObjectURL(new Blob([response]));
+                const link = document.createElement("a");
+                link.href = url;
+                link.setAttribute("download", nom);
+                document.body.appendChild(link);
+                link.click();
+            })
+        },
+        handleUpdate(id) {
+            console.log(id);
+            //Open file explorer, when file is selected, send whole file with xmlHttpRequest
+            const input = document.createElement("input");
+            input.type = "file";
+            input.ref = "file";
+            input.click();
+            input.onchange = () => {
+                const formData = new FormData();
+                console.log(input);
+                formData.append("file", input.files[0]);
+                let xhr = new XMLHttpRequest();
+                xhr.open("PATCH", "https://e-courtage-back.fly.dev/document/updateDocument/" + id, true);
+                xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+                xhr.send(formData);
+                xhr.onload = function() {
+                    if (xhr.status == 200) {
+                        console.log("File uploaded");
+                    } else {
+                        console.log("Error " + xhr.status + " occurred when trying to upload your file.");
+                    }
+                };
             }
+
         },
-        onFilesChange(ev) {
-            this.newFile.file = ev.target.files[0];
-        },
-        handleSubmit(ev) {
-            if(this.newFile.name == '' || this.newFile.use == '' || this.newFile.file == null){
-                return;
-            }
-            ev.preventDefault();
-            this.userFiles.push({
-                name: this.newFile.name,
-                use: this.newFile.use,
-                size: this.newFile.file.size,
-                file: this.newFile.file
-            });
-            this.newFile = {
-                name: '',
-                use: '',
-                file: null
-            };
-            this.newForm = false;
-        },
-        handleDownload(name) {
-            console.log(name);
-        },
-        handleReplace(name) {
-            console.log(name);
+        handleDelete(id) {
+            console.log(id);
+            fetch("https://e-courtage-back.fly.dev/document/deleteDocument/" + id, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem("token")
+                }
+            })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Something went wrong");
+                }
+            })
+            .then((response) => {
+                console.log(response);
+                this.userFiles = this.userFiles.filter((file) => file.id_document !== id);
+            })
         },
         fetchUserFiles() {
-            /*
-            fetch('/api/userfilesaddress/',{
+            fetch("https://e-courtage-back.fly.dev/document/getAllDocuments", {
+                method: "GET",
                 headers: {
-                'Content-Type': 'application/json',
-                'authorization': sessionStorage.getItem("token")
-                }})
-            .then((response)=>{return(response.json())})
-            .then((parsed) => {
-                console.log(parsed);
-                this.userFiles = parsed;
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem("token")
+                }
+            })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Something went wrong");
+                }
+            })
+            .then((response) => {
+                console.log(response);
+                this.userFiles = response;
+            })
+            .catch((error) => {
+                console.log(error);
+                alert("Une erreur est survenue, veuillez réessayer plus tard");
             });
-            */
         }
 
     },
     mounted() {
-        this.userFiles = [
-            {
-                name: 'test',
-                use: 'test',
-                size: 1000,
-                file: null
-            },
-            {
-                name: 'test2',
-                use: 'test2',
-                size: 2000,
-                file: null
-            }
-        ]
         this.fetchUserFiles();
     }
 }
@@ -129,6 +163,15 @@ export default {
         justify-content: space-between;
         align-items: center;
         width: 100%;
+    }
+
+    .fileRow-text {
+        width: 50%;
+        text-align: left;
+    }
+
+    .fileRow-buttons {
+        width: 50%;
     }
 
     .fileRowButton {

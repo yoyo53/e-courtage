@@ -98,14 +98,15 @@ exports.deleteExpiredToken = async () => {
     var condition = {where: {valid_until: {[Op.lte]: currentDate}}}
     await SessionClient.findAll(condition)
     .then(data => {
+        console.log(data)
         for(var i=0; i<data.length; i++){
-            this.delete(data[i].id)
+            SessionClient.destroy({where: {id_sessionclient: data[i].id_sessionclient}})
         }
     })
     await SessionBanque.findAll(condition)
     .then(data => {
         for(var i=0; i<data.length; i++){
-            this.delete(data[i].id)
+            SessionBanque.destroy({where: {id_sessionbanque: data[i].id_sessionbanque}})
         }
     })
 }

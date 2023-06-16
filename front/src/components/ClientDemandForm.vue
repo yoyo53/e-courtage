@@ -156,7 +156,7 @@ export default {
             
             console.log(localStorage.getItem("token"));
 
-            fetch("http://localhost:3000/demande_client/createDemande", {
+            fetch("https://e-courtage-back.fly.dev/demande_client/createDemande", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -173,6 +173,8 @@ export default {
             })
             .then((response) => {
                 console.log(response);
+                let temp_demand = this.newDemand;
+                temp_demand.id_demande = response.id_demande;
                 this.$parent.userDemands.push(this.newDemand);
                 console.log(this.$parent.userDemands);
                 //reset form
@@ -207,7 +209,7 @@ export default {
     },
     components: { ClientFileListCheckableElement, ClientNewFileForm },
     mounted() {
-        fetch("http://localhost:3000/document/getAllDocuments", {
+        fetch("https://e-courtage-back.fly.dev/document/getAllDocuments", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

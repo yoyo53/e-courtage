@@ -27,4 +27,7 @@ router.get('/downloadDocument/:id_document', document.downloadDocument);
 /* Téléchargement de tous les documents d'un client */
 router.get('/downloadAllDocuments', document.downloadAllDocuments);
 
+/* Téléchargement de tous les documents côtés banque */
+router.get('/downloadAllDocumentsBanque', document.downloadAllDocumentsBanque);
+
 module.exports = router;        

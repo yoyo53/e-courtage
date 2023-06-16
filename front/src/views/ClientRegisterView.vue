@@ -102,7 +102,7 @@ export default {
                 alert('Password not match');
                 return;
             }
-            fetch('http://localhost:3000/auth/registerClient', {
+            fetch('https://e-courtage-back.fly.dev/auth/registerClient', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
