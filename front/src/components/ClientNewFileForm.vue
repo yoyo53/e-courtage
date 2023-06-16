@@ -55,8 +55,8 @@ export default {
                 if(xhr.status == 200){
                     console.log("File sent");
                     this.$parent.userFiles.push({
-                        name: this.name,
-                        id: this.$parent.userFiles.length,
+                        nom_document: this.name,
+                        id_document: this.$parent.userFiles.length,
                     });
                     this.name = '';
                     this.file = null;

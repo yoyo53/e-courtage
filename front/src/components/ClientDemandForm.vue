@@ -173,6 +173,8 @@ export default {
             })
             .then((response) => {
                 console.log(response);
+                let temp_demand = this.newDemand;
+                temp_demand.id_demande = response.id_demande;
                 this.$parent.userDemands.push(this.newDemand);
                 console.log(this.$parent.userDemands);
                 //reset form
