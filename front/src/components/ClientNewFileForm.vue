@@ -53,10 +53,14 @@ export default {
             xhr.send(formData);
             xhr.onload = () => {
                 if(xhr.status == 200){
+
+                    let response = JSON.parse(xhr.response);
+
                     console.log("File sent");
+                    console.log(response.id_document);
                     this.$parent.userFiles.push({
-                        nom_document: this.name,
-                        id_document: this.$parent.userFiles.length,
+                        nom_document: this.name+"."+this.file.name.split('.').pop(),
+                        id_document: response.id_document
                     });
                     this.name = '';
                     this.file = null;
