@@ -105,10 +105,10 @@ export default {
             ]
 
             /*
-            fetch('/api/usernotificationsaddress/',{
+            fetch('http://localhost:3000/demande_client/getAllDemandesAccepted', {
                 headers: {
                 'Content-Type': 'application/json',
-                'authorization': sessionStorage.getItem("token")
+                'Authorization': localStorage.getItem("token")
                 }})
             .then((response)=>{return(response.json())})
             .then((parsed) => {

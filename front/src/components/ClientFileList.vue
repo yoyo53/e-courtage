@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="()=>handleDisplay()">Vos fichiers</button>
+        <button class="btn btn-primary" @click="()=>handleDisplay()">Vos fichiers</button>
         <div id="modal-list" v-if="display">
             <button id="closeButton" @click="()=>handleDisplay()">X</button>
             <div>
