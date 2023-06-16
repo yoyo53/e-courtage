@@ -46,6 +46,7 @@ exports.patch = async (req, res) => {
         };
 		res.status(200).send(client);
 	}
+	}
 }
 
 exports.deleteClients = async (req, res) => {
@@ -68,5 +69,4 @@ exports.deleteClients = async (req, res) => {
 		});
 		res.status(200).send({ message: "All clients are deleted" });
 	}
-}
 }
