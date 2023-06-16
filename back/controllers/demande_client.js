@@ -41,26 +41,22 @@ exports.createDemande = async (req, res) => {
 
         // Link all documents to demande
         for (let id_file of req.body.files) {
-            // Create new contient
-            let contient = {
+            // Save new contient
+            await Contient.create({
                 id_demande: newDemande.id_demande,
                 id_document: id_file
-            }
-            // Save new contient
-            await Contient.create(contient);
+            });
         }
 
         // Make a find all banques
         let banques = await Banque.findAll();
         for (let banque of banques) {
-            // Create new accepter
-            let accepter = {
+            // Save new accepter
+            await Accepter.create({
                 id_demande: newDemande.id_demande,
                 id_banque: banque.id_banque,
                 status: 0 // 0 = En attente, 1 = Pinned by banque, 2 = Accepté, -1 = Refusé
-            }
-            // Save new accepter
-            await Accepter.create(accepter);
+            })
         }
         res.status(200).send({ id_demande: newDemande.id_demande, message: "Demande created successfully" });
     }
@@ -108,12 +104,11 @@ exports.getAllDemandesAccepted = async (req, res) => {
         let client = await sessions.findByToken(token, "client");
         // Get all demandes accepted
         let accepted = await Accepter.findAll({ where: { id_client: client.id_client, status: 2 } });
-        let demandes = [];
         for (let accept of accepted) {
-            let demande = await Demande.findOne({ where: { id_demande: accept.id_demande } });
-            demandes.push(demande);
+            let banque = await Banque.findOne({ where: { id_banque: accept.id_banque } });
+            accept.dataValues.nom_banque = banque.nom_banque;
         }
-        res.status(200).send(demandes);
+        res.status(200).send(accepted);
     }
 }
 

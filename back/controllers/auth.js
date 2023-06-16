@@ -6,6 +6,7 @@ const sessions = require("../controllers/session.js");
 const Client = require("../models/client.model.js")(Sequelize.connection, Sequelize.library);
 const Banque = require("../models/banque.model.js")(Sequelize.connection, Sequelize.library);
 const Session = require("../models/sessionClient.model.js")(Sequelize.connection, Sequelize.library);
+const SessionBanque = require("../models/sessionBanque.model.js")(Sequelize.connection, Sequelize.library);
 
 exports.loginClient = async(req, res) => {
     // Check if user exists in database
@@ -74,16 +75,16 @@ exports.registerClient = async(req, res) => {
 }   
 
 exports.loginBanque = async(req, res) => {
-    let banque = await Banque.findOne({where: {Num_Siren: req.body.Num_Siren}});
+    let banque = await Banque.findOne({where: {email: req.body.email}});
 
-    if(banque && banque.Id_Banque && 
-        banque.Password == Crypto.createHash('sha256').update(req.body.Password).digest('hex')){
+    if(banque && banque.id_banque && 
+        banque.password == Crypto.createHash('sha256').update(req.body.password).digest('hex')){
         
         // Find if banque already has a session
-        let session = await Session.findOne({where: {Id_Banque: banque.Id_Banque}});
+        let session = await SessionBanque.findOne({where: {id_banque: banque.id_banque}});
 
         // If banque has a session, check if it is still valid
-        let isTokenExpired = session ? (new Date(session.validUntil) - new Date() <= 0) : true;
+        let isTokenExpired = session ? (new Date(session.valid_until) - new Date() <= 0) : true;
         var token = "";
 
         // If banque has a session and it is still valid
@@ -93,7 +94,7 @@ exports.loginBanque = async(req, res) => {
         } else {
             // If session is not valid, delete it and create a new one
             sessions.deleteExpiredToken();
-            let newSession = await sessions.createSession(banque.Id_Banque);
+            let newSession = await sessions.createSession(banque.id_banque, "banque");
             token = newSession.token;
         }
         res.status(200).send({token: token});
@@ -105,18 +106,18 @@ exports.loginBanque = async(req, res) => {
 
 
 exports.registerBanque = async(req, res) => {
-    sendConfirmationMail(req, res);
+    //sendConfirmationMail(req, res);
     // Create new Banque
     let banque = {
         id_banque: req.body.id_banque,
         email: req.body.email,
-        password: Crypto.createHash('sha256').update(req.body.Password).digest('hex'),
+        password: Crypto.createHash('sha256').update(req.body.password).digest('hex'),
         nom_banque: req.body.nom_banque,
         siren: req.body.siren,
         account_status: req.body.account_status,
     }
     // Verify if banque account already exists
-    let verifyBanque = await Banque.findOne({where: {Num_Siren: req.body.Num_Siren}});
+    let verifyBanque = await Banque.findOne({where: {email: req.body.email}});
     
     if(verifyBanque != null){
         res.status(401).send({message: "Account banque already exists"});
