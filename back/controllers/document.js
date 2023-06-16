@@ -32,6 +32,7 @@ exports.addDocument = async (req, res) => {
 
 		// Upload file
 		file.uploadFile(req, newName ,res);
+		res.status(200).send({id_document: document.id_document, message: `${newName} added successfully`});
 	}	
 }
 

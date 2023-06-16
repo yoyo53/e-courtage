@@ -12,10 +12,9 @@ async function generateSignedUrl(filepath, response) {
 	response.status(200).send(`URL du fichier: ${url}`);
 };
 
-function uploadFile(request, filepath, response) {
+function uploadFile(request, filepath) {
     bucket.file(filepath).save(request.file.buffer, { contentType: request.file.mimetype }, (error) => {
         if (error) { throw error }
-        response.status(200).send(`${request.file.originalname} uploaded to bucket.`);
     })
 }
 
