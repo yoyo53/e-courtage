@@ -12,79 +12,132 @@
                 <div class="fields">
                     <div class="mb-3 profilePageField">
                         <label for="formName" class="form-label">Nom</label>
-                        <input type="text" class="form-control" id="formName"/>
+                        <input type="text" class="form-control" id="formName" v-model="userInfo.nom" placeholder="Votre nom" required disabled/>
                     </div>
                     <div class="mb-3 profilePageField">
                         <label for="formFirstName" class="form-label">Prénom</label>
-                        <input type="text" class="form-control" id="formFirstName"/>
+                        <input type="text" class="form-control" id="formFirstName" v-model="userInfo.prenom" placeholder="Votre prénom" required disabled/>
                     </div>
                     <div class="mb-3 profilePageField">
                         <label for="formEmail" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="formEmail"/>
+                        <input type="email" class="form-control" id="formEmail" v-model="userInfo.email" placeholder="Votre adresse email" required disabled/>
                     </div>
                     <div class="mb-3 profilePageField">
                         <label for="formGenre" class="form-label">Genre</label>
-                        <input type="text" class="form-control" id="formGenre"/>
+                        <select class="form-select" aria-label="Default select example" id="formGenre" v-model="userInfo.genre" required>
+                            <option value="">Selectionnez votre genre</option>
+                            <option value="1">homme</option>
+                            <option value="2">femme</option>
+                            <option value="3">autre</option>
+                        </select>
                     </div>
                     <div class="mb-3 profilePageField">
                         <label for="formBirthDate" class="form-label">Date de naissance</label>
-                        <input type="text" class="form-control" id="formBirthDate"/>
+                        <input type="date" class="form-control" id="formBirthDate" v-model="userInfo.date_birth" required/>
                     </div>
                     <div class="mb-3 profilePageField">
                         <label for="formTelephone" class="form-label">Telephone</label>
-                        <input type="text" class="form-control" id="formTelephone"/>
+                        <input type="text" class="form-control" id="formTelephone" v-model="userInfo.tel" placeholder="Votre numéro" required/>
                     </div>
                     <div class="mb-3 profilePageField">
                         <label for="formCountry" class="form-label">Pays</label>
-                        <input type="text" class="form-control" id="formCountry"/>
+                        <input type="text" class="form-control" id="formCountry" v-model="userInfo.pays" placeholder="Votre ville de résidence" required/>
                     </div>
                     <div class="mb-3 profilePageField">
                         <label for="formCity" class="form-label">Ville</label>
-                        <input type="text" class="form-control" id="formCity"/>
+                        <input type="text" class="form-control" id="formCity" v-model="userInfo.ville" placeholder="Votre ville de résidence" required/>
                     </div>
                     <div class="mb-3 profilePageField">
                         <label for="formAddress" class="form-label">Adresse</label>
-                        <input type="text" class="form-control" id="formAddress"/>
+                        <input type="text" class="form-control" id="formAddress" v-model="userInfo.adresse" placeholder="Votre adresse" required/>
                     </div>
                     <div class="mb-3 profilePageField">
                         <label for="formHousingStatus" class="form-label">Statut immobilier</label>
-                        <input type="text" class="form-control" id="formHousingStatus"/>
+                        <select class="form-select" aria-label="Default select example" id="formHousingStatus" v-model="userInfo.statut_immo" required>
+                            <option value="">Aujourd'hui vous êtes ...</option>
+                            <option value="Locataire">Locataire</option>
+                            <option value="Propriétaire">Propriétaire</option>
+                            <option value="Bénéficiare d'un logement de fonction">Bénéficiare d'un logement de fonction</option>
+                            <option value="Hébergé à titre gratuit">Hébergé à titre gratuit</option>
+                            <option value="Autre">Autre</option>
+                        </select>
                     </div>
                     <div class="mb-3 profilePageField">
-                        <label for="formWorkStatus" class="form-label">Situation professionnelle</label>
-                        <input type="text" class="form-control" id="formWorkStatus"/>
-                    </div>
-                    <div class="mb-3 profilePageField">
-                        <label for="formWorkContract" class="form-label">Contrat</label>
-                        <input type="text" class="form-control" id="formWorkContract"/>
-                    </div>
-                    <div class="mb-3 profilePageField">
-                        <label for="formWorkLength" class="form-label">En poste depuis</label>
-                        <input type="text" class="form-control" id="formWorkLength"/>
-                    </div>
-                    <div class="mb-3 profilePageField">
-                        <label for="formMainBank" class="form-label">Banque principale</label>
-                        <input type="text" class="form-control" id="formMainBank"/>
+                        <label for="formCurrentRent" class="form-label">Loyer Actuel (Si applicable)</label>
+                        <input type="number" class="form-control" id="formCurrentRent" v-model="userInfo.loyer_actuel" placeholder="Votre loyer actuel" required/>
                     </div>
                     <div class="mb-3 profilePageField">
                         <label for="formFamilyStatus" class="form-label">Situation familiale</label>
-                        <input type="text" class="form-control" id="formFamilyStatus"/>
+                        <select class="form-select" aria-label="Default select example" id="formFamilyStatus" v-model="userInfo.situation_familiale" required>
+                            <option value=''>Aujourd'hui vous êtes ...</option>
+                            <option value="Célibataire">Célibataire</option>
+                            <option value="Marié(e) contrat de mariage">Marié(e) contrat de mariage</option>
+                            <option value="Marié(e) communauté de biens">Marié(e) communauté de biens</option>
+                            <option value="Concubin(e) / Vie maritale">Concubin(e) / Vie maritale</option>
+                            <option value="PACS">PACS</option>
+                            <option value="Divorcé(e)">Divorcé(e)</option>
+                            <option value="Séparé(e)">Séparé(e)</option>
+                            <option value="Veuf(ve)">Veuf(ve)</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 profilePageField">
+                        <label for="formChildCount" class="form-label">Nombre d'enfants</label>
+                        <input type="number" class="form-control" id="formChildCount" min="0" v-model="userInfo.nombre_enfant" required/>
                     </div>
                     <div class="mb-3 profilePageField">
                         <label for="formNationality" class="form-label">Nationalité</label>
-                        <input type="text" class="form-control" id="formNationality"/>
+                        <input type="text" class="form-control" id="formNationality" v-model="userInfo.nationalite" placeholder="Votre nationalité" required/>
                     </div>
                     <div class="mb-3 profilePageField">
-                        <label for="formMonthlyRevenue" class="form-label">Revenu mensuel</label>
-                        <input type="text" class="form-control" id="formMonthlyRevenue"/>
+                        <label for="formWorkStatus" class="form-label">Situation professionnelle</label>
+                        <select class="form-select" aria-label="Default select example" id="formWorkStatus" v-model="userInfo.situation_professionnelle" required>
+                            <option value="">Aujourd'hui vous êtes ...</option>
+                            <option value="Employé">Employé</option>
+                            <option value="Ouvrier">Ouvrier</option>
+                            <option value="Cadre">Cadre</option>
+                            <option value="Fonctionnaire">Fonctionnaire</option>
+                            <option value="Enseignant">Enseignant</option>
+                            <option value="Artisan commerçant">Artisan commerçant</option>
+                            <option value="Chef d'entreprise">Chef d'entreprise</option>
+                            <option value="Profession libérale">Profession libérale</option>
+                            <option value="Profession libérale médicale">Profession libérale médicale</option>
+                            <option value="Travailleur indépendant">Travailleur indépendant</option>
+                            <option value="Congé parental">Congé parental</option>
+                            <option value="Intermittent du spectacle">Intermittent du spectacle</option>
+                            <option value="Agriculteur">Agriculteur</option>
+                            <option value="Retraité">Retraité</option>
+                            <option value="Etudiant">Etudiant</option>
+                            <option value="Sans emploi">Sans emploi</option>
+                            <option value="Autre">Autre</option>
+                        </select>
                     </div>
                     <div class="mb-3 profilePageField">
-                        <label for="formAnnualPrime" class="form-label">Prime annuelle (Optionnel)</label>
-                        <input type="text" class="form-control" id="formAnnualPrime"/>
+                        <label for="formWorkContract" class="form-label">Contrat</label>
+                        <select class="form-select" aria-label="Default select example" id="formWorkContract" v-model="userInfo.contrat" required>
+                            <option value="">Aujourd'hui vous travaillez en ...</option>
+                            <option value="CDI">CDI</option>
+                            <option value="CDI Probatoire">CDI Probatoire</option>
+                            <option value="CDD">CDD</option>
+                            <option value="Intérim">Intérim</option>
+                            <option value="Autre">Autre</option>
+                        </select>
                     </div>
                     <div class="mb-3 profilePageField">
-                        <label for="formCurrentRent" class="form-label">Loyer Actuel</label>
-                        <input type="text" class="form-control" id="formCurrentRent"/>
+                        <label for="formWorkLength" class="form-label">En poste depuis (en mois)</label>
+                        <input type="number" class="form-control" id="formWorkLength" min="1" max="1200" v-model="userInfo.poste_depuis" required/>
+                    </div>
+                    <div class="mb-3 profilePageField">
+                        <label for="formMainBank" class="form-label">Banque principale</label>
+                        <input type="text" class="form-control" id="formMainBank" v-model="userInfo.banque_principale" placeholder="Votre banque principale" required/>
+                    </div>
+                    <div class="mb-3 profilePageField">
+                        <label for="formMonthlyRevenue" class="form-label">Revenu mensuel (€)</label>
+                        <input type="number" class="form-control" id="formMonthlyRevenue" v-model="userInfo.revenu_mensuel" required/>
+                    </div>
+                    <div class="mb-3 profilePageField">
+                        <label for="formAnnualPrime" class="form-label">Prime annuelle (€) (Optionnel)</label>
+                        <input type="number" class="form-control" id="formAnnualPrime" v-model="userInfo.prime_annuelle"/>
                     </div>
                 </div>
 
@@ -120,9 +173,37 @@ export default {
     data() {
         return{
             userFiles: [],
+            userInfo: {
+                nom: "",
+                prenom: "",
+                email: "",
+                genre: "",
+                date_birth: "",
+                tel: "",
+                pays: "",
+                ville: "",
+                adresse: "",
+                statut_immo: "",
+                situation_professionnelle: "",
+                contrat: "",
+                poste_depuis: 1,
+                banque_principale: "",
+                situation_familiale: "",
+                nationalite: "",
+                revenu_mensuel: 0,
+                prime_annuelle: 0,
+                loyer_actuel: 0,
+                nombre_enfant: 0,
+            }
         }
     },
     methods:{
+        handlePatchUserInfo(ev) {
+            if(!ev.target.checkValidity()){
+                return;
+            }
+            ev.preventDefault();
+        },
         handleDownload(id,nom) {
             console.log(id);
             fetch("https://e-courtage-back.fly.dev/document/downloadDocument/" + id, {

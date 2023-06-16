@@ -21,7 +21,7 @@
 
             <div class="mb-3">
                 <label for="formGenre" class="form-label">Genre</label>
-                <select class="form-select" aria-label="Default select example" v-model="userInfo.genre">
+                <select class="form-select" aria-label="Default select example" id="formGenre" v-model="userInfo.genre">
                     <option value="">Selectionnez votre genre</option>
                     <option value="1">homme</option>
                     <option value="2">femme</option>
