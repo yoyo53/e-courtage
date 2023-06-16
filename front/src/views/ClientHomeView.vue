@@ -191,6 +191,7 @@ export default {
         padding: 10px;
         border-radius: 10px;
         overflow-y: scroll;
+        scrollbar-width: none;
     }
 
     ::-webkit-scrollbar {
