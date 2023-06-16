@@ -7,8 +7,8 @@
                 <h2 style="margin-bottom: 30px;">Vos fichiers</h2>
                 <ul class="list-group">
                     <li class="fileRow list-group-item" v-for="file in userFiles" :key="file.name">
-                        <div>{{file.id_document}} - {{ file.nom_document }}</div>
-                        <div>
+                        <div class="fileRow-text">{{file.id_document}} - {{ file.nom_document }}</div>
+                        <div class="fileRow-buttons">
                             <button class="btn btn-success fileRowButton" @click="()=>handleDownload(file.id_document, file.nom_document)">Télécharger</button>
                             <button class="btn btn-light fileRowButton" @click="()=>handleUpdate(file.id_document)">Remplacer</button>
                             <button class="btn btn-danger fileRowButton" @click="()=>handleDelete(file.id_document)">Supprimer</button>
@@ -163,6 +163,15 @@ export default {
         justify-content: space-between;
         align-items: center;
         width: 100%;
+    }
+
+    .fileRow-text {
+        width: 50%;
+        text-align: left;
+    }
+
+    .fileRow-buttons {
+        width: 50%;
     }
 
     .fileRowButton {

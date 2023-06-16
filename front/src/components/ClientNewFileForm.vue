@@ -59,7 +59,7 @@ export default {
                     console.log("File sent");
                     console.log(response.id_document);
                     this.$parent.userFiles.push({
-                        nom_document: this.name,
+                        nom_document: this.name+"."+this.file.name.split('.').pop(),
                         id_document: response.id_document
                     });
                     this.name = '';
