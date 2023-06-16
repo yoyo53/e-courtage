@@ -203,7 +203,7 @@ export default {
         }
     },
     mounted() {
-        fetch("http://localhost:3000/document/getAllDocuments", {
+        fetch("https://e-courtage-back.fly.dev/document/getAllDocuments", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
