@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 /* Initialize all routers */
 var authRouter = require('./routes/auth');
 var clientRouter = require('./routes/client');
+var banqueRouter = require('./routes/banque');
 var demande_clientRouter = require('./routes/demande_client');
 var demande_banqueRouter = require('./routes/demande_banque');
 var documentRouter = require('./routes/document');
@@ -43,6 +44,7 @@ bucket.getFiles().then(([files]) => files.forEach(file => console.log(file.name)
 /* Use all routers */
 app.use('/auth', authRouter);
 app.use('/client', clientRouter);
+app.use('/banque', banqueRouter);
 app.use('/document', documentRouter);
 app.use('/demande_client', demande_clientRouter);
 app.use('/demande_banque', demande_banqueRouter);
