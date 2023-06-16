@@ -113,16 +113,19 @@ exports.getAllDemandesAccepted = async (req, res) => {
             return;
         } else {
             let client = await sessions.findByToken(token, "client");
-            // Get all demandes accepted
-            let accepted = await Accepter.findAll({ where: { id_client: client.id_client, status: 2 } });
-            for (let accept of accepted) {
-                let banque = await Banque.findOne({ where: { id_banque: accept.id_banque } });
-                accept.dataValues.nom_banque = banque.nom_banque;
+            let demandes = await Demande.findAll({ where: { id_client: client.id_client } });
+            let accepted_list = [];
+            for (let demande of demandes) {
+                let accepted = await Accepter.findOne({ where: { id_demande: demande.id_demande, statut: 2}});
+                if(accepted){
+                    accepted_list.push(demande);
+                }
+                
             }
-            res.status(200).send(accepted);
+            res.status(200).send(accepted_list);
         }
     } catch(err){
-        res.status(500).send({ message: "Error has occured" });
+        res.status(500).send({ message: "Error has occured" + err });
     }
 
 }
