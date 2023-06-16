@@ -104,7 +104,7 @@
                 <div class="mb-3">
                     <label for="formFileMultiple" class="form-label">Vos Fichiers</label>
                     <ul>
-                        <ClientFileListCheckableElement v-for="file in userFiles" :key="file.name" :file="file"/>
+                        <ClientFileListCheckableElement v-for="file in userFiles" :key="file.id_document" :file="file"/>
                     </ul>
                     <client-new-file-form />
                 </div>
@@ -207,20 +207,28 @@ export default {
     },
     components: { ClientFileListCheckableElement, ClientNewFileForm },
     mounted() {
-        this.userFiles = [
-            {
-                name: "file1",
-                id: "1"
-            },
-            {
-                name: "file2",
-                id: "2"
-            },
-            {
-                name: "file3",
-                id: "3"
+        fetch("http://localhost:3000/document/getAllDocuments", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token")
             }
-        ];
+        })
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Something went wrong");
+            }
+        })
+        .then((response) => {
+            console.log(response);
+            this.userFiles = response;
+        })
+        .catch((error) => {
+            console.log(error);
+            alert("Une erreur est survenue, veuillez réessayer plus tard");
+        });
     }
 }
 </script>

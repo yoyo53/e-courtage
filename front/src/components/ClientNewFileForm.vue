@@ -41,28 +41,31 @@ export default {
             }
             ev.preventDefault();
 
-            /*
-            fetch( '/api/userfilesaddress', {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json',
-                'authorization': sessionStorage.getItem("token")
-                },
-                body: JSON.stringify({
-                    "name": this.name,
-                    "file": this.file,
-                })
-            })
-            .then( response => response.json() )
-            .then( json => {
-                console.log(json);
-                this.$parent.files.push({name: this.name, file: this.file, id: this.$parent.files.length + 1});
-                this.displayForm = false;
-            })
-            */
-
-            this.$parent.userFiles.push({name: this.name, file: this.file, id: this.$parent.userFiles.length + 1});
-            this.displayForm = false;
+            
+            //We send the file with a XMLHttpRequest
+            let formData = new FormData();
+            formData.append('file', this.file);
+            formData.append('nom_document', this.name);
+            
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://localhost:3000/document/addDocument');
+            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            xhr.send(formData);
+            xhr.onload = () => {
+                if(xhr.status == 200){
+                    console.log("File sent");
+                    this.$parent.userFiles.push({
+                        name: this.name,
+                        id: this.$parent.userFiles.length,
+                    });
+                    this.name = '';
+                    this.file = null;
+                    this.displayForm = false;
+                }
+                else{
+                    console.log("Error while sending file");
+                }
+            }
         },
         handleDisplay() {
             console.log("display");
