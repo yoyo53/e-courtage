@@ -3,65 +3,44 @@ const { Op } = require("sequelize");
 const Sequelize = require("../db.connection");
 const Client = require("../models/client.model.js")(Sequelize.connection, Sequelize.library);
 
-/* END db initialization */
-const { getUsers, getUserById, insertUser, updateUserById, deleteUserById } = require("../models/userModel.js");
+exports.getAllClients = async (req, res) => {
+	// Get Client Id from token
+	var token = req.get("Authorization");
 
-// Get All users
-export const showUsers = (req, res) => {
-    getUsers((err, results) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json(results);
-        }
-    });
+	// Verify if user is logged in
+	let session = await sessions.verifyToken(token, "client");
+
+	if (!session) {
+		res.status(401).send({ message: "Unauthorized" });
+		return;
+	} else {
+		// Get Client Id
+		let client = await sessions.findByToken(token, "client");
+		let clients = await Clients.findAll({
+			where: {
+				id_client: client.id_client
+			}
+		});
+		res.status(200).send(clients);
+	}
 }
 
-// Get Single user 
-export const showUserById = (req, res) => {
-    const id = req.params.id;
-    getUserById(id, (err, results) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json(results);
-        }
-    });
+exports.patch = async (req, res) => {
+	// Get Client Id from token
+	var token = req.get("Authorization");
+
+	// Verify if user is logged in
+	let session = await sessions.verifyToken(token, "client");
+
+	if (!session) {
+		res.status(401).send({ message: "Unauthorized" });
+		return;
+	} else {
+		let client = await Clients.find((client) => client.id === session.clientId);
+        for(var key in req.body){
+            client[key] = req.body[key];
+        };
+		res.status(200).send(clients);
+	}
 }
 
-// Create New user
-export const createUser = (req, res) => {
-    const data = req.body;
-    insertUser(data, (err, results) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json(results);
-        }
-    });
-}
-
-// Update User
-export const updateUser = (req, res) => {
-    const data = req.body;
-    const id = req.params.id;
-    updateUserById(data, id, (err, results) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json(results);
-        }
-    });
-}
-
-// Delete User
-export const deleteUser = (req, res) => {
-    const id = req.params.id;
-    deleteUserById(id, (err, results) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json(results);
-        }
-    });
-}
