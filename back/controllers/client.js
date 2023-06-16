@@ -44,3 +44,23 @@ exports.patch = async (req, res) => {
 	}
 }
 
+exports.deleteAllClients = async (req, res) => {
+	var token = req.get("Authorization");
+
+	// Verify if user is logged in
+	let session = await sessions.verifyToken(token, "client");
+
+	if (!session) {
+		res.status(401).send({ message: "Unauthorized" });
+		return;
+	} else {
+		// Delete all clients
+		await Clients.destroy({
+			where: {
+				id_client: client.id_client
+			}
+		});
+		res.status(200).send({ message: "All clients are deleted" });
+	}
+}
+
