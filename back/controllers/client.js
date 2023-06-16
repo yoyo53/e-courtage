@@ -4,7 +4,7 @@ const Sequelize = require("../db.connection");
 const Client = require("../models/client.model.js")(Sequelize.connection, Sequelize.library);
 
 /* END db initialization */
-import { getUsers, getUserById, insertUser, updateUserById, deleteUserById } from "../models/userModel.js";
+const { getUsers, getUserById, insertUser, updateUserById, deleteUserById } = require("../models/userModel.js");
 
 // Get All users
 export const showUsers = (req, res) => {

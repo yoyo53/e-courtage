@@ -18,6 +18,12 @@ function uploadFile(request, filepath) {
     })
 }
 
+function deleteFile(filepath) {
+    bucket.file(filepath).delete((error) => {
+        if (error) { throw error }
+    })
+}
+
 function getFile(filepath, response) {
     bucket.file(filepath).createReadStream().pipe(response);
 }
@@ -33,6 +39,7 @@ function getFiles(filepaths, response) {
 module.exports = {
     generateSignedUrl,
     uploadFile,
+	deleteFile,
 	getFile,
 	getFiles
 }

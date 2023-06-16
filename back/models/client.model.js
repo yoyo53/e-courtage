@@ -84,7 +84,7 @@ module.exports = (sequelize, Sequelize) => {
 };
 
 // Import bcrypt
-import bcrypt, { hash } from "bcrypt";
+const bcrypt = require("bcrypt");
 
 // Get ALL users
 export const getUsers = (result) => {
