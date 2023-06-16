@@ -36,7 +36,7 @@ export default {
     methods: {
         handleLoginC(){
             let obj = {email:this.email,password:this.password}
-            fetch( 'http://localhost:3000/auth/loginClient', {
+            fetch( 'https://e-courtage-back.fly.dev/auth/loginClient', {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'
