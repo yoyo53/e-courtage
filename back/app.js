@@ -69,19 +69,23 @@ catch(error){
 
 const Banque = require("./models/banque.model.js")(connection, Sequelize.library);
 const Client = require("./models/client.model.js")(connection, Sequelize.library);
+const Admin = require("./models/admin.model.js")(connection, Sequelize.library);
 const Demande = require("./models/demande.model.js")(connection, Sequelize.library);
 const Document = require("./models/document.model.js")(connection, Sequelize.library);
 const Accepter = require("./models/accepter.model.js")(connection, Sequelize.library);
 const SessionClient = require("./models/sessionClient.model.js")(connection, Sequelize.library);
 const SessionBanque = require("./models/sessionBanque.model.js")(connection, Sequelize.library);
+const SessionAdmin = require("./models/sessionAdmin.model.js")(connection, Sequelize.library);
 
 /* Add db relations */
 Demande.sync({force: false}, {alter: true});
 Client.sync({force: false}, {alter: true});
 Document.sync({force: false}, {alter: true});
 Banque.sync({force: false}, {alter: true});
+Admin.sync({force: false}, {alter: true});
 SessionClient.sync({ force: false, alter: true });
 SessionBanque.sync({ force: false, alter: true });
+SessionAdmin.sync({ force: false, alter: true });
 
 
 Demande.belongsToMany(Document, {as: "document", through: "contient", foreignKey: "id_demande", timestamps: false});
@@ -96,6 +100,7 @@ Banque.belongsToMany(Demande, {as:"accepted", through: Accepter, foreignKey: "id
 
 SessionClient.belongsTo(Client, {as: "user", foreignKey: "id_client"});
 SessionBanque.belongsTo(Banque, {as: "user", foreignKey: "id_banque"});
+SessionAdmin.belongsTo(Admin, {as: "user", foreignKey: "id_admin"});
 
 connection.sync()
 /* END db relations */

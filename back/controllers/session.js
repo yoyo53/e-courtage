@@ -5,6 +5,7 @@ const moment = require('moment');
 const Sequelize = require("../db.connection");
 const SessionClient = require("../models/sessionClient.model")(Sequelize.connection, Sequelize.library);
 const SessionBanque = require("../models/sessionBanque.model")(Sequelize.connection, Sequelize.library);
+const SessionAdmin = require("../models/sessionAdmin.model")(Sequelize.connection, Sequelize.library);
 
 // Create a new Session
 exports.createSession = async (id, userType) => {
@@ -26,7 +27,24 @@ exports.createSession = async (id, userType) => {
             .catch(e => {
                 console.log("error", e)
             });
-    } else{
+    } else if (userType == "admin") {
+        const obj = {
+            token: uuidv4(),
+            valid_until: validity,
+            id_admin: id
+        };
+        // Save new Session
+        // Save in the database
+        var result = {};
+        await SessionAdmin.create(obj)
+            .then(data => {
+                result = data
+            })
+            .catch(e => {
+                console.log("error", e)
+            });
+    } 
+    else{
         const obj = {
             token: uuidv4(),
             valid_until: validity,
@@ -79,7 +97,16 @@ exports.findByToken = async (token, userType) => {
         .catch(e => {
             console.log("Error", e)
         })
-    } else{
+    } else if (userType == "admin") {
+        await SessionAdmin.findOne({ where: condition })
+        .then(data => {
+            result = data
+        })
+        .catch(e => {
+            console.log("Error", e)
+        })
+    }
+    else{
         await SessionClient.findOne({ where: condition })
         .then(data => {
             result = data
