@@ -26,9 +26,9 @@
                         <label for="formGenre" class="form-label">Genre</label>
                         <select class="form-select" aria-label="Default select example" id="formGenre" v-model="userInfo.genre" required>
                             <option value="">Selectionnez votre genre</option>
-                            <option value="1">homme</option>
-                            <option value="2">femme</option>
-                            <option value="3">autre</option>
+                            <option value="1">Homme</option>
+                            <option value="2">Femme</option>
+                            <option value="3">Autre</option>
                         </select>
                     </div>
                     <div class="mb-3 profilePageField">
@@ -53,7 +53,7 @@
                     </div>
                     <div class="mb-3 profilePageField">
                         <label for="formHousingStatus" class="form-label">Statut immobilier</label>
-                        <select class="form-select" aria-label="Default select example" id="formHousingStatus" v-model="userInfo.statut_immo" required>
+                        <select class="form-select" aria-label="Default select example" id="formHousingStatus" v-model="userInfo.status_immo" required>
                             <option value="">Aujourd'hui vous êtes ...</option>
                             <option value="Locataire">Locataire</option>
                             <option value="Propriétaire">Propriétaire</option>
@@ -124,8 +124,8 @@
                         </select>
                     </div>
                     <div class="mb-3 profilePageField">
-                        <label for="formWorkLength" class="form-label">En poste depuis (en mois)</label>
-                        <input type="number" class="form-control" id="formWorkLength" min="1" max="1200" v-model="userInfo.poste_depuis" required/>
+                        <label for="formWorkLength" class="form-label">En poste depuis</label>
+                        <input type="date" class="form-control" id="formWorkLength" :min="this.userInfo.date_birth" max="2023-06-19" v-model="userInfo.poste_depuis" required/>
                     </div>
                     <div class="mb-3 profilePageField">
                         <label for="formMainBank" class="form-label">Banque principale</label>
@@ -141,7 +141,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary" id="saveButton">Mettre à jour</button>
+                <button type="submit" class="btn btn-primary" id="saveButton" @click="(ev)=>handlePatchUserInfo(ev)">Mettre à jour</button>
 
             </form>
 
@@ -183,10 +183,10 @@ export default {
                 pays: "",
                 ville: "",
                 adresse: "",
-                statut_immo: "",
+                status_immo: "",
                 situation_professionnelle: "",
                 contrat: "",
-                poste_depuis: 1,
+                poste_depuis: "",
                 banque_principale: "",
                 situation_familiale: "",
                 nationalite: "",
@@ -203,6 +203,14 @@ export default {
                 return;
             }
             ev.preventDefault();
+            fetch(this.api_url + "client/patchClient", {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem("token")
+                },
+                body: JSON.stringify(this.userInfo)
+            })
         },
         handleDownload(id,nom) {
             console.log(id);
@@ -299,10 +307,41 @@ export default {
                 console.log(error);
                 alert("Une erreur est survenue, veuillez réessayer plus tard");
             });
+        },
+        fetchUserData() {
+            
+            fetch(this.api_url + 'client/getClient',{
+                headers: {
+                'Content-Type': 'application/json',
+                'authorization': localStorage.getItem("token")
+                }})
+            .then((response)=>{return(response.json())})
+            .then((parsed) => {
+                console.log(parsed);
+                this.userInfo = parsed;
+                //For each key in userInfo, set the value to "" or 0 if the field is in [poste_depuis, nombre_enfant, revenu_mensuel, prime_annuelle, loyer_actuel]
+                
+                for (const key in this.userInfo) {
+                    
+                    if(key == "date_birth" || key == "poste_depuis") {
+                        this.userInfo[key] = this.userInfo[key].split("T")[0];
+                    }
+                    else if (this.userInfo[key] == null) {
+                        if (key == "nombre_enfant" || key == "revenu_mensuel" || key == "prime_annuelle" || key == "loyer_actuel") {
+                        this.userInfo[key] = 0;
+                        } else {
+                            this.userInfo[key] = "";
+                        }
+                    }
+                    
+                }
+            });
+            
         }
     },
     mounted() {
         this.fetchUserFiles();
+        this.fetchUserData();
     }
 }
 </script>
@@ -316,21 +355,28 @@ export default {
     #topDog {
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
+        height: 85vh;
+        overflow-y: scroll;
+        flex-wrap: wrap;
     }
 
     #filesList {
         width: 45%;
+        min-width: 300px;
         margin: auto;
         background-color: #d9d9d9;
         padding: 20px;
         border-radius: 10px;
         color: black;
         text-align: left;
+        height: 100%;
+        overflow-y: scroll;
     }
     
     #profileForm {
         width: 45%;
+        min-width: 300px;
         height: 85vh;
         margin: auto;
         background-color: #d9d9d9;
@@ -338,6 +384,8 @@ export default {
         border-radius: 10px;
         color: black;
         text-align: left;
+        height: 100%;
+        overflow-y: scroll;
     }
 
     .fields {

@@ -7,12 +7,12 @@
                 <div id="profile-overview-area">
                     <h2>Votre profil :</h2>
                     <ul id="profile-list" class="section-list">
-                        <li class="profile-item"><span>Nom :</span> <input type="text" v-model="userData.name"></li>
-                        <li class="profile-item"><span>Prénom :</span> <input type="text" v-model="userData.firstname"> </li>
-                        <li class="profile-item"><span>Date de Naissance :</span> <input type="date" v-model="userData.birthdate"></li>
-                        <li class="profile-item"><span>Numéro de téléphone :</span> <input type="tel" v-model="userData.phone"></li>
-                        <li class="profile-item"><span>Adresse mail :</span> <input type="email" v-model="userData.email"></li>
-                        <li class="profile-item"><span>Profession :</span> <input type="text" v-model="userData.occupation"></li>
+                        <li class="profile-item"><span>Nom :</span><span> {{ userData.nom }}</span></li>
+                        <li class="profile-item"><span>Prénom :</span><span> {{ userData.prenom }}</span></li>
+                        <li class="profile-item"><span>Date de Naissance :</span><span> {{ userData.date_birth }}</span></li>
+                        <li class="profile-item"><span>Numéro de téléphone :</span><span> {{ userData.tel }}</span></li>
+                        <li class="profile-item"><span>Adresse mail :</span><span> {{ userData.email }}</span></li>
+                        <li class="profile-item"><span>Profession :</span><span> {{ userData.situation_professionnelle }}</span></li>
                         <li class="profile-item profile-buttons"><client-file-list/><router-link class="btn btn-primary" to="/client/profile">Votre profil</router-link></li>
                     </ul>
                 </div>
@@ -64,32 +64,29 @@ export default {
     },
     methods: {
         fetchUserData() {
-            // TODO
-            this.userData = {
-                name: "Doe",
-                firstname: "John",
-                birthdate: "2002-09-29",
-                phone: "0123456789",
-                email: "john.doe@gmail.com",
-                occupation: "Software Engineer",
-            }
-            console.log(this.userData);
-            /*
-            fetch('/api/userdataaddress/',{
+            
+            fetch(this.api_url + 'client/getClient',{
                 headers: {
                 'Content-Type': 'application/json',
-                'authorization': sessionStorage.getItem("token")
+                'authorization': localStorage.getItem("token")
                 }})
             .then((response)=>{return(response.json())})
             .then((parsed) => {
                 console.log(parsed);
                 this.userData = parsed;
+                for(const key in this.userData){
+                    if(key == "date_birth"){
+                        this.userData[key] = this.userData[key].split("T")[0];
+                    } else if(this.userData[key] == null){
+                        this.userData[key] = "Non renseigné";
+                    }
+                }
             });
-            */
+            
         },
         fetchUserNotifications() {
             
-            fetch('https://e-courtage-back.fly.dev/demande_client/getAllDemandesAccepted', {
+            fetch(this.api_url + 'demande_client/getAllDemandesAccepted', {
                 headers: {
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem("token")
@@ -118,25 +115,6 @@ export default {
                 this.userDemands = parsed;
             });
             
-        },
-        sendUserData() {
-            /*
-            fetch( '/api/userdataaddress', {
-                method: 'PATCH',
-                headers: {
-                'Content-Type': 'application/json',
-                'authorization': sessionStorage.getItem("token")
-                },
-                body: JSON.stringify({
-                    "name": this.userData.name,
-                    "firstname": this.userData.firstname,
-                    "birthdate": this.userData.birthdate,
-                    "phone": this.userData.phone,
-                    "email": this.userData.email,
-                    "occupation": this.userData.occupation
-                })
-            })
-            */
         }
     },
     mounted() {
@@ -144,10 +122,6 @@ export default {
         this.fetchUserData();
         this.fetchUserNotifications();
         this.fetchUserDemands();
-    },
-    beforeUnmount() {
-        console.log("Unmounted");
-        this.sendUserData();
     }
     
 }
