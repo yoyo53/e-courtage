@@ -150,12 +150,13 @@ exports.getAllStatutDemandes = async (req, res) => {
             let client = await sessions.findByToken(token, "client");
             let demandes = await Demande.findAll({ where: { id_client: client.id_client } });
             // Check for all demandes how many are accepted, refused or pending
-            let accepted = 0;
-            let refused = 0;
-            let pending = 0;
+            
             let list = [];
             for (let demande of demandes) {
                 let accepter = await Accepter.findAll({ where: { id_demande: demande.id_demande } });
+                let accepted = 0;
+                let refused = 0;
+                let pending = 0;
                 for (let accept of accepter) {
                     if (accept.statut == 2) {
                         accepted++;
