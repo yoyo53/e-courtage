@@ -63,6 +63,9 @@ export default {
             })
         },
         handleUpdate(id) {
+
+            let $this = this;
+            
             console.log(id);
             //Open file explorer, when file is selected, send whole file with xmlHttpRequest
             const input = document.createElement("input");
@@ -80,6 +83,8 @@ export default {
                 xhr.onload = function() {
                     if (xhr.status == 200) {
                         console.log("File uploaded");
+                        $this.userFiles.find((file) => file.id_document === id).nom_document = input.files[0].name;
+                        
                     } else {
                         console.log("Error " + xhr.status + " occurred when trying to upload your file.");
                     }

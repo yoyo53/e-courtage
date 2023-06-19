@@ -1,7 +1,12 @@
 <template>
     <div id="notificationListElement">
-        <span>{{notification.demand}}</span>
-        <span>{{notification.bank}}</span>
+        <div class="notification-row">
+            <span>{{notification.sujet_demande}}</span>
+            <span>{{notification.banque_name}}</span>
+        </div>
+        <div class="notification-row">
+            <span id="comment"> Accepté ! </span>
+        </div>
     </div>
 </template>
 
@@ -18,10 +23,10 @@ export default {
 </script>
 
 <style>
+
     #notificationListElement {
-        font-size: 1.5vw;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
         width: 100%;
@@ -30,4 +35,17 @@ export default {
         padding: 5px;
         margin-bottom: 10px;
     }
+
+    .notification-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: left;
+        width: 100%;
+    }
+
+    #comment {
+        color: green;
+    }
+
 </style>
