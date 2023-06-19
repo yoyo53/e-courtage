@@ -117,12 +117,18 @@ exports.getAllDemandesAccepted = async (req, res) => {
             let accepted_list = [];
             for (let demande of demandes) {
                 let accepted = await Accepter.findOne({ where: { id_demande: demande.id_demande, statut: 2}});
-                // Add new attribute banque_name to demande
-                accepted.dataValues.nom_banque = (await Banque.findOne({ where: { id_banque: accepted.id_banque } })).nom_banque;
-                accepted.dataValues.nom_demande = (await Demande.findOne({ where: { id_demande: accepted.id_demande } })).sujet;
 
                 if(accepted){
-                    accepted_list.push(accepted);
+                    // Add new attribute banque_name to demande
+                    let nom_banque = (await Banque.findOne({ where: { id_banque: accepted.id_banque } })).nom_banque;
+                    let sujet_demande = (await Demande.findOne({ where: { id_demande: accepted.id_demande } })).sujet;
+                    accepted.dataValues.banque_name = nom_banque;
+                    accepted.dataValues.sujet_demande = sujet_demande;
+                    accepted_list.push(list_accepted);
+                }
+                else {
+                    res.status(404).send({ message: "Not found" });
+                    return;
                 }
                 
             }
