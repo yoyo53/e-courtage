@@ -359,6 +359,7 @@ export default {
         height: 85vh;
         overflow-y: scroll;
         flex-wrap: wrap;
+        scrollbar-width: none;
     }
 
     #filesList {
@@ -372,6 +373,7 @@ export default {
         text-align: left;
         height: 100%;
         overflow-y: scroll;
+        scrollbar-width: none;
     }
     
     #profileForm {
@@ -386,6 +388,7 @@ export default {
         text-align: left;
         height: 100%;
         overflow-y: scroll;
+        scrollbar-width: none;
     }
 
     .fields {
