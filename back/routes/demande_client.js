@@ -20,5 +20,8 @@ router.delete('/deleteDemande/:id_demande', demande_client.deleteDemande);
 /*  Récupération des demandes acceptées d'un client */
 router.get('/getAllDemandesAccepted', demande_client.getAllDemandesAccepted);
 
+/*  Récupération des statuts de demandes */
+router.get('/getAllStatutDemandes', demande_client.getAllStatutDemandes);
+
 module.exports = router;
 
