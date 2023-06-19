@@ -396,6 +396,7 @@ export default {
         flex-wrap: wrap;
         justify-content: space-between;
         overflow-y: scroll;
+        scrollbar-width: none;
         height: 70vh;
     }
 
