@@ -4,7 +4,7 @@ var router = express.Router();
 
 
 router.get('/getClient', client.getClient);
-router.patch('/patch', client.patch);
+router.patch('/patchClient', client.patchClient);
 router.delete('/deleteClients', client.deleteClients);
 
 
