@@ -33,7 +33,8 @@ exports.createDemande = async (req, res) => {
                 montant_travaux: req.body.montant_travaux ? req.body.montant_travaux : null,
                 frais_notaire: req.body.frais_notaire ? req.body.frais_notaire : null,
                 apport_personnel: req.body.apport_personnel,
-                commentaire: req.body.commentaire ? req.body.commentaire : null,    
+                commentaire: req.body.commentaire ? req.body.commentaire : null,
+                accompagnement: req.body.accompagnement,    
                 id_client: client.id_client
             }
             // Save new Demande
@@ -149,12 +150,13 @@ exports.getAllStatutDemandes = async (req, res) => {
             let client = await sessions.findByToken(token, "client");
             let demandes = await Demande.findAll({ where: { id_client: client.id_client } });
             // Check for all demandes how many are accepted, refused or pending
-            let accepted = 0;
-            let refused = 0;
-            let pending = 0;
+            
             let list = [];
             for (let demande of demandes) {
                 let accepter = await Accepter.findAll({ where: { id_demande: demande.id_demande } });
+                let accepted = 0;
+                let refused = 0;
+                let pending = 0;
                 for (let accept of accepter) {
                     if (accept.statut == 2) {
                         accepted++;
