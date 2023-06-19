@@ -50,6 +50,10 @@
                 <label for="formAddress" class="form-label">Adresse</label>
                 <input type="text" class="form-control" id="formAddress" v-model="userInfo.adresse" required/>
             </div>
+            <div class="mb-3">
+                <label for="formHealthDocument" class="form-label">Document de santé</label>
+                <input type="file" class="form-control" id="formHealthDocument" required @change="(ev)=>handleDocumentPlacement(ev)" />
+            </div>
 
             <div class="mb-3">
                 <label for="formPassword" class="form-label">Mot de passe</label>
@@ -85,10 +89,14 @@ export default {
                 adresse: '',
                 password: ''
             },
+            healthDocument: null,
             rePassword: ''
         }
     },
     methods: {
+        handleDocumentPlacement(ev) {
+            this.healthDocument = ev.target.files[0];
+        },
         handleRegister(ev) {
 
             if(this.userInfo.nom == '' || this.userInfo.prenom == '' || this.userInfo.email == '' || this.userInfo.genre == '' || this.userInfo.date_birth == '' || this.userInfo.tel == '' || this.userInfo.pays == '' || this.userInfo.ville == '' || this.userInfo.adresse == '' || this.userInfo.password == '') {
@@ -119,6 +127,24 @@ export default {
                     alert('Register failed');
                 }
             })
+
+            //We send the file with a XMLHttpRequest
+            let formData = new FormData();
+            formData.append('file', this.file);
+            formData.append('nom_document', "Document de santé");
+            
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', this.api_url + 'document/addDocument');
+            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            xhr.send(formData);
+            xhr.onload = () => {
+                if(xhr.status == 200){
+                    console.log("File sent");
+                }
+                else{
+                    console.log("Error while sending file");
+                }
+            }
 
         }
     }
