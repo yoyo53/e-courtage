@@ -2,8 +2,9 @@
 const { Op } = require("sequelize");
 const Sequelize = require("../db.connection");
 const Client = require("../models/client.model.js")(Sequelize.connection, Sequelize.library);
+const sessions = require("./session.js");
 
-exports.getClients = async (req, res) => {
+exports.getClient = async (req, res) => {
 	// Get Client Id from token
 	var token = req.get("Authorization");
 
@@ -15,14 +16,14 @@ exports.getClients = async (req, res) => {
 		return;
 	} else {
 		// Get Client Id
-		const sessions = require("./session.js");
-		let client = await sessions.findByToken(token, "client");
-		let clients = await Client.findAll({
+		
+		let client_session = await sessions.findByToken(token, "client");
+		let client = await Client.findOne({
 			where: {
-				id_client: client.id_client
+				id_client: client_session.id_client
 			}
 		});
-		res.status(200).send(clients);
+		res.status(200).send(client);
 	}
 }
 
