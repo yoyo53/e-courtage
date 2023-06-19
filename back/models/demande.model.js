@@ -51,7 +51,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
             allowNull: false
         },
-        accompagnement:{
+        commentaire:{
             type: Sequelize.STRING
         },
         id_client : {

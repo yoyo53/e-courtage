@@ -34,7 +34,6 @@ exports.createDemande = async (req, res) => {
                 frais_notaire: req.body.frais_notaire ? req.body.frais_notaire : null,
                 apport_personnel: req.body.apport_personnel,
                 commentaire: req.body.commentaire ? req.body.commentaire : null,    
-                accompagnement: req.body.accompagnement,
                 id_client: client.id_client
             }
             // Save new Demande
