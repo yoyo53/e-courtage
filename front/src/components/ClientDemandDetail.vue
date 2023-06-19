@@ -236,7 +236,6 @@ export default {
     #openButton{
         height: 100%;
         width: 50%;
-        background-color: #D9D9D9;
         text-align: center;
         font-size: 2vw;
         border-radius: 10px;
