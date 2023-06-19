@@ -117,8 +117,9 @@ exports.getAllDemandesAccepted = async (req, res) => {
             let accepted_list = [];
             for (let demande of demandes) {
                 let accepted = await Accepter.findOne({ where: { id_demande: demande.id_demande, statut: 2}});
+
                 if(accepted){
-                    accepted_list.push(demande);
+                    accepted_list.push(accepted);
                 }
                 
             }
