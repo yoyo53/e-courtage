@@ -3,6 +3,8 @@
         <h3>{{demand.sujet}}</h3>
         <div class="demandRow"><span> Acquisition : {{ demand.montant_bien}} €</span> <span> Apport : {{ demand.apport_personnel }} €</span></div>
         <div class="demandRow"><span>{{ demand.commentaire }}</span></div>
+        <br>
+        <div class="demandRow"><span>État :</span><span id="accept_count">{{ demand.accepted }}</span><span id="pending_count">{{ demand.pending }}</span><span id="refuse_count">{{ demand.refused }}</span></div>
         <client-demand-detail :propDemand="demand"/>
     </div>
 </template>
@@ -16,11 +18,6 @@ export default {
         demand: {
             type: Object,
             required: true
-        }
-    },
-    methods: {
-        handleDisplayDetail() {
-            alert("WIP")
         }
     }
 }
@@ -48,10 +45,16 @@ export default {
         width: 100%;
     }
 
-    #detailButton{
-        color: blue;
-        margin-top: 10px;
-        border: none;
+    #accept_count {
+        color: green;
+    }
+
+    #pending_count {
+        color: orange;
+    }
+
+    #refuse_count {
+        color: red;
     }
 
 </style>

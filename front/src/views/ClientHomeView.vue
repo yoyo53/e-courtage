@@ -113,6 +113,21 @@ export default {
             .then((parsed) => {
                 console.log(parsed);
                 this.userDemands = parsed;
+
+                fetch(this.api_url + 'demande_client/getAllStatutDemandes', {
+                    headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem("token")
+                    }})
+                .then((response)=>{return(response.json())})
+                .then((parsed) => {
+                    for(let i = 0; i < this.userDemands.length; i++){
+                        this.userDemands[i].accepted = parsed[i].accepted;
+                        this.userDemands[i].refused = parsed[i].refused;
+                        this.userDemands[i].pending = parsed[i].pending;
+                    }
+
+                });
             });
             
         }
