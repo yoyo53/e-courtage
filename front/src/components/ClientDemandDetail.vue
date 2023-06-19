@@ -147,7 +147,7 @@ export default {
 
             ev.preventDefault();
             
-            fetch("https://e-courtage-back.fly.dev/demande_client/updateDemande/"+this.newDemand.id_demande, {
+            fetch(this.api_url + "demande_client/updateDemande/"+this.newDemand.id_demande, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -173,7 +173,7 @@ export default {
             });
         },
         handleDelete() {
-            fetch("https://e-courtage-back.fly.dev/demande_client/deleteDemande/"+this.newDemand.id_demande, {
+            fetch(this.api_url + "demande_client/deleteDemande/"+this.newDemand.id_demande, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -203,7 +203,7 @@ export default {
         }
     },
     mounted() {
-        fetch("https://e-courtage-back.fly.dev/document/getAllDocuments", {
+        fetch(this.api_url + "document/getAllDocuments", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

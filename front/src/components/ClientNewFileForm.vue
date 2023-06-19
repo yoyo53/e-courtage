@@ -48,7 +48,7 @@ export default {
             formData.append('nom_document', this.name);
             
             let xhr = new XMLHttpRequest();
-            xhr.open('POST', 'https://e-courtage-back.fly.dev/document/addDocument');
+            xhr.open('POST', this.api_url + 'document/addDocument');
             xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
             xhr.send(formData);
             xhr.onload = () => {

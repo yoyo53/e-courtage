@@ -156,7 +156,7 @@ export default {
             
             console.log(localStorage.getItem("token"));
 
-            fetch("https://e-courtage-back.fly.dev/demande_client/createDemande", {
+            fetch(this.api_url + "demande_client/createDemande", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -209,7 +209,7 @@ export default {
     },
     components: { ClientFileListCheckableElement, ClientNewFileForm },
     mounted() {
-        fetch("https://e-courtage-back.fly.dev/document/getAllDocuments", {
+        fetch(this.api_url + "document/getAllDocuments", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
