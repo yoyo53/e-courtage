@@ -117,19 +117,15 @@ exports.getAllDemandesAccepted = async (req, res) => {
             let accepted_list = [];
             for (let demande of demandes) {
                 let accepted = await Accepter.findOne({ where: { id_demande: demande.id_demande, statut: 2}});
-
                 if(accepted){
                     // Add new attribute banque_name to demande
                     let nom_banque = (await Banque.findOne({ where: { id_banque: accepted.id_banque } })).nom_banque;
                     let sujet_demande = (await Demande.findOne({ where: { id_demande: accepted.id_demande } })).sujet;
                     accepted.dataValues.banque_name = nom_banque;
                     accepted.dataValues.sujet_demande = sujet_demande;
-                    accepted_list.push(list_accepted);
+                    accepted_list.push(accepted);
                 }
-                else {
-                    res.status(404).send({ message: "Not found" });
-                    return;
-                }
+                
                 
             }
             res.status(200).send(accepted_list);
@@ -137,7 +133,45 @@ exports.getAllDemandesAccepted = async (req, res) => {
     } catch(err){
         res.status(500).send({ message: "Error has occured" + err });
     }
+}
 
+exports.getAllStatutDemandes = async (req, res) => {
+    try{
+        // Get Client Id from token
+        var token = req.get("Authorization");
+        
+        // Verify if user is logged in
+        let session = await sessions.verifyToken(token, "client");
+
+        if (!session) {
+            res.status(401).send({ message: "Unauthorized" });
+            return;
+        } else {
+            let client = await sessions.findByToken(token, "client");
+            let demandes = await Demande.findAll({ where: { id_client: client.id_client } });
+            // Check for all demandes how many are accepted, refused or pending
+            let accepted = 0;
+            let refused = 0;
+            let pending = 0;
+            let list = [];
+            for (let demande of demandes) {
+                let accepter = await Accepter.findAll({ where: { id_demande: demande.id_demande } });
+                for (let accept of accepter) {
+                    if (accept.statut == 2) {
+                        accepted++;
+                    } else if (accept.statut == -1) {
+                        refused++;
+                    } else {
+                        pending++;
+                    }
+                }
+                list.push({ id_demande: demande.id_demande, sujet: demande.sujet, accepted: accepted, refused: refused, pending: pending });
+            }
+            res.status(200).send(list);
+        }
+    } catch(err){
+        res.status(500).send({ message: "Error has occured" });
+    }
 }
 
 exports.getSingleDemande = async (req, res) => {

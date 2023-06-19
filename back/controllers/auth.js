@@ -5,8 +5,10 @@ const sessions = require("../controllers/session.js");
 
 const Client = require("../models/client.model.js")(Sequelize.connection, Sequelize.library);
 const Banque = require("../models/banque.model.js")(Sequelize.connection, Sequelize.library);
+const Admin = require("../models/admin.model.js")(Sequelize.connection, Sequelize.library);
 const Session = require("../models/sessionClient.model.js")(Sequelize.connection, Sequelize.library);
 const SessionBanque = require("../models/sessionBanque.model.js")(Sequelize.connection, Sequelize.library);
+const SessionAdmin = require("../models/sessionAdmin.model.js")(Sequelize.connection, Sequelize.library);
 
 exports.loginClient = async(req, res) => {
     // Check if user exists in database
@@ -134,4 +136,36 @@ exports.registerBanque = async(req, res) => {
             res.status(500).send({message: error.message || "Error while creating Banque"});
         }
     );
+}
+
+
+exports.loginAdmin = async(req, res) => {
+    try{
+        // Check if user exists in database
+        let admin = await Admin.findOne({where: {identifiant: req.body.identifiant}});
+        if(admin && admin.id_admin && 
+            admin.password == Crypto.createHash('sha256').update(req.body.password).digest('hex')){
+            
+            // Find if user already has a session
+            let session = await SessionAdmin.findOne({where: {id_admin: admin.id_admin}});
+            // If user has a session, check if it is still valid
+            let isTokenExpired = session ? (new Date(session.valid_until) - new Date() <= 0) : true;
+            var token = "";
+
+            // If user has a session and it is still valid
+            if(session && !isTokenExpired){
+                // If session is valid, token is the same
+                token = session.token;
+            }
+            else {
+                // If session is not valid, delete it and create a new one
+                sessions.deleteExpiredToken();
+                let newSession = await sessions.createSession(admin.id_admin, "admin");
+                token = newSession.token;
+            }
+            res.status(200).send({token: token});
+        }
+    } catch(err){
+        res.status(500).send({message: "Error has occured"});
+    }
 }

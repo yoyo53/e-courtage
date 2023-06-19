@@ -88,34 +88,22 @@ export default {
             */
         },
         fetchUserNotifications() {
-            // TODO
-            this.userNotifications = [
-                {
-                    "demand": "Demande de prêt 1",
-                    "bank": "Crédit Agricole"
-                },
-                {
-                    "demand": "Demande de prêt 1",
-                    "bank": "BNP Paribas"
-                },
-                {
-                    "demand": "Demande de prêt 2",
-                    "bank": "Crédit Agricole"
-                }
-            ]
-
-            /*
-            fetch('http://localhost:3000/demande_client/getAllDemandesAccepted', {
+            
+            fetch('https://e-courtage-back.fly.dev/demande_client/getAllDemandesAccepted', {
                 headers: {
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem("token")
                 }})
             .then((response)=>{return(response.json())})
             .then((parsed) => {
-                console.log(parsed);
-                this.userNotifications = parsed;
+                if(!Array.isArray(parsed)){
+                    this.userNotifications = [];
+                } else {
+                    console.log(parsed);
+                    this.userNotifications = parsed;
+                }
             });
-            */
+            
         },
         fetchUserDemands() {
             
