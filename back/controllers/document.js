@@ -162,26 +162,37 @@ exports.updateDocument = async (req, res) => {
 		} else {
 			// Get Client Id
 			let client = await sessions.findByToken(token, "client");
+			
+			let document = await Document.findOne({
+				where: {
+					id_document: req.params.id_document,
+					id_client: client.id_client
+				}
+			});
+
+			// Previous file name
+			const document_name = document.nom_document;
+			const extension = document_name.split('.').pop();
+			const name_file = document.id_document + '.' + extension;
+
+			// New file name
+			const nameFile = req.file.originalname;
+			const extension_new = nameFile.split('.').pop();
+			const newName = document.id_document + '.' + extension_new;
 
 			// Update document
-			let document = await Document.update({
-				nom_document: req.body.nom_document
+			await Document.update({
+				nom_document: nameFile,
 			}, {
 				where: {
 					id_document: req.params.id_document,
 					id_client: client.id_client
 				}
 			});
-			
-			// Verify if extension is the same
-			const nameFile = req.file.originalname;
-			const extension = nameFile.split('.').pop();
-			const newName = document.id_document + '.' + extension;
 
-			if (extension != req.file.originalname.split('.').pop()) {
-				// Delete file
-				//await file.deleteFile(document.id_document);
-			}
+			// Delete previous file
+			file.deleteFile(name_file);
+	
 			// Upload file
 			file.uploadFile(req, newName);
 			res.status(200).send({ message: "Document updated successfully" });
