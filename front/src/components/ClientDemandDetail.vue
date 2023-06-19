@@ -108,7 +108,7 @@
                     </ul>
                     <client-new-file-form />
                 </div>
-                <button type="submit" class="btn btn-primary" @click="(ev)=>handleSubmit(ev)">Envoyer</button>
+                <button type="submit" class="btn btn-primary" @click="(ev)=>handleSubmit(ev)">Enregistrer les modifications</button>
                 <button type="button" class="btn btn-danger" @click="(ev)=>handleDelete(ev)">Supprimer</button>
             </form>
         </div>
@@ -233,14 +233,6 @@ export default {
 
 <style>
 
-    #openButton{
-        height: 100%;
-        width: 50%;
-        text-align: center;
-        font-size: 2vw;
-        border-radius: 10px;
-    }
-
     #closeButton{
         position: absolute;
         top: 0;
@@ -280,6 +272,7 @@ export default {
         color: blue;
         margin-top: 10px;
         border: none;
+        background-color: white;
     }
 
 </style>
