@@ -12,7 +12,18 @@
                 </div>
                 <div class="mb-3">
                     <label for="formNameTitle" class="form-label">Nom du fichier</label>
-                    <input type="text" class="form-control" id="formNameTitle" v-model="name" required>
+                    <input type="text" class="form-control" id="formNameTitle" v-model="name" placeholder="Nom du fichier" required>
+                </div>
+                <div class="mb-3">
+                    <label for="formDocType" class="form-label">Genre</label>
+                    <select class="form-select" aria-label="Default select example" id="formDocType" v-model="type">
+                        <option value="">Selectionnez le type du fichier</option>
+                        <option value="Document d'identité">Document d'identité</option>
+                        <option value="Fiche de paie">Fiche de paie</option>
+                        <option value="Document médical">Document médical</option>
+                        <option value="Justificatif de domicile">Justificatif de domicile</option>
+                        <option value="Autre">Autre</option>
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-success" @click="(ev)=>handleSubmit(ev)">Envoyer</button>
                 <button type="none" class="btn btn-warning" @click="()=>handleDisplay()">Annuler</button>
@@ -29,6 +40,7 @@ export default {
             name: '',
             file: null,
             displayForm: false,
+            type: ''
         }
     },
     methods: {
