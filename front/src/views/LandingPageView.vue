@@ -41,7 +41,7 @@
         <h3>Rejoignez-nous !</h3>
         <div class="cta-buttons">
           <button class="cta-button" @click="redirectToClientRegister">Particuliers</button>
-          <button class="cta-button" >Profesionnels</button>
+          <button class="cta-button" @click="redirectToBankRegister">Profesionnels</button>
         </div>
       </section>
 
@@ -68,7 +68,10 @@ export default {
   name: 'LandingPage',
     methods: {
     redirectToClientRegister() {
-      this.$router.push({ path: '/register' });
+      this.$router.push({ path: '/login' });
+    },
+    redirectToBankRegister() {
+      this.$router.push({ path: '/login/bank' });
     }
   }
 }

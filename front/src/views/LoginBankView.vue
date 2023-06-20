@@ -1,9 +1,8 @@
 <template>
     <div>
-        <h1>This is a login page</h1>
-
-        <router-link class="btn btn-primary" to="/register/bank">Banque intéressé ?</router-link>
-        <router-link class="btn btn-primary" to="/register">Pas encore de compte ?</router-link>
+        <h1>This is a Bank login page</h1>
+        <button @click="()=>handleLoginB()">Login (Banque)</button>
+        <router-link class="btn btn-primary" to="/register/bank">Pas encore de compte ?</router-link>
 
         <form id="loginForm">
             <div class="mb-3">
