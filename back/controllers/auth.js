@@ -111,7 +111,6 @@ exports.registerBanque = async(req, res) => {
     //sendConfirmationMail(req, res);
     // Create new Banque
     let banque = {
-        id_banque: req.body.id_banque,
         email: req.body.email,
         password: Crypto.createHash('sha256').update(req.body.password).digest('hex'),
         nom_banque: req.body.nom_banque,
