@@ -2,7 +2,7 @@
     <div>
         <!--<h1>This is a demand form filling pop up</h1>-->
         <button type="none" id="openNFButton" @click="()=>handleDisplay()">NOUVEAU DOCUMENT</button>
-        <div id="modal-form" ref="modalForm" v-if="displayForm">
+        <div id="modal-file-form" ref="modalForm" v-if="displayForm">
             <button id="closeButton" @click="()=>handleDisplay()">X</button>
             <h2>Nouveau document</h2>
             <form>
@@ -114,7 +114,7 @@ export default {
         font-size: 2vw;
     }
 
-    #modal-form{
+    #modal-file-form{
         z-index: 100;
         color: black;
         position: absolute;
