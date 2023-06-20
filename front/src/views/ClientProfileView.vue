@@ -147,7 +147,7 @@
 
             <div id="filesList">
                 <h2 style="margin-bottom: 30px;">Vos fichiers</h2>
-                <ul class="list-group">
+                <ul id="trueFileList" class="list-group">
                     <li class="fileRow list-group-item" v-for="file in userFiles" :key="file.name">
                         <div class="fileRow-text">{{file.id_document}} - {{ file.nom_document }}</div>
                         <div class="fileRow-buttons">
@@ -372,6 +372,12 @@ export default {
         color: black;
         text-align: left;
         height: 100%;
+    }
+
+    #trueFileList {
+        display: flex;
+        flex-direction: column;
+        height: 80%;
         overflow-y: scroll;
         scrollbar-width: none;
     }
@@ -379,7 +385,7 @@ export default {
     #profileForm {
         width: 45%;
         min-width: 300px;
-        height: 85vh;
+        height: 100%;
         margin: auto;
         background-color: #d9d9d9;
         padding: 20px;
@@ -387,7 +393,6 @@ export default {
         color: black;
         text-align: left;
         height: 100%;
-        overflow-y: scroll;
         scrollbar-width: none;
     }
 
@@ -395,9 +400,9 @@ export default {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+        height: 80%;
         overflow-y: scroll;
         scrollbar-width: none;
-        height: 70vh;
     }
 
     .profilePageField {
