@@ -13,7 +13,7 @@
                         <li class="profile-item"><span>Numéro de téléphone :</span><span> {{ userData.tel }}</span></li>
                         <li class="profile-item"><span>Adresse mail :</span><span> {{ userData.email }}</span></li>
                         <li class="profile-item"><span>Profession :</span><span> {{ userData.situation_professionnelle }}</span></li>
-                        <li class="profile-item profile-buttons"><client-file-list/><router-link class="btn btn-primary" to="/client/profile">Votre profil</router-link></li>
+                        <li class="profile-item profile-buttons"><client-file-list-modal/><router-link class="btn btn-primary" to="/client/profile">Votre profil</router-link></li>
                     </ul>
                 </div>
                 <div id="notifications-view-area">
@@ -44,7 +44,7 @@ import ClientDemandForm from '@/components/ClientDemandForm.vue';
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import ClientNotificationListElement from '../components/ClientNotificationListElement.vue';
 import ClientDemandsListElement from '../components/ClientDemandsListElement.vue';
-import ClientFileList from '../components/ClientFileList.vue';
+import ClientFileListModal from '../components/ClientFileListModal.vue';
 
 export default {
     name: 'ClientHomeView',
@@ -52,8 +52,8 @@ export default {
     HeaderComponent,
     ClientDemandForm,
     ClientNotificationListElement,
-        ClientDemandsListElement,
-        ClientFileList
+    ClientDemandsListElement,
+    ClientFileListModal
 },
     data() {
         return {

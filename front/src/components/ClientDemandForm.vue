@@ -272,6 +272,7 @@ export default {
         height: 70vh;
         border-radius: 10px;
         overflow-y: scroll;
+        padding: 10px;
     }
 
     ::-webkit-scrollbar {

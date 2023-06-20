@@ -12,7 +12,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="formNameTitle" class="form-label">Nom du fichier</label>
-                    <input type="text" class="form-control" id="formNameTitle" v-model="name" placeholder="Nom du fichier" required>
+                    <input type="text" class="form-control" id="formNameTitle" v-model="name" placeholder="Nom du fichier" maxlength="30" required>
                 </div>
                 <div class="mb-3">
                     <label for="formDocType" class="form-label">Genre</label>
@@ -48,7 +48,7 @@ export default {
             this.file = ev.target.files[0];
         },
         handleSubmit(ev) {
-            if(this.name == '' || this.file == null){
+            if(this.name == '' || this.file == null || this.type == ''){
                 return;
             }
             ev.preventDefault();
@@ -58,6 +58,7 @@ export default {
             let formData = new FormData();
             formData.append('file', this.file);
             formData.append('nom_document', this.name);
+            formData.append('type', this.type);
             
             let xhr = new XMLHttpRequest();
             xhr.open('POST', this.api_url + 'document/addDocument');
@@ -72,10 +73,12 @@ export default {
                     console.log(response.id_document);
                     this.$parent.userFiles.push({
                         nom_document: this.name+"."+this.file.name.split('.').pop(),
-                        id_document: response.id_document
+                        id_document: response.id_document,
+                        type: this.type
                     });
                     this.name = '';
                     this.file = null;
+                    this.type = '';
                     this.displayForm = false;
                 }
                 else{
@@ -94,8 +97,6 @@ export default {
 <style>
 
     #openNFButton{
-        height: 50%;
-        width: 25%;
         background-color: #D9D9D9;
         text-align: center;
         font-size: 1vw;
@@ -129,6 +130,11 @@ export default {
         height: 70vh;
         border-radius: 10px;
         overflow-y: scroll;
+    }
+
+    #modal-file-form>h2{
+        text-align: center;
+        margin-bottom: 50px;
     }
 
     ::-webkit-scrollbar {

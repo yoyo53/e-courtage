@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div id="checkableRow">
     <input type="checkbox" v-bind:id= file.id_document v-bind:ref="file.id_document" v-bind:name= file.id value="Bike" @change="(ev)=>handleAddFile(ev)">
-    <label v-bind:for= file.id>  {{ file.nom_document }}</label><br>
+    <label v-bind:for= file.id>  {{ file.nom_document }} [{{ file.type }}]</label><br>
   </div>
 </template>
 
@@ -51,5 +51,12 @@ export default {
 </script>
 
 <style>
-
+    #checkableRow {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    #checkableRow input {
+        margin-right: 10px;
+    }
 </style>
