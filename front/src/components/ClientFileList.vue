@@ -175,12 +175,12 @@ export default {
     }
 
     .fileRow-text {
-        width: 50%;
+        width: 40%;
         text-align: left;
     }
 
     .fileRow-buttons {
-        width: 50%;
+        width: 60%;
     }
 
     .fileRowButton {
