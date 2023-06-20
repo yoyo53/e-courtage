@@ -78,6 +78,7 @@ export default {
                     });
                     this.name = '';
                     this.file = null;
+                    this.type = '';
                     this.displayForm = false;
                 }
                 else{
