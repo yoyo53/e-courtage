@@ -150,7 +150,7 @@
                 <h2 style="margin-bottom: 30px;">Vos fichiers</h2>
                 <ul id="trueFileList" class="list-group">
                     <li class="fileRow list-group-item" v-for="file in userFiles" :key="file.name">
-                        <div class="fileRow-text">{{file.id_document}} - {{ file.nom_document }}</div>
+                        <div class="fileRow-text">{{ file.nom_document }} - {{ file.type }}</div>
                         <div class="fileRow-buttons">
                             <button class="btn btn-success fileRowButton" @click="()=>handleDownload(file.id_document, file.nom_document)">Télécharger</button>
                             <button class="btn btn-light fileRowButton" @click="()=>handleUpdate(file.id_document)">Remplacer</button>
