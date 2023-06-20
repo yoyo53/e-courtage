@@ -3,8 +3,8 @@
         <button class="btn btn-primary" @click="()=>handleDisplay()">Vos fichiers</button>
         <div id="modal-list" v-if="display">
             <button id="closeButton" @click="()=>handleDisplay()">X</button>
-            <div>
-                <h2 style="margin-bottom: 30px;">Vos fichiers</h2>
+            <h2 style="margin-bottom: 30px;">Vos fichiers</h2>
+            <div id="clientFileList">
                 <ul class="list-group">
                     <li class="fileRow list-group-item" v-for="file in userFiles" :key="file.name">
                         <div class="fileRow-text">{{file.id_document}} - {{ file.nom_document }}</div>
@@ -159,6 +159,10 @@ export default {
         width: 50vw;
         height: 70vh;
         border-radius: 10px;
+    }
+
+    #clientFileList {
+        height: 80%;
         overflow-y: scroll;
     }
 
