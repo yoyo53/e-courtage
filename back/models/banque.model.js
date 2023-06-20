@@ -17,8 +17,20 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false
         },
-        siren: {
+        siret: {
             type: Sequelize.INTEGER,
+            allowNull: false
+        },
+        adresse : {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        ville : {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        pays : {
+            type: Sequelize.STRING,
             allowNull: false
         },
         account_status: {

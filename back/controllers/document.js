@@ -28,6 +28,7 @@ exports.addDocument = async (req, res) => {
 			let document = await Document.create({
 				id_client: client.id_client,
 				nom_document: req.body.nom_document + '.' + extension,
+				type: req.body.type
 			});
 			const newName = document.id_document + '.' + extension;
 			

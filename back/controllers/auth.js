@@ -114,7 +114,11 @@ exports.registerBanque = async(req, res) => {
         email: req.body.email,
         password: Crypto.createHash('sha256').update(req.body.password).digest('hex'),
         nom_banque: req.body.nom_banque,
-        siren: req.body.siren,
+        siret: req.body.siret,
+        adresse: req.body.adresse,
+        ville: req.body.ville,
+        pays: req.body.pays,
+        tel : req.body.tel,
         account_status: false,
     }
     // Verify if banque account already exists
