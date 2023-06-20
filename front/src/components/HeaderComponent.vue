@@ -43,6 +43,6 @@ export default {
 #header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 50px;
+    margin-bottom: 5vh;
 }
 </style>
