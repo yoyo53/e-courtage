@@ -88,8 +88,8 @@ export default {
         text-align: center;
         font-size: 1vw;
         border-radius: 10px;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin-top: 1vh;
+        margin-bottom: 1vh;
     }
 
     #closeButton{

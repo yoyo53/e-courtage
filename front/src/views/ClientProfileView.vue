@@ -356,7 +356,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        height: 85vh;
+        height: 80vh;
         overflow-y: scroll;
         flex-wrap: wrap;
         scrollbar-width: none;
