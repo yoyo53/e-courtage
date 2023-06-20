@@ -12,7 +12,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="formNameTitle" class="form-label">Nom du fichier</label>
-                    <input type="text" class="form-control" id="formNameTitle" v-model="name" placeholder="Nom du fichier" required>
+                    <input type="text" class="form-control" id="formNameTitle" v-model="name" placeholder="Nom du fichier" maxlength="30" required>
                 </div>
                 <div class="mb-3">
                     <label for="formDocType" class="form-label">Genre</label>
@@ -48,7 +48,7 @@ export default {
             this.file = ev.target.files[0];
         },
         handleSubmit(ev) {
-            if(this.name == '' || this.file == null){
+            if(this.name == '' || this.file == null || this.type == ''){
                 return;
             }
             ev.preventDefault();

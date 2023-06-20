@@ -4,8 +4,8 @@
         <div id="clientFileList">
             <ul class="list-group">
                 <li class="fileRow list-group-item" v-for="file in userFiles" :key="file.name">
-                    <div class="fileRow-text"><span>{{ file.nom_document }}</span><span>{{ file.type }}</span></div>
-                    <div class="fileRow-buttons">
+                    <div class="fileRowText"><span id="fileRowTextName">{{ file.nom_document }}</span><span>{{ file.type }}</span></div>
+                    <div class="fileRowButtons">
                         <button class="btn btn-success fileRowButton" @click="()=>handleDownload(file.id_document, file.nom_document)">Télécharger</button>
                         <button class="btn btn-light fileRowButton" @click="()=>handleUpdate(file.id_document)">Remplacer</button>
                         <button class="btn btn-danger fileRowButton" @click="()=>handleDelete(file.id_document)">Supprimer</button>
@@ -85,6 +85,10 @@ export default {
 
         },
         handleDelete(id) {
+
+            if(!confirm("Voulez-vous vraiment supprimer ce fichier ?")) 
+                return;
+
             console.log(id);
             fetch(this.api_url + "document/deleteDocument/" + id, {
                 method: "DELETE",
@@ -123,6 +127,11 @@ export default {
             .then((response) => {
                 console.log(response);
                 this.userFiles = response;
+                for(let i = 0; i < this.userFiles.length; i++) {
+                    if(this.userFiles[i].type == null) {
+                        this.userFiles[i].type = "Non spécifié";
+                    }
+                }
             })
             .catch((error) => {
                 console.log(error);
@@ -161,14 +170,18 @@ export default {
         width: 100%;
     }
 
-    .fileRow-text {
+    .fileRowText {
         width: 40%;
         text-align: left;
         display: flex;
         flex-direction: column;
     }
 
-    .fileRow-buttons {
+    #fileRowTextName {
+        font-weight: 550;
+    }
+
+    .fileRowButtons {
         width: 60%;
     }
 
