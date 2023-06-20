@@ -38,8 +38,6 @@ app.listen(PORT, (error) =>{
 const Firebase = require('./firebase.connection');
 const bucket = Firebase.bucket;
 /* END firebase initialization */
-bucket.getFiles().then(([files]) => files.forEach(file => console.log(file.name)))
-
 
 /* Use all routers */
 app.use('/auth', authRouter);
@@ -49,6 +47,8 @@ app.use('/document', documentRouter);
 app.use('/demande_client', demande_clientRouter);
 app.use('/demande_banque', demande_banqueRouter);
 app.use('/banque', banqueRouter);
+
+app.get('/', (req, res) => { return res.send('Hello! Welome to the E-Courtage API !') })
 
 
 /* BEGIN db initialization */
