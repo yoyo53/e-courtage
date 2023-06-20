@@ -183,6 +183,7 @@ export default {
 
     .fileRowButtons {
         width: 60%;
+        text-align: right;
     }
 
     .fileRowButton {
