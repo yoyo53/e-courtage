@@ -1,23 +1,19 @@
 <template>
-    <div>
-        <button class="btn btn-primary" @click="()=>handleDisplay()">Vos fichiers</button>
-        <div id="modal-list" v-if="display">
-            <button id="closeButton" @click="()=>handleDisplay()">X</button>
-            <h2 style="margin-bottom: 30px;">Vos fichiers</h2>
-            <div id="clientFileList">
-                <ul class="list-group">
-                    <li class="fileRow list-group-item" v-for="file in userFiles" :key="file.name">
-                        <div class="fileRow-text">{{ file.nom_document }} - {{ file.type }}</div>
-                        <div class="fileRow-buttons">
-                            <button class="btn btn-success fileRowButton" @click="()=>handleDownload(file.id_document, file.nom_document)">Télécharger</button>
-                            <button class="btn btn-light fileRowButton" @click="()=>handleUpdate(file.id_document)">Remplacer</button>
-                            <button class="btn btn-danger fileRowButton" @click="()=>handleDelete(file.id_document)">Supprimer</button>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <client-new-file-form/>
+    <div id="clientFileListComponent">
+        <h2 style="margin-bottom: 30px;">Vos fichiers</h2>
+        <div id="clientFileList">
+            <ul class="list-group">
+                <li class="fileRow list-group-item" v-for="file in userFiles" :key="file.name">
+                    <div class="fileRow-text"><span>{{ file.nom_document }}</span><span>{{ file.type }}</span></div>
+                    <div class="fileRow-buttons">
+                        <button class="btn btn-success fileRowButton" @click="()=>handleDownload(file.id_document, file.nom_document)">Télécharger</button>
+                        <button class="btn btn-light fileRowButton" @click="()=>handleUpdate(file.id_document)">Remplacer</button>
+                        <button class="btn btn-danger fileRowButton" @click="()=>handleDelete(file.id_document)">Supprimer</button>
+                    </div>
+                </li>
+            </ul>
         </div>
+        <client-new-file-form/>
     </div>
 </template>
 
@@ -29,13 +25,9 @@ export default {
     data() {
         return {
             userFiles: [],
-            display: false,
         }
     },
     methods: {
-        handleDisplay() {
-            this.display = !this.display;
-        },
         handleDownload(id,nom) {
             console.log(id);
             fetch(this.api_url + "document/downloadDocument/" + id, {
@@ -147,18 +139,12 @@ export default {
 
 <style>
 
-    #modal-list {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #D9D9D9;
-        padding: 50px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        width: 50vw;
-        height: 70vh;
-        border-radius: 10px;
+    #clientFileListComponent {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
     }
 
     #clientFileList {
@@ -170,6 +156,7 @@ export default {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        flex-wrap: nowrap;
         align-items: center;
         width: 100%;
     }
@@ -177,6 +164,8 @@ export default {
     .fileRow-text {
         width: 40%;
         text-align: left;
+        display: flex;
+        flex-direction: column;
     }
 
     .fileRow-buttons {

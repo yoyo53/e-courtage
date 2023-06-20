@@ -58,6 +58,7 @@ export default {
             let formData = new FormData();
             formData.append('file', this.file);
             formData.append('nom_document', this.name);
+            formData.append('type', this.type);
             
             let xhr = new XMLHttpRequest();
             xhr.open('POST', this.api_url + 'document/addDocument');
@@ -72,7 +73,8 @@ export default {
                     console.log(response.id_document);
                     this.$parent.userFiles.push({
                         nom_document: this.name+"."+this.file.name.split('.').pop(),
-                        id_document: response.id_document
+                        id_document: response.id_document,
+                        type: this.type
                     });
                     this.name = '';
                     this.file = null;
@@ -94,8 +96,6 @@ export default {
 <style>
 
     #openNFButton{
-        height: 50%;
-        width: 25%;
         background-color: #D9D9D9;
         text-align: center;
         font-size: 1vw;
@@ -129,6 +129,11 @@ export default {
         height: 70vh;
         border-radius: 10px;
         overflow-y: scroll;
+    }
+
+    #modal-file-form>h2{
+        text-align: center;
+        margin-bottom: 50px;
     }
 
     ::-webkit-scrollbar {
