@@ -142,6 +142,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary" id="saveButton" @click="(ev)=>handlePatchUserInfo(ev)">Mettre à jour</button>
+                <div id="userEditSuccessMessage" v-if="userEditSuccess">Your informations have been stored</div>
 
             </form>
 
@@ -194,7 +195,8 @@ export default {
                 prime_annuelle: 0,
                 loyer_actuel: 0,
                 nombre_enfant: 0,
-            }
+            },
+            userEditSuccess: false,
         }
     },
     methods:{
@@ -211,6 +213,20 @@ export default {
                 },
                 body: JSON.stringify(this.userInfo)
             })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Something went wrong");
+                }
+            })
+            .then((response) => {
+                console.log(response);
+                this.userEditSuccess = true;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
         },
         handleDownload(id,nom) {
             console.log(id);
@@ -408,6 +424,10 @@ export default {
     .profilePageField {
         width: 45%;
         margin: auto;
+    }
+
+    #userEditSuccessMessage{
+        color: green;
     }
 
     #saveButton{
