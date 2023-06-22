@@ -1,6 +1,7 @@
 const Sequelize = require("../db.connection");
 const Demande = require("../models/demande.model.js")(Sequelize.connection, Sequelize.library);
 const Banque = require("../models/banque.model.js")(Sequelize.connection, Sequelize.library);
+const Client = require("../models/client.model.js")(Sequelize.connection, Sequelize.library);
 const Document = require("../models/document.model.js")(Sequelize.connection, Sequelize.library);
 const Accepter = require("../models/accepter.model.js")(Sequelize.connection, Sequelize.library);
 const sessions = require("./session.js");
@@ -24,6 +25,11 @@ exports.getAllDemandes = async(req, res) => {
                 let demandes = [];
                 for(let accepter of accepters){
                     let demande = await Demande.findOne({ where: { id_demande: accepter.id_demande } });
+                    let client = await Client.findOne({ where: { id_client: demande.id_client } });
+                    delete client.dataValues.password;
+                    delete client.dataValues.id_client;
+                    delete client.dataValues.account_status;
+                    demande.dataValues.client = client;
                     demandes.push(demande);
                 }
                 
