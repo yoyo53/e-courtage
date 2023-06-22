@@ -17,7 +17,7 @@ URL du site web (front-end) : <https://yoyo53.github.io/e-courtage>
 
 ## Release Note
 
-(Pas sur de ce que je dois dire ici non plus)
+TODO
 
 ## Installation
 
