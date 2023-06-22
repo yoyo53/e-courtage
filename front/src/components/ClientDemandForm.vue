@@ -155,6 +155,30 @@ export default {
             }
 
             ev.preventDefault();
+
+            let existing_file_types = ["Document d'identité","Fiche de paie","Document médical","Justificatif de domicile"]
+            let present_file_types = [];
+            let missing_file_types = [];
+
+            for(let i = 0; i < this.userFiles.length; i++) {
+                if(this.newDemand.files.findIndex((file) => file == this.userFiles[i].id_document) != -1) {
+                    present_file_types.push(this.userFiles[i].type);
+                }
+            }
+
+            for(let i = 0; i < existing_file_types.length; i++) {
+                if(present_file_types.findIndex((file_type) => file_type == existing_file_types[i]) == -1) {
+                    missing_file_types.push(existing_file_types[i]);
+                }
+            }
+
+            if(missing_file_types.length > 0) {
+                if(!confirm("Attention ! Les fichiers suivants sont manquants : \n-" + missing_file_types.join("\n-") + "\nVoulez-vous continuer ?")) {
+                    return;
+                }
+            }
+
+
             
             console.log(localStorage.getItem("token"));
 
