@@ -38,7 +38,7 @@ export default {
     methods: {
         handleLoginA(){
             let obj = {identifiant:this.identifiant,password:this.password}
-            fetch( 'http://localhost:3000/auth/loginAdmin', {
+            fetch( this.api_url + 'auth/loginAdmin', {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'
