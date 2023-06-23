@@ -1,26 +1,30 @@
 <template>
-    <div>
-        <h1>This is a login page</h1>
-
-        <router-link class="btn btn-primary" to="/register/bank">Banque intéressé ?</router-link>
-        <router-link class="btn btn-primary" to="/register">Pas encore de compte ?</router-link>
+    <div id="loginMain">
+        <h1>Connexion</h1>
 
         <form id="loginForm">
             <div class="mb-3">
-                <label for="formEmail" class="form-label">Email address</label>
+                <label for="formEmail" class="form-label">Adresse Email</label>
                 <input type="email" class="form-control" id="formEmail" placeholder="name@example.com" v-model="email">
             </div>
 
             <div class="mb-3">
-                <label for="formPassword" class="form-label">Password</label>
+                <label for="formPassword" class="form-label">Mot de passe</label>
                 <input type="password" class="form-control" id="formPassword" placeholder="********" v-model="password">
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary" @click="()=>handleLoginC()">Login</button>
+                <button type="submit" class="btn btn-primary" @click="()=>handleLoginC()">Connexion</button>
             </div>
 
         </form>
+
+        <div id="loginLinks">
+            <router-link to="/register">Vous n'avez encore de compte ?</router-link>
+            <router-link to="/login/bank">Vous vous connectez en tant que banque?</router-link>
+            <router-link to="/">Retour à la page d'accueil</router-link>
+        </div>
+
     </div>
 </template>
 
@@ -64,9 +68,31 @@ export default {
 </script>
 
 <style>
+
+    #loginMain {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        border-radius: 10px;
+        border: 3px solid #000000;
+        padding: 1vh;
+    }
+
     #loginForm {
-        width: 30%;
+        width: 80%;
         margin: auto;
         margin-top: 2vw;
+    }
+
+    #loginLinks {
+        margin-top: 2vw;
+        display: flex;
+        flex-direction: column;
+        padding: 1vh;
+        border-radius: 10px;
+        border: 3px solid #000000;
+        background-color: #b9b9b9;
     }
 </style>

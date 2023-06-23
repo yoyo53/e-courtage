@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1>This is a register page</h1>
+    <div id="registerMain">
+        <h1>Inscription</h1>
 
         <form id="registerForm">
 
@@ -66,10 +66,15 @@
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary" @click="(ev)=>handleRegister(ev)">Register</button>
+                <button type="submit" class="btn btn-primary" @click="(ev)=>handleRegister(ev)">Inscription</button>
             </div>
 
         </form>
+        <div id="registerLinks">
+            <router-link to="/login">Vous avez déjà un compte ?</router-link>
+            <router-link to="/register/bank">Vous vous inscrivez en tant que banque ?</router-link>
+            <router-link to="/">Retour à la page d'accueil</router-link>
+        </div>
     </div>
 </template>
 
@@ -132,6 +137,7 @@ export default {
             let formData = new FormData();
             formData.append('file', this.file);
             formData.append('nom_document', "Document de santé");
+            formData.append('type', "Document médical");
             
             let xhr = new XMLHttpRequest();
             xhr.open('POST', this.api_url + 'document/addDocument');
@@ -153,15 +159,36 @@ export default {
 
 <style>
 
-    #registerForm {
-        width: 30%;
-        margin: auto;
-        margin-top: 2vw;
-        height: 80vh;
-        overflow-y : scroll;
-        background-color: #d9d9d9;
+    #registerMain {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
         border-radius: 10px;
-        color: black;
+        border: 3px solid #000000;
+        padding: 1vh;
+    }
+
+    #registerForm {
+        width: 80%;
+        margin: auto;
+        margin-top: 10%;
+
+        height: 60vh;
+        overflow-y : scroll;
+        scrollbar-width: none;
+
+    }
+
+    #registerLinks {
+        margin-top: 2vw;
+        display: flex;
+        flex-direction: column;
+        padding: 1vh;
+        border-radius: 10px;
+        border: 3px solid #000000;
+        background-color: #b9b9b9;
     }
 
 </style>
