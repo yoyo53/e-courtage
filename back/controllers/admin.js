@@ -5,8 +5,6 @@ const sessions = require("./session.js");
 const Client = require("../models/client.model.js")(Sequelize.connection, Sequelize.library);
 const Banque = require("../models/banque.model.js")(Sequelize.connection, Sequelize.library);
 const Demande = require("../models/demande.model.js")(Sequelize.connection, Sequelize.library);
-const Admin = require("../models/admin.model.js")(Sequelize.connection, Sequelize.library);
-const SessionAdmin = require("../models/sessionAdmin.model.js")(Sequelize.connection, Sequelize.library);
 
 
 exports.getAllClients = async (req, res) => {
