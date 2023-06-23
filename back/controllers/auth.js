@@ -167,8 +167,9 @@ exports.loginAdmin = async(req, res) => {
                 token = newSession.token;
             }
             res.status(200).send({token: token});
+        }else{
+            res.status(403).send({message: "Wrong credentials"});
         }
-        res.status(403).send({message: "Wrong credentials"});
     } catch(err){
         res.status(500).send({message: "Error has occured"});
     }
