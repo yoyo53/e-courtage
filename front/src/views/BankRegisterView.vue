@@ -11,7 +11,7 @@
 
             <div class="mb-3">
                 <label for="formName" class="form-label">SIRET</label>
-                <input type="text" class="form-control" id="formSiret" v-model="BankInfo.siren" required/>
+                <input type="text" class="form-control" id="formSiret" v-model="BankInfo.siret" required/>
             </div>
 
             <div class="mb-3">
@@ -53,11 +53,13 @@ export default {
         return {
             BankInfo: {
                 nom_banque: '',
-                siren: '',
+                siret: '',
                 email: '',
                 tel: '',
                 adresse: '',
-                password: ''
+                password: '',
+                pays: 'France',
+                ville: 'Paris'
             },
             rePassword: ''
         }
@@ -76,7 +78,7 @@ export default {
                 alert('Password not match');
                 return;
             }
-            if(/^[0-9]{14}$/.test(this.BankInfo.siret)) {
+            if(/^[0-9]{15}$/.test(this.BankInfo.siret)) {
                 alert('Siret is false');
                 return;
             }
