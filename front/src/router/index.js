@@ -50,6 +50,16 @@ const routes = [
     name: 'bank',
     component: () => import('../views/BankHomeView.vue')
   },
+  {
+    path: '/admin/login',
+    name: 'login-admin',
+    component: () => import('../views/AdminLoginView.vue')
+  },
+  {
+    path: '/admin/home',
+    name: 'admin-home',
+    component: () => import('../views/AdminHomeView.vue')
+  }
 ]
 
 const router = createRouter({
