@@ -168,6 +168,7 @@ exports.loginAdmin = async(req, res) => {
             }
             res.status(200).send({token: token});
         }
+        res.status(403).send({message: "Wrong credentials"});
     } catch(err){
         res.status(500).send({message: "Error has occured"});
     }
