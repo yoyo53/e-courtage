@@ -2,7 +2,7 @@
     <div id="loginMain">
         <h1>Connexion</h1>
 
-        <form id="clientLoginForm">
+        <form id="clientLoginForm" @submit.prevent="handleLoginC">
             <div class="mb-3">
                 <label for="formEmail" class="form-label">Adresse Email</label>
                 <input type="email" class="form-control" id="formEmail" placeholder="name@example.com" v-model="email">
@@ -14,7 +14,7 @@
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary" @click="()=>handleLoginC()">Connexion</button>
+                <button type="submit" class="btn btn-primary">Connexion</button>
             </div>
 
         </form>
