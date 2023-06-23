@@ -2,7 +2,7 @@
     <div id="loginMain">
         <h1>Connexion</h1>
 
-        <form id="loginForm">
+        <form id="clientLoginForm">
             <div class="mb-3">
                 <label for="formEmail" class="form-label">Adresse Email</label>
                 <input type="email" class="form-control" id="formEmail" placeholder="name@example.com" v-model="email">
@@ -80,7 +80,7 @@ export default {
         padding: 1vh;
     }
 
-    #loginForm {
+    #clientLoginForm {
         width: 80%;
         margin: auto;
         margin-top: 2vw;
