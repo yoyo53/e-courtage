@@ -1,9 +1,6 @@
 <template>
-    <div>
-        <h1>This is bank register page</h1>
-
-        
-        <router-link class="btn btn-primary" to="/login/bank">Déja un compte ?</router-link>
+    <div id="registerMain">
+        <h1>Inscription</h1>
 
         <form id="registerForm">
 
@@ -43,10 +40,15 @@
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary" @click="(ev)=>handleRegister(ev)">Register</button>
+                <button type="submit" class="btn btn-primary" @click="(ev)=>handleRegister(ev)">Inscription</button>
             </div>
 
         </form>
+        <div id="registerLinks">
+            <router-link to="/login/bank">Vous avez déjà un compte ?</router-link>
+            <router-link to="/register">Vous vous inscrivez en tant que particulier ?</router-link>
+            <router-link to="/">Retour à la page d'accueil</router-link>
+        </div>
     </div>
 </template>
 
@@ -110,17 +112,36 @@ export default {
 
 <style>
 
-#registerForm {
-    width: 30%;
-    margin: auto;
-    margin-top: 2vw;
-    height: 80vh;
-    overflow-y : scroll;
-    background-color: #d9d9d9;
+#registerMain {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
     border-radius: 10px;
-    color: black;
+    border: 3px solid #000000;
+    padding: 1vh;
 }
-::-webkit-scrollbar {
-    display:none;
+
+#registerForm {
+    width: 80%;
+    margin: auto;
+    margin-top: 10%;
+
+    height: 60vh;
+    overflow-y : scroll;
+    scrollbar-width: none;
+
 }
+
+#registerLinks {
+    margin-top: 2vw;
+    display: flex;
+    flex-direction: column;
+    padding: 1vh;
+    border-radius: 10px;
+    border: 3px solid #000000;
+    background-color: #b9b9b9;
+}
+
 </style>
