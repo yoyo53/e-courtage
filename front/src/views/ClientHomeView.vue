@@ -70,7 +70,12 @@ export default {
                 'Content-Type': 'application/json',
                 'authorization': localStorage.getItem("token")
                 }})
-            .then((response)=>{return(response.json())})
+            .then((response)=>{
+                if(response.status == 401){
+                    this.$router.push("/login");
+                }
+                return(response.json())
+            })
             .then((parsed) => {
                 console.log(parsed);
                 this.userData = parsed;
@@ -91,7 +96,12 @@ export default {
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem("token")
                 }})
-            .then((response)=>{return(response.json())})
+            .then((response)=>{
+                if(response.status == 401){
+                    this.$router.push("/login");
+                }
+                return(response.json())
+            })
             .then((parsed) => {
                 if(!Array.isArray(parsed)){
                     this.userNotifications = [];
@@ -109,7 +119,12 @@ export default {
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem("token")
                 }})
-            .then((response)=>{return(response.json())})
+            .then((response)=>{
+                if(response.status == 401){
+                    this.$router.push("/login");
+                }
+                return(response.json())
+            })
             .then((parsed) => {
                 console.log(parsed);
                 this.userDemands = parsed;

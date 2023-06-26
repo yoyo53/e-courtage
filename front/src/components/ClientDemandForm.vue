@@ -150,7 +150,11 @@ export default {
         handleSubmit(ev) {
 
             if(this.newDemand.sujet == "" || this.newDemand.nature == "" || this.newDemand.type == "" || this.newDemand.age == "" || this.newDemand.usage == "" || this.newDemand.status_recherche == "" || this.newDemand.pays == "" || this.newDemand.montant_bien == "" || this.newDemand.aloneGroup == "" || this.newDemand.apport_personnel == "") {
-                alert("Veuillez remplir tous les champs obligatoires");
+                this.$notify({
+                    title: 'Erreur',
+                    text: 'Veuillez remplir tous les champs obligatoires',
+                    type: 'error'
+                });
                 return;
             }
 
@@ -222,11 +226,20 @@ export default {
                     files: []
                 };
 
-                this.displayForm = false;
+                //this.displayForm = false;
+                this.$notify({
+                    title: "Demande envoyée",
+                    text: "Votre demande a bien été envoyée",
+                    type: "success"
+                });
             })
             .catch((error) => {
                 console.log(error);
-                alert("Une erreur est survenue, veuillez réessayer plus tard");
+                this.$notify({
+                    title: "Erreur",
+                    text: "Une erreur est survenue, veuillez réessayer plus tard",
+                    type: "error"
+                });
             });
         },
         handleDisplay() {
@@ -246,7 +259,7 @@ export default {
             if (response.ok) {
                 return response.json();
             } else {
-                throw new Error("Something went wrong");
+                throw new Error("Il y a eu un problème lors de la récupération des documents");
             }
         })
         .then((response) => {
@@ -255,7 +268,11 @@ export default {
         })
         .catch((error) => {
             console.log(error);
-            alert("Une erreur est survenue, veuillez réessayer plus tard");
+            this.$notify({
+                title: "Erreur",
+                text: error.message,
+                type: "error"
+            });
         });
     }
 }

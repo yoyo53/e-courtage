@@ -120,6 +120,8 @@ export default {
             .then((response) => {
                 if (response.ok) {
                     return response.json();
+                } else if(response.status == 401) {
+                    this.$router.push("/login");
                 } else {
                     throw new Error("Something went wrong");
                 }
@@ -135,7 +137,11 @@ export default {
             })
             .catch((error) => {
                 console.log(error);
-                alert("Une erreur est survenue, veuillez réessayer plus tard");
+                this.$notify({
+                    group: "error",
+                    title: "Erreur",
+                    text: "Une erreur est survenue lors de la récupération de vos fichiers"
+                });
             });
         }
 
