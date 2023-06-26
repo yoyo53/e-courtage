@@ -76,9 +76,19 @@ export default {
                     if (xhr.status == 200) {
                         console.log("File uploaded");
                         $this.userFiles.find((file) => file.id_document === id).nom_document = input.files[0].name;
+                        $this.$notify({
+                            group: "success",
+                            title: "Succès",
+                            text: "Votre fichier a été mis à jour"
+                        });
                         
                     } else {
                         console.log("Error " + xhr.status + " occurred when trying to upload your file.");
+                        this.$notify({
+                            group: "error",
+                            title: "Erreur",
+                            text: "Une erreur est survenue lors de la mise à jour de votre fichier"
+                        });
                     }
                 };
             }
@@ -101,13 +111,26 @@ export default {
                 if (response.ok) {
                     return response.json();
                 } else {
-                    throw new Error("Something went wrong");
+                    throw new Error("Une erreur est survenue lors de la suppression de votre fichier");
                 }
             })
             .then((response) => {
                 console.log(response);
                 this.userFiles = this.userFiles.filter((file) => file.id_document !== id);
+                this.$notify({
+                    group: "success",
+                    title: "Succès",
+                    text: "Votre fichier a été supprimé"
+                });
             })
+            .catch((error) => {
+                console.log(error);
+                this.$notify({
+                    group: "error",
+                    title: "Erreur",
+                    text: "Une erreur est survenue lors de la suppression de votre fichier"
+                });
+            });
         },
         fetchUserFiles() {
             fetch(this.api_url + "document/getAllDocuments", {
@@ -123,7 +146,7 @@ export default {
                 } else if(response.status == 401) {
                     this.$router.push("/login");
                 } else {
-                    throw new Error("Something went wrong");
+                    throw new Error("Une erreur est survenue lors de la récupération de vos fichiers");
                 }
             })
             .then((response) => {
