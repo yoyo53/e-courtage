@@ -18,7 +18,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         siret: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.BIGINT,
             allowNull: false
         },
         adresse : {

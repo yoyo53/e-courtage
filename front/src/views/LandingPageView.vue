@@ -68,10 +68,10 @@ export default {
   name: 'LandingPage',
     methods: {
     redirectToClientRegister() {
-      this.$router.push({ path: '/login' });
+      this.$router.push({ path: '/register' });
     },
     redirectToBankRegister() {
-      this.$router.push({ path: '/login/bank' });
+      this.$router.push({ path: '/register/bank' });
     }
   }
 }
@@ -123,7 +123,6 @@ header h1 {
 
 .benefits h3 {
   margin-bottom: 20px;
-  font-size: 20px;
 }
 
 .testimonials {
@@ -191,7 +190,6 @@ header h1 {
 
 .reassurance h3 {
   margin-bottom: 20px;
-  font-size: 20px;
 }
 
 .partner-logos {

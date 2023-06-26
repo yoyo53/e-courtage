@@ -1,12 +1,12 @@
 <template>
     <div>
         <!--<h1>This is a demand form filling pop up</h1>-->
-        <button id="openButton" @click="()=>handleDisplay()">NOUVELLE DEMANDE</button>
-        <div id="modal-form" ref="modalForm" v-if="displayForm">
+        <button id="detailButton" @click="()=>handleDisplay()">Détails</button>
+        <div id="modal-form" ref="modalForm" v-if="displayDetail">
             <button id="closeButton" @click="()=>handleDisplay()">X</button>
-            <h2>Nouvelle demande</h2>
-            <form id="demandCreationForm">
-                <div id="demandCreationFormFields">
+            <h2>Détails de la demande {{ newDemand.subject }}</h2>
+            <form id="demandDetailForm">
+                <div id="demandDetailFormFields">
                     <div class="mb-3">
                         <label for="formSubject" class="form-label">Sujet</label>
                         <input type="text" class="form-control" id="formSubject" v-model="newDemand.sujet" placeholder="Trouvez un titre pour votre demande" required>
@@ -110,7 +110,8 @@
                         <client-new-file-form />
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" @click="(ev)=>handleSubmit(ev)">Envoyer</button>
+                <button type="submit" class="btn btn-primary" @click="(ev)=>handleSubmit(ev)">Enregistrer les modifications</button>
+                <button type="button" class="btn btn-danger" @click="(ev)=>handleDelete(ev)">Supprimer</button>
             </form>
         </div>
     </div>
@@ -122,41 +123,29 @@ import ClientNewFileForm from './ClientNewFileForm.vue';
 
 
 export default {
-    name: "ClientDemandForm",
+    name: "ClientDemandDetail",
+    components: {
+        ClientFileListCheckableElement,
+        ClientNewFileForm
+    },
+    props: {
+        propDemand: {
+            type: Object,
+            required: true
+        }
+    },
     data() {
         return {
-            newDemand: {
-                sujet: "",
-                nature: "",
-                type: "",
-                age: "",
-                usage: "",
-                status_recherche: "",
-                pays: "",
-                ville: "",
-                montant_bien: "",
-                montant_travaux: "",
-                frais_notaire: "",
-                accompagnement: "",
-                apport_personnel: "",
-                commentaire: "",
-                files: []
-            },
-            displayForm: false,
+            newDemand: {},
+            displayDetail: false,
             userFiles: []
         };
     },
     methods: {
         handleSubmit(ev) {
 
-            if(this.newDemand.sujet == "" || this.newDemand.nature == "" || this.newDemand.type == "" || this.newDemand.age == "" || this.newDemand.usage == "" || this.newDemand.status_recherche == "" || this.newDemand.pays == "" || this.newDemand.montant_bien == "" || this.newDemand.aloneGroup == "" || this.newDemand.apport_personnel == "") {
-                this.$notify({
-                    title: 'Erreur',
-                    text: 'Veuillez remplir tous les champs obligatoires',
-                    type: 'error'
-                });
+            if(this.newDemand.subject=="" || this.newDemand.nature=="" || this.newDemand.type=="" || this.newDemand.age=="" || this.newDemand.usage=="" || this.newDemand.researchStatus=="" || this.newDemand.country=="" || this.newDemand.city=="" || this.newDemand.acquisitionAmount=="" || this.newDemand.aloneGroup=="" || this.newDemand.apport=="")
                 return;
-            }
 
             ev.preventDefault();
 
@@ -181,72 +170,75 @@ export default {
                     return;
                 }
             }
-
-
             
-            console.log(localStorage.getItem("token"));
-
-            fetch(this.api_url + "demande_client/createDemande", {
-                method: "POST",
+            fetch(this.api_url + "demande_client/updateDemande/"+this.newDemand.id_demande, {
+                method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": localStorage.getItem("token")
                 },
                 body: JSON.stringify(this.newDemand)
             })
-            .then((response) => {
-                if (response.ok) {
+            .then((response)=>{
+                if(response.ok){
                     return response.json();
-                } else {
-                    throw new Error("Something went wrong");
+                }
+                else{
+                    throw new Error("Erreur lors de la mise à jour de la demande");
                 }
             })
-            .then((response) => {
-                console.log(response);
-                let temp_demand = this.newDemand;
-                temp_demand.id_demande = response.id_demande;
-                this.$parent.userDemands.push(this.newDemand);
-                console.log(this.$parent.userDemands);
-                //reset form
-                this.newDemand = {
-                    sujet: "",
-                    nature: "",
-                    type: "",
-                    age: "",
-                    usage: "",
-                    status_recherche: "",
-                    pays: "",
-                    ville: "",
-                    montant_bien: "",
-                    montant_travaux: "",
-                    frais_notaire: "",
-                    accompagnement: "",
-                    apport_personnel: "",
-                    commentaire: "",
-                    files: []
-                };
-
-                //this.displayForm = false;
+            .then(res => {
+                console.log(res);
+                this.displayDetail = false;
                 this.$notify({
-                    title: "Demande envoyée",
-                    text: "Votre demande a bien été envoyée",
+                    title: "Demande mise à jour",
+                    text: "La demande a bien été mise à jour",
                     type: "success"
                 });
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(err => {
+                console.log(err);
                 this.$notify({
                     title: "Erreur",
-                    text: "Une erreur est survenue, veuillez réessayer plus tard",
+                    text: err.message,
+                    type: "error"
+                });
+            });
+        },
+        handleDelete() {
+            fetch(this.api_url + "demande_client/deleteDemande/"+this.newDemand.id_demande, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem("token")
+                }
+            })
+            .then((response)=>{
+                if(response.ok){
+                    return response.json();
+                }
+                else{
+                    throw new Error("Erreur lors de la suppression de la demande");
+                }
+            })
+            .then(res => {
+                console.log(res);
+                this.$parent.$parent.userDemands = this.$parent.$parent.userDemands.filter(demand => demand.id_demande != this.newDemand.id_demande);
+                this.displayDetail = false;
+            })
+            .catch(err => {
+                console.log(err);
+                this.$notify({
+                    title: "Erreur",
+                    text: err.message,
                     type: "error"
                 });
             });
         },
         handleDisplay() {
-            this.displayForm = !this.displayForm;
+            this.displayDetail = !this.displayDetail;
         }
     },
-    components: { ClientFileListCheckableElement, ClientNewFileForm },
     mounted() {
         fetch(this.api_url + "document/getAllDocuments", {
             method: "GET",
@@ -258,13 +250,16 @@ export default {
         .then((response) => {
             if (response.ok) {
                 return response.json();
+            } else if(response.status == 401) {
+                this.$router.push("/login");
             } else {
-                throw new Error("Il y a eu un problème lors de la récupération des documents");
+                throw new Error("Une erreur est survenue, veuillez réessayer plus tard");
             }
         })
         .then((response) => {
             console.log(response);
             this.userFiles = response;
+            this.newDemand = this.propDemand;
         })
         .catch((error) => {
             console.log(error);
@@ -274,25 +269,17 @@ export default {
                 type: "error"
             });
         });
+
     }
 }
 </script>
 
 <style>
 
-    #openButton{
-        height: 100%;
-        width: 50%;
-        background-color: #D9D9D9;
-        text-align: center;
-        font-size: 2vw;
-        border-radius: 10px;
-    }
-
     #closeButton{
         position: absolute;
         top: 0;
-        right: 0;
+        right: 5px;
         background-color: #D9D9D9;
         border-radius: 10px;
         border: none;
@@ -302,7 +289,7 @@ export default {
     #modal-form{
         color: black;
         position: absolute;
-        top: 50%;
+        top: 45%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #D9D9D9;
@@ -310,25 +297,30 @@ export default {
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.5);
         width: 50vw;
-        height: 70vh;
+        height: 80vh;
         border-radius: 10px;
-        overflow-y: scroll;
-        padding: 10px;
     }
 
     ::-webkit-scrollbar {
         display: none;
     }
 
-    #demandCreationForm{
+    #demandDetailForm{
         margin-top: 50px;
         text-align: left;
         height: 80%;
     }
 
-    #demandCreationFormFields{
+    #demandDetailFormFields{
         height: 100%;
         overflow-y: scroll;
+    }
+
+    #detailButton{
+        color: blue;
+        margin-top: 10px;
+        border: none;
+        background-color: white;
     }
 
 </style>
