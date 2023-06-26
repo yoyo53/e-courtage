@@ -26,9 +26,16 @@
                     </div>
                     
                 </div>
-                <ul id="demands-list" class="section-list">
-                    <client-bank-demands-list-element v-for="temp_demand in displayedDemands" v-bind:key="temp_demand.id" :demand="temp_demand"></client-bank-demands-list-element>
-                </ul>
+                <div id="demands-overview-area">
+                    <h2>Liste des demandes :</h2>
+                    <ul id="demands-list" class="section-list">
+                        <client-bank-demands-list-element v-for="temp_demand in displayedDemands" v-bind:key="temp_demand.id" :demand="temp_demand"></client-bank-demands-list-element>
+                    </ul>
+                </div>
+                <div id="add-demand-area">
+                    <ClientDemandDetails id="demand-form"/>
+                </div>
+                
             </div>
         </div>
     </div>
