@@ -7,27 +7,27 @@
             <div id="demands-overview-area" class="section-list">
                 <div id="demands-area-header">
                     <div id="research-input" class="input-group flex-nowrap">
-                        <input type="text" class="form-control" placeholder="Recherche" aria-label="Recherche" aria-describedby="addon-wrapping">
+                        <input type="text" class="form-control" placeholder="Recherche" aria-label="Recherche" aria-describedby="addon-wrapping" v-model="searchInput">
                     </div>
                     <!-- <input type="text" name="recherche"> -->
                     <div>
-                        <select id="sort-choices" class="form-select" aria-label="Default select example">
-                            <option selected>Trier par :</option>
+                        <select id="sort-choices" class="form-select" aria-label="Default select example" v-model="orderBy">
+                            <option value="">Trier par :</option>
                             <option value="Name">Nom</option>
                             <option value="Value">Valeur</option>
                             <option value="Salaire">Salaire</option>
                           </select>
                     </div>
                     <div>
-                        <select id="sort-choices" class="form-select" aria-label="Default select example">
-                            <option selected>Afficher :</option>
-                            <option value="1">favori</option>
+                        <select id="sort-choices" class="form-select" aria-label="Default select example" v-model="onlyPinned">
+                            <option value="0">Afficher Tous</option>
+                            <option value="1">Favoris Uniquement</option>
                           </select>
                     </div>
                     
                 </div>
                 <ul id="demands-list" class="section-list">
-                    <client-bank-demands-list-element v-for="temp_demand in userDemands" v-bind:key="temp_demand.id" :demand="temp_demand"></client-bank-demands-list-element>
+                    <client-bank-demands-list-element v-for="temp_demand in displayedDemands" v-bind:key="temp_demand.id" :demand="temp_demand"></client-bank-demands-list-element>
                 </ul>
             </div>
         </div>
@@ -45,70 +45,123 @@ export default {
     },
     data(){
         return {
-            userDemands:[]
+            userDemands:[],
+            displayedDemands:[],
+            searchInput:"",
+            orderBy:"",
+            onlyPinned:0
+        }
+    },
+    watch:{
+        searchInput(newSearchInput){
+            console.log(newSearchInput);
+            this.performAllFilters();
+            
+        },
+        orderBy(newOrderBy){
+            console.log(newOrderBy);
+            this.performAllFilters();
+            
+        },
+        onlyPinned(newOnlyPinned){
+            console.log(newOnlyPinned);
+            this.performAllFilters();
         }
     },
     methods:{
+        performAllFilters(){
+            this.displayedDemands = this.userDemands.filter((demand) => {
+                return demand.sujet.toLowerCase().includes(this.searchInput.toLowerCase());
+            })
+
+            if (this.orderBy == "Name") {
+                this.displayedDemands.sort((a,b) => {
+                    return a.nom.localeCompare(b.nom);
+                })
+            }
+            else if (this.orderBy == "Value") {
+                this.displayedDemands.sort((a,b) => {
+                    return a.montant_bien - b.montant_bien;
+                })
+            }
+            else if (this.orderBy == "Salaire") {
+                this.displayedDemands.sort((a,b) => {
+                    return a.revenu_mensuel - b.revenu_mensuel;
+                })
+            }
+            else{
+                this.displayedDemands.sort((a,b) => {
+                    return a.id - b.id;
+                })
+            }
+
+            if (this.onlyPinned == 1) {
+                this.displayedDemands = this.displayedDemands.filter((demand) => {
+                    return demand.favorite;
+                })
+            }
+
+        },
         fetchBankUserDemands() {
             // TODO
             this.userDemands = [
                 {
                     "id":0,
                     "sujet": "Projet Maison",
-                    "Nom": "Jesen Brown",
-                    "Valeur": "300 000 €",
-                    "Salaire" : "4000 €",
+                    "nom": "Jesen Brown",
+                    "montant_bien": 300000,
+                    "revenu_mensuel" : 4000,
                     "favorite" : false,
                     "added" : false
                 },
                 {
                     "id":1,
                     "sujet": "Projet construction",
-                    "Nom": "Mike Harvey",
-                    "Valeur": "900 000 €",
-                    "Salaire" : "8000 €",
+                    "nom": "Mike Harvey",
+                    "montant_bien": 900000,
+                    "revenu_mensuel" : 8000,
                     "favorite" : false,
                     "added" : false
                 },
                 {
                     "id":2,
                     "sujet": "Projet jet",
-                    "Nom": "Louis Litt",
-                    "Valeur": "500 000 €",
-                    "Salaire" : "6000 €",
+                    "nom": "Louis Litt",
+                    "montant_bien": 500000,
+                    "revenu_mensuel" : 6000,
                     "favorite" : false,
                     "added" : false
                 },
                 {
                     "id":3,
                     "sujet": "Projet LVMH",
-                    "Nom": "Bernard Arnaud",
-                    "Valeur": "20 000 000 €",
-                    "Salaire" : "60 000 €",
+                    "nom": "Bernard Arnaud",
+                    "montant_bien": 20000000,
+                    "revenu_mensuel" : 60000,
                     "favorite" : false,
                     "added" : false
                 },
                 {
                     "id":4,
                     "sujet": "Projet lawyer",
-                    "Nom": "Specter Ross",
-                    "Valeur": "100 000 €",
-                    "Salaire" : "3000 €",
+                    "nom": "Specter Ross",
+                    "montant_bien": 100000,
+                    "revenu_mensuel" : 3000,
                     "favorite" : false,
                     "added" : false
                 },
                 {
                     "id":5,
                     "sujet": "Projet club",
-                    "Nom": "Jimmy Buckets",
-                    "Valeur": "1 000 000 €",
-                    "Salaire" : "8000 €",
+                    "nom": "Jimmy Buckets",
+                    "montant_bien": 1000000,
+                    "revenu_mensuel" : 8000,
                     "favorite" : false,
                     "added" : false
                 }
-            ]
-        },
-
+            ];
+            this.displayedDemands = this.userDemands;
+        }
     },
     mounted() {
         console.log("Mounted");
@@ -116,7 +169,7 @@ export default {
     },
     beforeUnmount() {
         console.log("Unmounted");
-    }
+    },
 
 
 }
