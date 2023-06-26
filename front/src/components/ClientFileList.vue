@@ -77,17 +77,17 @@ export default {
                         console.log("File uploaded");
                         $this.userFiles.find((file) => file.id_document === id).nom_document = input.files[0].name;
                         $this.$notify({
-                            group: "success",
                             title: "Succès",
-                            text: "Votre fichier a été mis à jour"
+                            text: "Votre fichier a été mis à jour",
+                            type: "success"
                         });
                         
                     } else {
                         console.log("Error " + xhr.status + " occurred when trying to upload your file.");
                         this.$notify({
-                            group: "error",
                             title: "Erreur",
-                            text: "Une erreur est survenue lors de la mise à jour de votre fichier"
+                            text: "Une erreur est survenue lors de la mise à jour de votre fichier",
+                            type: "error"
                         });
                     }
                 };
@@ -118,17 +118,17 @@ export default {
                 console.log(response);
                 this.userFiles = this.userFiles.filter((file) => file.id_document !== id);
                 this.$notify({
-                    group: "success",
                     title: "Succès",
-                    text: "Votre fichier a été supprimé"
+                    text: "Votre fichier a été supprimé",
+                    type: "success"
                 });
             })
             .catch((error) => {
                 console.log(error);
                 this.$notify({
-                    group: "error",
                     title: "Erreur",
-                    text: "Une erreur est survenue lors de la suppression de votre fichier"
+                    text: "Une erreur est survenue lors de la suppression de votre fichier",
+                    type: "error"
                 });
             });
         },
@@ -161,9 +161,9 @@ export default {
             .catch((error) => {
                 console.log(error);
                 this.$notify({
-                    group: "error",
                     title: "Erreur",
-                    text: "Une erreur est survenue lors de la récupération de vos fichiers"
+                    text: "Une erreur est survenue lors de la récupération de vos fichiers",
+                    type: "error"
                 });
             });
         }
