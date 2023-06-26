@@ -2,6 +2,9 @@
     <div>
         <h1>This is bank register page</h1>
 
+        
+        <router-link class="btn btn-primary" to="/login/bank">Déja un compte ?</router-link>
+
         <form id="registerForm">
 
             <div class="mb-3">
