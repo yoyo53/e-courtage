@@ -15,7 +15,7 @@
         </div>
         <div id="banks-list-container">
         <ul id="banks-list" class="section-list">
-          <banks-list-element v-for="temp_bank in banks" v-bind:key="temp_bank.id" :bank="temp_bank"></banks-list-element>
+          <banks-list-element @updateBank="fetchBanks()" v-for="temp_bank in banks" v-bind:key="temp_bank.id" :bank="temp_bank"></banks-list-element>
         </ul>
       </div>
     </div>
@@ -45,69 +45,17 @@ export default {
         }
     },
     methods:{
-        fetchBanks() {
-            this.banks = [
-            {
-                nom_banque: "Banque A",
-                siret: "123456789",
-                pays: "France",
-                ville: "Paris",
-                adresse: "123 Rue de la Banque",
-                email: "contact@banquea.com",
-                tel: "0123456789",
-                account_status: true
-            },
-            {
-                nom_banque: "Banque B",
-                siret: "987654321",
-                pays: "États-Unis",
-                ville: "New York",
-                adresse: "456 Bank Street",
-                email: "info@banqueb.com",
-                tel: "9876543210",
-                account_status: false
-            },
-            {
-                nom_banque: "Banque C",
-                siret: "111111111",
-                pays: "Espagne",
-                ville: "Madrid",
-                adresse: "Calle de la Banca",
-                email: "info@banquex.com",
-                tel: "1111111111",
-                account_status: false
-            },
-            {
-                nom_banque: "Banque D",
-                siret: "222222222",
-                pays: "Allemagne",
-                ville: "Berlin",
-                adresse: "Bankstraße",
-                email: "contact@banquey.com",
-                tel: "2222222222",
-                account_status: true
-            },
-            {
-                nom_banque: "Banque E",
-                siret: "999999999",
-                pays: "Royaume-Uni",
-                ville: "Londres",
-                adresse: "Bank Road",
-                email: "support@banquez.com",
-                tel: "9999999999",
-                account_status: true
-            },
-            {
-                nom_banque: "Banque F",
-                siret: "888888888",
-                pays: "Italie",
-                ville: "Rome",
-                adresse: "Via della Banca",
-                email: "info@banquew.com",
-                tel: "8888888888",
-                account_status: false
-            }
-        ];
+        async fetchBanks() {
+            const token = localStorage.getItem('token');
+            const response = await fetch(this.api_url + "admin/getAllBanques", {
+                headers: {
+                    'authorization': token
+                }
+            });
+            const data = await response.json();
+            console.log(data);
+            this.banks = data;
+            
         },
         performSearch(){
             this.displayedDemands = this.userDemands.filter((demand) => {
