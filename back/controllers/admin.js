@@ -103,11 +103,9 @@ exports.updateClient = async (req, res) => {
             return;
         } else {
             let client = await Client.findOne({ where: { id_client: req.params.id_client } });
-            for(let key in req.body){
-                client[key] = req.body[key];
-            }
+            client.account_status = req.body.account_status;
             await client.save();
-            res.status(200).send(client);
+            res.status(200).send(client.account_status);
         }
     } catch(err){
         res.status(500).send({ message: "Error has occured" });
@@ -127,11 +125,9 @@ exports.updateBanque = async (req, res) => {
             return;
         } else {
             let banque = await Banque.findOne({ where: { id_banque: req.params.id_banque } });
-            for(let key in req.body){
-                banque[key] = req.body[key];
-            }
+            banque.account_status = req.body.account_status;
             await banque.save();
-            res.status(200).send({ message: "Banque updated successfully" });
+            res.status(200).send(banque.account_status);
         }
     } catch(err){
         res.status(500).send({ message: "Error has occured" });
