@@ -9,14 +9,14 @@
         <div class="demandRow"><span> Nom : {{ demand.nom}}</span> <span> Salaire : {{ demand.revenu_mensuel }} €</span></div>
         <div class="demandRow"><span> Valeur : {{ demand.montant_bien}} €</span></div>
         <div class="demandRow"><span>{{ demand.commentaire }}</span></div>
-        <client-demand-detail :propDemand="demand"/>
+        <bank-demand-detail :demand="demand"/>
     </div>
 </template>
 
 <script>
-import ClientDemandDetail from './ClientDemandDetail.vue'
+import BankDemandDetail from './BankDemandDetail.vue'
 export default {
-  components: { ClientDemandDetail },
+  components: { BankDemandDetail },
     name: 'ClientDemandsListElement',
     props: {
         demand: {

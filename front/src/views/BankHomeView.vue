@@ -32,9 +32,6 @@
                         <client-bank-demands-list-element v-for="temp_demand in displayedDemands" v-bind:key="temp_demand.id" :demand="temp_demand"></client-bank-demands-list-element>
                     </ul>
                 </div>
-                <div id="add-demand-area">
-                    <ClientDemandDetails id="demand-form"/>
-                </div>
                 
             </div>
         </div>

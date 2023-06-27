@@ -1,12 +1,11 @@
 <template>
     <div id="loginMain">
-        <h1>Connexion</h1>
-        <button @click="()=>handleLoginB()">Login (Banque)</button>
+        <h1>Connexion Banque</h1>
 
         <form id="loginForm">
             <div class="mb-3">
                 <label for="formEmail" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="formEmail" placeholder="name@example.com" v-model="email">
+                <input type="text" class="form-control" id="formEmail" placeholder="name@example.com" v-model="email">
             </div>
 
             <div class="mb-3">
@@ -15,7 +14,7 @@
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary" @click="()=>handleLoginC()">Connexion</button>
+                <button type="submit" class="btn btn-primary" @click="()=>handleLoginB()">Connexion</button>
             </div>
 
         </form>
@@ -37,9 +36,9 @@ export default {
         }
     },
     methods: {
-        handleLoginC(){
+        handleLoginB(){
             let obj = {email:this.email,password:this.password}
-            fetch( this.api_url + 'auth/loginClient', {
+            fetch( this.api_url + 'auth/loginBanque', {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'
@@ -51,16 +50,16 @@ export default {
                 console.log(data);
                 if(data.token != null) {
                     localStorage.setItem('token', data.token);
-                    this.$router.push('/client');
+                    this.$router.push('/bank');
                 } else {
-                    alert('Login failed');
+                    this.$notify({
+                        title: 'Erreur',
+                        text: 'Email ou mot de passe incorrect',
+                        type: 'warn'
+                    });
                 }
             })
                 
-        },
-        handleLoginB(){
-            localStorage.setItem('token', '123456789');
-            this.$router.push('/bank');
         }
     }
 }

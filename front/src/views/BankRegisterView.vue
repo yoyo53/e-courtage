@@ -99,9 +99,13 @@ export default {
                 console.log(data);
                 if(data.id_banque != null) {
                     localStorage.setItem('token', data.token);
-                    this.$router.push('/login');
+                    this.$router.push('/login/bank');
                 } else {
-                    alert('Register failed');
+                    this.$notify({
+                        title: 'Erreur',
+                        text: "L'inscription a échoué",
+                        type: 'warn'
+                    });
                 }
             })
 
