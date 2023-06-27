@@ -165,6 +165,24 @@ export default {
                 }
             ];
             this.displayedDemands = this.userDemands;
+
+
+            fetch(this.api_url + 'demande_banque/getAllDemandes',{
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem("token")
+                }})
+            .then((response)=>{
+                if(response.status == 401){
+                    this.$router.push("/login/bank");
+                }
+                return(response.json())
+            })
+            .then((data)=>{
+                console.log(data);
+                //this.userDemands = data;
+                //this.displayedDemands = this.userDemands;
+            })
         }
     },
     mounted() {

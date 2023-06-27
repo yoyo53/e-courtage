@@ -223,8 +223,16 @@ export default {
             })
             .then(res => {
                 console.log(res);
-                this.$parent.$parent.userDemands = this.$parent.$parent.userDemands.filter(demand => demand.id_demande != this.newDemand.id_demande);
+                console.log("a");
                 this.displayDetail = false;
+                this.$notify({
+                    title: "Demande supprimée",
+                    text: "La demande a bien été supprimée",
+                    type: "success"
+                });
+                console.log(this.$parent.$parent.userDemands)
+                this.$parent.$parent.userDemands = this.$parent.$parent.userDemands.filter(demand => demand.id_demande != this.newDemand.id_demande);
+                console.log(this.$parent.$parent.userDemands);
             })
             .catch(err => {
                 console.log(err);
