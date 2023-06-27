@@ -1,6 +1,6 @@
 <template>
     <div id="registerMain">
-        <h1>Inscription</h1>
+        <h1>Inscription Banque</h1>
 
         <form id="registerForm">
 
