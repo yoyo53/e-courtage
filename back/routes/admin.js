@@ -13,10 +13,10 @@ router.get('/getAllBanques', admin.getAllBanques);
 router.get('/getAllDemandes', admin.getAllDemandes);
 
 /* Update a client */
-router.put('/updateClient/:id_client', admin.updateClient);
+router.patch('/updateClient/:id_client', admin.updateClient);
 
 /* Update a banque */
-router.put('/updateBanque/:id_banque', admin.updateBanque);
+router.patch('/updateBanque/:id_banque', admin.updateBanque);
 
 /* Delete a client */
 router.delete('/deleteClient/:id_client', admin.deleteClient);
