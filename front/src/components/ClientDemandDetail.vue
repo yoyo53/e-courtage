@@ -148,6 +148,28 @@ export default {
                 return;
 
             ev.preventDefault();
+
+            let existing_file_types = ["Document d'identité","Fiche de paie","Document médical","Justificatif de domicile"]
+            let present_file_types = [];
+            let missing_file_types = [];
+
+            for(let i = 0; i < this.userFiles.length; i++) {
+                if(this.newDemand.files.findIndex((file) => file == this.userFiles[i].id_document) != -1) {
+                    present_file_types.push(this.userFiles[i].type);
+                }
+            }
+
+            for(let i = 0; i < existing_file_types.length; i++) {
+                if(present_file_types.findIndex((file_type) => file_type == existing_file_types[i]) == -1) {
+                    missing_file_types.push(existing_file_types[i]);
+                }
+            }
+
+            if(missing_file_types.length > 0) {
+                if(!confirm("Attention ! Les fichiers suivants sont manquants : \n-" + missing_file_types.join("\n-") + "\nVoulez-vous continuer ?")) {
+                    return;
+                }
+            }
             
             fetch(this.api_url + "demande_client/updateDemande/"+this.newDemand.id_demande, {
                 method: "PATCH",
@@ -168,10 +190,19 @@ export default {
             .then(res => {
                 console.log(res);
                 this.displayDetail = false;
+                this.$notify({
+                    title: "Demande mise à jour",
+                    text: "La demande a bien été mise à jour",
+                    type: "success"
+                });
             })
             .catch(err => {
                 console.log(err);
-                alert(err.message)
+                this.$notify({
+                    title: "Erreur",
+                    text: err.message,
+                    type: "error"
+                });
             });
         },
         handleDelete() {
@@ -192,12 +223,24 @@ export default {
             })
             .then(res => {
                 console.log(res);
-                this.$parent.$parent.userDemands = this.$parent.$parent.userDemands.filter(demand => demand.id_demande != this.newDemand.id_demande);
+                console.log("a");
                 this.displayDetail = false;
+                this.$notify({
+                    title: "Demande supprimée",
+                    text: "La demande a bien été supprimée",
+                    type: "success"
+                });
+                console.log(this.$parent.$parent.userDemands)
+                this.$parent.$parent.userDemands = this.$parent.$parent.userDemands.filter(demand => demand.id_demande != this.newDemand.id_demande);
+                console.log(this.$parent.$parent.userDemands);
             })
             .catch(err => {
                 console.log(err);
-                alert(err.message)
+                this.$notify({
+                    title: "Erreur",
+                    text: err.message,
+                    type: "error"
+                });
             });
         },
         handleDisplay() {
@@ -215,8 +258,10 @@ export default {
         .then((response) => {
             if (response.ok) {
                 return response.json();
+            } else if(response.status == 401) {
+                this.$router.push("/login");
             } else {
-                throw new Error("Something went wrong");
+                throw new Error("Une erreur est survenue, veuillez réessayer plus tard");
             }
         })
         .then((response) => {
@@ -226,7 +271,11 @@ export default {
         })
         .catch((error) => {
             console.log(error);
-            alert("Une erreur est survenue, veuillez réessayer plus tard");
+            this.$notify({
+                title: "Erreur",
+                text: error.message,
+                type: "error"
+            });
         });
 
     }

@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1>This is bank register page</h1>
+    <div id="registerMain">
+        <h1>Inscription Banque</h1>
 
         <form id="registerForm">
 
@@ -11,7 +11,7 @@
 
             <div class="mb-3">
                 <label for="formName" class="form-label">SIRET</label>
-                <input type="text" class="form-control" id="formSiret" v-model="BankInfo.siren" required/>
+                <input type="text" class="form-control" id="formSiret" v-model="BankInfo.siret" required/>
             </div>
 
             <div class="mb-3">
@@ -40,10 +40,15 @@
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary" @click="(ev)=>handleRegister(ev)">Register</button>
+                <button type="submit" class="btn btn-primary" @click="(ev)=>handleRegister(ev)">Inscription</button>
             </div>
 
         </form>
+        <div id="registerLinks">
+            <router-link to="/login/bank">Vous avez déjà un compte ?</router-link>
+            <router-link to="/register">Vous vous inscrivez en tant que particulier ?</router-link>
+            <router-link to="/">Retour à la page d'accueil</router-link>
+        </div>
     </div>
 </template>
 
@@ -53,11 +58,13 @@ export default {
         return {
             BankInfo: {
                 nom_banque: '',
-                siren: '',
+                siret: '',
                 email: '',
                 tel: '',
                 adresse: '',
-                password: ''
+                password: '',
+                pays: 'France',
+                ville: 'Paris'
             },
             rePassword: ''
         }
@@ -76,7 +83,7 @@ export default {
                 alert('Password not match');
                 return;
             }
-            if(/^[0-9]{14}$/.test(this.BankInfo.siret)) {
+            if(/^[0-9]{15}$/.test(this.BankInfo.siret)) {
                 alert('Siret is false');
                 return;
             }
@@ -92,9 +99,13 @@ export default {
                 console.log(data);
                 if(data.id_banque != null) {
                     localStorage.setItem('token', data.token);
-                    this.$router.push('/login');
+                    this.$router.push('/login/bank');
                 } else {
-                    alert('Register failed');
+                    this.$notify({
+                        title: 'Erreur',
+                        text: "L'inscription a échoué",
+                        type: 'warn'
+                    });
                 }
             })
 
@@ -105,17 +116,36 @@ export default {
 
 <style>
 
-#registerForm {
-    width: 30%;
-    margin: auto;
-    margin-top: 2vw;
-    height: 80vh;
-    overflow-y : scroll;
-    background-color: #d9d9d9;
+#registerMain {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
     border-radius: 10px;
-    color: black;
+    border: 3px solid #000000;
+    padding: 1vh;
 }
-::-webkit-scrollbar {
-    display:none;
+
+#registerForm {
+    width: 80%;
+    margin: auto;
+    margin-top: 10%;
+
+    height: 60vh;
+    overflow-y : scroll;
+    scrollbar-width: none;
+
 }
+
+#registerLinks {
+    margin-top: 2vw;
+    display: flex;
+    flex-direction: column;
+    padding: 1vh;
+    border-radius: 10px;
+    border: 3px solid #000000;
+    background-color: #b9b9b9;
+}
+
 </style>

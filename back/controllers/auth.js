@@ -9,13 +9,14 @@ const Admin = require("../models/admin.model.js")(Sequelize.connection, Sequeliz
 const Session = require("../models/sessionClient.model.js")(Sequelize.connection, Sequelize.library);
 const SessionBanque = require("../models/sessionBanque.model.js")(Sequelize.connection, Sequelize.library);
 const SessionAdmin = require("../models/sessionAdmin.model.js")(Sequelize.connection, Sequelize.library);
+const mail = require("../controllers/mail.js");
 
 exports.loginClient = async(req, res) => {
     // Check if user exists in database
     let client = await Client.findOne({where: {email: req.body.email}});
 
     if(client && client.id_client && 
-        client.password == Crypto.createHash('sha256').update(req.body.password).digest('hex')){
+        client.password == Crypto.createHash('sha256').update(req.body.password).digest('hex') && client.account_status){
         
         // Find if user already has a session
         let session = await Session.findOne({where: {id_client: client.id_client}});
@@ -63,24 +64,22 @@ exports.registerClient = async(req, res) => {
         res.status(401).send({message: "Account already exists"});
         return;
     }
-    // Save new Client
-    Client.create(client)
-        .then(data => {
-            // Send a confirmation email to the user
-            //sendConfirmationMail(req, res);
-            res.send(data);
-        })
-        .catch(error => {
-            res.status(500).send({message: error.message || "Error while creating Client"});
-        }
-    );
+    let newClient = await Client.create(client);
+
+    // Create new session
+    let session = await sessions.createSession(newClient.id_client, "client");
+
+    // Send confirmation mail
+    mail.sendConfirmationMail(newClient.email, newClient.nom, session.token);
+
+    res.status(200).send({id_client: newClient.id_client});
 }   
 
 exports.loginBanque = async(req, res) => {
     let banque = await Banque.findOne({where: {email: req.body.email}});
 
     if(banque && banque.id_banque && 
-        banque.password == Crypto.createHash('sha256').update(req.body.password).digest('hex')){
+        banque.password == Crypto.createHash('sha256').update(req.body.password).digest('hex') && banque.account_status){
         
         // Find if banque already has a session
         let session = await SessionBanque.findOne({where: {id_banque: banque.id_banque}});
@@ -167,8 +166,43 @@ exports.loginAdmin = async(req, res) => {
                 token = newSession.token;
             }
             res.status(200).send({token: token});
+        }else{
+            res.status(403).send({message: "Wrong credentials"});
         }
     } catch(err){
+        res.status(500).send({message: "Error has occured"});
+    }
+}
+
+
+exports.verifyClient = async(req, res) => {
+    try{
+        // Verify token
+        let tokenClient = req.params.token;
+        console.log(tokenClient);
+
+        if(!tokenClient){
+            res.status(401).send({message: "No token provided"});
+            return;
+        }
+        // Find if token exists in database
+        let session = await Session.findOne({where: {token: tokenClient}});
+        if(!session){
+            res.status(401).send({message: "Invalid token"});
+            return;
+        }
+        // If token exists, check if it is still valid
+        let isTokenExpired = session ? (new Date(session.valid_until) - new Date() <= 0) : true;
+
+        // If token is valid, verify client account
+        if(session && !isTokenExpired){
+            await Client.update({account_status: true}, {where: {id_client: session.id_client}});
+            // Delete token
+            await Session.destroy({where: {token: tokenClient}});
+            res.status(200).send({message: "Client account is verified"});
+        }
+    }catch(err){
+        console.log(err);
         res.status(500).send({message: "Error has occured"});
     }
 }

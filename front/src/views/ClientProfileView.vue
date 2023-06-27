@@ -211,10 +211,20 @@ export default {
             })
             .then((response) => {
                 console.log(response);
-                this.userEditSuccess = true;
+                //this.userEditSuccess = true;
+                this.$notify({
+                    title: 'Success',
+                    text: 'Vos informations ont été mises à jour',
+                    type: 'success'
+                });
             })
             .catch((error) => {
                 console.log(error);
+                this.$notify({
+                    title: 'Error',
+                    text: 'Il y a eu une erreur lors de la mise à jour de vos informations',
+                    type: 'error'
+                });
             });
         },
         fetchUserData() {
@@ -224,7 +234,15 @@ export default {
                 'Content-Type': 'application/json',
                 'authorization': localStorage.getItem("token")
                 }})
-            .then((response)=>{return(response.json())})
+            .then((response)=>{
+                if(response.ok){
+                    return response.json();
+                }else if(response.status == 401){
+                    this.$router.push("/login");
+                }else{
+                    throw new Error("Something went wrong");
+                }
+            })
             .then((parsed) => {
                 console.log(parsed);
                 this.userInfo = parsed;
@@ -244,6 +262,14 @@ export default {
                     }
                     
                 }
+            })
+            .catch((error) => {
+                console.log(error);
+                this.$notify({
+                    group: "foo",
+                    title: "Erreur",
+                    text: "Une erreur est survenue lors de la récupération de vos informations",
+                });
             });
             
         }

@@ -14,11 +14,13 @@ router.post('/loginBanque', auth.loginBanque);
 /* Vérification des credentials admin */
 router.post('/loginAdmin', auth.loginAdmin);
 
-
 /*  Enregistrement d'un nouveau client */
 router.post('/registerClient', auth.registerClient);
 
 /*  Enregistrement d'un nouvelle banque */
 router.post('/registerBanque', auth.registerBanque);
+
+/* Vérification d'un compte client */
+router.get('/verifyClient/:token', auth.verifyClient);
 
 module.exports = router;

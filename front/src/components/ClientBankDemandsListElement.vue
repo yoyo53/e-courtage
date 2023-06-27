@@ -6,17 +6,17 @@
             <span><p id="valid" class="but" @click="()=>validElement()">+</p></span>
         </div>
         <h2>{{demand.sujet}}</h2>
-        <div class="demandRow"><span> Nom : {{ demand.Nom}}</span> <span> Salaire : {{ demand.Salaire }}</span></div>
-        <div class="demandRow"><span> Valeur : {{ demand.Valeur}}</span></div>
+        <div class="demandRow"><span> Nom : {{ demand.nom}}</span> <span> Salaire : {{ demand.revenu_mensuel }} €</span></div>
+        <div class="demandRow"><span> Valeur : {{ demand.montant_bien}} €</span></div>
         <div class="demandRow"><span>{{ demand.commentaire }}</span></div>
-        <client-demand-detail :propDemand="demand"/>
+        <bank-demand-detail :demand="demand"/>
     </div>
 </template>
 
 <script>
-import ClientDemandDetail from './ClientDemandDetail.vue'
+import BankDemandDetail from './BankDemandDetail.vue'
 export default {
-  components: { ClientDemandDetail },
+  components: { BankDemandDetail },
     name: 'ClientDemandsListElement',
     props: {
         demand: {
@@ -93,6 +93,7 @@ export default {
     }
     .but{
         padding-left:2mm;
+        cursor: pointer;
     }
 
 </style>

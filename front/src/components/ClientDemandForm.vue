@@ -149,12 +149,40 @@ export default {
     methods: {
         handleSubmit(ev) {
 
-            if(this.newDemand.sujet == "" || this.newDemand.nature == "" || this.newDemand.type == "" || this.newDemand.age == "" || this.newDemand.usage == "" || this.newDemand.status_recherche == "" || this.newDemand.pays == "" || this.newDemand.montant_bien == "" || this.newDemand.aloneGroup == "" || this.newDemand.apport_personnel == "") {
-                alert("Veuillez remplir tous les champs obligatoires");
+            if(this.newDemand.sujet == "" || this.newDemand.nature == "" || this.newDemand.type == "" || this.newDemand.age == "" || this.newDemand.usage == "" || this.newDemand.status_recherche == "" || this.newDemand.pays == "" || this.newDemand.montant_bien == "" || this.newDemand.accompagnement == "" || this.newDemand.apport_personnel == "") {
+                this.$notify({
+                    title: 'Erreur',
+                    text: 'Veuillez remplir tous les champs obligatoires',
+                    type: 'error'
+                });
                 return;
             }
 
             ev.preventDefault();
+
+            let existing_file_types = ["Document d'identité","Fiche de paie","Document médical","Justificatif de domicile"]
+            let present_file_types = [];
+            let missing_file_types = [];
+
+            for(let i = 0; i < this.userFiles.length; i++) {
+                if(this.newDemand.files.findIndex((file) => file == this.userFiles[i].id_document) != -1) {
+                    present_file_types.push(this.userFiles[i].type);
+                }
+            }
+
+            for(let i = 0; i < existing_file_types.length; i++) {
+                if(present_file_types.findIndex((file_type) => file_type == existing_file_types[i]) == -1) {
+                    missing_file_types.push(existing_file_types[i]);
+                }
+            }
+
+            if(missing_file_types.length > 0) {
+                if(!confirm("Attention ! Les fichiers suivants sont manquants : \n-" + missing_file_types.join("\n-") + "\nVoulez-vous continuer ?")) {
+                    return;
+                }
+            }
+
+
             
             console.log(localStorage.getItem("token"));
 
@@ -198,11 +226,23 @@ export default {
                     files: []
                 };
 
-                this.displayForm = false;
+                //this.displayForm = false;
+                this.$notify({
+                    title: "Demande envoyée",
+                    text: "Votre demande a bien été envoyée",
+                    type: "success"
+                });
+
+                this.handleDisplay();
+
             })
             .catch((error) => {
                 console.log(error);
-                alert("Une erreur est survenue, veuillez réessayer plus tard");
+                this.$notify({
+                    title: "Erreur",
+                    text: "Une erreur est survenue, veuillez réessayer plus tard",
+                    type: "error"
+                });
             });
         },
         handleDisplay() {
@@ -222,7 +262,7 @@ export default {
             if (response.ok) {
                 return response.json();
             } else {
-                throw new Error("Something went wrong");
+                throw new Error("Il y a eu un problème lors de la récupération des documents");
             }
         })
         .then((response) => {
@@ -231,7 +271,11 @@ export default {
         })
         .catch((error) => {
             console.log(error);
-            alert("Une erreur est survenue, veuillez réessayer plus tard");
+            this.$notify({
+                title: "Erreur",
+                text: error.message,
+                type: "error"
+            });
         });
     }
 }

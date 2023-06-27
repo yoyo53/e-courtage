@@ -5,9 +5,9 @@
 [![](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)](https://expressjs.com/)
 [![](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)](https://sequelize.org/)
 [![](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)](https://vuejs.org/)
+[![](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 
-E-courtage est une solution permettant la mise en relation de chercheurs de prêts et de banques.
-(Je ne suis pas certain de ce que je dois mettre là-dedans)
+E-courtage est une solution de courtage en ligne permettant la mise en relation de chercheurs de prêts immobiliers et de banques en mesure de les financer. Découvrez dès maintenant e-courtage sur notre [site](https://yoyo53.github.io/e-courtage).
 
 ## Démonstration
 
@@ -18,7 +18,7 @@ URL du site web (front-end) : <https://yoyo53.github.io/e-courtage>
 
 ## Release Note
 
-(Pas sur de ce que je dois dire ici non plus)
+TODO
 
 ## Installation
 
@@ -113,10 +113,11 @@ npm install
 ```
 
 \
-**Étape 3 : Configuration de l'url du back-end**
+**Étape 3 : Configuration de des paramètres du front-end**
 1. Dans le répertoire du front-end, recherchez un fichier `config.js`.
 2. Ouvrez le fichier `config.js` dans un éditeur de texte.
 3. Remplacez la valeur de la variable **api_url** par l’url de votre back-end.
+4. Remplacez la valeur de la variable **base_url** par l'url de base sur laquelle votre application sera déployée.
 
 \
 **Étape 4 : Compilation du front-end**

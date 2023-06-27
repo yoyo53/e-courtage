@@ -1,5 +1,7 @@
-const { defineConfig } = require('@vue/cli-service')
-module.exports = defineConfig({
+import { defineConfig } from '@vue/cli-service';
+import { config } from './config.js';
+
+export default defineConfig({
   transpileDependencies: true,
-  publicPath: process.env.NODE_ENV === 'production' ? '/e-courtage/' : '/'
+  publicPath: process.env.NODE_ENV === 'production' ? config.base_url : '/'
 })
