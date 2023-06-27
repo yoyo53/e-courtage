@@ -20,4 +20,7 @@ router.post('/registerClient', auth.registerClient);
 /*  Enregistrement d'un nouvelle banque */
 router.post('/registerBanque', auth.registerBanque);
 
+/* Vérification d'un compte client */
+router.get('/verifyClient/:token', auth.verifyClient);
+
 module.exports = router;

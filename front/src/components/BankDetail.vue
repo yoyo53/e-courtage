@@ -4,7 +4,7 @@
         <button id="detailButton" @click="()=>handleDisplay()">Détails</button>
         <div id="modal-form" ref="modalForm" v-if="displayDetail">
             <button id="closeButton" @click="()=>handleDisplay()">X</button>
-            <h2>Détails de la demande</h2>
+            <h2>Détails du compte</h2>
         </div>
     </div>
 </template>
@@ -16,7 +16,7 @@ export default {
         }
     },
     props: {
-        demand: {
+        bank: {
             type: Object,
             required: true
         }

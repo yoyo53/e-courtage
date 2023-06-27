@@ -190,10 +190,19 @@ export default {
             .then(res => {
                 console.log(res);
                 this.displayDetail = false;
+                this.$notify({
+                    title: "Demande mise à jour",
+                    text: "La demande a bien été mise à jour",
+                    type: "success"
+                });
             })
             .catch(err => {
                 console.log(err);
-                alert(err.message)
+                this.$notify({
+                    title: "Erreur",
+                    text: err.message,
+                    type: "error"
+                });
             });
         },
         handleDelete() {
@@ -214,12 +223,24 @@ export default {
             })
             .then(res => {
                 console.log(res);
-                this.$parent.$parent.userDemands = this.$parent.$parent.userDemands.filter(demand => demand.id_demande != this.newDemand.id_demande);
+                console.log("a");
                 this.displayDetail = false;
+                this.$notify({
+                    title: "Demande supprimée",
+                    text: "La demande a bien été supprimée",
+                    type: "success"
+                });
+                console.log(this.$parent.$parent.userDemands)
+                this.$parent.$parent.userDemands = this.$parent.$parent.userDemands.filter(demand => demand.id_demande != this.newDemand.id_demande);
+                console.log(this.$parent.$parent.userDemands);
             })
             .catch(err => {
                 console.log(err);
-                alert(err.message)
+                this.$notify({
+                    title: "Erreur",
+                    text: err.message,
+                    type: "error"
+                });
             });
         },
         handleDisplay() {
@@ -237,8 +258,10 @@ export default {
         .then((response) => {
             if (response.ok) {
                 return response.json();
+            } else if(response.status == 401) {
+                this.$router.push("/login");
             } else {
-                throw new Error("Something went wrong");
+                throw new Error("Une erreur est survenue, veuillez réessayer plus tard");
             }
         })
         .then((response) => {
@@ -248,7 +271,11 @@ export default {
         })
         .catch((error) => {
             console.log(error);
-            alert("Une erreur est survenue, veuillez réessayer plus tard");
+            this.$notify({
+                title: "Erreur",
+                text: error.message,
+                type: "error"
+            });
         });
 
     }

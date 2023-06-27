@@ -105,14 +105,24 @@ export default {
         handleRegister(ev) {
 
             if(this.userInfo.nom == '' || this.userInfo.prenom == '' || this.userInfo.email == '' || this.userInfo.genre == '' || this.userInfo.date_birth == '' || this.userInfo.tel == '' || this.userInfo.pays == '' || this.userInfo.ville == '' || this.userInfo.adresse == '' || this.userInfo.password == '') {
-                alert('Please fill all the fields');
+                this.$notify({
+                    group: 'foo',
+                    title: 'Error',
+                    text: 'Veuiilez remplir tous les champs',
+                    type: 'warn'
+                });
                 return;
             }
 
             ev.preventDefault();
             console.log(this.userInfo);
             if(this.userInfo.password !== this.rePassword) {
-                alert('Password not match');
+                this.$notify({
+                    group: 'foo',
+                    title: 'Error',
+                    text: 'Les mots de passe ne correspondent pas',
+                    type: 'warn'
+                });
                 return;
             }
             fetch(this.api_url + 'auth/registerClient', {
@@ -129,7 +139,12 @@ export default {
                     localStorage.setItem('token', data.token);
                     this.$router.push('/login');
                 } else {
-                    alert('Register failed');
+                    this.$notify({
+                        group: 'foo',
+                        title: 'Error',
+                        text: 'Une erreur est survenue',
+                        type: 'warn'
+                    });
                 }
             })
 

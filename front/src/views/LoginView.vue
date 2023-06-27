@@ -54,7 +54,12 @@ export default {
                     localStorage.setItem('token', data.token);
                     this.$router.push('/client');
                 } else {
-                    alert('Login failed');
+                    this.$notify({
+                        group: 'foo',
+                        title: 'Erreur',
+                        text: 'La connexion a échoué',
+                        type: 'warn'
+                    });
                 }
             })
                 
