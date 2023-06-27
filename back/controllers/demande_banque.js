@@ -35,7 +35,7 @@ exports.getAllDemandes = async(req, res) => {
                     let list_files = [];
                     let contients = await Contient.findAll({ where: { id_demande: demande.id_demande } });
                     for(let contient of contients){
-                        list_files.push(await Demande.findOne({ where: { id_demande: contient.id_document } }));
+                        list_files.push(await Document.findOne({ where: { id_demande: contient.id_document } }));
                     }
                     // Add new attribute to demande
                     demande.dataValues.files = list_files;
@@ -73,7 +73,7 @@ exports.getSingleDemande = async(req, res) => {
             let list_files = [];
             let contients = await Contient.findAll({ where: { id_demande: demande.id_demande } });
             for(let contient of contients){
-                list_files.push(await Demande.findOne({ where: { id_demande: contient.id_document } }));
+                list_files.push(await Document.findOne({ where: { id_demande: contient.id_document } }));
             }
             // Add new attribute to demande
             demande.dataValues.files = list_files;
