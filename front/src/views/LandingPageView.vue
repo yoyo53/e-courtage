@@ -14,10 +14,10 @@
       <section class="benefits">
         <h3>Avantages clés</h3>
         <ul>
-          <li>Des prêts immobiliers sur mesure pour répondre à vos besoins</li>
-          <li>Accès direct aux offres de plusieurs institutions financières</li>
-          <li>Processus simple et rapide de dépôt des pièces et d'évaluation des dossiers</li>
-          <li>Gain de temps et d'efforts grâce à une recherche centralisée</li>
+          <p>Des prêts immobiliers sur mesure pour répondre à vos besoins</p>
+          <p>Accès direct aux offres de plusieurs institutions financières</p>
+          <p>Processus simple et rapide de dépôt des pièces et d'évaluation des dossiers</p>
+          <p>Gain de temps et d'efforts grâce à une recherche centralisée</p>
         </ul>
       </section>
 
