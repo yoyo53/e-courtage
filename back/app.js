@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
     "origin": "*",
-    "methods": "GET,PATCH,POST,DELETE,OPTIONS",
+    "methods": "GET,PATCH,POST,PUT,DELETE,OPTIONS",
     "allowedHeaders": "X-Requested-With,Content-Type,Authorization",
 }))
 
@@ -90,19 +90,19 @@ SessionBanque.sync({ force: false, alter: true });
 SessionAdmin.sync({ force: false, alter: true });
 
 
-Demande.belongsToMany(Document, {as: "document", through: "contient", foreignKey: "id_demande", timestamps: false});
-Demande.belongsToMany(Banque, {as:"banque", through: Accepter, foreignKey: "id_demande"});
-Demande.belongsTo(Client, {as: "owner", foreignKey: "id_client"});
+Demande.belongsToMany(Document, {as: "document", through: "contient", foreignKey: "id_demande", timestamps: false , onDelete: 'cascade'});
+Demande.belongsToMany(Banque, {as:"banque", through: Accepter, foreignKey: "id_demande" , onDelete: 'cascade'});
+Demande.belongsTo(Client, {as: "owner", foreignKey: "id_client" , onDelete: 'cascade'});
 
-Client.hasMany(Demande, {as: "demande", foreignKey: "id_client"});
+Client.hasMany(Demande, {as: "demande", foreignKey: "id_client" , onDelete: 'cascade'});
 
-Document.belongsToMany(Demande, {as:"demandes", through: "contient", foreignKey: "id_document", timestamps: false});
+Document.belongsToMany(Demande, {as:"demandes", through: "contient", foreignKey: "id_document", timestamps: false , onDelete: 'cascade'} );
 
-Banque.belongsToMany(Demande, {as:"accepted", through: Accepter, foreignKey: "id_banque"});
+Banque.belongsToMany(Demande, {as:"accepted", through: Accepter, foreignKey: "id_banque" , onDelete: 'cascade'});
 
-SessionClient.belongsTo(Client, {as: "user", foreignKey: "id_client"});
-SessionBanque.belongsTo(Banque, {as: "user", foreignKey: "id_banque"});
-SessionAdmin.belongsTo(Admin, {as: "user", foreignKey: "id_admin"});
+SessionClient.belongsTo(Client, {as: "user", foreignKey: "id_client", onDelete: 'cascade'});
+SessionBanque.belongsTo(Banque, {as: "user", foreignKey: "id_banque", onDelete: 'cascade'});
+SessionAdmin.belongsTo(Admin, {as: "user", foreignKey: "id_admin", onDelete: 'cascade'});
 
 connection.sync()
 /* END db relations */
