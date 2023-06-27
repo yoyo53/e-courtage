@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
     "origin": "*",
-    "methods": "GET,PATCH,POST,DELETE,OPTIONS",
+    "methods": "GET,PATCH,POST,PUT,DELETE,OPTIONS",
     "allowedHeaders": "X-Requested-With,Content-Type,Authorization",
 }))
 
