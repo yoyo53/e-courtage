@@ -1,25 +1,57 @@
 var nodemailer = require('nodemailer');
 
 exports.sendConfirmationMail = sendConfirmationMail;
+exports.sendAgreementMail= sendAgreementMail;
 
 /* Send mail to email given */
-function sendConfirmationMail(email, name){
+function sendConfirmationMail(email, name, token){
     //Create reusable transporter 
     let transporter = nodemailer.createTransport({
         service: "gmail",
         secure:true,
         auth: {
-            user: "eecourtage@gmail.com",
-            pass: "eecourtage.2000"
+            user: process.env.ECOURTAGE_EMAIL,
+            pass: process.env.ECOURTAGE_PASSWORD
         }
     });
     // Message object
     let message = {
-    from: 'eecourtage@gmail.com',
-    to: "angele.blais@efrei.net",
+    from: process.env.ECOURTAGE_EMAIL,
+    to: email,
     subject: 'Confirmation of Account creation',
-    text: 'Hi ' + req.body.Username +",",
-    html:'Hi '+ req.body.Username + ',' + '<br><p>Thanks again for creating an account on ecourtage.</p> <p>Follow this link to begin your ecourtage adventure! :</p> <p>http://lefthanging-frontend.s3-website.us-east-2.amazonaws.com/</p>'
+    text: 'Hi ' + name +",",
+    html:'Hi '+ name + ',' + '<br><p>Thanks again for creating an account on ecourtage.</p> <p>Follow this link to activate your account! :</p>https://e-courtage-back.fly.dev/auth/verifyClient/'+token + '<p></p>'
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(message, function(err, success){
+    if(err){
+        console.log(err);
+    }
+    else{
+        console.log("Email Sent!")
+    }
+    })
+
+}
+/* Send agreement mail */
+function sendAgreementMail(email, name, titre){
+    //Create reusable transporter 
+    let transporter = nodemailer.createTransport({
+        service: "gmail",
+        secure:true,
+        auth: {
+            user: process.env.ECOURTAGE_EMAIL,
+            pass: process.env.ECOURTAGE_PASSWORD
+        }
+    });
+    // Message object
+    let message = {
+    from: process.env.ECOURTAGE_EMAIL,
+    to: email,
+    subject: 'Banque subvention aproval',
+    text: 'Bonjour ' + name + ",",
+    html:'Bonjour '+ name + ',' + '<p>Votre demande</p>' + titre + '<p>a été acceptée</p>'
     };
 
     // send mail with defined transport object
