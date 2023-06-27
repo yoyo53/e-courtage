@@ -1,21 +1,18 @@
 <template>
     <div id="bankListElement" :class="borderClass">
         <div id="buttons_options">
-            <span><p id="delete" class="but" onclick="deleteElement()">x</p></span>
-            <span><p id="valid" class="but" @click="()=>validElement()">+</p></span>
+            <span><p id="delete" class="but" @click="this.deleteBank(bank.id_banque)">x</p></span>
+            <span v-if="!bank.account_status"><p id="valid" class="but" @click="this.validateBank(bank.id_banque)">+</p></span>
         </div>
         <span id="bankTitle">{{bank.nom_banque}}</span>
         <div class="bankRow"><span> Siret : {{ bank.siret }} </span></div>
         <div class="bankRow"><span> Pays : {{ bank.pays}}</span> <span> Ville : {{ bank.ville}}</span> <span> Address : {{ bank.adresse}}</span></div>
         <div class="bankRow"><span> Email : {{ bank.email }}</span><span> Telephone : {{ bank.tel }}</span></div>
-        <bank-detail :propbank="bank"/>
     </div>
 </template>
 
 <script>
-import bankDetail from './BankDetail.vue'
 export default {
-  components: { bankDetail },
   name: 'banksListElement',
   props: {
     bank: {
@@ -38,11 +35,29 @@ export default {
         handleDisplayDetail() {
             alert("WIP")
         },
-        deleteBank(){
-        //Todo
+        async deleteBank(id_banque){
+            if(confirm("Voulez-vous vraiment supprimer cette banque ?")){
+            const token = localStorage.getItem('token');
+            await fetch(this.api_url + "admin/deleteBanque/"+id_banque, {
+                method: 'DELETE',
+                headers: {
+                    'authorization': token
+                }
+            });
+            this.$emit('updateBank');
+            }
         },
-        validateBank(){
-            //Todo
+        async validateBank(id_banque){
+            if(confirm("Voulez-vous vraiment valider cette banque ?")){
+                const token = localStorage.getItem('token');
+                await fetch(this.api_url + "admin/validateBanque/"+id_banque, {
+                    method: 'PUT',
+                    headers: {
+                        'authorization': token
+                    }
+                });
+                this.$emit('updateBank');
+            }
         }
     },
 }
@@ -83,12 +98,7 @@ export default {
         color: black;
         font-size: 1.5em;
     }
-
-    #detailButton{
-        color: blue;
-        margin-top: 10px;
-        border: none;
-    }
+    
     #buttons_options{
         display: flex;
         margin-left: 90%;
