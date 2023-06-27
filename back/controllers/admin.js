@@ -107,7 +107,7 @@ exports.updateClient = async (req, res) => {
                 client[key] = req.body[key];
             }
             await client.save();
-            res.status(200).send({ message: "Client updated successfully" });
+            res.status(200).send(client);
         }
     } catch(err){
         res.status(500).send({ message: "Error has occured" });
