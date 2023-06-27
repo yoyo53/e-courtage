@@ -27,9 +27,11 @@ exports.getAllDemandes = async(req, res) => {
                 for(let accepter of accepters){
                     let demande = await Demande.findOne({ where: { id_demande: accepter.id_demande } });
                     let client = await Client.findOne({ where: { id_client: demande.id_client } });
-                    delete client.dataValues.password;
-                    delete client.dataValues.id_client;
-                    delete client.dataValues.account_status;
+                    if(client){
+                        delete client.dataValues.password;
+                        delete client.dataValues.id_client;
+                        delete client.dataValues.account_status;
+                    }
                     demande.dataValues.client = client;
                     demande.dataValues.statut = accepter.statut;
                     let list_files = [];
@@ -45,11 +47,13 @@ exports.getAllDemandes = async(req, res) => {
                 res.status(200).send(demandes);
             }
             catch(err){
+                console.log(err);
                 res.status(500).send({ message: "Error has occured" });
             }
             
         }
     } catch(err){
+        console.log(err);
         res.status(500).send({ message: "Error has occured" });
     }
     
