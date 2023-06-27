@@ -302,7 +302,7 @@ exports.downloadAllDocuments = async (req, res) => {
 					id_client: client.id_client
 				}
 			});
-			name_files = [];
+			let name_files = [];
 			for (document of documents) {
 				const extension = document.nom_document.split('.').pop();
 				const name_file = document.id_document + '.' + extension;
@@ -310,8 +310,6 @@ exports.downloadAllDocuments = async (req, res) => {
 			}
 			// Download file
 			file.getFiles(name_files, res);
-
-			res.status(200).send({ message: "All documents downloaded successfully" });
 		}
 	} catch (err) {
 		res.status(500).send({ message: "Error has occured" });
@@ -344,11 +342,15 @@ exports.downloadAllDocumentsBanque = async (req, res) => {
 					id_demande: accepter.id_demande
 				}
 			});
-			let documents = await Document.findAll({
-				where: {
-					id_document: contients.id_document
-				}
-			});
+			let documents = [];
+			for(let contient of contients){
+				let document = await Document.findOne({
+					where: {
+						id_document: contient.id_document
+					}
+				});
+				documents.push(document);
+			}
 
 			let name_files = [];
 			for (document of documents) {
@@ -358,11 +360,9 @@ exports.downloadAllDocumentsBanque = async (req, res) => {
 			}
 			// Download file
 			file.getFiles(name_files, res);
-			
-
-			res.status(200).send({ message: "All documents downloaded successfully" });
 		}
 	} catch (err) {
+		console.log(err);
 		res.status(500).send({ message: "Error has occured" });
 	}
 	

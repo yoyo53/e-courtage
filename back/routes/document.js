@@ -28,6 +28,6 @@ router.get('/downloadDocument/:id_document', document.downloadDocument);
 router.get('/downloadAllDocuments', document.downloadAllDocuments);
 
 /* Téléchargement de tous les documents côtés banque */
-router.get('/downloadAllDocumentsBanque', document.downloadAllDocumentsBanque);
+router.get('/downloadAllDocumentsBanque/:id_demande', document.downloadAllDocumentsBanque);
 
 module.exports = router;        

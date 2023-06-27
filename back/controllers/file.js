@@ -30,7 +30,7 @@ function getFile(filepath, response) {
 
 function getFiles(filepaths, response) {
 	const zip = new JSZip();
-	for (let filepath of JSON.parse(filepaths)) {
+	for (let filepath of filepaths) {
 		zip.file(filepath, bucket.file(filepath).createReadStream(), { binary : true });
 	}
 	zip.generateNodeStream().pipe(response);
