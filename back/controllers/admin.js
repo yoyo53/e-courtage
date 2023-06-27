@@ -90,6 +90,54 @@ exports.deleteClient = async (req, res) => {
     }
 }
 
+exports.updateClient = async (req, res) => {
+    try{
+        // Get Client Id from token
+        var token = req.get("Authorization");
+
+        // Verify if user is logged in
+        let session = await sessions.verifyToken(token, "admin");
+
+        if (!session) {
+            res.status(401).send({ message: "Unauthorized" });
+            return;
+        } else {
+            let client = await Client.findOne({ where: { id_client: req.params.id_client } });
+            for(let key in req.body){
+                client[key] = req.body[key];
+            }
+            await client.save();
+            res.status(200).send({ message: "Client updated successfully" });
+        }
+    } catch(err){
+        res.status(500).send({ message: "Error has occured" });
+    }
+}
+
+exports.updateBanque = async (req, res) => {
+    try{
+        // Get Client Id from token
+        var token = req.get("Authorization");
+
+        // Verify if user is logged in
+        let session = await sessions.verifyToken(token, "admin");
+
+        if (!session) {
+            res.status(401).send({ message: "Unauthorized" });
+            return;
+        } else {
+            let banque = await Banque.findOne({ where: { id_banque: req.params.id_banque } });
+            for(let key in req.body){
+                banque[key] = req.body[key];
+            }
+            await banque.save();
+            res.status(200).send({ message: "Banque updated successfully" });
+        }
+    } catch(err){
+        res.status(500).send({ message: "Error has occured" });
+    }
+}
+
 exports.deleteBanque = async (req, res) => {
     try{
         // Get Client Id from token

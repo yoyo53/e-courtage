@@ -12,6 +12,12 @@ router.get('/getAllBanques', admin.getAllBanques);
 /* Get all demandes */
 router.get('/getAllDemandes', admin.getAllDemandes);
 
+/* Update a client */
+router.put('/updateClient/:id_client', admin.updateClient);
+
+/* Update a banque */
+router.put('/updateBanque/:id_banque', admin.updateBanque);
+
 /* Delete a client */
 router.delete('/deleteClient/:id_client', admin.deleteClient);
 
