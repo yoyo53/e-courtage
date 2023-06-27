@@ -98,7 +98,7 @@ export default {
         color: black;
         font-size: 1.5em;
     }
-    
+
     #buttons_options{
         display: flex;
         margin-left: 90%;
@@ -109,11 +109,11 @@ export default {
     }
 
     .active-border {
-        border: 2px solid green;
+        border: 3px solid green;
     }
 
     .inactive-border {
-        border: 2px solid red;
+        border: 3px solid red;
     }
 
 </style>
