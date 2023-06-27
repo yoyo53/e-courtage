@@ -30,6 +30,7 @@ exports.getAllDemandes = async(req, res) => {
                     delete client.dataValues.id_client;
                     delete client.dataValues.account_status;
                     demande.dataValues.client = client;
+                    demande.dataValues.statut = accepter.statut;
                     demandes.push(demande);
                 }
                 
