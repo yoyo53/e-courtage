@@ -232,6 +232,9 @@ export default {
                     text: "Votre demande a bien été envoyée",
                     type: "success"
                 });
+
+                this.handleDisplay();
+
             })
             .catch((error) => {
                 console.log(error);
