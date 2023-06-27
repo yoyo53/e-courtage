@@ -6,6 +6,7 @@
 [![](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)](https://sequelize.org/)
 [![](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)](https://vuejs.org/)
 [![](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+
 E-courtage est une solution de courtage en ligne permettant la mise en relation de chercheurs de prêts immobiliers et de banques en mesure de les financer. Découvrez dès maintenant e-courtage sur notre [site](https://yoyo53.github.io/e-courtage).
 
 ## Démonstration
