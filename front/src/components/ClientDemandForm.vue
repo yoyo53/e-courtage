@@ -149,7 +149,7 @@ export default {
     methods: {
         handleSubmit(ev) {
 
-            if(this.newDemand.sujet == "" || this.newDemand.nature == "" || this.newDemand.type == "" || this.newDemand.age == "" || this.newDemand.usage == "" || this.newDemand.status_recherche == "" || this.newDemand.pays == "" || this.newDemand.montant_bien == "" || this.newDemand.aloneGroup == "" || this.newDemand.apport_personnel == "") {
+            if(this.newDemand.sujet == "" || this.newDemand.nature == "" || this.newDemand.type == "" || this.newDemand.age == "" || this.newDemand.usage == "" || this.newDemand.status_recherche == "" || this.newDemand.pays == "" || this.newDemand.montant_bien == "" || this.newDemand.accompagnement == "" || this.newDemand.apport_personnel == "") {
                 this.$notify({
                     title: 'Erreur',
                     text: 'Veuillez remplir tous les champs obligatoires',

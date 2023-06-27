@@ -27,7 +27,7 @@
                 <div id="demands-overview-area">
                     <h2>Liste de vos demandes en cours :</h2>
                     <ul id="demands-list" class="section-list">
-                        <client-demands-list-element v-for="temp_demand in userDemands" v-bind:key="temp_demand.id" :demand="temp_demand"></client-demands-list-element>
+                        <client-demands-list-element v-for="temp_demand in userDemands" v-bind:key="temp_demand.id_demande" :demand="temp_demand"></client-demands-list-element>
                     </ul>
                 </div>
                 <div id="add-demand-area">
