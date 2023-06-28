@@ -266,9 +266,9 @@ export default {
             .catch((error) => {
                 console.log(error);
                 this.$notify({
-                    group: "foo",
                     title: "Erreur",
                     text: "Une erreur est survenue lors de la récupération de vos informations",
+                    type: "error"
                 });
             });
             

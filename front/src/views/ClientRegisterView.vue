@@ -51,11 +51,6 @@
                 <input type="text" class="form-control" id="formAddress" v-model="userInfo.adresse" required/>
             </div>
             <div class="mb-3">
-                <label for="formHealthDocument" class="form-label">Document de santé</label>
-                <input type="file" class="form-control" id="formHealthDocument" required @change="(ev)=>handleDocumentPlacement(ev)" />
-            </div>
-
-            <div class="mb-3">
                 <label for="formPassword" class="form-label">Mot de passe</label>
                 <input type="password" class="form-control" id="formPassword" placeholder="********" v-model="userInfo.password" required>
             </div>
@@ -94,19 +89,14 @@ export default {
                 adresse: '',
                 password: ''
             },
-            healthDocument: null,
             rePassword: ''
         }
     },
     methods: {
-        handleDocumentPlacement(ev) {
-            this.healthDocument = ev.target.files[0];
-        },
         handleRegister(ev) {
 
             if(this.userInfo.nom == '' || this.userInfo.prenom == '' || this.userInfo.email == '' || this.userInfo.genre == '' || this.userInfo.date_birth == '' || this.userInfo.tel == '' || this.userInfo.pays == '' || this.userInfo.ville == '' || this.userInfo.adresse == '' || this.userInfo.password == '') {
                 this.$notify({
-                    group: 'foo',
                     title: 'Error',
                     text: 'Veuiilez remplir tous les champs',
                     type: 'warn'
@@ -118,7 +108,6 @@ export default {
             console.log(this.userInfo);
             if(this.userInfo.password !== this.rePassword) {
                 this.$notify({
-                    group: 'foo',
                     title: 'Error',
                     text: 'Les mots de passe ne correspondent pas',
                     type: 'warn'
@@ -132,7 +121,13 @@ export default {
                 },
                 body: JSON.stringify(this.userInfo)
             })
-            .then(res => res.json())
+            .then(res => {
+                if(res.status == 200) {
+                    return res.json();
+                } else {
+                    throw new Error('Une erreur est survenue');
+                }
+            })
             .then(data => {
                 console.log(data);
                 if(data.id_client != null) {
@@ -140,39 +135,30 @@ export default {
                     this.$router.push('/login');
                 } else {
                     this.$notify({
-                        group: 'foo',
                         title: 'Error',
                         text: 'Une erreur est survenue',
                         type: 'warn'
                     });
                 }
             })
-
-            //We send the file with a XMLHttpRequest
-            let formData = new FormData();
-            formData.append('file', this.file);
-            formData.append('nom_document', "Document de santé");
-            formData.append('type', "Document médical");
-            
-            let xhr = new XMLHttpRequest();
-            xhr.open('POST', this.api_url + 'document/addDocument');
-            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-            xhr.send(formData);
-            xhr.onload = () => {
-                if(xhr.status == 200){
-                    console.log("File sent");
-                }
-                else{
-                    console.log("Error while sending file");
-                }
-            }
-
+            .catch(err => {
+                console.log(err);
+                this.$notify({
+                    title: 'Error',
+                    text: 'Une erreur est survenue',
+                    type: 'warn'
+                });
+            });
         }
     }
 }
 </script>
 
 <style>
+
+    ::-webkit-scrollbar {
+        display:none;
+    }
 
     #registerMain {
         position: absolute;

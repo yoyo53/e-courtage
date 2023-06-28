@@ -55,7 +55,6 @@ export default {
                     this.$router.push('/client');
                 } else {
                     this.$notify({
-                        group: 'foo',
                         title: 'Erreur',
                         text: 'La connexion a échoué',
                         type: 'warn'
