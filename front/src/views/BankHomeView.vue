@@ -181,6 +181,14 @@ export default {
             })
             .then((data)=>{
                 console.log(data);
+
+                for (let i = 0; i < data.length; i++) {
+                    if(data[i].client == null){
+                        data.splice(i,1);
+                        i--;
+                    }
+                }
+
                 this.userDemands = data;
                 this.displayedDemands = this.userDemands;
             })
