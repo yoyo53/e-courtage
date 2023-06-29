@@ -136,7 +136,7 @@ export default {
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #D9D9D9;
-        padding: 50px;
+        padding: 30px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.5);
         width: 80vw;
@@ -158,6 +158,7 @@ export default {
         margin-top: 2vh;
         padding: 1vh;
         text-align: left;
+        overflow-y: scroll;
     }
 
     .bankDemandDetailDivision p{
@@ -187,7 +188,26 @@ export default {
     }
 
     #bankDemandDetailBottomButtons{
-        margin-top: 2vh;
+        margin-top: 0vh;
+    }
+
+    #clientInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        align-items: flex-start;
+        width: 35%;
+        height: 100%;
+    }
+
+    #demandInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        align-items: flex-start;
+        width: 60%;
+        height: 100%;
+        margin-left: 37%;
     }
 
 </style>
