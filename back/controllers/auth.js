@@ -190,7 +190,7 @@ exports.verifyClient = async(req, res) => {
         if(!session){
             res.status(401).send(`<html>
                                     <body>
-                                        <h1>Account already verified</h1>
+                                        <h1>Account verified</h1>
                                     </body>
                                 </html>`);
             return;
