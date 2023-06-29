@@ -110,7 +110,7 @@ exports.updateDemande = async(req, res) => {
             for(var key in req.body){
                 accepter[key] = req.body[key];
             }
-            let demande = await Demande.findOne({ where: { id_client: accepter.id_demande } });
+            let demande = await Demande.findOne({ where: { id_demande: accepter.id_demande } });
             let client = await Client.findOne({ where: { id_client: demande.id_client } });
             if(accepter.statut == 2){
                 mail.sendAgreementMail(client.email, client.nom, demande.sujet);

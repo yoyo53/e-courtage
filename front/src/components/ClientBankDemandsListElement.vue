@@ -77,13 +77,13 @@ export default {
             }
             console.log(this.$parent.userDemands);  
 
-            fetch(this.api_url + "demande_banque/updateDemande/" + this.demand.id_demande, {
+            fetch("http://localhost:3000/demande_banque/updateDemande/" + this.demand.id_demande, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": localStorage.getItem("token")
                 },
-                body: JSON.stringify(this.demande)
+                body: JSON.stringify(this.demand)
             })
             .then((response) => {
                 if (response.ok) {
