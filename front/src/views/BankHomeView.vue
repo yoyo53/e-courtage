@@ -29,7 +29,7 @@
                 <div id="demands-overview-area">
                     <h2>Liste des demandes :</h2>
                     <ul id="demands-list" class="section-list">
-                        <client-bank-demands-list-element v-for="temp_demand in displayedDemands" v-bind:key="temp_demand.id" :demand="temp_demand"></client-bank-demands-list-element>
+                        <client-bank-demands-list-element v-for="temp_demand in displayedDemands" v-bind:key="temp_demand.id_demande" :demand="temp_demand"></client-bank-demands-list-element>
                     </ul>
                 </div>
                 
@@ -80,7 +80,7 @@ export default {
 
             if (this.orderBy == "Name") {
                 this.displayedDemands.sort((a,b) => {
-                    return a.nom.localeCompare(b.nom);
+                    return a.client.nom.localeCompare(b.client.nom);
                 })
             }
             else if (this.orderBy == "Value") {
@@ -90,12 +90,12 @@ export default {
             }
             else if (this.orderBy == "Salaire") {
                 this.displayedDemands.sort((a,b) => {
-                    return a.revenu_mensuel - b.revenu_mensuel;
+                    return a.client.revenu_mensuel - b.client.revenu_mensuel;
                 })
             }
             else{
                 this.displayedDemands.sort((a,b) => {
-                    return a.id - b.id;
+                    return a.id_demande - b.id_demande;
                 })
             }
 
@@ -108,6 +108,7 @@ export default {
         },
         fetchBankUserDemands() {
             // TODO
+            /*
             this.userDemands = [
                 {
                     "id":0,
@@ -165,7 +166,7 @@ export default {
                 }
             ];
             this.displayedDemands = this.userDemands;
-
+            */
 
             fetch(this.api_url + 'demande_banque/getAllDemandes',{
                 headers: {
@@ -180,8 +181,8 @@ export default {
             })
             .then((data)=>{
                 console.log(data);
-                //this.userDemands = data;
-                //this.displayedDemands = this.userDemands;
+                this.userDemands = data;
+                this.displayedDemands = this.userDemands;
             })
         }
     },
@@ -243,7 +244,7 @@ h3{
     justify-content: left;
     align-items: flex-start;
     width: 100%;
-    height: 80%;
+    height: 90%;
     border: 0px solid black;
 }
 #demands-list{

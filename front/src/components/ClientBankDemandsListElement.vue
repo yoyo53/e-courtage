@@ -6,7 +6,7 @@
             <span><p id="valid" class="but" @click="()=>validElement()">+</p></span>
         </div>
         <h2>{{demand.sujet}}</h2>
-        <div class="demandRow"><span> Nom : {{ demand.nom}}</span> <span> Salaire : {{ demand.revenu_mensuel }} €</span></div>
+        <div class="demandRow"><span> Nom : {{ demand.client.nom }} {{ demand.client.prenom }}</span> <span> Salaire : {{ demand.client.revenu_mensuel }} €</span></div>
         <div class="demandRow"><span> Valeur : {{ demand.montant_bien}} €</span></div>
         <div class="demandRow"><span>{{ demand.commentaire }}</span></div>
         <bank-demand-detail :demand="demand"/>
@@ -53,8 +53,7 @@ export default {
             else{
                 this.$parent.userDemands.find(obj=> {return obj.id == this.demand.id}).favorite = false;
             }
-            console.log(this.$parent.userDemands);
-            
+            console.log(this.$parent.userDemands);   
         }
     },
 }
