@@ -84,9 +84,14 @@ exports.sendRecuperationMail = async (req, res) => {
 		res.status(404).send({message: "Client not found"});
 	}
 	else{
-		let session = await sessions.createSession(client.id_client, "client");
-		mail.sendRecuperationMail(client.email, client.nom, session.token);
-		res.status(200).send({message: "Email sent"});
+		if(client.account_status){
+			let session = await sessions.createSession(client.id_client, "client");
+			mail.sendRecuperationMail(client.email, client.nom, session.token);
+			res.status(200).send({message: "Email sent"});
+		}
+		else{
+			res.status(401).send({message: "Account not activated"});
+		}
 	}
 }
 
