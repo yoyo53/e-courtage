@@ -20,7 +20,7 @@ function sendConfirmationMail(email, name, token){
     to: email,
     subject: 'Confirmation of Account creation',
     text: 'Hi ' + name +",",
-    html:'Hi '+ name + ',' + '<br><p>Thanks again for creating an account on ecourtage.</p> <p>Follow this link to activate your account! :</p>https://e-courtage-back.fly.dev/auth/verifyClient/'+token + '<p></p>'
+    html:'Hi '+ name + ',' + '<br><p>Thanks again for creating an account on ecourtage.</p> <p>Follow this link to activate your account! :</a href="https://e-courtage-back.fly.dev/auth/verifyClient/' + token + '">https://e-courtage-back.fly.dev/auth/verifyClient/' + token + '</a>'
     };
 
     // send mail with defined transport object
