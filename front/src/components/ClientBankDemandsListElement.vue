@@ -77,7 +77,7 @@ export default {
             }
             console.log(this.$parent.userDemands);  
 
-            fetch("http://localhost:3000/demande_banque/updateDemande/" + this.demand.id_demande, {
+            fetch(this.api_url + "demande_banque/updateDemande/" + this.demand.id_demande, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
