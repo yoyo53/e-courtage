@@ -190,7 +190,12 @@ export default {
     },
     methods:{
         handlePatchUserInfo(ev) {
-            if(!ev.target.checkValidity()){
+            if(this.userInfo=="" || this.userInfo.nom=="" || this.userInfo.prenom=="" || this.userInfo.email=="" || this.userInfo.genre=="" || this.userInfo.date_birth=="" || this.userInfo.tel=="" || this.userInfo.pays=="" || this.userInfo.ville=="" || this.userInfo.adresse=="" || this.userInfo.status_immo=="" || this.userInfo.situation_professionnelle=="" || this.userInfo.contrat=="" || this.userInfo.poste_depuis=="" || this.userInfo.banque_principale=="" || this.userInfo.situation_familiale=="" || this.userInfo.nationalite=="" ) {
+                this.$notify({
+                    title: 'Erreur',
+                    text: 'Veuillez remplir tous les champs obligatoires',
+                    type: 'error'
+                });
                 return;
             }
             ev.preventDefault();
