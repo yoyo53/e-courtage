@@ -7,6 +7,8 @@
             <h2>{{demand.sujet}}</h2>
             <div id="bankDemandDetailFields">
             <!--[{"id_demande":41,"sujet":"Mon chateau dans le Berry","nature":"Achat","type":"Maison","age":"Ancien","usage":"Résidence principale","status_recherche":"En recherche","pays":"France","ville":"Le Kremlin-Bicêtre","montant_bien":300000,"montant_travaux":3000,"frais_notaire":null,"apport_personnel":200000,"commentaire":"Gotta go fast !","accompagnement":"1","id_client":2,"client":{"nom":"Craipeau","prenom":"Antoine","email":"antoine.craipeau@efrei.net","genre":"1","date_birth":"2002-09-29T00:00:00.000Z","tel":"+33652084199","pays":"France","ville":"Le Kremlin-Bicêtre","adresse":"20 Avenue du Repos","status_immo":"Locataire","situation_professionnelle":"Etudiant","contrat":"CDI","poste_depuis":"2018-06-28T00:00:00.000Z","banque_principale":"Boursorama","situation_familiale":"Célibataire","nationalite":"Français","revenu_mensuel":0,"prime_annuelle":0,"loyer_actuel":0,"nombre_enfant":0}},{"id_demande":42,"sujet":"Mon chateau dans le Berry 2","nature":"Achat","type":"Maison","age":"Ancien","usage":"Résidence principale","status_recherche":"En recherche","pays":"France","ville":"Chateauroux","montant_bien":300000,"montant_travaux":3000,"frais_notaire":null,"apport_personnel":200000,"commentaire":"Gotta go fast !","accompagnement":"1","id_client":2,"client":{"nom":"Craipeau","prenom":"Antoine","email":"antoine.craipeau@efrei.net","genre":"1","date_birth":"2002-09-29T00:00:00.000Z","tel":"+33652084199","pays":"France","ville":"Le Kremlin-Bicêtre","adresse":"20 Avenue du Repos","status_immo":"Locataire","situation_professionnelle":"Etudiant","contrat":"CDI","poste_depuis":"2018-06-28T00:00:00.000Z","banque_principale":"Boursorama","situation_familiale":"Célibataire","nationalite":"Français","revenu_mensuel":0,"prime_annuelle":0,"loyer_actuel":0,"nombre_enfant":0}},{"id_demande":29,"sujet":"Mon chateau dans le Berry 5","nature":"Achat","type":"Maison","age":"Ancien","usage":"Résidence principale","status_recherche":"En recherche","pays":"France","ville":"Chateauroux","montant_bien":300000,"montant_travaux":3000,"frais_notaire":null,"apport_personnel":30000,"commentaire":"Gotta go fast !","accompagnement":"1","id_client":2,"client":{"nom":"Craipeau","prenom":"Antoine","email":"antoine.craipeau@efrei.net","genre":"1","date_birth":"2002-09-29T00:00:00.000Z","tel":"+33652084199","pays":"France","ville":"Le Kremlin-Bicêtre","adresse":"20 Avenue du Repos","status_immo":"Locataire","situation_professionnelle":"Etudiant","contrat":"CDI","poste_depuis":"2018-06-28T00:00:00.000Z","banque_principale":"Boursorama","situation_familiale":"Célibataire","nationalite":"Français","revenu_mensuel":0,"prime_annuelle":0,"loyer_actuel":0,"nombre_enfant":0}}]-->
+                
+            <div id="top-part">
                 <div id="clientInfo" class="bankDemandDetailDivision">
                     <p><span>Nom : </span><span>{{ demand.client.nom }}</span></p>
                     <p><span>Prénom : </span><span>{{ demand.client.prenom }}</span></p>
@@ -43,6 +45,7 @@
                     <p><span>Commentaire : </span><span>{{ demand.commentaire }}</span></p>
                     <p><span>Accompagnement : </span><span>{{ demand.accompagnement==1?"Seul":"En groupe" }}</span></p>
                 </div>
+            </div>
                 <div id="demandFiles" class="bankDemandDetailDivision">
                     <p>Documents : </p>
                     <li class="fileRow list-group-item" v-for="file in demand.files" :key="file.name">
@@ -193,8 +196,17 @@ export default {
     }
 
     #bankDemandDetailBottomButtons{
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
         margin-top: 1vh;
-        
+    }
+
+    #top-part{
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+        margin-bottom: 5vh ;
     }
 
     #clientInfo {
@@ -202,7 +214,7 @@ export default {
         flex-direction: column;
         justify-content: left;
         align-items: flex-start;
-        width: 35%;
+        width: 50%;
         height: 100%;
     }
 
@@ -211,9 +223,10 @@ export default {
         flex-direction: column;
         justify-content: left;
         align-items: flex-start;
-        width: 60%;
+        width: 45%;
         height: 100%;
-        margin-left: 37%;
+        margin-left: 5%;
+
     }
 
 </style>

@@ -101,7 +101,7 @@ export default {
 
             if (this.onlyPinned == 1) {
                 this.displayedDemands = this.displayedDemands.filter((demand) => {
-                    return demand.favorite;
+                    return demand.statut==1;
                 })
             }
 
