@@ -251,7 +251,7 @@ export default {
                 for (const key in this.userInfo) {
                     
                     if(key == "date_birth" || key == "poste_depuis") {
-                        this.userInfo[key] = this.userInfo[key].split("T")[0];
+                        this.userInfo[key] = this.userInfo[key]?.split("T")[0];
                     }
                     else if (this.userInfo[key] == null) {
                         if (key == "nombre_enfant" || key == "revenu_mensuel" || key == "prime_annuelle" || key == "loyer_actuel") {
