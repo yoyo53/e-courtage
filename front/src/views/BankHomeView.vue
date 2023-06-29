@@ -73,7 +73,11 @@ export default {
     methods:{
         performAllFilters(){
             this.displayedDemands = this.userDemands.filter((demand) => {
-                return demand.sujet.toLowerCase().includes(this.searchInput.toLowerCase()) || demand.client.nom.toLowerCase().includes(this.searchInput.toLowerCase()) || demand.client.prenom.toLowerCase().includes(this.searchInput.toLowerCase()) || demand.client.revenu_mensuel.toString().includes(this.searchInput.toLowerCase()) || demand.montant_bien.toString().includes(this.searchInput.toLowerCase());
+                return demand.sujet.toLowerCase().includes(this.searchInput.toLowerCase()) || 
+                demand.client.nom.toLowerCase().includes(this.searchInput.toLowerCase()) || 
+                demand.client.prenom.toLowerCase().includes(this.searchInput.toLowerCase()) || 
+                demand.client.revenu_mensuel.toString().includes(this.searchInput.toLowerCase()) || 
+                demand.montant_bien.toString().includes(this.searchInput.toLowerCase());
             })
 
             if (this.orderBy == "Name") {
