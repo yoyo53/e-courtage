@@ -5,6 +5,7 @@ const Client = require("../models/client.model.js")(Sequelize.connection, Sequel
 const Document = require("../models/document.model.js")(Sequelize.connection, Sequelize.library);
 const Accepter = require("../models/accepter.model.js")(Sequelize.connection, Sequelize.library);
 const Contient = require("../models/contient.model.js")(Sequelize.connection, Sequelize.library);
+const mail = require("./mail.js")
 const sessions = require("./session.js");
 const { Op } = require("sequelize");
 
@@ -112,6 +113,11 @@ exports.updateDemande = async(req, res) => {
         let accepter = await Accepter.findOne({ where: { id_banque: banque.id_banque, id_demande: req.params.id_demande } });
         for(var key in req.body){
             accepter[key] = req.body[key];
+        }
+        let demande = await Demande.findOne({ where: { id_client: accepter.id_demande } });
+        let client = await Client.findOne({ where: { id_client: demande.id_client } });
+        if(accepter.statut == 2){
+            mail.sendAgreementMail(client.email, client.nom, demande.sujet);
         }
         await accepter.save();
         res.status(200).send({ message: "Demande updated successfully" });
