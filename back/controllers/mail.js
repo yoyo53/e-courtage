@@ -19,8 +19,31 @@ function sendConfirmationMail(email, name, token){
     from: process.env.ECOURTAGE_EMAIL,
     to: email,
     subject: 'Confirmation of Account creation',
-    text: 'Hi ' + name +",",
-    html:'Hi '+ name + ',' + '<br><p>Thanks again for creating an account on ecourtage.</p> <p>Follow this link to activate your account! : <br><a href="https://e-courtage-back.fly.dev/auth/verifyClient/' + token + '">https://e-courtage-back.fly.dev/auth/verifyClient/' + token + '</a>'
+    html:`
+        <p>Hi ${name},</p>
+        <p>
+            Thanks again for creating an account on e-courtage. If you didn't create an account on 
+            <a href="https://yoyo53.github.io/e-courtage">e-courtage</a>,
+            you can safely delete this email.
+        </p>
+        <p>Tap the button below to confirm your email address:</p>
+        <a href="https://e-courtage-back.fly.dev/auth/verifyClient/${token}" target="_blank"
+           style="display: block; width: fit-content; margin: auto; padding: 16px 36px; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px; background-color: #1a82e2;">
+            Verify your account
+        </a>
+        <p>If that doesn't work, copy and paste the following link in your browser:
+            <br>
+            <a href="https://e-courtage-back.fly.dev/auth/verifyClient/${token}" target="_blank">
+                https://e-courtage-back.fly.dev/auth/verifyClient/${token}
+            </a>
+        </p>
+        <br>
+        <p>
+            Cheers,
+            <br>
+            The e-courtage team
+        </p>
+    `
     };
 
     // send mail with defined transport object
