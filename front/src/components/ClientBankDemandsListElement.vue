@@ -46,9 +46,6 @@ export default {
         }
     },
     methods: {
-        handleDisplayDetail() {
-            alert("WIP")
-        },
         deleteElement(){
         //
         },
