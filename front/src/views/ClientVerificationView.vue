@@ -6,10 +6,12 @@
         <div id="verificationMessage">
             <div v-if="verifying">
                 <h2>Verification ...</h2>
+                <p>Veuillez patienter pendant que nous vérifions votre compte.</p>
             </div>
 
             <div v-if="verified" class="verificationOption">
                 <h2>Votre compte a été activé</h2>
+                <p>Vous pouvez maintenant vous connecter.</p>
                 <router-link to="/login" class="btn btn-primary verificationLink">Cliquez ici pour vous connecter</router-link>
                 <router-link to="/" class="btn btn-primary verificationLink">Cliquez ici pour retourner à l'accueil</router-link>
             </div>
