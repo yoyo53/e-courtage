@@ -1,5 +1,5 @@
 <template>
-    <div id="demandListElement">
+    <div id="demandListElement" :class="{ approvedDemand: demand.statut == 2, refusedDemand: demand.statut == -1,  }">
         <div id="buttons_options">
             <span>
                 <p id="valid" class="but" @click="()=>validElement()">
@@ -9,7 +9,7 @@
                 </p>
             </span>
             <span>
-                <p id="delete" class="but" onclick="deleteElement()">
+                <p id="delete" class="but" @click="()=>deleteElement()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
                     </svg>
@@ -47,23 +47,105 @@ export default {
     },
     methods: {
         deleteElement(){
-        //
-        },
-        validElement(){
             if (this.$parent.userDemands.find(obj=> {
-                return obj.id == this.demand.id
-            }).added==false) {
+                return obj.id_demande == this.demand.id_demande
+            }).statut != -1) {
         
                 this.$parent.userDemands.find(obj=> {
-                return obj.id == this.demand.id
-                }).added = true;
+                return obj.id_demande == this.demand.id_demande
+                }).statut = -1;
             }
             else{
                 this.$parent.userDemands.find(obj=> {
-                return obj.id == this.demand.id
-            }).added = false;
+                return obj.id_demande == this.demand.id_demande
+            }).statut = 0;
             }
+
             console.log(this.$parent.userDemands);
+            fetch(this.api_url + "demande_banque/updateDemande/" + this.demand.id_demande, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem("token")
+                },
+                body: JSON.stringify(this.demand)
+            })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Something went wrong");
+                }
+            })
+            .then((response) => {
+                console.log(response);
+                //this.userEditSuccess = true;
+                this.$notify({
+                    title: 'Success',
+                    text: this.demand.statut==-1?'La demande a été refusée':'La demande n\'est plus refusée',
+                    type: 'success'
+                });
+                this.$parent.performAllFilters();
+            })
+            .catch((error) => {
+                console.log(error);
+                this.$notify({
+                    title: 'Error',
+                    text: 'Il y a eu une erreur lors de la mise à jour de la demande',
+                    type: 'error'
+                });
+            });
+            
+        },
+        validElement(){
+            if (this.$parent.userDemands.find(obj=> {
+                return obj.id_demande == this.demand.id_demande
+            }).statut != 2) {
+        
+                this.$parent.userDemands.find(obj=> {
+                return obj.id_demande == this.demand.id_demande
+                }).statut = 2;
+            }
+            else{
+                this.$parent.userDemands.find(obj=> {
+                return obj.id_demande == this.demand.id_demande
+            }).statut = 1;
+            }
+
+            console.log(this.$parent.userDemands);
+            fetch(this.api_url + "demande_banque/updateDemande/" + this.demand.id_demande, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem("token")
+                },
+                body: JSON.stringify(this.demand)
+            })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Something went wrong");
+                }
+            })
+            .then((response) => {
+                console.log(response);
+                //this.userEditSuccess = true;
+                this.$notify({
+                    title: 'Success',
+                    text: this.demand.statut==2?'La demande a été acceptée':'La demande n\'est plus acceptée',
+                    type: 'success'
+                });
+                this.$parent.performAllFilters();
+            })
+            .catch((error) => {
+                console.log(error);
+                this.$notify({
+                    title: 'Error',
+                    text: 'Il y a eu une erreur lors de la mise à jour de la demande',
+                    type: 'error'
+                });
+            });
         },
         favoriteElement(){
             if (this.$parent.userDemands.find(obj=> {return obj.id_demande == this.demand.id_demande}).statut == 0) {
@@ -94,15 +176,16 @@ export default {
                 //this.userEditSuccess = true;
                 this.$notify({
                     title: 'Success',
-                    text: 'Vos informations ont été mises à jour',
+                    text: this.demand.statut==1?'La demande a été épinglée':'La demande a été désépinglée',
                     type: 'success'
                 });
+                this.$parent.performAllFilters();
             })
             .catch((error) => {
                 console.log(error);
                 this.$notify({
                     title: 'Error',
-                    text: 'Il y a eu une erreur lors de la mise à jour de vos informations',
+                    text: 'Il y a eu une erreur lors de la mise à jour de la demande',
                     type: 'error'
                 });
             });
@@ -123,6 +206,14 @@ export default {
         border-radius: 10px;
         padding: 5px;
         margin-bottom: 10px;
+    }
+
+    .approvedDemand {
+        border: 1px solid green;
+    }
+
+    .refusedDemand {
+        border: 1px solid red;
     }
 
     .demandRow {
@@ -153,5 +244,8 @@ export default {
         color: #008D17;
     }
 
+    #favorite{
+        color: green;
+    }
 
 </style>

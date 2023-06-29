@@ -22,6 +22,8 @@
                         <select id="sort-choices" class="form-select" aria-label="Default select example" v-model="onlyPinned">
                             <option value="0">Afficher Tous</option>
                             <option value="1">Favoris Uniquement</option>
+                            <option value="2">Afficher rejetés</option>
+                            <option value="3">Afficher acceptés</option>
                           </select>
                     </div>
                     
@@ -99,9 +101,22 @@ export default {
                 })
             }
 
-            if (this.onlyPinned == 1) {
+
+            if (this.onlyPinned == 0) {
+                this.displayedDemands = this.displayedDemands.filter((demand) => {
+                    return demand.statut==0 || demand.statut==1;
+                })
+            } else if (this.onlyPinned == 1) {
                 this.displayedDemands = this.displayedDemands.filter((demand) => {
                     return demand.statut==1;
+                })
+            } else if (this.onlyPinned == 2) {
+                this.displayedDemands = this.displayedDemands.filter((demand) => {
+                    return demand.statut==-1;
+                })
+            } else if (this.onlyPinned == 3) {
+                this.displayedDemands = this.displayedDemands.filter((demand) => {
+                    return demand.statut==2;
                 })
             }
 
@@ -191,6 +206,7 @@ export default {
 
                 this.userDemands = data;
                 this.displayedDemands = this.userDemands;
+                this.performAllFilters();
             })
         }
     },

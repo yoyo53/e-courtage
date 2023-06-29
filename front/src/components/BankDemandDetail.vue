@@ -55,9 +55,9 @@
                 </div>
             </div>
             <div id="bankDemandDetailBottomButtons">
-                <button class="btn btn-primary" @click="()=>handleDisplay()">Épingler</button>
-                <button class="btn btn-success" @click="()=>handleDisplay()">Accepter</button>
-                <button class="btn btn-danger" @click="()=>handleDisplay()">Refuser</button>
+                <button class="btn btn-primary" @click="()=>handleFavorite()">Épingler</button>
+                <button class="btn btn-success" @click="()=>handleValid()">Accepter</button>
+                <button class="btn btn-danger" @click="()=>handleDelete()">Refuser</button>
             </div>
         </div>
     </div>
@@ -110,12 +110,16 @@ export default {
         },
         handleFavorite(){
             this.$parent.favoriteElement();
+            this.handleDisplay();
+
         },
         handleValid(){
             this.$parent.validElement();
+            this.handleDisplay();
         },
         handleDelete(){
             this.$parent.deleteElement();
+            this.handleDisplay();
         }
     }
 }
