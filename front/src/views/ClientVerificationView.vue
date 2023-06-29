@@ -1,6 +1,6 @@
 <template>
     <div id="verificationMain">
-        <h1 id="verificationTitle">Client Verification</h1>
+        <h1 id="verificationTitle">Verification Client </h1>
         
 
         <div id="verificationMessage">
