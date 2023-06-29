@@ -1,18 +1,25 @@
 <template>
-    <div>
-        <h1>Client Verification</h1>
+    <div id="verificationMain">
+        <h1 id="verificationTitle">Client Verification</h1>
         
-        <div v-if="verifying">
-            <h2>Verifying...</h2>
-        </div>
 
-        <div v-if="verified">
-            <h2>Verified</h2>*
-            <router-link to="/login">Login</router-link>
-        </div>
+        <div id="verificationMessage">
+            <div v-if="verifying">
+                <h2>Verification ...</h2>
+            </div>
 
-        <div v-if="!verifying && !verified">
-            <h2>Verification failed</h2>
+            <div v-if="verified" class="verificationOption">
+                <h2>Votre compte a été activé</h2>
+                <router-link to="/login" class="btn btn-primary verificationLink">Cliquez ici pour vous connecter</router-link>
+                <router-link to="/" class="btn btn-primary verificationLink">Cliquez ici pour retourner à l'accueil</router-link>
+            </div>
+
+            <div v-if="!verifying && !verified" class="verificationOption">
+                <h2>La verification a échoué</h2>
+                <p>Votre compte a peut-être déjà été activé.</p>
+                <router-link to="/login" class="btn btn-primary verificationLink">Cliquez ici pour vous connecter</router-link>
+                <router-link to="/" class="btn btn-primary verificationLink">Cliquez ici pour retourner à l'accueil</router-link>
+            </div>
         </div>
 
     </div>
@@ -46,5 +53,38 @@ export default {
 </script>
 
 <style>
+
+    #verificationMain{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        border-radius: 10px;
+        background-color: #b9b9b9;
+        border: solid 1px black;
+        padding: 1vh;
+        height: 30vh;
+    }
+
+    #verificationTitle{
+        font-size: 3em;
+        border-bottom: solid 1px black;
+        margin-bottom: 1vh;
+    }
+
+    #verificationMessage{
+        margin-top: 1vh;
+    }
+
+    .verificationOption{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .verificationLink{
+        font-size: 1.2em;
+        margin-top: 1vh;
+    }
 
 </style>
