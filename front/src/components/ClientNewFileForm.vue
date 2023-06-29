@@ -81,7 +81,6 @@ export default {
                     this.type = '';
                     this.displayForm = false;
                     this.$notify({
-                        group: 'foo',
                         title: 'Succès',
                         text: 'Votre document a bien été envoyé',
                         type: 'success'
@@ -90,7 +89,6 @@ export default {
                 else{
                     console.log("Error while sending file");
                     this.$notify({
-                        group: 'foo',
                         title: 'Erreur',
                         text: 'Une erreur est survenue lors de l\'envoi du document',
                         type: 'error'
