@@ -188,7 +188,11 @@ exports.verifyClient = async(req, res) => {
         // Find if token exists in database
         let session = await Session.findOne({where: {token: tokenClient}});
         if(!session){
-            res.status(401).send({message: "Invalid token"});
+            res.status(401).send(`<html>
+                                    <body>
+                                        <h1>Account already verified</h1>
+                                    </body>
+                                </html>`);
             return;
         }
         // If token exists, check if it is still valid
