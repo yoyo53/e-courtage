@@ -64,7 +64,12 @@ const routes = [
     path: '/admin/home/clients',
     name: 'admin-clients-home',
     component: () => import('../views/AdminClientsView.vue')
-  }
+  },
+  {
+    path: '/client/verification/:token',
+    name: 'client-verification',
+    component: () => import('../views/ClientVerificationView.vue')
+  },
 ]
 
 const router = createRouter({
