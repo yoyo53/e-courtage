@@ -3,6 +3,7 @@ const { Op } = require("sequelize");
 const Sequelize = require("../db.connection");
 const Client = require("../models/client.model.js")(Sequelize.connection, Sequelize.library);
 const sessions = require("./session.js");
+const mail = require("./mail.js");
 
 exports.getClient = async (req, res) => {
 	// Get Client Id from token
@@ -13,7 +14,6 @@ exports.getClient = async (req, res) => {
 
 	if (!session) {
 		res.status(401).send({ message: "Unauthorized" });
-		return;
 	} else {
 		// Get Client Id
 		
@@ -36,7 +36,6 @@ exports.patchClient = async (req, res) => {
 
 	if (!session) {
 		res.status(401).send({ message: "Unauthorized" });
-		return;
 	} else {
 		let client_session = await sessions.findByToken(token, "client");
 		let client = await Client.findOne({ 
@@ -64,7 +63,6 @@ exports.deleteClients = async (req, res) => {
 
 	if (!session) {
 		res.status(401).send({ message: "Unauthorized" });
-		return;
 	} else {
 		// Delete all clients
 		await Client.destroy({
@@ -73,5 +71,38 @@ exports.deleteClients = async (req, res) => {
 			}
 		});
 		res.status(200).send({ message: "All clients are deleted" });
+	}
+}
+
+exports.sendRecuperationMail = async (req, res) => {
+	let client = await Client.findOne({
+		where: {
+			email: req.body.email
+		}
+	});
+	if(!client){
+		res.status(404).send({message: "Client not found"});
+	}
+	else{
+		let session = await sessions.createSession(client.id_client, "client");
+		mail.sendRecuperationMail(client.email, client.nom, session.token);
+		res.status(200).send({message: "Email sent"});
+	}
+}
+
+exports.recuperationPassword = async (req, res) => {
+	let session = await sessions.findByToken(req.body.token, "client");
+	if(!session){
+		res.send(401).send({message: "Unauthorized"});
+	} else {
+		let client = await Client.findOne({
+			where: {
+				id_client: session.id_client
+			}
+		});
+		client.password = req.body.password;
+		await client.save();
+		await session.destroy();
+		res.status(200).send({message: "Password changed"});
 	}
 }
