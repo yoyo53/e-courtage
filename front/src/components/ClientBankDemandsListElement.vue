@@ -1,5 +1,5 @@
 <template>
-    <div id="demandListElement" :class="{ approvedDemand: demand.statut == 2, refusedDemand: demand.statut == -1,  }">
+    <div id="demandListElement" :class="{ approvedDemand: demand.statut == 2, refusedDemand: demand.statut == -1, pinnedDemand: demand.statut == 1 }">
         <div id="buttons_options">
             <span>
                 <p id="valid" class="but" @click="()=>validElement()">
@@ -216,6 +216,10 @@ export default {
         border: 1px solid red;
     }
 
+    .pinnedDemand {
+        border: 1px solid lightseagreen;
+    }
+
     .demandRow {
         display: flex;
         flex-direction: row;
@@ -238,14 +242,14 @@ export default {
         cursor: pointer;
     }
     #delete{
-        color: #E70F0F;
+        color: red;
     }
     #valid{
-        color: #008D17;
+        color: green;
     }
 
     #favorite{
-        color: green;
+        color: lightseagreen;
     }
 
 </style>
