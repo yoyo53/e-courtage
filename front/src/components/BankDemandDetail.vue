@@ -137,10 +137,12 @@ export default {
         transform: translate(-50%, -50%);
         background-color: #D9D9D9;
         padding: 30px;
+        margin-top: 2.8%;
+        padding-top: 1%;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.5);
         width: 80vw;
-        height: 80vh;
+        height: 95vh;
         border-radius: 10px;
     }
 
@@ -176,6 +178,9 @@ export default {
         width: 100%;
     }
 
+    #demandFiles{
+        margin-bottom: 2vh;
+    }
     .fileRowText {
         width: 40%;
         text-align: left;
@@ -188,7 +193,8 @@ export default {
     }
 
     #bankDemandDetailBottomButtons{
-        margin-top: 0vh;
+        margin-top: 1vh;
+        
     }
 
     #clientInfo {
