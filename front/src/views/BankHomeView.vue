@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import ClientBankDemandsListElement from '@/components/ClientBankDemandsListElement.vue';
+import ClientBankDemandsListElement from '@/components/BankDemandListElement.vue';
 import HeaderComponent from '@/components/HeaderComponent.vue'
 export default {
     name: 'BankHomeView',

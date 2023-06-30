@@ -1,29 +1,31 @@
 <template>
   <div>
-    <h1>Admin Home Page</h1>
+    <div>
+      <h1>Admin Home Page</h1>
 
-    <HeaderComponent/>
-  </div>
+      <HeaderComponent/>
+    </div>
 
-  <div id="main-body">
-    <h3>Liste des banques :</h3>
-    <div id="banks-overview-area" class="section-list">
-        <div id="banks-area-header">
-            <div id="research-input" class="input-group flex-nowrap">
-                <input type="text" class="form-control" placeholder="Recherche" aria-label="Recherche" aria-describedby="addon-wrapping">
-            </div>
+    <div id="main-body">
+      <h3>Liste des banques :</h3>
+      <div id="banks-overview-area" class="section-list">
+          <div id="banks-area-header">
+              <div id="research-input" class="input-group flex-nowrap">
+                  <input type="text" class="form-control" placeholder="Recherche" aria-label="Recherche" aria-describedby="addon-wrapping">
+              </div>
+          </div>
+          <div id="banks-list-container">
+          <ul id="banks-list" class="section-list">
+            <banks-list-element @updateBank="fetchBanks()" v-for="temp_bank in banks" v-bind:key="temp_bank.id" :bank="temp_bank"></banks-list-element>
+          </ul>
         </div>
-        <div id="banks-list-container">
-        <ul id="banks-list" class="section-list">
-          <banks-list-element @updateBank="fetchBanks()" v-for="temp_bank in banks" v-bind:key="temp_bank.id" :bank="temp_bank"></banks-list-element>
-        </ul>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import BanksListElement from '@/components/BanksListElement.vue';
+import BanksListElement from '@/components/AdminBanksListElement.vue';
 import HeaderComponent from '@/components/HeaderComponent.vue'
 export default {
     name: 'BankHomeView',

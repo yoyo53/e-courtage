@@ -20,7 +20,7 @@
         </form>
         <div id="loginLinks">
             <router-link to="/register/bank">Vous n'avez pas encore de compte ?</router-link>
-            <router-link to="/login">Vous vous connectez en tant que particulier ?</router-link>
+            <router-link to="/login/client">Vous vous connectez en tant que particulier ?</router-link>
             <router-link to="/">Retour à la page d'accueil</router-link>
         </div>
     </div>

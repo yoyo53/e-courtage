@@ -66,7 +66,7 @@
 
         </form>
         <div id="registerLinks">
-            <router-link to="/login">Vous avez déjà un compte ?</router-link>
+            <router-link to="/login/client">Vous avez déjà un compte ?</router-link>
             <router-link to="/register/bank">Vous vous inscrivez en tant que banque ?</router-link>
             <router-link to="/">Retour à la page d'accueil</router-link>
         </div>
@@ -132,7 +132,7 @@ export default {
                 console.log(data);
                 if(data.id_client != null) {
                     localStorage.setItem('token', data.token);
-                    this.$router.push('/login');
+                    this.$router.push('/login/client');
                 } else {
                     this.$notify({
                         title: 'Error',
