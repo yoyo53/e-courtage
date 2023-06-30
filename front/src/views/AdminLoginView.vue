@@ -4,8 +4,8 @@
 
         <form id="loginForm">
             <div class="mb-3">
-                <label for="formEmail" class="form-label">Adresse Email</label>
-                <input type="text" class="form-control" id="formEmail" placeholder="test" v-model="identifiant">
+                <label for="formId" class="form-label">Identifiant</label>
+                <input type="text" class="form-control" id="formId" placeholder="test" v-model="identifiant">
             </div>
 
             <div class="mb-3">

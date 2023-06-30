@@ -1,8 +1,6 @@
 <template>
   <div>
     <div>
-      <h1>Admin Home Page</h1>
-
       <HeaderComponent/>
     </div>
 

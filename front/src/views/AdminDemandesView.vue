@@ -1,7 +1,5 @@
 <template>
     <div>
-      <h1>Admin Demandes Page</h1>
-  
       <HeaderComponent />
     </div>
   
