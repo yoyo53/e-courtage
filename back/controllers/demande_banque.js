@@ -122,3 +122,18 @@ exports.updateDemande = async(req, res) => {
         res.status(500).send({ message: "Error has occured :" + err.message });
     }
 }
+
+exports.getDemandesNewAccount = async function getDemandesNewAccount(id_banque) {
+    console.log(id_banque)
+    
+    let demandes = await Demande.findAll();
+    // Create 
+    for(let demande of demandes){
+        // Create Accepter
+        await Accepter.create({
+            id_banque: id_banque,
+            id_demande: demande.id_demande,
+            statut: 0
+        });
+    }
+}

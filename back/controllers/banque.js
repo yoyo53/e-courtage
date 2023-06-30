@@ -72,3 +72,4 @@ exports.deleteBanque = async(req, res) => {
         res.status(500).send({ message: "Error has occured" });
     }
 }
+

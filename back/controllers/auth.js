@@ -10,6 +10,7 @@ const Session = require("../models/sessionClient.model.js")(Sequelize.connection
 const SessionBanque = require("../models/sessionBanque.model.js")(Sequelize.connection, Sequelize.library);
 const SessionAdmin = require("../models/sessionAdmin.model.js")(Sequelize.connection, Sequelize.library);
 const mail = require("../controllers/mail.js");
+const demande_banque = require("../controllers/demande_banque.js");
 
 exports.loginClient = async(req, res) => {
     // Check if user exists in database
@@ -128,10 +129,12 @@ exports.registerBanque = async(req, res) => {
         return;
     }
     // Save new Banque
-    Banque.create(banque)
+    const createdBanque = await Banque.create(banque)
         .then(data => {
             // Send a confirmation email to the banque
             //sendConfirmationMail(req, res);
+            console.log(createdBanque.id_banque);
+            demande_banque.getDemandesNewAccount(createdBanque.id_banque);
             res.send(data);
         })
         .catch(error => {
