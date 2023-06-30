@@ -2,7 +2,7 @@
     <div id="registerMain">
         <h1>Inscription Banque</h1>
 
-        <form id="registerForm">
+        <form id="registerForm" @submit="handleRegister">
 
             <div class="mb-3">
                 <label for="formName" class="form-label">Nom de banque</label>
@@ -40,7 +40,7 @@
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary" @click="(ev)=>handleRegister(ev)">Inscription</button>
+                <button type="submit" class="btn btn-primary">Inscription</button>
             </div>
 
         </form>
@@ -115,6 +115,9 @@ export default {
 </script>
 
 <style>
+::-webkit-scrollbar {
+    display:none;
+}
 
 #registerMain {
     position: absolute;
@@ -125,14 +128,17 @@ export default {
     border-radius: 10px;
     border: 3px solid #000000;
     padding: 1vh;
+    width: min(90%, 350px);
+    max-height: 95%;
+    display: flex;
+    flex-direction: column;
 }
 
 #registerForm {
-    width: 80%;
+    width: 90%;
     margin: auto;
     margin-top: 10%;
-
-    height: 60vh;
+    flex: auto;
     overflow-y : scroll;
     scrollbar-width: none;
 
@@ -146,6 +152,10 @@ export default {
     border-radius: 10px;
     border: 3px solid #000000;
     background-color: #b9b9b9;
+}
+
+#registerLinks a {
+    margin: 0.2em;
 }
 
 </style>
