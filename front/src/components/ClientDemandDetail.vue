@@ -260,7 +260,7 @@ export default {
             if (response.ok) {
                 return response.json();
             } else if(response.status == 401) {
-                this.$router.push("/login");
+                this.$router.push("/login/client");
             } else {
                 throw new Error("Une erreur est survenue, veuillez réessayer plus tard");
             }

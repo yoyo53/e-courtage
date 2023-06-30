@@ -72,7 +72,7 @@ export default {
                 }})
             .then((response)=>{
                 if(response.status == 401){
-                    this.$router.push("/login");
+                    this.$router.push("/login/client");
                 }
                 return(response.json())
             })
@@ -98,7 +98,7 @@ export default {
                 }})
             .then((response)=>{
                 if(response.status == 401){
-                    this.$router.push("/login");
+                    this.$router.push("/login/client");
                 }
                 return(response.json())
             })
@@ -121,7 +121,7 @@ export default {
                 }})
             .then((response)=>{
                 if(response.status == 401){
-                    this.$router.push("/login");
+                    this.$router.push("/login/client");
                 }
                 return(response.json())
             })

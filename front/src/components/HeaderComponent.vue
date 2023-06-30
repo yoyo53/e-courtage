@@ -25,7 +25,7 @@ export default {
         // TODO: we should check if the token is really valid
 
         if(!localStorage.getItem('token') && this.$route.path != '/') {
-          this.$router.push('/login');
+          this.$router.push('/login/client');
           return;
         }
 
@@ -38,7 +38,7 @@ export default {
             .then((response)=>{
               if(response.status == 401) {
                 localStorage.removeItem('token');
-                this.$router.push('/login');
+                this.$router.push('/login/client');
               }
               return;
             })
@@ -50,7 +50,7 @@ export default {
             this.$router.push('/');
         },
         handleLoginButton(){
-          this.$router.push('/login');
+          this.$router.push('/login/client');
         }
     }
 }

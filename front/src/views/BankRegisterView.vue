@@ -56,7 +56,7 @@
         </form>
         <div id="registerLinks">
             <router-link to="/login/bank">Vous avez déjà un compte ?</router-link>
-            <router-link to="/register">Vous vous inscrivez en tant que particulier ?</router-link>
+            <router-link to="/register/client">Vous vous inscrivez en tant que particulier ?</router-link>
             <router-link to="/">Retour à la page d'accueil</router-link>
         </div>
     </div>
