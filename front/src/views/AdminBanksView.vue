@@ -47,18 +47,22 @@ export default {
       showUncheckedOnly: false
     }
   },
-    computed: {
-      filteredBanks() {
-        if (this.searchInput) {
-          const searchKeyword = this.searchInput.toLowerCase();
-          return this.banks.filter(bank => {
-            return bank.nom_banque.toLowerCase().includes(searchKeyword) || bank.id_banque.toString().toLowerCase().includes(searchKeyword);
-          });
-        } else {
-          return this.banks;
-        }
+  computed: {
+    filteredBanks() {
+      if (this.searchInput) {
+        const searchKeyword = this.searchInput.toLowerCase();
+        return this.banks.filter(bank => {
+          return (
+            (!this.showUncheckedOnly || !bank.account_status) &&
+            (bank.nom_banque.toLowerCase().includes(searchKeyword) ||
+              bank.id_banque.toString().toLowerCase().includes(searchKeyword))
+          );
+        });
+      } else {
+        return this.banks.filter(bank => !this.showUncheckedOnly || !bank.account_status);
       }
-    },
+    }
+  },
   methods: {
     async fetchBanks() {
       const token = localStorage.getItem('token');
