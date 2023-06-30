@@ -3,36 +3,34 @@
         <HeaderComponent/>
         <!--<h1>This is a client home page</h1>-->
         <div id="main-body">
-            <h3>Liste des demandes en cours :</h3>
-            <div id="demands-overview-area" class="section-list">
-                <div id="demands-area-header">
-                    <div id="research-input" class="input-group flex-nowrap">
-                        <input type="text" class="form-control" placeholder="Recherche" aria-label="Recherche" aria-describedby="addon-wrapping" v-model="searchInput">
-                    </div>
-                    <!-- <input type="text" name="recherche"> -->
-                    <div>
-                        <select id="sort-choices" class="form-select" aria-label="Default select example" v-model="orderBy">
-                            <option value="">Trier par :</option>
-                            <option value="Name">Nom</option>
-                            <option value="Value">Valeur</option>
-                            <option value="Salaire">Salaire</option>
-                          </select>
-                    </div>
-                    <div>
-                        <select id="sort-choices" class="form-select" aria-label="Default select example" v-model="onlyPinned">
-                            <option value="0">Afficher Tous</option>
-                            <option value="1">Favoris Uniquement</option>
-                          </select>
-                    </div>
-                    
+            <div id="demands-area-header">
+                <div id="research-input" class="input-group flex-nowrap">
+                    <input type="text" class="form-control" placeholder="Recherche" aria-label="Recherche" aria-describedby="addon-wrapping" v-model="searchInput">
                 </div>
-                <div id="demands-overview-area">
-                    <h2>Liste des demandes :</h2>
-                    <ul id="demands-list" class="section-list">
-                        <client-bank-demands-list-element v-for="temp_demand in displayedDemands" v-bind:key="temp_demand.id_demande" :demand="temp_demand"></client-bank-demands-list-element>
-                    </ul>
+                <!-- <input type="text" name="recherche"> -->
+                <div>
+                    <select id="sort-choices" class="form-select" aria-label="Default select example" v-model="orderBy">
+                        <option value="">Trier par :</option>
+                        <option value="Name">Nom</option>
+                        <option value="Value">Valeur</option>
+                        <option value="Salaire">Salaire</option>
+                        </select>
+                </div>
+                <div>
+                    <select id="sort-choices" class="form-select" aria-label="Default select example" v-model="onlyPinned">
+                        <option value="0">Afficher Tous</option>
+                        <option value="1">Favoris Uniquement</option>
+                        <option value="2">Afficher rejetés</option>
+                        <option value="3">Afficher acceptés</option>
+                        </select>
                 </div>
                 
+            </div>
+            <div id="demands-overview-area">
+                <h2>Liste des demandes :</h2>
+                <ul id="demands-list" class="section-list">
+                    <client-bank-demands-list-element v-for="temp_demand in displayedDemands" v-bind:key="temp_demand.id_demande" :demand="temp_demand"></client-bank-demands-list-element>
+                </ul>
             </div>
         </div>
     </div>
@@ -75,7 +73,11 @@ export default {
     methods:{
         performAllFilters(){
             this.displayedDemands = this.userDemands.filter((demand) => {
-                return demand.sujet.toLowerCase().includes(this.searchInput.toLowerCase());
+                return demand.sujet.toLowerCase().includes(this.searchInput.toLowerCase()) || 
+                demand.client.nom.toLowerCase().includes(this.searchInput.toLowerCase()) || 
+                demand.client.prenom.toLowerCase().includes(this.searchInput.toLowerCase()) || 
+                demand.client.revenu_mensuel.toString().includes(this.searchInput.toLowerCase()) || 
+                demand.montant_bien.toString().includes(this.searchInput.toLowerCase());
             })
 
             if (this.orderBy == "Name") {
@@ -99,9 +101,22 @@ export default {
                 })
             }
 
-            if (this.onlyPinned == 1) {
+
+            if (this.onlyPinned == 0) {
                 this.displayedDemands = this.displayedDemands.filter((demand) => {
-                    return demand.favorite;
+                    return demand.statut==0 || demand.statut==1;
+                })
+            } else if (this.onlyPinned == 1) {
+                this.displayedDemands = this.displayedDemands.filter((demand) => {
+                    return demand.statut==1;
+                })
+            } else if (this.onlyPinned == 2) {
+                this.displayedDemands = this.displayedDemands.filter((demand) => {
+                    return demand.statut==-1;
+                })
+            } else if (this.onlyPinned == 3) {
+                this.displayedDemands = this.displayedDemands.filter((demand) => {
+                    return demand.statut==2;
                 })
             }
 
@@ -181,8 +196,17 @@ export default {
             })
             .then((data)=>{
                 console.log(data);
+
+                for (let i = 0; i < data.length; i++) {
+                    if(data[i].client == null){
+                        data.splice(i,1);
+                        i--;
+                    }
+                }
+
                 this.userDemands = data;
                 this.displayedDemands = this.userDemands;
+                this.performAllFilters();
             })
         }
     },
@@ -205,9 +229,12 @@ export default {
     justify-content: space-between;
     align-items:start;
     width: 95%;
-    height: 90%;
-    height: 80vh;
+    height: 85vh;
     margin: auto;
+    background-color: #D9D9D9;
+    padding: 10px;
+    border-radius: 10px;
+    color: black;
 }
 
 h3{
@@ -223,12 +250,11 @@ h3{
     justify-content: left;
     align-items: flex-start;
     width: 100%;
-    height: 100%;
+    padding: 0;
     margin: 0;
     background-color: #D9D9D9;
     color: black;
     list-style: none;
-    padding: 10px;
     border-radius: 10px;
     overflow-y: scroll;
 }
@@ -239,13 +265,9 @@ h3{
 
 #demands-overview-area {
     margin-top: 1.5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    align-items: flex-start;
     width: 100%;
-    height: 90%;
-    border: 0px solid black;
+    height: 100%;
+    text-align: left;
 }
 #demands-list{
     height: 85%;
@@ -260,7 +282,7 @@ h3{
     height: 80%;
 }
 #sort-choices{
-    height: 80%;
+    height: 85%;
     font-size:small;
 }
 </style>

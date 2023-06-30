@@ -36,22 +36,23 @@ export default {
     async deleteClient(id_client, account_status) {
       if (confirm("Voulez-vous vraiment supprimer/bannir ce client ?")) {
         if(account_status){
-            const token = localStorage.getItem('token');
-        await fetch(this.api_url + "admin/updateClient/" + id_client, {
-          method: 'PATCH',
-          headers: {
-            'authorization': token
-          },
-          body: JSON.stringify({
-            account_status: false
-          })
-        });
+          const token = localStorage.getItem('token');
+          await fetch(this.api_url + "admin/updateClient/" + id_client, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': token
+            },
+            body: JSON.stringify({
+              account_status: false
+            })
+          });
         } else {
         const token = localStorage.getItem('token');
         await fetch(this.api_url + "admin/deleteClient/" + id_client, {
           method: 'DELETE',
           headers: {
-            'authorization': token
+            'Authorization': token
           }});
         }
         this.$emit('updateClient');

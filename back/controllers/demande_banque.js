@@ -95,31 +95,30 @@ exports.getSingleDemande = async(req, res) => {
 
 exports.updateDemande = async(req, res) => {
     try{
+        // Check if token is valid
+        var token = req.get("Authorization");
 
+        let session = await sessions.verifyToken(token, "banque");
+
+        if(!session){
+            res.status(401).send({ message: "Unauthorized" });
+            return;
+        }else{
+            var banque = await sessions.findByToken(token, "banque");
+            // Get single demande
+            let accepter = await Accepter.findOne({ where: { id_banque: banque.id_banque, id_demande: req.params.id_demande } });
+            for(var key in req.body){
+                accepter[key] = req.body[key];
+            }
+            let demande = await Demande.findOne({ where: { id_demande: accepter.id_demande } });
+            let client = await Client.findOne({ where: { id_client: demande.id_client } });
+            if(accepter.statut == 2){
+                mail.sendAgreementMail(client.email, client.nom, demande.sujet);
+            }
+            await accepter.save();
+            res.status(200).send({ message: "Demande updated successfully" });
+        }
     } catch(err){
-        res.status(500).send({ message: "Error has occured" });
-    }
-    // Check if token is valid
-    var token = req.get("Authorization");
-
-    let session = await sessions.verifyToken(token, "banque");
-
-    if(!session){
-        res.status(401).send({ message: "Unauthorized" });
-        return;
-    }else{
-        var banque = await sessions.findByToken(token, "banque");
-        // Get single demande
-        let accepter = await Accepter.findOne({ where: { id_banque: banque.id_banque, id_demande: req.params.id_demande } });
-        for(var key in req.body){
-            accepter[key] = req.body[key];
-        }
-        let demande = await Demande.findOne({ where: { id_client: accepter.id_demande } });
-        let client = await Client.findOne({ where: { id_client: demande.id_client } });
-        if(accepter.statut == 2){
-            mail.sendAgreementMail(client.email, client.nom, demande.sujet);
-        }
-        await accepter.save();
-        res.status(200).send({ message: "Demande updated successfully" });
+        res.status(500).send({ message: "Error has occured :" + err.message });
     }
 }
