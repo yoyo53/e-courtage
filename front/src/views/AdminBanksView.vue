@@ -4,21 +4,25 @@
       <HeaderComponent/>
     </div>
     <div id="links">
-    <router-link class="link" to="/admin/Banques">Banques</router-link>
-    <router-link class="link" to="/admin/Clients">Clients</router-link>
-    <router-link class="link" to="/admin/Demandes">Demandes</router-link>
+      <router-link class="link" to="/admin/Banques">Banques</router-link>
+      <router-link class="link" to="/admin/Clients">Clients</router-link>
+      <router-link class="link" to="/admin/Demandes">Demandes</router-link>
     </div>
     <div id="main-body">
+      <div id="banks-filter">
+        <input type="checkbox" id="uncheckedOnly" v-model="showUncheckedOnly">
+        <label for="uncheckedOnly">Afficher uniquement les comptes non validés</label>
+      </div>
       <h3>Liste des banques :</h3>
       <div id="banks-overview-area" class="section-list">
-          <div id="banks-area-header">
-              <div id="research-input" class="input-group flex-nowrap">
-                  <input type="text" class="form-control" placeholder="Recherche" aria-label="Recherche" aria-describedby="addon-wrapping">
-              </div>
+        <div id="banks-area-header">
+          <div id="research-input" class="input-group flex-nowrap">
+            <input type="text" class="form-control" placeholder="Recherche" aria-label="Recherche" aria-describedby="addon-wrapping" v-model="searchInput">
           </div>
-          <div id="banks-list-container">
+        </div>
+        <div id="banks-list-container">
           <ul id="banks-list" class="section-list">
-            <banks-list-element @updateBank="fetchBanks()" v-for="temp_bank in banks" v-bind:key="temp_bank.id" :bank="temp_bank"></banks-list-element>
+            <banks-list-element @updateBank="fetchBanks()" v-for="bank in filteredBanks" :key="bank.id" :bank="bank"></banks-list-element>
           </ul>
         </div>
       </div>
@@ -29,55 +33,56 @@
 <script>
 import BanksListElement from '@/components/AdminBanksListElement.vue';
 import HeaderComponent from '@/components/HeaderComponent.vue'
+
 export default {
-    name: 'BankHomeView',
-    components: {
+  name: 'BankHomeView',
+  components: {
     HeaderComponent,
     BanksListElement
-    },
-    data(){
-        return {
-            banks:[],
-            searchInput:""
-        }
-    },
-    watch:{
-        searchInput(newSearchInput){
-            console.log(newSearchInput);
-            this.performSearch();
-            
-        }
-    },
-    methods:{
-        async fetchBanks() {
-            const token = localStorage.getItem('token');
-            const response = await fetch(this.api_url + "admin/getAllBanques", {
-                headers: {
-                    'authorization': token
-                }
-            });
-            const data = await response.json();
-            console.log(data);
-            this.banks = data;
-            
-        },
-        performSearch(){
-            this.displayedDemands = this.userDemands.filter((demand) => {
-                return demand.sujet.toLowerCase().includes(this.searchInput.toLowerCase());
-        });
-
-    }},
-    mounted() {
-        console.log("Mounted");
-        this.fetchBanks();
-    },
-    beforeUnmount() {
-        console.log("Unmounted");
+  },
+  data() {
+    return {
+      banks: [],
+      searchInput: "",
+      showUncheckedOnly: false
     }
-
-
+  },
+    computed: {
+      filteredBanks() {
+        if (this.searchInput) {
+          const searchKeyword = this.searchInput.toLowerCase();
+          return this.banks.filter(bank => {
+            return bank.nom_banque.toLowerCase().includes(searchKeyword) || bank.id_banque.toString().toLowerCase().includes(searchKeyword);
+          });
+        } else {
+          return this.banks;
+        }
+      }
+    },
+  methods: {
+    async fetchBanks() {
+      const token = localStorage.getItem('token');
+      const response = await fetch(this.api_url + "admin/getAllBanques", {
+        headers: {
+          'authorization': token
+        }
+      });
+      const data = await response.json();
+      this.banks = data;
+    }
+  },
+  mounted() {
+    this.fetchBanks();
+  },
+  beforeUnmount() {
+    console.log("Unmounted");
+  }
 }
 </script>
+
+
+
+
 
 <style>
 
@@ -98,7 +103,10 @@ export default {
   color: black;
   padding: 5px 10px;
   font-size: 26px;
+  flex-basis: 0;
+  flex-grow: 1;
 }
+
 
 
 
