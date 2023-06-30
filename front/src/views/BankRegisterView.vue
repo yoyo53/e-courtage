@@ -25,6 +25,16 @@
             </div>
 
             <div class="mb-3">
+                <label for="formCountry" class="form-label">Pays</label>
+                <input type="text" class="form-control" id="formCountry" v-model="BankInfo.pays" required/>
+            </div>
+
+            <div class="mb-3">
+                <label for="formCity" class="form-label">Ville</label>
+                <input type="text" class="form-control" id="formCity" v-model="BankInfo.ville" required/>
+            </div>
+
+            <div class="mb-3">
                 <label for="formAddress" class="form-label">Adresse</label>
                 <input type="text" class="form-control" id="formAddress" v-model="BankInfo.adresse" required/>
             </div>
@@ -63,8 +73,8 @@ export default {
                 tel: '',
                 adresse: '',
                 password: '',
-                pays: 'France',
-                ville: 'Paris'
+                pays: '',
+                ville: ''
             },
             rePassword: ''
         }
