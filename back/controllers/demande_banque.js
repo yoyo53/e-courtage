@@ -23,7 +23,7 @@ exports.getAllDemandes = async(req, res) => {
             try{
                 var banque = await sessions.findByToken(token, "banque");
                 // Get all demandes
-                let accepters = await Accepter.findAll({ where: { id_banque: banque.id_banque, statut : {[Op.not] : -1} }});
+                let accepters = await Accepter.findAll({ where: { id_banque: banque.id_banque }});
                 let demandes = [];
                 for(let accepter of accepters){
                     let demande = await Demande.findOne({ where: { id_demande: accepter.id_demande } });
