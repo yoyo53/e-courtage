@@ -5,19 +5,19 @@
         <div id="main-body">
             <div id="demands-area-header">
                 <div id="research-input" class="input-group flex-nowrap">
-                    <input type="text" class="form-control" placeholder="Recherche" aria-label="Recherche" aria-describedby="addon-wrapping" v-model="searchInput">
+                    <input type="text" id="" class="form-control" placeholder="Recherche" aria-label="Recherche" aria-describedby="addon-wrapping" v-model="searchInput">
                 </div>
                 <!-- <input type="text" name="recherche"> -->
-                <div>
-                    <select id="sort-choices" class="form-select" aria-label="Default select example" v-model="orderBy">
+                <div class="sort-div">
+                    <select class="sort-choices form-select" aria-label="Default select example" v-model="orderBy">
                         <option value="">Trier par :</option>
                         <option value="Name">Nom</option>
                         <option value="Value">Valeur</option>
                         <option value="Salaire">Salaire</option>
                         </select>
                 </div>
-                <div>
-                    <select id="sort-choices" class="form-select" aria-label="Default select example" v-model="onlyPinned">
+                <div class="sort-div">
+                    <select class="sort-choices form-select" aria-label="Default select example" v-model="onlyPinned">
                         <option value="0">Afficher Tous</option>
                         <option value="1">Favoris Uniquement</option>
                         <option value="2">Afficher rejetés</option>
@@ -277,13 +277,18 @@ h3{
     height: 10%;
 }
 #research-input{
-    margin-right: 55%;
-    width: 30%;
+    margin-right: auto;
+    width: 10em;
     height: 80%;
 }
-#sort-choices{
+
+.sort-div{
+    width: fit-content;
+    max-width: 20%;
+}
+
+.sort-choices{
     height: 85%;
-    width: 100%;
     font-size:small;
 }
 </style>
