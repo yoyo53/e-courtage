@@ -244,21 +244,6 @@ h3{
     text-align: left;
 }
 
-.section-list{
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    align-items: flex-start;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    background-color: #D9D9D9;
-    color: black;
-    list-style: none;
-    border-radius: 10px;
-    overflow-y: scroll;
-}
-
 ::-webkit-scrollbar {
     display:none;
 }
@@ -266,15 +251,28 @@ h3{
 #demands-overview-area {
     margin-top: 1.5%;
     width: 100%;
-    height: 100%;
+    height: 85%;
     text-align: left;
 }
 #demands-list{
-    height: 85%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    color: black;
+    list-style: none;
+    overflow-y: scroll;
+    border-radius: 10px;
 }
+
 #demands-area-header{
     display: flex;
-    width: 100%
+    width: 100%;
+    height: 5%;
 }
 #research-input{
     margin-right: 55%;
@@ -283,6 +281,7 @@ h3{
 }
 #sort-choices{
     height: 85%;
+    width: 100%;
     font-size:small;
 }
 </style>
