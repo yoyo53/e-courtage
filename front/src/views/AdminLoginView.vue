@@ -4,8 +4,8 @@
 
         <form id="loginForm" @submit="handleLoginA">
             <div class="mb-3">
-                <label for="formEmail" class="form-label">Adresse Email</label>
-                <input type="text" class="form-control" id="formEmail" placeholder="test" v-model="identifiant">
+                <label for="formIdentifiant" class="form-label">Identifiant</label>
+                <input type="text" class="form-control" id="formIdentifiant" placeholder="test" v-model="identifiant">
             </div>
 
             <div class="mb-3">
@@ -50,7 +50,7 @@ export default {
                 console.log(data);
                 if(data.token != null) {
                     localStorage.setItem('token', data.token);
-                    this.$router.push('/admin/home');
+                    this.$router.push('/admin/Banques');
                 } else {
                     alert('Login failed');
                 }
@@ -74,12 +74,14 @@ export default {
         transform: translate(-50%, -50%);
         text-align: center;
         border-radius: 10px;
-        border: 3px solid #005500;
+        border: 3px solid #000000;
         padding: 1vh;
+        width: min(90%, 350px);
+        max-height: 95%;
     }
 
     #loginForm {
-        width: 80%;
+        width: 90%;
         margin: auto;
         margin-top: 2vw;
     }
@@ -90,7 +92,7 @@ export default {
         flex-direction: column;
         padding: 1vh;
         border-radius: 10px;
-        border: 3px solid #005500;
+        border: 3px solid #000000;
         background-color: #b9b9b9;
     }
 </style>
