@@ -137,15 +137,16 @@ export default {
     }
 
     #modal-form{
+        display: flex;
+        flex-direction: column;
         color: black;
         position: absolute;
-        top: 45%;
+        top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #D9D9D9;
-        padding: 30px;
-        margin-top: 2.8%;
-        padding-top: 1%;
+        padding: 20px;
+        padding-top: 10px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.5);
         width: 80vw;
