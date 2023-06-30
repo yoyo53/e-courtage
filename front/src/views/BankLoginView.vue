@@ -2,7 +2,7 @@
     <div id="loginMain">
         <h1>Connexion Banque</h1>
 
-        <form id="loginForm">
+        <form id="bankLoginForm" @submit.prevent="handleLoginB">
             <div class="mb-3">
                 <label for="formEmail" class="form-label">Email address</label>
                 <input type="text" class="form-control" id="formEmail" placeholder="name@example.com" v-model="email">
@@ -14,7 +14,7 @@
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary" @click="()=>handleLoginB()">Connexion</button>
+                <button type="submit" class="btn btn-primary">Connexion</button>
             </div>
 
         </form>
@@ -75,10 +75,11 @@ export default {
     border-radius: 10px;
     border: 3px solid #000000;
     padding: 1vh;
+    width: min(90%, 350px);
 }
 
-#clientLoginForm {
-    width: 80%;
+#bankLoginForm {
+    width: 90%;
     margin: auto;
     margin-top: 2vw;
 }
@@ -91,5 +92,9 @@ export default {
     border-radius: 10px;
     border: 3px solid #000000;
     background-color: #b9b9b9;
+}
+
+#loginLinks a {
+    margin: 0.2em;
 }
 </style>

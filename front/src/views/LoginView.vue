@@ -11,7 +11,6 @@
             <div class="mb-3">
                 <label for="formPassword" class="form-label">Mot de passe</label>
                 <input type="password" class="form-control" id="formPassword" placeholder="********" v-model="password">
-                <router-link to="/client/forgot">Mot de passe oublié ?</router-link>
             </div>
 
             <div class="mb-3">
@@ -21,7 +20,7 @@
         </form>
 
         <div id="loginLinks">
-            <router-link to="/register/client">Vous n'avez pas encore de compte ?</router-link>
+            <router-link to="/register">Vous n'avez pas encore de compte ?</router-link>
             <router-link to="/login/bank">Vous vous connectez en tant que banque?</router-link>
             <router-link to="/">Retour à la page d'accueil</router-link>
         </div>
@@ -83,11 +82,10 @@ export default {
         border-radius: 10px;
         border: 3px solid #000000;
         padding: 1vh;
-        width: min(90%, 350px);
     }
 
     #clientLoginForm {
-        width: 90%;
+        width: 80%;
         margin: auto;
         margin-top: 2vw;
     }
@@ -100,9 +98,5 @@ export default {
         border-radius: 10px;
         border: 3px solid #000000;
         background-color: #b9b9b9;
-    }
-
-    #loginLinks a {
-        margin: 0.2em;
     }
 </style>
