@@ -78,7 +78,7 @@
   </script>
   
   
-  <style>
+  <style scoped>
 
 #links {
   display: flex;
