@@ -97,7 +97,7 @@ header {
 }
 
 header h1 {
-  font-size: 64px;
+  font-size: 2.5em;
   font-weight: 800;
 }
 
@@ -114,15 +114,19 @@ header h1 {
 
 .benefits {
   text-align: center;
-  margin-bottom: 40px;
   padding: 20px;
   background-color: rgba(45, 59, 84, 0.9);
   border-radius: 10px;
-  margin: 20px 200px;
+  width: max(min(90%, 700px), 50%);
+  margin: 20px auto;
 }
 
 .benefits h3 {
   margin-bottom: 20px;
+}
+
+.benefits ul {
+  padding: 0;
 }
 
 .testimonials {
@@ -131,7 +135,8 @@ header h1 {
   padding: 20px;
   background-color: rgba(45, 59, 84, 0.9);
   border-radius: 10px;
-  margin: 20px 200px;
+  width: max(min(90%, 700px), 50%);
+  margin: 20px auto;
 }
 
 .testimonial {
@@ -185,7 +190,8 @@ header h1 {
   padding: 20px;
   background-color: rgba(45, 59, 84, 0.9);
   border-radius: 10px;
-  margin: 20px 200px;
+  width: max(min(90%, 700px), 50%);
+  margin: 20px auto;
 }
 
 .reassurance h3 {
@@ -194,14 +200,14 @@ header h1 {
 
 .partner-logos {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 10px;
 }
 
 .partner-logos img {
   width: 80px;
   height: 80px;
-  margin: 0 10px;
+  margin: 10px;
 }
 
 footer {
