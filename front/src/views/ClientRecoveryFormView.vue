@@ -47,7 +47,7 @@ export default {
                 return;
             }
 
-            fetch(this.api_url + 'auth/verifyClient/'+this.$route.params.token,{
+            fetch(this.api_url + 'client/recuperationPassword',{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
