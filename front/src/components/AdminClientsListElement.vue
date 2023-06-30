@@ -7,12 +7,16 @@
         </div>
         <span id="clientName">{{ client.nom }} {{ client.prenom }}</span>
         <div class="clientRow"><span> ID : {{ client.id_client }} </span></div>
-        <bank-demand-detail :demand="demand"/>
+        <admin-client-detail :client="client"/>
     </div>
 </template>
 
 <script>
+import AdminClientDetail from './AdminClientDetail.vue';
 export default {
+  components: {
+    'admin-client-detail': AdminClientDetail
+  },
   name: 'clientsListElement',
   props: {
     client: {
