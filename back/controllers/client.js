@@ -4,6 +4,7 @@ const Sequelize = require("../db.connection");
 const Client = require("../models/client.model.js")(Sequelize.connection, Sequelize.library);
 const sessions = require("./session.js");
 const mail = require("./mail.js");
+const Crypto = require("crypto");
 
 exports.getClient = async (req, res) => {
 	// Get Client Id from token
@@ -105,7 +106,7 @@ exports.recuperationPassword = async (req, res) => {
 				id_client: session.id_client
 			}
 		});
-		client.password = req.body.password;
+		client.password = Crypto.createHash('sha256').update(req.body.password).digest('hex');
 		await client.save();
 		await session.destroy();
 		res.status(200).send({message: "Password changed"});

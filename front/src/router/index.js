@@ -57,6 +57,7 @@ const routes = [
     name: 'admin-clients',
     component: () => import('../views/AdminClientsView.vue')
   },
+
   {
     path: '/admin/demandes',
     name: 'admin-demandes',
@@ -67,6 +68,16 @@ const routes = [
     name: 'client-verification',
     component: () => import('../views/ClientVerificationView.vue')
   },
+  {
+    path: '/client/forgot',
+    name: 'client-recovery-forgot',
+    component: () => import('../views/ClientRecoveryForgotView.vue')
+  },
+  {
+    path: '/client/recover/:token',
+    name: 'client-recovery-form',
+    component: () => import('../views/ClientRecoveryFormView.vue')
+  }
 ]
 
 const router = createRouter({

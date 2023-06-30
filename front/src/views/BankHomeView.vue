@@ -249,6 +249,8 @@ h3{
 }
 
 #demands-overview-area {
+    display: flex;
+    flex-direction: column;
     margin-top: 1.5%;
     width: 100%;
     height: 85%;
@@ -272,7 +274,7 @@ h3{
 #demands-area-header{
     display: flex;
     width: 100%;
-    height: 5%;
+    height: 10%;
 }
 #research-input{
     margin-right: 55%;
