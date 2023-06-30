@@ -48,16 +48,21 @@ const routes = [
     component: () => import('../views/AdminLoginView.vue')
   },
   {
-    path: '/admin/home',
-    name: 'admin-home',
-    component: () => import('../views/AdminHomeView.vue')
+    path: '/admin/banques',
+    name: 'admin-banques',
+    component: () => import('../views/AdminBanksView.vue')
   },
   {
-    path: '/admin/home/clients',
-    name: 'admin-clients-home',
+    path: '/admin/clients',
+    name: 'admin-clients',
     component: () => import('../views/AdminClientsView.vue')
   },
 
+  {
+    path: '/admin/demandes',
+    name: 'admin-demandes',
+    component: () => import('../views/AdminDemandesView.vue')
+  },
   {
     path: '/client/verification/:token',
     name: 'client-verification',
