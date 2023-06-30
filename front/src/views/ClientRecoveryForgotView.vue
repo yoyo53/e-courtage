@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="recoveryForgotMain">
         <h1> Vous avez oublié votre mot de passe ? </h1>
         <form>
             <div class="mb-3">
@@ -7,12 +7,10 @@
                     <input type="email" class="form-control" id="formEmail" v-model="email" placeholder="Renseignez votre email" required :disabled="success">
             </div>
             <button type="submit" class="btn btn-primary" @click="(ev)=>handleSubmit(ev)" v-if="!success">Envoyer</button>
+            <h2 v-if="success">Un email vous a été envoyé</h2>
         </form>
-        <div v-if="success">
-            <h2>Un email vous a été envoyé</h2>
-            <router-link to="/login/client">Retour à la page de connexion</router-link>
-            <router-link to="/">Retour à la page d'accueil</router-link>
-        </div>
+        <router-link to="/login/client">Retour à la page de connexion</router-link>
+        <router-link to="/">Retour à la page d'accueil</router-link>
     </div>
 </template>
 
@@ -70,5 +68,47 @@ export default {
 </script>
 
 <style>
+
+    #recoveryForgotMain {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 50vh;
+        margin: auto;
+        padding: 2vh;
+        background-color: #b9b9b9;
+        color: white;
+        border: 1px solid black;
+        border-radius: 10px;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #recoveryForgotMain h1 {
+        margin-bottom: 5vh;
+        border-bottom: solid 1px black;
+    }
+
+    #recoveryForgotMain form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 70%;
+        margin-bottom: 2vh;
+    }
+
+    #recoveryForgotMain form div {
+        width: 100%;
+        margin-bottom: 2vh;
+    }
+
+    #recoveryForgotMain form div input {
+        width: 100%;
+    }
 
 </style>

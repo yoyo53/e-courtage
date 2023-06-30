@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="recoveryFormMain">
         <h1> Nouveau mot de passe </h1>
         <form>
             <div class="mb-3">
@@ -85,4 +85,45 @@ export default {
 
 <style>
 
+    #recoveryFormMain {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 50vh;
+        margin: auto;
+        padding: 2vh;
+        background-color: #b9b9b9;
+        color: white;
+        border: 1px solid black;
+        border-radius: 10px;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #recoveryFormMain h1 {
+        margin-bottom: 5vh;
+        border-bottom: solid 1px black;
+    }
+
+    #recoveryFormMain form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+        margin-bottom: 2vh;
+    }
+
+    #recoveryFormMain form div {
+        width: 100%;
+        margin-bottom: 2vh;
+    }
+
+    #recoveryFormMain form div input {
+        width: 100%;
+    }
 </style>

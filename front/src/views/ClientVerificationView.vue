@@ -66,7 +66,7 @@ export default {
         background-color: #b9b9b9;
         border: solid 1px black;
         padding: 1vh;
-        height: 30vh;
+        min-height: 30vh;
     }
 
     #verificationTitle{
