@@ -243,7 +243,7 @@ export default {
                 if(response.ok){
                     return response.json();
                 }else if(response.status == 401){
-                    this.$router.push("/login");
+                    this.$router.push("/login/client");
                 }else{
                     throw new Error("Something went wrong");
                 }

@@ -12,14 +12,14 @@
             <div v-if="verified" class="verificationOption">
                 <h2>Votre compte a été activé</h2>
                 <p>Vous pouvez maintenant vous connecter.</p>
-                <router-link to="/login" class="btn btn-primary verificationLink">Cliquez ici pour vous connecter</router-link>
+                <router-link to="/login/client" class="btn btn-primary verificationLink">Cliquez ici pour vous connecter</router-link>
                 <router-link to="/" class="btn btn-primary verificationLink">Cliquez ici pour retourner à l'accueil</router-link>
             </div>
 
             <div v-if="!verifying && !verified" class="verificationOption">
                 <h2>La verification a échoué</h2>
                 <p>Votre compte a peut-être déjà été activé.</p>
-                <router-link to="/login" class="btn btn-primary verificationLink">Cliquez ici pour vous connecter</router-link>
+                <router-link to="/login/client" class="btn btn-primary verificationLink">Cliquez ici pour vous connecter</router-link>
                 <router-link to="/" class="btn btn-primary verificationLink">Cliquez ici pour retourner à l'accueil</router-link>
             </div>
         </div>
