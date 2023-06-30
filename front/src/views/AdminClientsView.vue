@@ -25,7 +25,7 @@
   </template>
   
   <script>
-  import ClientsListElement from '@/components/ClientsListElement.vue';
+  import ClientsListElement from '@/components/AdminClientsListElement.vue';
   import HeaderComponent from '@/components/HeaderComponent.vue'
   export default {
       name: 'BankHomeView',
