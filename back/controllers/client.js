@@ -106,7 +106,7 @@ exports.recuperationPassword = async (req, res) => {
 				id_client: session.id_client
 			}
 		});
-		client.password == Crypto.createHash('sha256').update(req.body.password).digest('hex');
+		client.password = Crypto.createHash('sha256').update(req.body.password).digest('hex');
 		await client.save();
 		await session.destroy();
 		res.status(200).send({message: "Password changed"});
