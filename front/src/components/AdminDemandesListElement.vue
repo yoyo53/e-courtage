@@ -58,6 +58,7 @@
     border-radius: 10px;
     padding: 5px;
     margin-bottom: 10px;
+    border: solid 3px black;
   }
   
   .demandRow {

@@ -21,6 +21,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BIGINT,
             allowNull: false
         },
+        tel: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
         adresse : {
             type: Sequelize.STRING,
             allowNull: false

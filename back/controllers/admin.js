@@ -5,6 +5,7 @@ const sessions = require("./session.js");
 const Client = require("../models/client.model.js")(Sequelize.connection, Sequelize.library);
 const Banque = require("../models/banque.model.js")(Sequelize.connection, Sequelize.library);
 const Demande = require("../models/demande.model.js")(Sequelize.connection, Sequelize.library);
+const mail = require("./mail.js");
 
 
 exports.getAllClients = async (req, res) => {
@@ -83,6 +84,7 @@ exports.deleteClient = async (req, res) => {
         } else {
             let client = await Client.findOne({ where: { id_client: req.params.id_client } });
             await client.destroy();
+            mail.sendAdminBannedAccountMail(client.email, client.nom);
             res.status(200).send({ message: "Client deleted successfully" });
         }
     } catch(err){
@@ -148,6 +150,7 @@ exports.deleteBanque = async (req, res) => {
         } else {
             let banque = await Banque.findOne({ where: { id_banque: req.params.id_banque } });
             await banque.destroy();
+            mail.sendAdminBannedAccountMail(banque.email, banque.nom_banque);
             res.status(200).send({ message: "Banque deleted successfully" });
         }
     } catch(err){
@@ -168,7 +171,9 @@ exports.deleteDemande = async (req, res) => {
             return;
         } else {
             let demande = await Demande.findOne({ where: { id_demande: req.params.id_demande } });
+            let client = await Client.findOne({ where: { id_client: demande.id_client } });
             await demande.destroy();
+            mail.sendAdminBannedAccountMail(client.email, client.nom, demande.sujet);
             res.status(200).send({ message: "Demande deleted successfully" });
         }
     } catch(err){
