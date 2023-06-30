@@ -130,17 +130,9 @@ exports.registerBanque = async(req, res) => {
     }
     // Save new Banque
     const createdBanque = await Banque.create(banque)
-        .then(data => {
-            // Send a confirmation email to the banque
-            //sendConfirmationMail(req, res);
-            console.log(createdBanque.id_banque);
-            demande_banque.getDemandesNewAccount(createdBanque.id_banque);
-            res.send(data);
-        })
-        .catch(error => {
-            res.status(500).send({message: error.message || "Error while creating Banque"});
-        }
-    );
+    demande_banque.getDemandesNewAccount(createdBanque.id_banque);
+    res.send(createdBanque);
+    
 }
 
 
