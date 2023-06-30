@@ -50,7 +50,7 @@ export default {
                 console.log(data);
                 if(data.token != null) {
                     localStorage.setItem('token', data.token);
-                    this.$router.push('/admin/home');
+                    this.$router.push('/admin/Banques');
                 } else {
                     alert('Login failed');
                 }
