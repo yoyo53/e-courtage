@@ -1,22 +1,16 @@
 <template>
     <div id="clientListElement" :class="borderClass">
-        <div id="buttons_options" style="padding-top: 10px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16" @click="deleteClient(client.id_client, client.account_status)" style="cursor: pointer;">
-          <path fill="red" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-          </svg>
+        <div id="buttons_options">
+            <span><p id="delete" class="but" @click="deleteClient(client.id_client, client.account_status)">x</p></span>
         </div>
         <span id="clientName">{{ client.nom }} {{ client.prenom }}</span>
         <div class="clientRow"><span> ID : {{ client.id_client }} </span></div>
-        <admin-client-detail :client="client"/>
+        <bank-demand-detail :demand="demand"/>
     </div>
 </template>
 
 <script>
-import AdminClientDetail from './AdminClientDetail.vue';
 export default {
-  components: {
-    'admin-client-detail': AdminClientDetail
-  },
   name: 'clientsListElement',
   props: {
     client: {
@@ -68,7 +62,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 #clientListElement {
   font-size: 1.5vw;
   display: flex;

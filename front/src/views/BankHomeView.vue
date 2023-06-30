@@ -222,7 +222,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #main-body {
     display: block;
     flex-direction: row;

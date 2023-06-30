@@ -68,7 +68,7 @@ export default {
   name: 'LandingPage',
     methods: {
     redirectToClientRegister() {
-      this.$router.push({ path: '/register/client' });
+      this.$router.push({ path: '/register' });
     },
     redirectToBankRegister() {
       this.$router.push({ path: '/register/bank' });

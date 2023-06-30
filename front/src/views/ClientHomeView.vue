@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="content">
         <HeaderComponent/>
         <!--<h1>This is a client home page</h1>-->
         <div id="main-body">
@@ -72,7 +72,7 @@ export default {
                 }})
             .then((response)=>{
                 if(response.status == 401){
-                    this.$router.push("/login/client");
+                    this.$router.push("/login");
                 }
                 return(response.json())
             })
@@ -98,7 +98,7 @@ export default {
                 }})
             .then((response)=>{
                 if(response.status == 401){
-                    this.$router.push("/login/client");
+                    this.$router.push("/login");
                 }
                 return(response.json())
             })
@@ -121,7 +121,7 @@ export default {
                 }})
             .then((response)=>{
                 if(response.status == 401){
-                    this.$router.push("/login/client");
+                    this.$router.push("/login");
                 }
                 return(response.json())
             })
@@ -158,15 +158,22 @@ export default {
 </script>
 
 <style>
-    #main-body {
+    #content {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    #main-body {
+        flex: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
         justify-content: space-between;
-        align-items: flex-start;
         width: 95%;
-        height: 90%;
-        height: 80vh;
         margin: auto;
+        overflow-y: scroll;
+        padding-bottom: 2em;
     }
 
     .section-list{
@@ -195,24 +202,24 @@ export default {
     #body-left {
         display: flex;
         flex-direction: column;
+        gap: 1em;
         justify-content: left;
         align-items: flex-start;
-        width: 40%;
-        height: 100%;
+        flex: auto;
+        max-height: 100%;
     }
 
     #profile-overview-area {
         display: flex;
         flex-direction: column;
+        flex: auto;
         justify-content: left;
         align-items: flex-start;
         width: 100%;
-        height: 50%;
         border: 0px solid black;
     }
 
     .profile-item {
-        font-size: 1.5vw;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -221,7 +228,8 @@ export default {
     }
 
     .profile-buttons{
-        margin-top: 10px;
+        margin-top: auto;
+        padding-top: 10px;
     }
 
     input {
@@ -238,10 +246,10 @@ export default {
     #notifications-view-area {
         display: flex;
         flex-direction: column;
+        flex: auto;
         justify-content: left;
         align-items: flex-start;
         width: 100%;
-        height: 50%;
         border: 0px solid black;
     }
 
@@ -252,17 +260,18 @@ export default {
         flex-direction: column;
         justify-content: left;
         align-items: flex-start;
-        width: 55%;
-        height: 100%;
+        flex: auto;
+        max-height: 100%;
     }
 
     #demands-overview-area {
         display: flex;
         flex-direction: column;
+        flex: auto;
         justify-content: left;
         align-items: flex-start;
         width: 100%;
-        height: 85%;
+        overflow: hidden;
         border: 0px solid black;
     }
 
@@ -272,7 +281,7 @@ export default {
         justify-content: right;
         align-items: flex-end;
         width: 100%;
-        height: 15%;
+        height: 4em;
         border: 0px solid black;
         padding-top : 10px;
     }

@@ -42,7 +42,7 @@
   }
   </script>
   
-  <style>
+  <style scoped>
   #demandListElement {
     font-size: 1.5vw;
     display: flex;

@@ -144,7 +144,7 @@ export default {
                 if (response.ok) {
                     return response.json();
                 } else if(response.status == 401) {
-                    this.$router.push("/login/client");
+                    this.$router.push("/login");
                 } else {
                     throw new Error("Une erreur est survenue lors de la récupération de vos fichiers");
                 }

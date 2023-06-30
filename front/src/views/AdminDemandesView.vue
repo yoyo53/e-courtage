@@ -79,7 +79,7 @@
   };
   </script>
   
-  <style>
+  <style scoped>
   #demandes-list-container {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */

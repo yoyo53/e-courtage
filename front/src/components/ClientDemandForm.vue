@@ -1,11 +1,12 @@
 <template>
     <div>
         <!--<h1>This is a demand form filling pop up</h1>-->
-        <button id="openButton" @click="()=>handleDisplay()">NOUVELLE DEMANDE</button>
+        <button id="openButton" @click="handleDisplay">NOUVELLE DEMANDE</button>
+        <div id="cover" v-if="displayForm"></div>
         <div id="modal-form" ref="modalForm" v-if="displayForm">
-            <button id="closeButton" @click="()=>handleDisplay()">X</button>
+            <button id="closeButton" @click="handleDisplay">X</button>
             <h2>Nouvelle demande</h2>
-            <form id="demandCreationForm">
+            <form id="demandCreationForm" @submit="handleSubmit">
                 <div id="demandCreationFormFields">
                     <div class="mb-3">
                         <label for="formSubject" class="form-label">Sujet</label>
@@ -110,7 +111,7 @@
                         <client-new-file-form />
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" @click="(ev)=>handleSubmit(ev)">Envoyer</button>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
             </form>
         </div>
     </div>
@@ -281,14 +282,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
     #openButton{
         height: 100%;
         width: 50%;
         background-color: #D9D9D9;
         text-align: center;
-        font-size: 2vw;
         border-radius: 10px;
     }
 
@@ -299,7 +299,15 @@ export default {
         background-color: #D9D9D9;
         border-radius: 10px;
         border: none;
-        font-size: 2vw;
+        font-size: 2em;
+    }
+
+    #cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
     }
 
     #modal-form{
@@ -309,14 +317,13 @@ export default {
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #D9D9D9;
-        padding: 50px;
-        border-radius: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        width: 50vw;
-        height: 70vh;
+        width: max(min(90vw, 350px), 50vw);
+        max-height: 95%;
+        display: flex;
+        flex-direction: column;
         border-radius: 10px;
-        overflow-y: scroll;
-        padding: 10px;
+        padding: 20px;
     }
 
     ::-webkit-scrollbar {
@@ -324,13 +331,16 @@ export default {
     }
 
     #demandCreationForm{
-        margin-top: 50px;
+        margin-top: 20px;
         text-align: left;
-        height: 80%;
+        flex: auto;
+        display: flex;
+        flex-direction: column;
+        overflow-y: hidden;
     }
 
     #demandCreationFormFields{
-        height: 100%;
+        flex: auto;
         overflow-y: scroll;
     }
 

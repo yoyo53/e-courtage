@@ -72,7 +72,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+    ::-webkit-scrollbar {
+        display:none;
+    }
 
     #loginMain {
         position: absolute;
@@ -84,12 +87,18 @@ export default {
         border: 3px solid #000000;
         padding: 1vh;
         width: min(90%, 350px);
+        max-height: 95%;
+        display: flex;
+        flex-direction: column;
     }
 
     #clientLoginForm {
         width: 90%;
         margin: auto;
         margin-top: 2vw;
+        flex: auto;
+        overflow-y : scroll;
+        scrollbar-width: none;
     }
 
     #loginLinks {

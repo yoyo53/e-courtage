@@ -66,7 +66,7 @@
 
         </form>
         <div id="registerLinks">
-            <router-link to="/login/client">Vous avez déjà un compte ?</router-link>
+            <router-link to="/login">Vous avez déjà un compte ?</router-link>
             <router-link to="/register/bank">Vous vous inscrivez en tant que banque ?</router-link>
             <router-link to="/">Retour à la page d'accueil</router-link>
         </div>
@@ -132,7 +132,7 @@ export default {
                 console.log(data);
                 if(data.id_client != null) {
                     localStorage.setItem('token', data.token);
-                    this.$router.push('/login/client');
+                    this.$router.push('/login');
                 } else {
                     this.$notify({
                         title: 'Error',
@@ -169,19 +169,17 @@ export default {
         border-radius: 10px;
         border: 3px solid #000000;
         padding: 1vh;
-        width: min(90%, 350px);
-        max-height: 95%;
-        display: flex;
-        flex-direction: column;
     }
 
     #registerForm {
-        width: 90%;
+        width: 80%;
         margin: auto;
         margin-top: 10%;
-        flex: auto;
+
+        height: 60vh;
         overflow-y : scroll;
         scrollbar-width: none;
+
     }
 
     #registerLinks {
@@ -192,10 +190,6 @@ export default {
         border-radius: 10px;
         border: 3px solid #000000;
         background-color: #b9b9b9;
-    }
-
-    #registerLinks a {
-        margin: 0.2em;
     }
 
 </style>

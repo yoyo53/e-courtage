@@ -1,32 +1,35 @@
 <template>
     <div>
         <!--<h1>This is a demand form filling pop up</h1>-->
-        <button type="none" id="openNFButton" @click="()=>handleDisplay()">NOUVEAU DOCUMENT</button>
+        <button type="none" id="openNFButton" @click="handleDisplay">NOUVEAU DOCUMENT</button>
+        <div id="cover" v-if="displayForm"></div>
         <div id="modal-file-form" ref="modalForm" v-if="displayForm">
-            <button id="closeButton" @click="()=>handleDisplay()">X</button>
+            <button id="closeButton" @click="handleDisplay">X</button>
             <h2>Nouveau document</h2>
-            <form>
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Votre fichier</label>
-                    <input class="form-control" type="file" id="formFile" @change="(ev)=>onFilesChange(ev)" required>
+            <form id="newFileForm" @submit="handleSubmit">
+                <div id="newFileFormFields">
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Votre fichier</label>
+                        <input class="form-control" type="file" id="formFile" @change="(ev)=>onFilesChange(ev)" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formNameTitle" class="form-label">Nom du fichier</label>
+                        <input type="text" class="form-control" id="formNameTitle" v-model="name" placeholder="Nom du fichier" maxlength="30" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formDocType" class="form-label">Genre</label>
+                        <select class="form-select" aria-label="Default select example" id="formDocType" v-model="type">
+                            <option value="">Selectionnez le type du fichier</option>
+                            <option value="Document d'identité">Document d'identité</option>
+                            <option value="Fiche de paie">Fiche de paie</option>
+                            <option value="Document médical">Document médical</option>
+                            <option value="Justificatif de domicile">Justificatif de domicile</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="formNameTitle" class="form-label">Nom du fichier</label>
-                    <input type="text" class="form-control" id="formNameTitle" v-model="name" placeholder="Nom du fichier" maxlength="30" required>
-                </div>
-                <div class="mb-3">
-                    <label for="formDocType" class="form-label">Genre</label>
-                    <select class="form-select" aria-label="Default select example" id="formDocType" v-model="type">
-                        <option value="">Selectionnez le type du fichier</option>
-                        <option value="Document d'identité">Document d'identité</option>
-                        <option value="Fiche de paie">Fiche de paie</option>
-                        <option value="Document médical">Document médical</option>
-                        <option value="Justificatif de domicile">Justificatif de domicile</option>
-                        <option value="Autre">Autre</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-success" @click="(ev)=>handleSubmit(ev)">Envoyer</button>
-                <button type="none" class="btn btn-warning" @click="()=>handleDisplay()">Annuler</button>
+                <button type="submit" class="btn btn-success">Envoyer</button>
+                <button type="none" class="btn btn-warning" @click="handleDisplay">Annuler</button>
             </form>
         </div>
     </div>
@@ -104,12 +107,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
     #openNFButton{
         background-color: #D9D9D9;
         text-align: center;
-        font-size: 1vw;
         border-radius: 10px;
         margin-top: 1vh;
         margin-bottom: 1vh;
@@ -122,38 +124,52 @@ export default {
         background-color: #D9D9D9;
         border-radius: 10px;
         border: none;
-        font-size: 2vw;
+        font-size: 2em;
+    }
+
+    #cover {
+        z-index: 100;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
     }
 
     #modal-file-form{
-        z-index: 100;
+        z-index: 101;
         color: black;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #D9D9D9;
-        padding: 50px;
+        padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        width: 50vw;
-        height: 70vh;
-        border-radius: 10px;
-        overflow-y: scroll;
-    }
-
-    #modal-file-form>h2{
-        text-align: center;
-        margin-bottom: 50px;
+        width: max(min(90vw, 350px), 50vw);
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow-y: hidden;
     }
 
     ::-webkit-scrollbar {
         display: none;
     }
 
-    #form{
-        margin-top: 50px;
+    #newFileForm{
+        margin-top: 20px;
         text-align: left;
+        flex: auto;
+        display: flex;
+        flex-direction: column;
+        overflow-y: hidden;
+    }
+
+    #newFileFormFields{
+        flex: auto;
+        overflow-y: scroll;
     }
 
 </style>

@@ -1,11 +1,12 @@
 <template>
     <div>
         <!--<h1>This is a demand form filling pop up</h1>-->
-        <button id="detailButton" @click="()=>handleDisplay()">Détails</button>
-        <div id="modal-form" ref="modalForm" v-if="displayDetail">
-            <button id="closeButton" @click="()=>handleDisplay()">X</button>
+        <button id="detailButton" @click="handleDisplay">Détails</button>
+        <div id="cover" v-if="displayDetail"></div>
+        <div id="modal-detail-form" ref="modalForm" v-if="displayDetail">
+            <button id="closeButton" @click="handleDisplay">X</button>
             <h2>Détails de la demande {{ newDemand.subject }}</h2>
-            <form id="demandDetailForm">
+            <form id="demandDetailForm" @submit="handleSubmit">
                 <div id="demandDetailFormFields">
                     <div class="mb-3">
                         <label for="formSubject" class="form-label">Sujet</label>
@@ -110,8 +111,8 @@
                         <client-new-file-form />
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" @click="(ev)=>handleSubmit(ev)">Enregistrer les modifications</button>
-                <button type="button" class="btn btn-danger" @click="(ev)=>handleDelete(ev)">Supprimer</button>
+                <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                <button type="button" class="btn btn-danger" @click="handleDelete">Supprimer</button>
             </form>
         </div>
     </div>
@@ -259,7 +260,7 @@ export default {
             if (response.ok) {
                 return response.json();
             } else if(response.status == 401) {
-                this.$router.push("/login/client");
+                this.$router.push("/login");
             } else {
                 throw new Error("Une erreur est survenue, veuillez réessayer plus tard");
             }
@@ -283,6 +284,13 @@ export default {
 </script>
 
 <style>
+    #cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
 
     #closeButton{
         position: absolute;
@@ -291,21 +299,23 @@ export default {
         background-color: #D9D9D9;
         border-radius: 10px;
         border: none;
-        font-size: 2vw;
+        font-size: 2em;
     }
 
-    #modal-form{
+    #modal-detail-form {
         color: black;
         position: absolute;
-        top: 45%;
+        top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #D9D9D9;
-        padding: 50px;
+        padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        width: 50vw;
-        height: 80vh;
+        width: max(min(90%, 350px), 50%);
+        max-height: 95%;
+        display: flex;
+        flex-direction: column;
         border-radius: 10px;
     }
 
@@ -314,13 +324,16 @@ export default {
     }
 
     #demandDetailForm{
-        margin-top: 50px;
+        margin-top: 20px;
         text-align: left;
-        height: 80%;
+        flex: auto;
+        display: flex;
+        flex-direction: column;
+        overflow-y: hidden;
     }
 
     #demandDetailFormFields{
-        height: 100%;
+        flex: auto;
         overflow-y: scroll;
     }
 

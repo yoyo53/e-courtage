@@ -51,7 +51,7 @@
   };
   </script>
   
-  <style>
+  <style scoped>
 
     .clientDetailDivision {
         margin-top: 20px;

@@ -1,6 +1,7 @@
 <template>
     <div>
         <button class="btn btn-primary" @click="()=>handleDisplay()">Vos fichiers</button>
+        <div id="cover" v-if="display"></div>
         <div id="modalFileList" v-if="display">
             <button id="closeButton" @click="()=>handleDisplay()">X</button>
             <client-file-list/>
@@ -26,20 +27,38 @@ export default {
 }
 </script>
 
-<style>
-    #modalFileList {
+<style scoped>
+    #cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         z-index: 10;
+    }
+
+    #modalFileList {
+        z-index: 11;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #D9D9D9;
-        padding: 50px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        width: 50vw;
+        width: max(min(90vw, 350px), 50vw);
         height: 70vh;
         border-radius: 10px;
-        padding: 10px;
+        padding: 20px;
+    }
+
+    #closeButton{
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: #D9D9D9;
+        border-radius: 10px;
+        border: none;
+        font-size: 2em;
     }
 </style>

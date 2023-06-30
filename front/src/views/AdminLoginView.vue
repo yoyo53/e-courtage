@@ -2,10 +2,10 @@
     <div id="loginMain">
         <h1>Connexion Admin</h1>
 
-        <form id="loginForm">
+        <form id="loginForm" @submit="handleLoginA">
             <div class="mb-3">
-                <label for="formId" class="form-label">Identifiant</label>
-                <input type="text" class="form-control" id="formId" placeholder="test" v-model="identifiant">
+                <label for="formEmail" class="form-label">Adresse Email</label>
+                <input type="text" class="form-control" id="formEmail" placeholder="test" v-model="identifiant">
             </div>
 
             <div class="mb-3">
@@ -14,7 +14,7 @@
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary" @click="()=>handleLoginA()">Connexion</button>
+                <button type="submit" class="btn btn-primary">Connexion</button>
             </div>
 
         </form>
@@ -50,7 +50,7 @@ export default {
                 console.log(data);
                 if(data.token != null) {
                     localStorage.setItem('token', data.token);
-                    this.$router.push('/admin/Banques');
+                    this.$router.push('/admin/home');
                 } else {
                     alert('Login failed');
                 }

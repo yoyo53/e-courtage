@@ -25,7 +25,7 @@ export default {
         // TODO: we should check if the token is really valid
 
         if(!localStorage.getItem('token') && this.$route.path != '/') {
-          this.$router.push('/login/client');
+          this.$router.push('/login');
           return;
         }
 
@@ -38,7 +38,7 @@ export default {
             .then((response)=>{
               if(response.status == 401) {
                 localStorage.removeItem('token');
-                this.$router.push('/login/client');
+                this.$router.push('/login');
               }
               return;
             })
@@ -50,7 +50,7 @@ export default {
             this.$router.push('/');
         },
         handleLoginButton(){
-          this.$router.push('/login/client');
+          this.$router.push('/login');
         }
     }
 }
@@ -59,51 +59,40 @@ export default {
 <style>
 #header {
     display: flex;
-    justify-content: space-between;
-    height: 5vh;
+    flex-wrap: wrap;
+    justify-content: center;
     margin-bottom: 5vh;
-    padding-left: 2vw;
-    padding-right: 2vw;
+    padding: 0 2vw;
 }
 
 #header h1 {
     color: white;
-    font-size: 5vh;
-    margin: 0;
+    font-size: 2em;
 }
 
 #headerButtons {
-    height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: right;
+    margin-left: auto;
 }
 
-.headerButton {
-    height: 100%;
+.headerButton, .headerButton a {
     color: white;
     background-color: transparent;
+    text-decoration: none;
     border: none;
     cursor: pointer;
-    font-size: 2.5vh;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding: 0 1em;
     white-space: nowrap;
 }
 
-.headerButton a:hover {
+.headerButton a:hover, .headerButton:hover {
     text-decoration: underline;
 }
 
-.headerButton a:active {
+.headerButton a:active, .headerButton:active {
     color: #D9D9D9;
 }
-
-.headerButton a:visited {
-    text-decoration: none;
-    color: white;
-    border: none;
-}
-
 
 </style>

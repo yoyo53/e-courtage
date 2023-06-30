@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div id="content">
 
         <HeaderComponent/>
 
         <div id="topDog">
 
-            <form id="profileForm">
+            <form id="profileForm" @submit="handlePatchUserInfo">
 
                 <h2>Profil</h2>
 
@@ -141,7 +141,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary" id="saveButton" @click="(ev)=>handlePatchUserInfo(ev)">Mettre à jour</button>
+                <button type="submit" class="btn btn-primary" id="saveButton">Mettre à jour</button>
                 <div id="userEditSuccessMessage" v-if="userEditSuccess">Your informations have been stored</div>
 
             </form>
@@ -243,7 +243,7 @@ export default {
                 if(response.ok){
                     return response.json();
                 }else if(response.status == 401){
-                    this.$router.push("/login/client");
+                    this.$router.push("/login");
                 }else{
                     throw new Error("Something went wrong");
                 }
@@ -291,20 +291,29 @@ export default {
         display: none;
     }
 
-    #topDog {
+    #content {
         display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        height: 80vh;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    #topDog {
+        flex: auto;
+        display: flex;
+        width: 95%;
+        gap: 1em;
+        justify-content: space-between;
         overflow-y: scroll;
         flex-wrap: wrap;
         scrollbar-width: none;
+        margin: auto;
+        padding-bottom: 2em;
     }
 
     #filesList {
-        width: 45%;
-        min-width: 300px;
+        flex: auto;
         margin: auto;
+        width: 49%;
         background-color: #d9d9d9;
         padding: 20px;
         border-radius: 10px;
@@ -322,10 +331,9 @@ export default {
     }
     
     #profileForm {
-        width: 45%;
-        min-width: 300px;
-        height: 100%;
+        flex: auto;
         margin: auto;
+        width: 49%;
         background-color: #d9d9d9;
         padding: 20px;
         border-radius: 10px;
