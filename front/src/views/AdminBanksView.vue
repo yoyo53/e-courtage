@@ -3,7 +3,11 @@
     <div>
       <HeaderComponent/>
     </div>
-
+    <div id="links">
+    <router-link class="link" to="/admin/Banques">Banques</router-link>
+    <router-link class="link" to="/admin/Clients">Clients</router-link>
+    <router-link class="link" to="/admin/Demandes">Demandes</router-link>
+    </div>
     <div id="main-body">
       <h3>Liste des banques :</h3>
       <div id="banks-overview-area" class="section-list">
@@ -76,6 +80,27 @@ export default {
 </script>
 
 <style>
+
+#links {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+#links .link {
+  text-decoration: none;
+  border: 1px solid #000;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  padding: 5px 10px;
+  font-size: 26px;
+}
+
+
 
 #banks-list-container {
   -ms-overflow-style: none;  /* IE and Edge */
