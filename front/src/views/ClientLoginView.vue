@@ -85,7 +85,7 @@ export default {
         text-align: center;
         border-radius: 10px;
         border: 3px solid #000000;
-        padding: 1vh;
+        padding: 1dvh;
         width: min(90%, 350px);
         max-height: 95%;
         display: flex;
@@ -95,17 +95,17 @@ export default {
     #clientLoginForm {
         width: 90%;
         margin: auto;
-        margin-top: 2vw;
+        margin-top: 2dvw;
         flex: auto;
         overflow-y : scroll;
         scrollbar-width: none;
     }
 
     #loginLinks {
-        margin-top: 2vw;
+        margin-top: 2dvw;
         display: flex;
         flex-direction: column;
-        padding: 1vh;
+        padding: 1dvh;
         border-radius: 10px;
         border: 3px solid #000000;
         background-color: #b9b9b9;

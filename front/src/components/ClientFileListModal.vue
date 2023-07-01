@@ -32,8 +32,8 @@ export default {
         position: absolute;
         top: 0;
         left: 0;
-        width: 100vw;
-        height: 100vh;
+        width: 100dvw;
+        height: 100dvh;
         z-index: 10;
     }
 
@@ -46,8 +46,8 @@ export default {
         background-color: #D9D9D9;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        width: max(min(90vw, 350px), 50vw);
-        height: 70vh;
+        width: max(min(90dvw, 350px), 50dvw);
+        height: 70dvh;
         border-radius: 10px;
         padding: 20px;
     }

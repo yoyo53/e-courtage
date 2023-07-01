@@ -74,9 +74,9 @@ export default {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        min-height: 50vh;
+        min-height: 50dvh;
         margin: auto;
-        padding: 2vh;
+        padding: 2dvh;
         background-color: #b9b9b9;
         color: white;
         border: 1px solid black;
@@ -89,7 +89,7 @@ export default {
     }
 
     #recoveryForgotMain h1 {
-        margin-bottom: 5vh;
+        margin-bottom: 5dvh;
         border-bottom: solid 1px black;
     }
 
@@ -99,12 +99,12 @@ export default {
         align-items: center;
         justify-content: center;
         width: 70%;
-        margin-bottom: 2vh;
+        margin-bottom: 2dvh;
     }
 
     #recoveryForgotMain form div {
         width: 100%;
-        margin-bottom: 2vh;
+        margin-bottom: 2dvh;
     }
 
     #recoveryForgotMain form div input {

@@ -16,7 +16,7 @@
   text-align: center;
   color: #f1f1f1;
   background: linear-gradient(to bottom left, #7ceb8c, #2c3b2e);
-  height: 100vh;
+  height: 100dvh;
   overflow-y: hidden;
 }
 

@@ -61,8 +61,8 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 5vh;
-    padding: 0 2vw;
+    margin-bottom: 5dvh;
+    padding: 0 2dvw;
 }
 
 #header h1 {

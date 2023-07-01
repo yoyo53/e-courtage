@@ -196,7 +196,7 @@ export default {
 
 <style scoped>
     #demandListElement {
-        font-size: 1.5vw;
+        font-size: 1.5dvw;
         display: flex;
         flex-direction: column;
         justify-content: space-between;

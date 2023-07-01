@@ -113,8 +113,8 @@ export default {
         background-color: #D9D9D9;
         text-align: center;
         border-radius: 10px;
-        margin-top: 1vh;
-        margin-bottom: 1vh;
+        margin-top: 1dvh;
+        margin-bottom: 1dvh;
     }
 
     #closeButton{
@@ -147,7 +147,7 @@ export default {
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        width: max(min(90vw, 350px), 50vw);
+        width: max(min(90dvw, 350px), 50dvw);
         max-height: 100%;
         display: flex;
         flex-direction: column;

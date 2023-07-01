@@ -71,7 +71,7 @@
         background-color: #D9D9D9;
         border-radius: 10px;
         border: none;
-        font-size: 2vw;
+        font-size: 2dvw;
     }
 
     #modal-form {
@@ -84,8 +84,8 @@
         padding: 50px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        width: 50vw;
-        height: 80vh;
+        width: 50dvw;
+        height: 80dvh;
         border-radius: 10px;
     }
 
