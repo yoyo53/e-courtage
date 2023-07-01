@@ -81,7 +81,7 @@ export default {
 <style scoped>
 
 .landing-page-container {
-  max-height: 100vh;
+  max-height: 100dvh;
   overflow-y: auto;
   padding: 20px;
 }

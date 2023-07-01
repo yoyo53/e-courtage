@@ -64,7 +64,7 @@ export default {
 
 <style>
 #clientListElement {
-  font-size: 1.5vw;
+  font-size: 1.5dvw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

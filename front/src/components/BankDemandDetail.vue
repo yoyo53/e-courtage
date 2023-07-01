@@ -133,7 +133,7 @@ export default {
         background-color: #D9D9D9;
         border-radius: 10px;
         border: none;
-        font-size: 2vw;
+        font-size: 2dvw;
     }
 
     #modal-form{
@@ -149,8 +149,8 @@ export default {
         padding-top: 10px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        width: 80vw;
-        height: 95vh;
+        width: 80dvw;
+        height: 95dvh;
         border-radius: 10px;
     }
 
@@ -165,8 +165,8 @@ export default {
         background-color: white;
         display: flex;
         flex-direction: column;
-        margin-top: 2vh;
-        padding: 1vh;
+        margin-top: 2dvh;
+        padding: 1dvh;
         text-align: left;
         overflow-y: scroll;
     }
@@ -188,7 +188,7 @@ export default {
     }
 
     #demandFiles{
-        margin-bottom: 2vh;
+        margin-bottom: 2dvh;
     }
     .fileRowText {
         width: 40%;
@@ -205,14 +205,14 @@ export default {
         display: flex;
         flex-direction: row;
         justify-content: right;
-        margin-top: 1vh;
+        margin-top: 1dvh;
     }
 
     #top-part{
         display: flex;
         flex-direction: row;
-        height: 100vh;
-        margin-bottom: 5vh ;
+        height: 100dvh;
+        margin-bottom: 5dvh ;
     }
 
     #clientInfo {

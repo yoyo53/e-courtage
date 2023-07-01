@@ -65,18 +65,18 @@ export default {
         border-radius: 10px;
         background-color: #b9b9b9;
         border: solid 1px black;
-        padding: 1vh;
-        min-height: 30vh;
+        padding: 1dvh;
+        min-height: 30dvh;
     }
 
     #verificationTitle{
         font-size: 3em;
         border-bottom: solid 1px black;
-        margin-bottom: 1vh;
+        margin-bottom: 1dvh;
     }
 
     #verificationMessage{
-        margin-top: 1vh;
+        margin-top: 1dvh;
     }
 
     .verificationOption{
@@ -86,7 +86,7 @@ export default {
 
     .verificationLink{
         font-size: 1.2em;
-        margin-top: 1vh;
+        margin-top: 1dvh;
     }
 
 </style>

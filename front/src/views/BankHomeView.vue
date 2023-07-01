@@ -229,7 +229,7 @@ export default {
     justify-content: space-between;
     align-items:start;
     width: 95%;
-    height: 85vh;
+    height: 85dvh;
     margin: auto;
     background-color: #D9D9D9;
     padding: 10px;

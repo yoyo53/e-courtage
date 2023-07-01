@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--<h1>This is a demand form filling pop up</h1>-->
-        <button type="none" id="openNFButton" @click="handleDisplay">NOUVEAU DOCUMENT</button>
+        <button type="button" id="openNFButton" @click="handleDisplay">NOUVEAU DOCUMENT</button>
         <div id="cover" v-if="displayForm"></div>
         <div id="modal-file-form" ref="modalForm" v-if="displayForm">
             <button id="closeButton" @click="handleDisplay">X</button>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success">Envoyer</button>
-                <button type="none" class="btn btn-warning" @click="handleDisplay">Annuler</button>
+                <button type="button" class="btn btn-warning" @click="handleDisplay">Annuler</button>
             </form>
         </div>
     </div>
@@ -113,8 +113,8 @@ export default {
         background-color: #D9D9D9;
         text-align: center;
         border-radius: 10px;
-        margin-top: 1vh;
-        margin-bottom: 1vh;
+        margin-top: 1dvh;
+        margin-bottom: 1dvh;
     }
 
     #closeButton{
@@ -147,7 +147,7 @@ export default {
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        width: max(min(90vw, 350px), 50vw);
+        width: max(min(90dvw, 350px), 50dvw);
         max-height: 100%;
         display: flex;
         flex-direction: column;
