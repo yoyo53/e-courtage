@@ -4,12 +4,12 @@
 
         <form id="bankLoginForm" @submit.prevent="handleLoginB">
             <div class="mb-3">
-                <label for="formEmail" class="form-label">Email address</label>
+                <label for="formEmail" class="form-label">Adresse Email</label>
                 <input type="text" class="form-control" id="formEmail" placeholder="name@example.com" v-model="email">
             </div>
 
             <div class="mb-3">
-                <label for="formPassword" class="form-label">Password</label>
+                <label for="formPassword" class="form-label">Mot de passe</label>
                 <input type="password" class="form-control" id="formPassword" placeholder="********" v-model="password">
             </div>
 
