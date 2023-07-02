@@ -2,7 +2,7 @@
     <div id="loginMain">
         <h1>Connexion Admin</h1>
 
-        <form id="loginForm" @submit="handleLoginA">
+        <form id="loginForm" @submit.prevent="handleLoginA">
             <div class="mb-3">
                 <label for="formIdentifiant" class="form-label">Identifiant</label>
                 <input type="text" class="form-control" id="formIdentifiant" placeholder="test" v-model="identifiant">

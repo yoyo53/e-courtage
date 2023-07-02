@@ -1,4 +1,5 @@
 <template>
+    <div id="cover" v-if="displayDetail"></div>
     <div>
         <!-- <h1>This demand detail pop up</h1> -->
         <button id="detailButton" @click="()=>handleDisplay()">Détails</button>
@@ -126,6 +127,14 @@ export default {
 
 </script>
 <style scoped>
+    #cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100dvw;
+        height: 100dvh;
+    }
+
     #closeButton{
         position: absolute;
         top: 0;
@@ -133,7 +142,7 @@ export default {
         background-color: #D9D9D9;
         border-radius: 10px;
         border: none;
-        font-size: 2dvw;
+        font-size: 2em;
     }
 
     #modal-form{
@@ -146,11 +155,10 @@ export default {
         transform: translate(-50%, -50%);
         background-color: #D9D9D9;
         padding: 20px;
-        padding-top: 10px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        width: 80dvw;
-        height: 95dvh;
+        width: max(min(90%, 350px), 50%);
+        max-height: 95%;
         border-radius: 10px;
     }
 
@@ -159,14 +167,18 @@ export default {
         overflow-y: scroll;
     }
 
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+
     .bankDemandDetailDivision{
-        width: 100%;
+        flex: auto;
         border-radius: 10px;
         background-color: white;
         display: flex;
         flex-direction: column;
-        margin-top: 2dvh;
-        padding: 1dvh;
+        padding: 0.5em;
         text-align: left;
         overflow-y: scroll;
     }
@@ -187,11 +199,7 @@ export default {
         width: 100%;
     }
 
-    #demandFiles{
-        margin-bottom: 2dvh;
-    }
     .fileRowText {
-        width: 40%;
         text-align: left;
         display: flex;
         flex-direction: column;
@@ -205,14 +213,17 @@ export default {
         display: flex;
         flex-direction: row;
         justify-content: right;
-        margin-top: 1dvh;
+        margin-top: 1em;
+        gap: 0.2em;
     }
 
     #top-part{
         display: flex;
         flex-direction: row;
-        height: 100dvh;
-        margin-bottom: 5dvh ;
+        flex-wrap: wrap;
+        align-items: stretch;
+        margin-bottom: 1em;
+        gap: 1em;
     }
 
     #clientInfo {
@@ -220,8 +231,7 @@ export default {
         flex-direction: column;
         justify-content: left;
         align-items: flex-start;
-        width: 50%;
-        height: 100%;
+        flex: auto;
     }
 
     #demandInfo {
@@ -229,10 +239,14 @@ export default {
         flex-direction: column;
         justify-content: left;
         align-items: flex-start;
-        width: 45%;
-        height: 100%;
-        margin-left: 5%;
+        flex: auto;
+    }
 
+    #detailButton{
+        color: blue;
+        margin-top: 10px;
+        border: none;
+        background-color: white;
     }
 
 </style>

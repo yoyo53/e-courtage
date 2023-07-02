@@ -1,4 +1,5 @@
 <template>
+    <div id="cover" v-if="displayDetail"></div>
     <div>
       <button id="detailButton" @click="handleDisplay()">Détails</button>
       <div id="modal-form" ref="modalForm" v-if="displayDetail">
@@ -52,16 +53,20 @@
   </script>
   
   <style scoped>
-
+    #cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100dvw;
+        height: 100dvh;
+    }
     .clientDetailDivision {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        max-height: 600px;
+        margin-top: 20px 0;
         overflow-y: scroll;
         border: solid black 3px;
         border-radius: 10px;
-        padding-top: 15px;
-        padding-bottom: 15px;
+        padding: 15px 0;
+        flex: auto;
     }
 
     #closeButton {
@@ -71,22 +76,24 @@
         background-color: #D9D9D9;
         border-radius: 10px;
         border: none;
-        font-size: 2dvw;
+        font-size: 2em;
     }
 
     #modal-form {
         color: black;
         position: absolute;
-        top: 45%;
+        top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #D9D9D9;
-        padding: 50px;
+        padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        width: 50dvw;
-        height: 80dvh;
+        width: max(min(90dvw, 350px), 50dvw);
+        max-height: 95%;
         border-radius: 10px;
+        display: flex;
+        flex-direction: column;
     }
 
     ::-webkit-scrollbar {

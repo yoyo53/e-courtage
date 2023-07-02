@@ -70,20 +70,16 @@ export default {
 
 <style scoped>
 #clientListElement {
-  font-size: 1.5dvw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 90%;
   justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 2%;
+  margin: 10px auto;
   background-color: white;
   border-radius: 10px;
   padding: 5px;
-  margin-bottom: 10px;
 }
 
 .clientRow {

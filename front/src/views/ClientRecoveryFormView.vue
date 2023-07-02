@@ -13,7 +13,7 @@
             <button type="submit" class="btn btn-primary" @click="(ev)=>handleSubmit(ev)" v-if="!success">Envoyer</button>
         </form>
         <div v-if="success">
-            <h2>Votre mail a été modifié</h2>
+            <h2>Votre mot de passe a été modifié !</h2>
             <router-link to="/login/client">Retour à la page de connexion</router-link>
             <router-link to="/">Retour à la page d'accueil</router-link>
         </div>
@@ -90,22 +90,23 @@ export default {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        min-height: 50dvh;
         margin: auto;
-        padding: 2dvh;
+        padding: 1em;
         background-color: #b9b9b9;
         color: white;
         border: 1px solid black;
         border-radius: 10px;
-
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        width: min(90%, 450px);
+
     }
 
     #recoveryFormMain h1 {
-        margin-bottom: 5dvh;
+        margin-bottom: 0.5em;
+        padding-bottom: 0.5em;
         border-bottom: solid 1px black;
     }
 
@@ -115,15 +116,19 @@ export default {
         align-items: center;
         justify-content: center;
         width: 90%;
-        margin-bottom: 2dvh;
+        margin-bottom: 1em;
     }
 
     #recoveryFormMain form div {
         width: 100%;
-        margin-bottom: 2dvh;
     }
 
     #recoveryFormMain form div input {
         width: 100%;
+    }
+
+    #recoveryFormMain a {
+        display: block;
+        margin: 0.2em;
     }
 </style>

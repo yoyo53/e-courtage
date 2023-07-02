@@ -14,9 +14,16 @@
         </div>
 
         <span id="bankTitle">{{bank.nom_banque}}</span>
-        <div class="bankRow"><span> Siret : {{ bank.siret }} </span></div>
-        <div class="bankRow"><span> Pays : {{ bank.pays}}</span> <span> Ville : {{ bank.ville}}</span> <span> Addresse : {{ bank.adresse}}</span></div>
-        <div class="bankRow"><span> Email : {{ bank.email }}</span><span> Telephone : {{ bank.tel }}</span></div>
+        <div class="bankRow">
+            <span> Siret : {{ bank.siret }} </span>
+        </div>
+        <div class="bankRow">
+            <span> Pays : {{ bank.pays}}</span>
+            <span> Ville : {{ bank.ville}}</span>
+            <span> Addresse : {{ bank.adresse}}</span>
+            <span> Email : {{ bank.email }}</span>
+            <span> Telephone : {{ bank.tel }}</span>
+        </div>
     </div>
 </template>
 
@@ -74,29 +81,25 @@ export default {
 
 <style scoped>
     #bankListElement {
-        font-size: 1.5dvw;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        width: 80%;
+        width: 90%;
         justify-content: center;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 2%;
+        margin: 10px auto;
         background-color: white;
         border-radius: 10px;
         padding: 5px;
-        margin-bottom: 10px;
     }
 
     .bankRow {
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
-        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
         width: 100%;
-        
+        column-gap: 1em;
     }
 
     .bankRow span {
@@ -112,9 +115,6 @@ export default {
         display: flex;
         margin-left: 90%;
         color: black;
-    }
-    .but{
-        padding-left:2mm;
     }
 
     .active-border {

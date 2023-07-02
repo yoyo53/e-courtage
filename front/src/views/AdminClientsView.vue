@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="content">
       <div>
         <HeaderComponent/>
       </div>
@@ -27,7 +27,7 @@
   </template>
   
   <script>
-  import ClientsListElement from '@/components/ClientsListElement.vue';
+  import ClientsListElement from '@/components/AdminClientsListElement.vue';
   import HeaderComponent from '@/components/HeaderComponent.vue'
   
   export default {
@@ -79,14 +79,36 @@
   
   
   <style scoped>
+#content {
+  height: 100dvh;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+#main-body {
+  height: 100dvh;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+}
+
+#clients-overview-area {
+  height: 100dvh;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+}
 
 #links {
   display: flex;
-  justify-content: space-between;
-  width: 30%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 20px;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin: auto;
+  gap: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 #links .link {
@@ -96,9 +118,7 @@
   background-color: white;
   color: black;
   padding: 5px 10px;
-  font-size: 26px;
-  flex-basis: 0;
-  flex-grow: 1;
+  font-size: 1.5em;
 }
 
 
@@ -112,20 +132,22 @@
   }
   
   #clients-list-container {
-    max-height: 600px;
-    overflow-y: auto;
+    flex: auto;
+    overflow-y: scroll;
     border: 2px solid aliceblue;
     border-radius: 15px;
-    max-width: 60%;
-    margin-left: auto;
-    margin-right: auto;
+    width: max(min(90%, 700px), 50%);
+    margin: 1em auto;
+  }
+
+  #clients-list {
+    padding: 0;
   }
   
   #search-input {
       margin-bottom: 10px;
-      width: 20%;
-      margin-left: auto;
-      margin-right: auto;
+      width: 15em;
+      margin: auto;
   }
   </style>
   
