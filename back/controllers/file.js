@@ -28,10 +28,10 @@ function getFile(filepath, response) {
     bucket.file(filepath).createReadStream().pipe(response);
 }
 
-function getFiles(filepaths, response) {
+function getFiles(files, response) {
 	const zip = new JSZip();
-	for (let filepath of filepaths) {
-		zip.file(filepath, bucket.file(filepath).createReadStream(), { binary : true });
+	for (let file of files) {
+		zip.file(file.name, bucket.file(file.path).createReadStream(), { binary : true });
 	}
 	zip.generateNodeStream().pipe(response);
 }

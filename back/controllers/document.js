@@ -302,14 +302,14 @@ exports.downloadAllDocuments = async (req, res) => {
 					id_client: client.id_client
 				}
 			});
-			let name_files = [];
+			let files = [];
 			for (document of documents) {
 				const extension = document.nom_document.split('.').pop();
-				const name_file = document.id_document + '.' + extension;
-				name_files.push(name_file);
+				const path_file = document.id_document + '.' + extension;
+				files.push({path: path_file, name: document.nom_document});
 			}
 			// Download file
-			file.getFiles(name_files, res);
+			file.getFiles(files, res);
 		}
 	} catch (err) {
 		res.status(500).send({ message: "Error has occured" });
