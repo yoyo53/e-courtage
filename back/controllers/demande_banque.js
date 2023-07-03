@@ -1,13 +1,12 @@
 const Sequelize = require("../db.connection");
 const Demande = require("../models/demande.model.js")(Sequelize.connection, Sequelize.library);
-const Banque = require("../models/banque.model.js")(Sequelize.connection, Sequelize.library);
 const Client = require("../models/client.model.js")(Sequelize.connection, Sequelize.library);
 const Document = require("../models/document.model.js")(Sequelize.connection, Sequelize.library);
 const Accepter = require("../models/accepter.model.js")(Sequelize.connection, Sequelize.library);
 const Contient = require("../models/contient.model.js")(Sequelize.connection, Sequelize.library);
 const mail = require("./mail.js")
 const sessions = require("./session.js");
-const { Op } = require("sequelize");
+
 
 exports.getAllDemandes = async(req, res) => {
     try{

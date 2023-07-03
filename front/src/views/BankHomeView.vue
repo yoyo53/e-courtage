@@ -7,7 +7,6 @@
                 <div id="research-input" class="input-group flex-nowrap">
                     <input type="text" id="" class="form-control" placeholder="Recherche" aria-label="Recherche" aria-describedby="addon-wrapping" v-model="searchInput">
                 </div>
-                <!-- <input type="text" name="recherche"> -->
                 <div class="sort-div">
                     <select class="sort-choices form-select" aria-label="Default select example" v-model="orderBy">
                         <option value="">Trier par :</option>
@@ -123,67 +122,6 @@ export default {
 
         },
         fetchBankUserDemands() {
-            // TODO
-            /*
-            this.userDemands = [
-                {
-                    "id":0,
-                    "sujet": "Projet Maison",
-                    "nom": "Jesen Brown",
-                    "montant_bien": 300000,
-                    "revenu_mensuel" : 4000,
-                    "favorite" : false,
-                    "added" : false
-                },
-                {
-                    "id":1,
-                    "sujet": "Projet construction",
-                    "nom": "Mike Harvey",
-                    "montant_bien": 900000,
-                    "revenu_mensuel" : 8000,
-                    "favorite" : false,
-                    "added" : false
-                },
-                {
-                    "id":2,
-                    "sujet": "Projet jet",
-                    "nom": "Louis Litt",
-                    "montant_bien": 500000,
-                    "revenu_mensuel" : 6000,
-                    "favorite" : false,
-                    "added" : false
-                },
-                {
-                    "id":3,
-                    "sujet": "Projet LVMH",
-                    "nom": "Bernard Arnaud",
-                    "montant_bien": 20000000,
-                    "revenu_mensuel" : 60000,
-                    "favorite" : false,
-                    "added" : false
-                },
-                {
-                    "id":4,
-                    "sujet": "Projet lawyer",
-                    "nom": "Specter Ross",
-                    "montant_bien": 100000,
-                    "revenu_mensuel" : 3000,
-                    "favorite" : false,
-                    "added" : false
-                },
-                {
-                    "id":5,
-                    "sujet": "Projet club",
-                    "nom": "Jimmy Buckets",
-                    "montant_bien": 1000000,
-                    "revenu_mensuel" : 8000,
-                    "favorite" : false,
-                    "added" : false
-                }
-            ];
-            this.displayedDemands = this.userDemands;
-            */
-
             fetch(this.api_url + 'demande_banque/getAllDemandes',{
                 headers: {
                 'Content-Type': 'application/json',

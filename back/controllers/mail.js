@@ -139,9 +139,7 @@ function sendAgreementMail(email, name, titre, bank_name){
     <p>
         Votre demande "${titre}" a été acceptée par ${bank_name}.
         <br>
-        Rendez vous sur
-        <a href="${website_url}">e-courtage</a>
-        pour accéder à leur informations de contact.
+        Vous allez être contacté par mail ou téléphone prochainement.
     </p>
     <p>
         Cordialement,

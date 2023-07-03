@@ -1,10 +1,6 @@
-/* BEGIN db initialization */
-const { Op } = require("sequelize");
 const Sequelize = require("../db.connection");
 const Banque = require("../models/banque.model.js")(Sequelize.connection, Sequelize.library);
 const sessions = require("./session.js");
-
-/* END db initialization */
 
 
 exports.getAllBanques = async(req, res) => {

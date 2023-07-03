@@ -216,7 +216,6 @@ export default {
             })
             .then((response) => {
                 console.log(response);
-                //this.userEditSuccess = true;
                 this.$notify({
                     title: 'Success',
                     text: 'Vos informations ont été mises à jour',

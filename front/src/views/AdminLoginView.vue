@@ -56,10 +56,6 @@ export default {
                 }
             })
                 
-        },
-        handleLoginB(){
-            localStorage.setItem('token', '123456789');
-            this.$router.push('/bank');
         }
     }
 }

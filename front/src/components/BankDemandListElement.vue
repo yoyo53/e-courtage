@@ -79,7 +79,6 @@ export default {
             })
             .then((response) => {
                 console.log(response);
-                //this.userEditSuccess = true;
                 this.$notify({
                     title: 'Success',
                     text: this.demand.statut==-1?'La demande a été refusée':'La demande n\'est plus refusée',
@@ -130,7 +129,6 @@ export default {
             })
             .then((response) => {
                 console.log(response);
-                //this.userEditSuccess = true;
                 this.$notify({
                     title: 'Success',
                     text: this.demand.statut==2?'La demande a été acceptée':'La demande n\'est plus acceptée',
@@ -173,7 +171,6 @@ export default {
             })
             .then((response) => {
                 console.log(response);
-                //this.userEditSuccess = true;
                 this.$notify({
                     title: 'Success',
                     text: this.demand.statut==1?'La demande a été épinglée':'La demande a été désépinglée',
