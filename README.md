@@ -39,7 +39,7 @@ Cette version marque le déploiement initial d'e-courtage en production. s'agit 
 - Sécurité des données : Les données des utilisateurs sont stockées de manière sécurisée, et les interactions avec le back-end sont protégées via des mesures d'authentification et d'autorisation.
 
 
-## Prochaines étapes
+### Prochaines étapes
 Cette version initiale fournit une base solide pour e-courtage, mais il reste encore un certain nombre de fonctionnalités et d'améliorations à ajouter. Voici quelques-unes des prochaines étapes prévues :
 
 - Filtrage des banques : Ajout de fonctionnalités pour envoyer les demandes de prêts uniquement aux banques choisies par l'utilisateur.
