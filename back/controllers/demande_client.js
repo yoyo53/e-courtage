@@ -187,9 +187,14 @@ exports.getSingleDemande = async (req, res) => {
             return;
         } else {
             // Get demande
-            let demande = await Demande.findOne({ where: { id_demande: req.params.id_demande } });
-
-            res.status(200).send(demande);
+            let client = await sessions.findByToken(token, "client");
+            let demande = await Demande.findOne({ where: { id_demande: req.params.id_demande, id_client: client.id_client } });
+            if (demande == null) {
+                res.status(401).send({ message: "Unauthorized" });
+            }
+            else {
+                res.status(200).send(demande);
+            }
         }
     } catch(err){
         res.status(500).send({ message: "Error has occured" });

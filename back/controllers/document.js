@@ -65,12 +65,6 @@ exports.deleteDocument = async (req, res) => {
 			const extension = document.nom_document.split('.').pop();	
 			const name_file = document.id_document + '.' + extension;
 
-			// Delete contient
-			await Contient.destroy({
-				where: {
-					id_document: req.params.id_document
-				}
-			});
 			// Delete document
 			await Document.destroy({
 				where: {
