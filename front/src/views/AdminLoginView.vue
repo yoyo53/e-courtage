@@ -5,12 +5,12 @@
         <form id="loginForm" @submit.prevent="handleLoginA">
             <div class="mb-3">
                 <label for="formIdentifiant" class="form-label">Identifiant</label>
-                <input type="text" class="form-control" id="formIdentifiant" placeholder="test" v-model="identifiant">
+                <input type="text" class="form-control" id="formIdentifiant" placeholder="identifiant" v-model="identifiant">
             </div>
 
             <div class="mb-3">
                 <label for="formPassword" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="formPassword" placeholder="password" v-model="password">
+                <input type="password" class="form-control" id="formPassword" placeholder="********" v-model="password">
             </div>
 
             <div class="mb-3">
@@ -65,7 +65,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
     #loginMain {
         position: absolute;

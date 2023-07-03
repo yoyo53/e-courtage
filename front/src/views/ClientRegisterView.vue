@@ -154,7 +154,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
     ::-webkit-scrollbar {
         display:none;

@@ -25,11 +25,11 @@
         <h3>Quelques témoignages de nos clients</h3>
         <div class="testimonial">
           <p>"Grâce à cette plateforme, j'ai pu obtenir un prêt immobilier avec un taux avantageux et sans tracas. Je la recommande vivement !"</p>
-          <span>- Jean-Michel</span>
+          <span>- Romain Foucher</span>
         </div>
         <div class="testimonial">
           <p>"Je suis impressionné par la facilité d'utilisation de cette plateforme. J'ai rapidement trouvé l'offre de prêt qui me convenait."</p>
-          <span>- Matthieu Evuort</span>
+          <span>- Yohan Villers</span>
         </div>
         <div class="testimonial">
           <p>"Je suis vraiment impressionné par la facilité avec laquelle j'ai trouvé l'offre de prêt immobilier qui me convenait. C'était rapide et pratique, et cela m'a grandement simplifié la vie."</p>
@@ -52,8 +52,8 @@
           <img src="../assets/logo-bnp-paribas.png" alt="Logo BNP Paribas" />
           <img src="../assets/logo-bred.png" alt="Logo BRED" />
         </div>
-        <p>Plus de XXXX prêts accordés avec succès</p>
-        <p>Taux de satisfaction client de XX%</p>
+        <p>Plus de 100 000 prêts accordés avec succès</p>
+        <p>Taux de satisfaction client de 97%</p>
       </section>
     </div>
   </div>

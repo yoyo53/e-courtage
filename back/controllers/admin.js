@@ -107,6 +107,9 @@ exports.updateClient = async (req, res) => {
             let client = await Client.findOne({ where: { id_client: req.params.id_client } });
             client.account_status = req.body.account_status;
             await client.save();
+            if (!req.body.account_status) {
+                mail.sendAdminBannedAccountMail(client.email, client.nom);
+            }
             res.status(200).send(client.account_status);
         }
     } catch(err){
@@ -129,6 +132,9 @@ exports.updateBanque = async (req, res) => {
             let banque = await Banque.findOne({ where: { id_banque: req.params.id_banque } });
             banque.account_status = req.body.account_status;
             await banque.save();
+            if (!req.body.account_status) {
+                mail.sendAdminBannedAccountMail(banque.email, banque.nom_banque);
+            }
             res.status(200).send(banque.account_status);
         }
     } catch(err){
@@ -173,7 +179,7 @@ exports.deleteDemande = async (req, res) => {
             let demande = await Demande.findOne({ where: { id_demande: req.params.id_demande } });
             let client = await Client.findOne({ where: { id_client: demande.id_client } });
             await demande.destroy();
-            mail.sendAdminBannedAccountMail(client.email, client.nom, demande.sujet);
+            mail.sendAdminDeletedDemandeMail(client.email, client.nom, demande.sujet);
             res.status(200).send({ message: "Demande deleted successfully" });
         }
     } catch(err){
@@ -196,6 +202,7 @@ exports.activateBanque = async (req, res) => {
             let banque = await Banque.findOne({ where: { id_banque: req.params.id_banque } });
             banque.account_status = true;
             await banque.save();
+            mail.sendAdminActivatedAccountMail(banque.email, banque.nom_banque);
             res.status(200).send({ message: "Banque activated successfully" });
         }
     } catch(err){

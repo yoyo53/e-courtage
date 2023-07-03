@@ -183,11 +183,7 @@ exports.verifyClient = async(req, res) => {
         // Find if token exists in database
         let session = await Session.findOne({where: {token: tokenClient}});
         if(!session){
-            res.status(401).send(`<html>
-                                    <body>
-                                        <h1>Account verified</h1>
-                                    </body>
-                                </html>`);
+            res.status(401).send({message: "Wrong credentials"});
             return;
         }
         // If token exists, check if it is still valid
@@ -198,18 +194,10 @@ exports.verifyClient = async(req, res) => {
             await Client.update({account_status: true}, {where: {id_client: session.id_client}});
             // Delete token
             await Session.destroy({where: {token: tokenClient}});
-            res.status(200).send(`<html>
-                                    <body>
-                                        <h1>Account verified</h1>
-                                    </body>
-                                </html>`);
+            res.status(200).send({message: "Account verified"});
         }
     }catch(err){
         console.log(err);
-        res.status(500).send(`<html>
-                                <body>
-                                    <h1>Account already verified</h1>
-                                </body>
-                            </html>`);
+        res.status(500).send({message: "Account already verified"});
     }
 }

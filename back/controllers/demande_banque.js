@@ -113,7 +113,7 @@ exports.updateDemande = async(req, res) => {
             let demande = await Demande.findOne({ where: { id_demande: accepter.id_demande } });
             let client = await Client.findOne({ where: { id_client: demande.id_client } });
             if(accepter.statut == 2){
-                mail.sendAgreementMail(client.email, client.nom, demande.sujet);
+                mail.sendAgreementMail(client.email, client.nom, demande.sujet, banque.nom_banque);
             }
             await accepter.save();
             res.status(200).send({ message: "Demande updated successfully" });
