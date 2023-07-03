@@ -18,9 +18,35 @@ URL de l'API (back-end) : <https://e-courtage-back.fly.dev/>
 URL du site web (front-end) : <https://yoyo53.github.io/e-courtage>
 
 
-## Release Note
+## Release Note - Version 1.0.0 (04/07/2023):
 
-TODO
+Cette version marque le déploiement initial d'e-courtage en production. s'agit d'une étape majeure dans le développement du projet et offre les fonctionnalités de base pour permettre aux clients et aux banques de se connecter, d'accéder à leurs espaces respectifs et de gérer leurs demandes.
+
+
+### Fonctionnalités clés
+- Inscription et connexion des utilisateurs : Les clients et les banques peuvent créer un compte et se connecter au site pour accéder aux différentes fonctionnalités du site.
+
+- Gestion du profil client : Les clients peuvent accéder à leur profil pour modifier leurs informations et les fichiers liés à leur compte.
+
+- Création de demandes de prêt : Les clients peuvent créer des demandes de prêt en y attachant des fichiers et les envoyer aux banques. Ils peuvent également les modifier et les supprimer par la suite.
+
+- Consultation des demandes : Les banques peuvent consulter les demandes de prêt envoyées par les clients puis les accepter ou les refuser. Accepter la demande enverra une notification au client.
+
+- Notifications par mail : Des notifications mails sont envoyées aux clients et aux banques lors de certains événements importants (compte activé, demande acceptée...).
+
+- Modération : L'administrateur peut accéder à la liste des clients, banques et demandes, et en supprimer si nécessaire. Les comptes de banques doivent également être validés par un administrateur avant d'être activés.
+
+- Sécurité des données : Les données des utilisateurs sont stockées de manière sécurisée, et les interactions avec le back-end sont protégées via des mesures d'authentification et d'autorisation.
+
+
+### Prochaines étapes
+Cette version initiale fournit une base solide pour e-courtage, mais il reste encore un certain nombre de fonctionnalités et d'améliorations à ajouter. Voici quelques-unes des prochaines étapes prévues :
+
+- Filtrage des banques : Ajout de fonctionnalités pour envoyer les demandes de prêts uniquement aux banques choisies par l'utilisateur.
+
+- Chat entre  clients et banques : Mise en place d'un système de chat permettant aux client et aux banque de discutter directement sur le site e-courtage.
+
+- Algorithme de classification : Création d'un algorithme de machine learning classant les demandes des clients suivant leur qualité globale.
 
 
 ## Installation
