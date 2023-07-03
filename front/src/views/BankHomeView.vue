@@ -76,7 +76,7 @@ export default {
                 return demand.sujet.toLowerCase().includes(this.searchInput.toLowerCase()) || 
                 demand.client.nom.toLowerCase().includes(this.searchInput.toLowerCase()) || 
                 demand.client.prenom.toLowerCase().includes(this.searchInput.toLowerCase()) || 
-                demand.client.commentaire.toLowerCase().includes(this.searchInput.toLowerCase()) ||
+                demand.commentaire.toLowerCase().includes(this.searchInput.toLowerCase()) ||
                 demand.client.revenu_mensuel.toString().includes(this.searchInput.toLowerCase()) || 
                 demand.montant_bien.toString().includes(this.searchInput.toLowerCase());
             })
