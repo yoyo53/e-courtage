@@ -154,10 +154,10 @@ export default {
                                 if(data[i][key][key2] == null){
                                     data[i][key][key2] = "Non renseigné";
                                 }
+                                if(key2 == "date_birth" || key2 == "poste_depuis") {
+                                    data[i][key][key2] = data[i][key][key2]?.split("T")[0];
+                                }
                             }
-                        }
-                        if(key == "date_birth" || key == "poste_depuis") {
-                            data[i][key] = data[i][key]?.split("T")[0];
                         }
                     }
                 }
