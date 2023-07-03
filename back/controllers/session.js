@@ -66,20 +66,19 @@ exports.createSession = async (id, userType) => {
 
 // Verify if user is logged in
 exports.verifyToken = async (token, userType) => {
-    if(token){
-        let session = await this.findByToken(token, userType)
-        if(session){
-            let isTokenExpired = (new Date(session.valid_until) - new Date()) <= 0
-            if(!isTokenExpired){
-                console.log("token is valid")
-                return true
-            }
-            console.log("token is expired")
-            return false
+    let session = await this.findByToken(token, userType)
+    console.log(session);
+    if(session){
+        let isTokenExpired = (new Date(session.valid_until) - new Date()) <= 0
+        if(!isTokenExpired){
+            console.log("token is valid")
+            return true
         }
+        console.log("token is expired")
+        return false
+    }
     console.log("token not found")
     return false
-    }
 }
 
 

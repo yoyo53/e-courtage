@@ -204,13 +204,13 @@ exports.verifyClient = async(req, res) => {
 
 exports.verifyToken = async (req, res) => {
     let token = req.params.token;
-    if (sessions.verifyToken(token, "client")) {
+    if (await sessions.verifyToken(token, "client")) {
         res.status(200).send({type: "client"});
     }
-    else if (sessions.verifyToken(token, "banque")) {
+    else if (await sessions.verifyToken(token, "banque")) {
         res.status(200).send({type: "banque"});
     }
-    else if (sessions.verifyToken(token, "admin")) {
+    else if (await sessions.verifyToken(token, "admin")) {
         res.status(200).send({type: "admin"});
     }
     else {
