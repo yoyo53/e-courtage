@@ -156,6 +156,9 @@ export default {
                                 }
                             }
                         }
+                        if(key == "date_birth" || key == "poste_depuis") {
+                            data[i][key] = data[i][key]?.split("T")[0];
+                        }
                     }
                 }
 
