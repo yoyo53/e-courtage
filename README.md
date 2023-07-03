@@ -9,6 +9,7 @@
 
 E-courtage est une solution de courtage en ligne permettant la mise en relation de chercheurs de prêts immobiliers et de banques en mesure de les financer. Découvrez dès maintenant e-courtage sur notre [site](https://yoyo53.github.io/e-courtage).
 
+
 ## Démonstration
 
 Afin de démontrer la viabilité de cette solution, une version de démonstration a été déployée depuis ce dépôt GitHub.  
@@ -16,9 +17,11 @@ La base de données PostgreSQL est déployée sur [neon.tech](https://neon.tech)
 URL de l'API (back-end) : <https://e-courtage-back.fly.dev/>  
 URL du site web (front-end) : <https://yoyo53.github.io/e-courtage>
 
+
 ## Release Note
 
 TODO
+
 
 ## Installation
 
@@ -27,20 +30,21 @@ Cette application web ayant été réalisée en mode n-tier, cela signifie qu’
 - Le back-end (API Express.js pour interagir avec les bases de données)
 - Le front-end (site web statique qui interagit avec l’API)
 
+
 ### Création des bases de données
 
 La première étape du déploiement consiste donc à créer et configurer ces bases de données utilisées par l’application. Elles sont au nombre de deux :
 -	Une base de données PostgreSQL pour stocker toutes les données textuelles
 -	Un bucket Firebase Storage pour stocker les documents et images
 
-\
-**Étape 1 : Création de la base de données PostgreSQL**
+
+#### <ins>Étape 1 :</ins> Création de la base de données PostgreSQL
 1. Créez une nouvelle instance PostgreSQL sur l’hébergeur de votre choix (ou votre propre serveur).
 2. Dans cette instance, créez une nouvelle base de données ainsi qu’un nouvel utilisateur ayant tous les droits sur cette base de données.
 3. Conservez le nom de domaine de l’instance PostgreSQL, le nom de la base de donnée ainsi que le nom et le mot de passe de l’utilisateur pour les étapes suivantes.
 
-\
-**Étape 2 : Création du bucket Firebase Storage**
+
+#### <ins>Étape 2 :</ins> Création du bucket Firebase Storage
 1. Rendez-vous sur le site Web de Firebase (https://firebase.google.com/) et créez un nouveau compte si vous n'en avez pas déjà un.
 2. Dans la console Firebase, ajoutez votre projet en cliquant sur le bouton "Ajouter un projet" et suivez les instructions pour le configurer.
 3. Une fois le projet créé, accédez à la section "Storage" dans la console Firebase.
@@ -49,28 +53,30 @@ La première étape du déploiement consiste donc à créer et configurer ces ba
 6. Rendez-vous ensuite dans les paramètres de votre projet, partie “comptes de service” et cliquez sur le bouton “Générer une nouvelle clé privée”. 
 7. Conservez le fichier JSON ainsi généré pour les étapes suivantes.
 
+
 ###	Utilisation d’un mail noreply
 
 Assurez-vous d’avoir créé votre compte google noreply. Ensuite, il faudra autoriser les applications tierces à utiliser ce mail pour automatiser l’envoi de mail.
 
-\
-**Étape 1 : Activer l’authentification en 2 étapes**
+
+#### <ins>Étape 1 :</ins> Activer l’authentification en 2 étapes
 1.	Aller sur le lien suivant pour activer l’authentification en 2 étapes sur le compte :  
     <https://myaccount.google.com/u/1/signinoptions/two-step-verification>
 
-\
-**Étape 2 : Créer un mot de passe d’application**
+
+#### <ins>Étape 2 :</ins> Créer un mot de passe d’application
 1.	Aller sur le lien suivant et créé un mot de passe pour application :  
     <https://myaccount.google.com/u/1/apppasswords>
 2.	Sélectionnez l’application Messagerie et l’appareil Ordinateur Windows.
 3.	Conservez le mot de passe pour les étapes suivantes.
 
+
 ### Déploiement du back-end
 
 Assurez-vous d'avoir Node.js et Git installés sur votre machine avant de commencer.
 
-\
-**Étape 1 : Cloner le dépôt GitHub**
+
+#### <ins>Étape 1 :</ins> Cloner le dépôt GitHub
 1. Ouvrez une ligne de commande ou un terminal.
 2. Naviguez vers le répertoire où vous souhaitez cloner le projet.
 3. Exécutez la commande suivante pour cloner le dépôt depuis GitHub :
@@ -78,8 +84,8 @@ Assurez-vous d'avoir Node.js et Git installés sur votre machine avant de commen
 git clone https://github.com/yoyo53/e-courtage.git
 ```
 
-\
-**Étape 2 : Configuration du back-end**
+
+#### <ins>Étape 2 :</ins> Configuration du back-end
 1. Accédez au répertoire du back-end :
 ```bash
 cd e-courtage/back
@@ -89,8 +95,8 @@ cd e-courtage/back
 npm install
 ```
 
-\
-**Étape 3 : Configuration des variables d'environnement**
+
+#### <ins>Étape 3 :</ins> Configuration des variables d'environnement
 1. Dans le répertoire du back-end, recherchez un fichier `.env.example`.
 2. Dupliquez ce fichier et renommez la copie en `.env`.
 3. Ouvrez le fichier `.env` dans un éditeur de texte.
@@ -98,20 +104,21 @@ npm install
 5.	Ajoutez également l'email et le mot de passe de l’adresse email noreply créée précédemment.
 6.	Enfin, ajoutez le domaine sur lequel sera déployé votre front-end ainsi que son url de base.
 
-\
-**Étape 4 : Exécution du back-end**
+
+#### <ins>Étape 4 :</ins> Exécution du back-end
 1. Exécutez la commande suivante pour démarrer le serveur :
 ```bash
 npm start
 ```
 Le serveur back-end est désormais en cours d'exécution.
 
+
 ### Déploiement du front-end
 
 Assurez-vous d'avoir Node.js et Git installés sur votre machine avant de commencer. Si le déploiement est fait sur la même machine que le back-end, commencez directement à l’étape 2.
 
-\
-**Étape 1 : Cloner le dépôt GitHub**
+
+#### <ins>Étape 1 :</ins> Cloner le dépôt GitHub
 1. Ouvrez une ligne de commande ou un terminal.
 2. Naviguez vers le répertoire où vous souhaitez cloner le projet.
 3. Exécutez la commande suivante pour cloner le dépôt depuis GitHub :
@@ -119,8 +126,8 @@ Assurez-vous d'avoir Node.js et Git installés sur votre machine avant de commen
 git clone https://github.com/yoyo53/e-courtage.git
 ```
 
-\
-**Étape 2 : Configuration du front-end**
+
+#### <ins>Étape 2 :</ins> Configuration du front-end
 1. Accédez au répertoire du front-end :
 ```bash
 cd e-courtage/front
@@ -130,15 +137,15 @@ cd e-courtage/front
 npm install
 ```
 
-\
-**Étape 3 : Configuration de des paramètres du front-end**
+
+#### <ins>Étape 3 :</ins> Configuration de des paramètres du front-end
 1. Dans le répertoire du front-end, recherchez un fichier `config.js`.
 2. Ouvrez le fichier `config.js` dans un éditeur de texte.
 3. Remplacez la valeur de la variable **api_url** par l’url de votre back-end.
 4. Remplacez la valeur de la variable **base_url** par l'url de base sur laquelle votre application sera déployée.
 
-\
-**Étape 4 : Compilation du front-end**
+
+#### <ins>Étape 4 :</ins> Compilation du front-end
 1. Exécutez la commande suivante pour compiler le front-end en un site web statique :
 ```bash
 npm run build
