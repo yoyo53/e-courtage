@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import LandingView from '../views/LandingPageView.vue'
+import { config } from '../../config';
 
 const routes = [
   {
@@ -88,5 +89,56 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
+
+router.beforeEach(async (to) => {
+  if (['404', 'landing'].includes(to.name)) {
+    return true;
+  }
+  else {
+    let verification = await fetch(config.api_url + "auth/verifyToken/" + localStorage.getItem("token"));
+    if (verification.type == "client") {
+      if (['client-home', 'client-profile'].includes(to.name)) {
+        return true;
+      }
+      else {
+        return '/client';
+      }
+    }
+    else if (verification.type == "banque") {
+      if (['bank'].includes(to.name)) {
+        return true;
+      }
+      else {
+        return '/bank';
+      }
+    }
+    else if (verification.type == "admin") {
+      if (['admin-banques', 'admin-clients', 'admin-demandes'].includes(to.name)) {
+        return true;
+      }
+      else {
+        return '/admin/banques';
+      }
+    }
+    else {
+      if (['login-client', 'login-bank', 'login-admin', 'register-client', 'register-bank', 'client-verification', 'client-recovery-forgot', 'client-recovery-form'].includes(to.name)) {
+        return true;
+      }
+      else if (['client-home', 'client-profile'].includes(to.name)) {
+        return '/login/client';
+      }
+      else if (['bank'].includes(to.name)) {
+        return '/login/bank';
+      }
+      else if (['admin-banques', 'admin-clients', 'admin-demandes'].includes(to.name)) {
+        return '/login/admin';
+      }
+      else {
+        return '/';
+      }
+    }
+  }
+})
+
 
 export default router

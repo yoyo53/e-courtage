@@ -2,9 +2,6 @@ var express = require('express');
 var auth = require('../controllers/auth');
 var router = express.Router();
 
-router.post('/something', function(req, res,) {	
-    res.send('POST request received');
-});
 /*  Vérification des credentials clients */
 router.post('/loginClient', auth.loginClient);
 
@@ -22,5 +19,8 @@ router.post('/registerBanque', auth.registerBanque);
 
 /* Vérification d'un compte client */
 router.get('/verifyClient/:token', auth.verifyClient);
+
+/* Vérification d'un token utilisateur */
+router.get('/verifyToken/:token', auth.verifyToken);
 
 module.exports = router;

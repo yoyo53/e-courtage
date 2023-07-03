@@ -201,3 +201,19 @@ exports.verifyClient = async(req, res) => {
         res.status(500).send({message: "Account already verified"});
     }
 }
+
+exports.verifyToken = async (req, res) => {
+    let token = req.params.token;
+    if (sessions.verifyToken(token, "client")) {
+        res.status(200).send({type: "client"});
+    }
+    else if (sessions.verifyToken(token, "banque")) {
+        res.status(200).send({type: "banque"});
+    }
+    else if (sessions.verifyToken(token, "admin")) {
+        res.status(200).send({type: "admin"});
+    }
+    else {
+        res.status(401).send({type: null});
+    }
+}
