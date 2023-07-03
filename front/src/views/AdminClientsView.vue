@@ -65,6 +65,10 @@
           }
         });
         const data = await response.json();
+        data.forEach(client => {
+          client.date_birth = client.date_birth.split('T')[0];
+          client.poste_depuis = client.poste_depuis.split('T')[0];
+        });
         this.clients = data;
       }
     },

@@ -1,6 +1,6 @@
 <template>
-    <div id="cover" v-if="displayDetail"></div>
     <div>
+      <div id="cover" v-if="displayDetail"></div>
       <button id="detailButton" @click="handleDisplay()">Détails</button>
       <div id="modal-form" ref="modalForm" v-if="displayDetail">
         <button id="closeButton" @click="handleDisplay()">X</button>
