@@ -43,7 +43,7 @@ const routes = [
     component: () => import('../views/BankHomeView.vue')
   },
   {
-    path: '/admin/login',
+    path: '/login/admin',
     name: 'login-admin',
     component: () => import('../views/AdminLoginView.vue')
   },
