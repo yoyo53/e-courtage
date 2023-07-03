@@ -174,7 +174,6 @@ exports.verifyClient = async(req, res) => {
     try{
         // Verify token
         let tokenClient = req.params.token;
-        console.log(tokenClient);
 
         if(!tokenClient){
             res.status(401).send({message: "No token provided"});

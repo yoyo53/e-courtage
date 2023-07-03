@@ -123,8 +123,6 @@ exports.updateDemande = async(req, res) => {
 }
 
 exports.getDemandesNewAccount = async function getDemandesNewAccount(id_banque) {
-    console.log(id_banque)
-    
     let demandes = await Demande.findAll();
     // Create 
     for(let demande of demandes){
