@@ -15,6 +15,7 @@
                     <p><span>Prénom : </span><span>{{ demand.client.prenom }}</span></p>
                     <p><span>Email : </span><span>{{ demand.client.email }}</span></p>
                     <p><span>Téléphone : </span><span>{{ demand.client.tel }}</span></p>
+                    <p><span>Date de naissance : </span><span>{{ demand.client.date_birth }}</span></p>
                     <p><span>Pays : </span><span>{{ demand.client.pays }}</span></p>
                     <p><span>Ville : </span><span>{{ demand.client.ville }}</span></p>
                     <p><span>Adresse : </span><span>{{ demand.client.adresse }}</span></p>
