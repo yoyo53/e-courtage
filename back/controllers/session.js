@@ -88,7 +88,7 @@ exports.verifyToken = async (token, userType) => {
 // Get session by token
 exports.findByToken = async (token, userType) => {
     var condition = token ? { token: { [Op.eq]: token } } : null;
-    var result = {};
+    var result = null;
     if (userType == "banque") {
         await SessionBanque.findOne({ where: condition })
         .then(data => {
