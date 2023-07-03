@@ -96,6 +96,7 @@ router.beforeEach(async (to) => {
   }
   else {
     let verification = await fetch(config.api_url + "auth/verifyToken/" + localStorage.getItem("token"));
+    verification = await verification.json();
     if (verification.type == "client") {
       if (['client-home', 'client-profile'].includes(to.name)) {
         return true;
