@@ -143,6 +143,22 @@ export default {
                     }
                 }
 
+                //If a field is null, we replace it with "Non renseigné"
+                for (let i = 0; i < data.length; i++) {
+                    for(let key in data[i]){
+                        if(data[i][key] == null){
+                            data[i][key] = "Non renseigné";
+                        }
+                        if(key == "client"){
+                            for(let key2 in data[i][key]){
+                                if(data[i][key][key2] == null){
+                                    data[i][key][key2] = "Non renseigné";
+                                }
+                            }
+                        }
+                    }
+                }
+
                 this.userDemands = data;
                 this.displayedDemands = this.userDemands;
                 this.performAllFilters();
