@@ -49,6 +49,22 @@ La première étape du déploiement consiste donc à créer et configurer ces ba
 6. Rendez-vous ensuite dans les paramètres de votre projet, partie “comptes de service” et cliquez sur le bouton “Générer une nouvelle clé privée”. 
 7. Conservez le fichier JSON ainsi généré pour les étapes suivantes.
 
+###	Utilisation d’un mail noreply
+
+Assurez-vous d’avoir créé votre compte google noreply. Ensuite, il faudra autoriser les applications tierces à utiliser ce mail pour automatiser l’envoi de mail.
+
+\
+**Étape 1 : Activer l’authentification en 2 étapes**
+1.	Aller sur le lien suivant pour activer l’authentification en 2 étapes sur le compte :  
+    <https://myaccount.google.com/u/1/signinoptions/two-step-verification>
+
+\
+**Étape 2 : Créer un mot de passe d’application**
+1.	Aller sur le lien suivant et créé un mot de passe pour application :  
+    <https://myaccount.google.com/u/1/apppasswords>
+2.	Sélectionnez l’application Messagerie et l’appareil Ordinateur Windows.
+3.	Conservez le mot de passe pour les étapes suivantes.
+
 ### Déploiement du back-end
 
 Assurez-vous d'avoir Node.js et Git installés sur votre machine avant de commencer.
@@ -79,6 +95,8 @@ npm install
 2. Dupliquez ce fichier et renommez la copie en `.env`.
 3. Ouvrez le fichier `.env` dans un éditeur de texte.
 4. Configurez les variables d'environnement avec les informations de connexion pour les bases de données PostgreSQL et Firebase Storage créées précédemment.
+5.	Ajoutez également l'email et le mot de passe de l’adresse email noreply créée précédemment.
+6.	Enfin, ajoutez le domaine sur lequel sera déployé votre front-end ainsi que son url de base.
 
 \
 **Étape 4 : Exécution du back-end**
