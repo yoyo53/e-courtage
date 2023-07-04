@@ -29,7 +29,7 @@
         </div>
         <div class="testimonial">
           <p>"Je suis impressionné par la facilité d'utilisation de cette plateforme. J'ai rapidement trouvé l'offre de prêt qui me convenait."</p>
-          <span>- Yohan Villers</span>
+          <span>- Yohan Villiers</span>
         </div>
         <div class="testimonial">
           <p>"Je suis vraiment impressionné par la facilité avec laquelle j'ai trouvé l'offre de prêt immobilier qui me convenait. C'était rapide et pratique, et cela m'a grandement simplifié la vie."</p>
