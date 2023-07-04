@@ -80,9 +80,9 @@ La première étape du déploiement consiste donc à créer et configurer ces ba
 7. Conservez le fichier JSON ainsi généré pour les étapes suivantes.
 
 
-###	Utilisation d’un mail noreply
+###	Utilisation d’un mail d'application
 
-Assurez-vous d’avoir créé votre compte google noreply. Ensuite, il faudra autoriser les applications tierces à utiliser ce mail pour automatiser l’envoi de mail.
+Assurez-vous d’avoir créé un compte google. Ensuite, il faudra autoriser les applications tierces à utiliser ce mail pour automatiser l’envoi de mail.
 
 
 #### <ins>Étape 1 :</ins> Activer l’authentification en 2 étapes
