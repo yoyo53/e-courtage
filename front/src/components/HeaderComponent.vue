@@ -59,21 +59,25 @@ export default {
 <style scoped>
 #header {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     margin-bottom: 5dvh;
-    padding: 0 2dvw;
+    min-width: fit-content;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
 }
+
 
 #header h1 {
     color: white;
     font-size: 2em;
+    white-space:nowrap;
 }
 
 #headerButtons {
     display: flex;
     flex-direction: row;
     justify-content: right;
+    width: fit-content;
     margin-left: auto;
 }
 

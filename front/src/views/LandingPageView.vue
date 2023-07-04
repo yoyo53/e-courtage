@@ -86,18 +86,12 @@ export default {
   padding: 20px;
 }
 
-.page-title {
-  text-align: center;
-  margin-top: 20px;
-}
-
 header {
   text-align: center;
   margin-bottom: 40px;
 }
 
 header h1 {
-  font-size: 2.5em;
   font-weight: 800;
 }
 
