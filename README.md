@@ -127,7 +127,7 @@ npm install
 2. Dupliquez ce fichier et renommez la copie en `.env`.
 3. Ouvrez le fichier `.env` dans un éditeur de texte.
 4. Configurez les variables d'environnement avec les informations de connexion pour les bases de données PostgreSQL et Firebase Storage créées précédemment.
-5.	Ajoutez également l'email et le mot de passe de l’adresse email noreply créée précédemment.
+5.	Ajoutez également l'adresse email et le mot de passe du compte email d'application créée précédemment.
 6.	Enfin, ajoutez le domaine sur lequel sera déployé votre front-end ainsi que son url de base.
 
 
