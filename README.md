@@ -46,8 +46,9 @@ Cette version initiale fournit une base solide pour e-courtage, mais il reste en
 
 - Chat entre  clients et banques : Mise en place d'un système de chat permettant aux client et aux banque de discutter directement sur le site e-courtage.
 
-- Algorithme de classification : Création d'un algorithme de machine learning classant les demandes des clients suivant leur qualité globale.
+- Algorithme de classification : Création d'un algorithme de machine learning afin de vérifier la pertinence des demandes des clients et les classer suivant leur qualité globale.
 
+- Vérification des fichiers : Ajout d'une fonctionnalité pour vérifier le type et le contenu des fichiers avant de les ajouter dans la base de données.
 
 ## Installation
 
