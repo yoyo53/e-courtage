@@ -66,8 +66,21 @@
         });
         const data = await response.json();
         data.forEach(client => {
-          client.date_birth = client.date_birth?.split('T')?.[0];
-          client.poste_depuis = client.poste_depuis?.split('T')?.[0];
+          if (client.date_birth != null) {
+            client.date_birth = new Date(client.date_birth).toLocaleDateString();
+          }
+          if (client.poste_depuis != null) {
+            client.poste_depuis = new Date(client.poste_depuis).toLocaleDateString();
+          }
+          if (client.genre == "1") {
+            client.genre = "Homme";
+          }
+          else if (client.genre == "2") {
+            client.genre = "Femme";
+          }
+          else if (client.genre == "3") {
+            client.genre = "Autre";
+          }
         });
         this.clients = data;
       }

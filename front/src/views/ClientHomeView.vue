@@ -260,6 +260,7 @@ export default {
         justify-content: left;
         align-items: flex-start;
         flex: auto;
+        max-height: 100%;
     }
 
     #demands-overview-area {

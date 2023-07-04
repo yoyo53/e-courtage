@@ -155,8 +155,19 @@ export default {
                                 if(data[i][key][key2] == null){
                                     data[i][key][key2] = "Non renseigné";
                                 }
-                                if(key2 == "date_birth" || key2 == "poste_depuis") {
-                                    data[i][key][key2] = data[i][key][key2]?.split("T")[0];
+                                if((key2 == "date_birth" || key2 == "poste_depuis") && data[i][key][key2] != null) {
+                                    data[i][key][key2] = new Date(data[i][key][key2]).toLocaleDateString();
+                                }
+                                if (key2 == "genre") {
+                                    if (data[i][key][key2] == "1") {
+                                        data[i][key][key2] = "Homme";
+                                    }
+                                    else if (data[i][key][key2] == "2") {
+                                        data[i][key][key2] = "Femme";
+                                    }
+                                    else if (data[i][key][key2] == "3") {
+                                        data[i][key][key2] = "Autre";
+                                    }
                                 }
                             }
                         }

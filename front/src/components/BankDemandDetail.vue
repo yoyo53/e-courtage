@@ -14,6 +14,7 @@
                     <p><span>Nom : </span><span>{{ demand.client.nom }}</span></p>
                     <p><span>Prénom : </span><span>{{ demand.client.prenom }}</span></p>
                     <p><span>Email : </span><span>{{ demand.client.email }}</span></p>
+                    <p><span>Genre : </span><span>{{ demand.client.genre }}</span></p>
                     <p><span>Téléphone : </span><span>{{ demand.client.tel }}</span></p>
                     <p><span>Date de naissance : </span><span>{{ demand.client.date_birth }}</span></p>
                     <p><span>Pays : </span><span>{{ demand.client.pays }}</span></p>
