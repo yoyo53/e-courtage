@@ -46,8 +46,9 @@ Cette version initiale fournit une base solide pour e-courtage, mais il reste en
 
 - Chat entre  clients et banques : Mise en place d'un système de chat permettant aux client et aux banque de discutter directement sur le site e-courtage.
 
-- Algorithme de classification : Création d'un algorithme de machine learning classant les demandes des clients suivant leur qualité globale.
+- Algorithme de classification : Création d'un algorithme de machine learning afin de vérifier la pertinence des demandes des clients et les classer suivant leur qualité globale.
 
+- Vérification des fichiers : Ajout d'une fonctionnalité pour vérifier le type et le contenu des fichiers avant de les ajouter dans la base de données.
 
 ## Installation
 
@@ -80,9 +81,9 @@ La première étape du déploiement consiste donc à créer et configurer ces ba
 7. Conservez le fichier JSON ainsi généré pour les étapes suivantes.
 
 
-###	Utilisation d’un mail noreply
+###	Utilisation d’un mail d'application
 
-Assurez-vous d’avoir créé votre compte google noreply. Ensuite, il faudra autoriser les applications tierces à utiliser ce mail pour automatiser l’envoi de mail.
+Assurez-vous d’avoir créé un compte google. Ensuite, il faudra autoriser les applications tierces à utiliser ce mail pour automatiser l’envoi de mail.
 
 
 #### <ins>Étape 1 :</ins> Activer l’authentification en 2 étapes
@@ -127,7 +128,7 @@ npm install
 2. Dupliquez ce fichier et renommez la copie en `.env`.
 3. Ouvrez le fichier `.env` dans un éditeur de texte.
 4. Configurez les variables d'environnement avec les informations de connexion pour les bases de données PostgreSQL et Firebase Storage créées précédemment.
-5.	Ajoutez également l'email et le mot de passe de l’adresse email noreply créée précédemment.
+5.	Ajoutez également l'adresse email et le mot de passe du compte email d'application créée précédemment.
 6.	Enfin, ajoutez le domaine sur lequel sera déployé votre front-end ainsi que son url de base.
 
 
