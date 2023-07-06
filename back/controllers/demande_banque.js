@@ -1,6 +1,7 @@
 const Sequelize = require("../db.connection");
 const Demande = require("../models/demande.model.js")(Sequelize.connection, Sequelize.library);
 const Client = require("../models/client.model.js")(Sequelize.connection, Sequelize.library);
+const Banque = require("../models/banque.model.js")(Sequelize.connection, Sequelize.library);
 const Document = require("../models/document.model.js")(Sequelize.connection, Sequelize.library);
 const Accepter = require("../models/accepter.model.js")(Sequelize.connection, Sequelize.library);
 const Contient = require("../models/contient.model.js")(Sequelize.connection, Sequelize.library);
@@ -103,7 +104,8 @@ exports.updateDemande = async(req, res) => {
             res.status(401).send({ message: "Unauthorized" });
             return;
         }else{
-            var banque = await sessions.findByToken(token, "banque");
+            var sessionBanque = await sessions.findByToken(token, "banque");
+            var banque = await Banque.findOne({ where: { id_banque: sessionBanque.id_banque } });
             // Get single demande
             let accepter = await Accepter.findOne({ where: { id_banque: banque.id_banque, id_demande: req.params.id_demande } });
             for(var key in req.body){
