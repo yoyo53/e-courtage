@@ -133,12 +133,6 @@
   padding: 5px 10px;
   font-size: 1.5em;
 }
-
-
-  #demandes-list-container {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
   
   #demandes-list-container::-webkit-scrollbar {
     display: none;
@@ -147,6 +141,7 @@
   #demandes-list-container {
     flex: auto;
     overflow-y: scroll;
+    scrollbar-width: none;
     border: 2px solid aliceblue;
     border-radius: 15px;
     width: max(min(90%, 700px), 50%);

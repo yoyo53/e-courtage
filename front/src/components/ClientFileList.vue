@@ -176,6 +176,9 @@ export default {
 </script>
 
 <style scoped>
+    ::-webkit-scrollbar {
+        display: none;
+    }
 
     #clientFileListComponent {
         display: flex;
@@ -188,6 +191,7 @@ export default {
     #clientFileList {
         height: 80%;
         overflow-y: scroll;
+        scrollbar-width: none;
     }
 
     .fileRow {

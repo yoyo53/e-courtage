@@ -167,6 +167,7 @@ export default {
     #bankDemandDetailFields{
         height: 90%;
         overflow-y: scroll;
+        scrollbar-width: none;
     }
 
     ::-webkit-scrollbar {
@@ -182,7 +183,6 @@ export default {
         flex-direction: column;
         padding: 0.5em;
         text-align: left;
-        overflow-y: scroll;
     }
 
     .bankDemandDetailDivision p{

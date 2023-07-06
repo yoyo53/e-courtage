@@ -246,39 +246,40 @@ export default {
         },
         handleDisplay() {
             this.displayDetail = !this.displayDetail;
+            if (this.displayDetail) {
+                fetch(this.api_url + "document/getAllDocuments", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": localStorage.getItem("token")
+                    }
+                })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else if(response.status == 401) {
+                        this.$router.push("/login/client");
+                    } else {
+                        throw new Error("Une erreur est survenue, veuillez réessayer plus tard");
+                    }
+                })
+                .then((response) => {
+                    console.log(response);
+                    this.userFiles = response;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.$notify({
+                        title: "Erreur",
+                        text: error.message,
+                        type: "error"
+                    });
+                });
+            }
         }
     },
     mounted() {
-        fetch(this.api_url + "document/getAllDocuments", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": localStorage.getItem("token")
-            }
-        })
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else if(response.status == 401) {
-                this.$router.push("/login/client");
-            } else {
-                throw new Error("Une erreur est survenue, veuillez réessayer plus tard");
-            }
-        })
-        .then((response) => {
-            console.log(response);
-            this.userFiles = response;
-            this.newDemand = this.propDemand;
-        })
-        .catch((error) => {
-            console.log(error);
-            this.$notify({
-                title: "Erreur",
-                text: error.message,
-                type: "error"
-            });
-        });
-
+        this.newDemand = this.propDemand;
     }
 }
 </script>
@@ -335,6 +336,7 @@ export default {
     #demandDetailFormFields{
         flex: auto;
         overflow-y: scroll;
+        scrollbar-width: none;
     }
 
     #detailButton{

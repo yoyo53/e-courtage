@@ -61,8 +61,9 @@
         height: 100dvh;
     }
     .clientDetailDivision {
-        margin-top: 20px 0;
+        margin: 20px 0;
         overflow-y: scroll;
+        scrollbar-width: none;
         border: solid black 3px;
         border-radius: 10px;
         padding: 15px 0;
@@ -100,41 +101,10 @@
         display: none;
     }
 
-    #demandDetailForm {
-        margin-top: 50px;
-        text-align: left;
-        height: 80%;
-    }
-
-    #demandDetailFormFields {
-        height: 100%;
-        overflow-y: scroll;
-    }
-
     #detailButton {
         color: blue;
         margin-top: 10px;
         border: none;
         background-color: white;
-    }
-
-    /* Custom styles for client account information */
-    #clientAccountForm {
-        margin-top: 50px;
-        text-align: left;
-        height: 80%;
-    }
-
-    #clientAccountFormFields {
-        height: 100%;
-        overflow-y: scroll;
-    }
-
-    #bankAccountDetailBottomButtons {
-        margin-top: 20px;
-    }
-
-    #bankAccountDetailBottomButtons button {
-        margin-right: 10px;
     }
 </style>

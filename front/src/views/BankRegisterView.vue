@@ -146,7 +146,7 @@ export default {
     margin: auto;
     margin-top: 10%;
     flex: auto;
-    overflow-y : scroll;
+    overflow-y: scroll;
     scrollbar-width: none;
 }
 

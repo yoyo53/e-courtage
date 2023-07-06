@@ -81,7 +81,7 @@ export default {
                 this.userData = parsed;
                 for(const key in this.userData){
                     if(key == "date_birth"){
-                        this.userData[key] = this.userData[key].split("T")[0];
+                        this.userData[key] = new Date(this.userData[key]).toLocaleDateString();
                     } else if(this.userData[key] == null){
                         this.userData[key] = "Non renseigné";
                     }
@@ -173,6 +173,7 @@ export default {
         width: 95%;
         margin: auto;
         overflow-y: scroll;
+        scrollbar-width: none;
         padding-bottom: 2em;
     }
 
@@ -206,16 +207,18 @@ export default {
         justify-content: left;
         align-items: flex-start;
         flex: auto;
+        max-height: 100%;
     }
 
     #profile-overview-area {
         display: flex;
         flex-direction: column;
-        flex: auto;
+        flex: 1;
         justify-content: left;
         align-items: flex-start;
         width: 100%;
         border: 0px solid black;
+        overflow-y: hidden;
     }
 
     .profile-item {
@@ -245,11 +248,12 @@ export default {
     #notifications-view-area {
         display: flex;
         flex-direction: column;
-        flex: auto;
+        flex: 1;
         justify-content: left;
         align-items: flex-start;
         width: 100%;
         border: 0px solid black;
+        overflow-y: hidden;
     }
 
     /* Right Part Stuff */
@@ -270,7 +274,7 @@ export default {
         justify-content: left;
         align-items: flex-start;
         width: 100%;
-        overflow: hidden;
+        overflow-y: hidden;
         border: 0px solid black;
     }
 

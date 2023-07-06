@@ -1,5 +1,5 @@
 let config = {
-    api_url: "https://e-courtage-back.fly.dev/",
+    api_url: "https://sheltered-everglades-24913.fly.dev/https://e-courtage-back.fly.dev/",
     base_url: "/e-courtage/"
 };
 

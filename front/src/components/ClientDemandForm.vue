@@ -206,7 +206,7 @@ export default {
                 console.log(response);
                 let temp_demand = this.newDemand;
                 temp_demand.id_demande = response.id_demande;
-                this.$parent.userDemands.push(this.newDemand);
+                this.$parent.fetchUserDemands();
                 console.log(this.$parent.userDemands);
                 //reset form
                 this.newDemand = {
@@ -248,36 +248,38 @@ export default {
         },
         handleDisplay() {
             this.displayForm = !this.displayForm;
+            if (this.displayForm) {
+                fetch(this.api_url + "document/getAllDocuments", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": localStorage.getItem("token")
+                    }
+                })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error("Il y a eu un problème lors de la récupération des documents");
+                    }
+                })
+                .then((response) => {
+                    console.log(response);
+                    this.userFiles = response;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.$notify({
+                        title: "Erreur",
+                        text: error.message,
+                        type: "error"
+                    });
+                });
+            }
         }
     },
     components: { ClientFileListCheckableElement, ClientNewFileForm },
     mounted() {
-        fetch(this.api_url + "document/getAllDocuments", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": localStorage.getItem("token")
-            }
-        })
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error("Il y a eu un problème lors de la récupération des documents");
-            }
-        })
-        .then((response) => {
-            console.log(response);
-            this.userFiles = response;
-        })
-        .catch((error) => {
-            console.log(error);
-            this.$notify({
-                title: "Erreur",
-                text: error.message,
-                type: "error"
-            });
-        });
     }
 }
 </script>
@@ -342,6 +344,7 @@ export default {
     #demandCreationFormFields{
         flex: auto;
         overflow-y: scroll;
+        scrollbar-width: none;
     }
 
 </style>

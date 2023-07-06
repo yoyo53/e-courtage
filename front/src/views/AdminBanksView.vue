@@ -134,11 +134,6 @@ export default {
   justify-content: center;
 }
 
-#banks-list-container {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
 #banks-list-container::-webkit-scrollbar {
   display: none;
 }
@@ -146,6 +141,7 @@ export default {
 #banks-list-container {
   flex: auto;
   overflow-y: scroll;
+  scrollbar-width: none;
   border: 2px solid aliceblue;
   border-radius: 15px;
   width: max(min(90%, 700px), 50%);

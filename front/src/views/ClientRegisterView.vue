@@ -179,7 +179,7 @@ export default {
         width: 90%;
         margin: auto;
         flex: auto;
-        overflow-y : scroll;
+        overflow-y: scroll;
         scrollbar-width: none;
     }
 

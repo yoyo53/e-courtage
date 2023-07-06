@@ -105,10 +105,6 @@ export default {
   color: black;
 }
 
-.but {
-  padding-left: 2mm;
-}
-
 .active-border {
   border: 3px solid green;
 }

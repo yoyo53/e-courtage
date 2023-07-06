@@ -18,7 +18,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="formDocType" class="form-label">Genre</label>
-                        <select class="form-select" aria-label="Default select example" id="formDocType" v-model="type">
+                        <select class="form-select" aria-label="Default select example" id="formDocType" v-model="type" required>
                             <option value="">Selectionnez le type du fichier</option>
                             <option value="Document d'identité">Document d'identité</option>
                             <option value="Fiche de paie">Fiche de paie</option>
@@ -170,6 +170,7 @@ export default {
     #newFileFormFields{
         flex: auto;
         overflow-y: scroll;
+        scrollbar-width: none;
     }
 
 </style>

@@ -330,6 +330,8 @@ export default {
     }
     
     #profileForm {
+        display: flex;
+        flex-direction: column;
         flex: auto;
         margin: auto;
         width: 49%;
@@ -346,7 +348,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        height: 80%;
+        flex: auto;
         overflow-y: scroll;
         scrollbar-width: none;
     }

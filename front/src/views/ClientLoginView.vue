@@ -93,7 +93,7 @@ export default {
         margin: auto;
         margin-top: 2dvw;
         flex: auto;
-        overflow-y : scroll;
+        overflow-y: scroll;
         scrollbar-width: none;
     }
 

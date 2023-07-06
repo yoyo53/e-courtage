@@ -84,11 +84,19 @@ export default {
   max-height: 100dvh;
   overflow-y: auto;
   padding: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: #000000a0 transparent;
 }
 
-header {
-  text-align: center;
-  margin-bottom: 40px;
+::-webkit-scrollbar {
+  width: 9px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #000000a0;
+  border-radius: 20px;
+  border: transparent;
 }
 
 header h1 {

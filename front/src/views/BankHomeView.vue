@@ -238,6 +238,7 @@ h3{
     color: black;
     list-style: none;
     overflow-y: scroll;
+    scrollbar-width: none;
     border-radius: 10px;
 }
 

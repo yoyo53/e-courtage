@@ -79,9 +79,5 @@
     margin-left: 90%;
     color: black;
   }
-  
-  .but {
-    padding-left: 2mm;
-  }
   </style>
   
